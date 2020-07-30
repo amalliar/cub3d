@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 07:12:41 by amalliar          #+#    #+#             */
-/*   Updated: 2020/07/19 01:15:46 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/07/30 18:27:43 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_ftoa_info
 char				*ft_ftoa(long double num, unsigned prec);
 char				*ft_itoa(intmax_t num, int base);
 char				*ft_utoa(uintmax_t num, int base);
+int					ft_abs(int num);
 int					ft_atoi(const char *str);
 void				*ft_calloc(size_t num, size_t size);
 

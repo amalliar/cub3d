@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_pixel_fill.c                                   :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/29 18:13:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/07/29 21:13:34 by amalliar         ###   ########.fr       */
+/*   Created: 2020/07/30 18:25:18 by amalliar          #+#    #+#             */
+/*   Updated: 2020/07/30 18:53:30 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "ft_stdlib.h"
 
-void	mlx_pixel_fill(t_frame *frame, int x, int y, int color)
+/*
+** Computes the absolute value of the integer num.
+*/
+
+int		ft_abs(int num)
 {
-    char	*dst;
-
-	dst = frame->addr + (y * frame->line_length + x * (frame->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	return ((num < 0 && num > INT_MIN) ? -num : num);
 }

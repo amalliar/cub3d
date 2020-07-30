@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/07/29 21:24:39 by amalliar         ###   ########.fr        #
+#    Updated: 2020/07/30 18:21:02 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,7 @@ SRCDIR     := src
 OBJDIR     := .obj
 DEPDIR     := .dep
 
-SRCS       := src/mlx_pixel_fill.c \
-              src/shapes.c \
+SRCS       := src/graphics.c \
               src/main.c
 OBJS       := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 DEPS       := $(SRCS:$(SRCDIR)/%.c=$(DEPDIR)/%.d)
@@ -42,12 +41,13 @@ NOC        := \033[0m
 
 all: $(NAME)
 $(NAME): $(OBJS) | $(LIBFT)
+	@echo "$(LGREEN)Linking executable $(NAME)$(NOC)"
 	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBS) -o $@
-	@echo "$(LGREEN)Built target $(NAME)$(NOC)"
+	@echo "Built target $(NAME)"
 .PHONY: all
 
 $(LIBFT):
-	$(MAKE) -C ./libft
+	@$(MAKE) -C ./libft
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(DEPDIR)/%.d | $(OBJDIR) $(DEPDIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -MMD -MF $(DEPDIR)/$*.tmp -c -o $@ $<

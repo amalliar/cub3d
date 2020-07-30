@@ -6,12 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:15:08 by amalliar          #+#    #+#             */
-/*   Updated: 2020/07/29 22:15:03 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/07/30 19:44:56 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "colors.h"
+#include "graphics.h"
 
 int		main(void)
 {
@@ -26,12 +26,10 @@ int		main(void)
 		&frame.line_length, &frame.endian);
 	frame.img_width = 1920;
 	frame.img_height = 1080;
-	draw_rectangle(&frame, 100, 100, 200, 200, YELLOW);
-	draw_rectangle(&frame, 110, 110, 180, 180, OLIVE);
-	draw_rectangle(&frame, 800, 320, 200, 400, LIME);
-	draw_rectangle(&frame, 810, 330, 180, 380, GREEN);
-	
-
+	int polypoints[] = {120, 250, 400, 250, 400, 350, 450, 200, 120, 250};
+	drawpoly(&frame, 5, polypoints, RED);
+	drawellipse(&frame, 1000, 400, 1500, 600, GREEN);
+	drawcircle(&frame, 700, 700, 200, BLUE);
 	mlx_put_image_to_window(mlx, mlx_win, frame.img, 0, 0);
 	mlx_loop(mlx);
 	return (0);
