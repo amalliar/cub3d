@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 20:56:01 by amalliar          #+#    #+#             */
-/*   Updated: 2020/07/30 19:39:54 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/07/31 20:37:06 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,9 +162,4 @@ void		drawpoly(t_frame *frame, int numpoints, int *polypoints, int color)
 			polypoints[i * 2 + 2], polypoints[i * 2 + 3], color);
 		++i;
 	}
-}
-
-void		fillpoly(int numpoints, int *polypoints)
-{
-	return ;
 }
