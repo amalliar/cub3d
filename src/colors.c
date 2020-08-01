@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:07:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/07/29 18:12:26 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/01 14:58:58 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ int		create_color(int a, int r, int g, int b)
 
 int		get_alpha(int color)
 {
-	return (color & (0xFF << 24));
+	return ((color & (0xFF << 24)) >> 24);
 }
 
 int		get_red(int color)
 {
-	return (color & (0xFF << 16));
+	return ((color & (0xFF << 16)) >> 16);
 }
 
 int		get_green(int color)
 {
-	return (color & (0xFF << 8));
+	return ((color & (0xFF << 8)) >> 8);
 }
 
 int		get_blue(int color)

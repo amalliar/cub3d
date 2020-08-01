@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:15:08 by amalliar          #+#    #+#             */
-/*   Updated: 2020/07/31 20:54:01 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/01 15:06:11 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,21 @@ int		render_next_frame(t_frame *frame)
 	}
 	mlx_put_image_to_window(frame->mlx, frame->win, frame->img, 0, 0);
 	mlx_destroy_image(frame->mlx, frame->img);
-	r = get_red(frame->color) >> 16;
-	g = get_green(frame->color) >> 8;
+	r = get_red(frame->color);
+	g = get_green(frame->color);
 	b = get_blue(frame->color);
-	if (r > 0 && g >= 0 && b == 0)
-	{
-		--r;
+	if (r == 0xFF && g < 0xFF && b == 0)
 		++g;
-	}
-	else if (r == 0 && g > 0 && b >= 0)
-	{
-		--g;
+	else if (r > 0 && g == 0xFF && b == 0)
+		--r;
+	else if (r == 0 && g == 0xFF && b < 0xFF)
 		++b;
-	}
-	else if (r >= 0 && g == 0 && b > 0)
-	{
+	else if (r == 0 && g > 0 && b == 0xFF)
+		--g;
+	else if (r < 0xFF && g == 0 && b == 0xFF)
 		++r;
+	else if (r == 0xFF && g == 0 && b > 0)
 		--b;
-	}
 	frame->color = create_color(0, r, g, b);
 	return (0);
 }
