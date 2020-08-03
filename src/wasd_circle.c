@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 21:12:41 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/03 13:39:15 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/03 14:30:53 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,12 @@ static int		init_data(t_data *data)
 	return (0);
 }
 
+static void		destroy_data(t_data *data)
+{
+	free(data->frame);
+	free(data->circle);
+}
+
 int				main(void)
 {
 	t_data		data;
@@ -126,5 +132,6 @@ int				main(void)
 	mlx_loop_hook(data.frame->mlx, render_next_frame, &data);
 	mlx_hook (data.frame->win, KeyPress, KeyPressMask, keypress_handler, &data);
 	mlx_loop(data.frame->mlx);
+	destroy_data(&data);
 	return (0);
 }
