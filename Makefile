@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/08/03 15:01:01 by amalliar         ###   ########.fr        #
+#    Updated: 2020/08/03 16:14:52 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCDIR     := src
 OBJDIR     := .obj
 DEPDIR     := .dep
 
-SRCS       := src/images.c \
+SRCS       := src/cursor.c \
               src/colors.c \
 	      src/graphics.c
 OBJS       := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
