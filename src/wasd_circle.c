@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 21:12:41 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/03 00:18:40 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/03 13:39:15 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "Events.h"
 #include "colors.h"
 #include "graphics.h"
-#include "ft_stdio.h"
 
 typedef struct	s_circle
 {
@@ -30,7 +29,27 @@ typedef struct	s_data
 	t_circle	*circle;
 }				t_data;
 
-int		keypress_handler(int keycode, t_data *data)
+static void		shift_circle_color(t_data *data)
+{
+	int		xm;
+	int		ym;
+	int		center_dist;
+	int		center_dist_limit;
+	int		max_dist;
+	int		r;
+	int		g;
+
+	xm = data->frame->img_width / 2;
+	ym = data->frame->img_height / 2;
+	center_dist = sqrt(pow(xm - data->circle->xm, 2) + pow(ym - data->circle->ym, 2));
+	center_dist_limit = sqrt(2) * data->circle->radius;
+	max_dist = sqrt(pow(data->frame->img_width, 2) + pow(data->frame->img_height, 2)) / 2 - center_dist_limit;
+	r = 255 * center_dist / max_dist;
+	g = 255 - r;
+	data->circle->color = create_color(0, r, g, 0);
+}
+
+static int		keypress_handler(int keycode, t_data *data)
 {
 	switch (keycode)
 	{
@@ -51,7 +70,7 @@ int		keypress_handler(int keycode, t_data *data)
 				data->circle->xm += 1;
 			break ;
 	}
-	// TODO: Add color shifting depending on circle position within the image.
+	shift_circle_color(data);
 	return (0);
 }
 
@@ -89,7 +108,7 @@ static int		init_data(t_data *data)
 	data->frame->win = mlx_new_window(data->frame->mlx, data->frame->win_width, \
 		data->frame->win_height, "cub3D");
 	data->frame->img_width = data->frame->win_width;
-	data->frame->img_height = data->frame->img_height;
+	data->frame->img_height = data->frame->win_height;
 	data->circle->xm = data->frame->img_width / 2;
 	data->circle->ym = data->frame->img_height / 2;
 	data->circle->radius = (data->frame->img_width < data->frame->img_height) ? \
@@ -104,8 +123,8 @@ int				main(void)
 
 	if (init_data(&data))
 		return (1);
-	mlx_loop_hook(data.frame.mlx, render_next_frame, &data);
-	mlx_hook (data.frame.win, KeyPress, KeyPressMask, keypress_handler, &data);
-	mlx_loop(data.frame.mlx);
+	mlx_loop_hook(data.frame->mlx, render_next_frame, &data);
+	mlx_hook (data.frame->win, KeyPress, KeyPressMask, keypress_handler, &data);
+	mlx_loop(data.frame->mlx);
 	return (0);
 }
