@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 07:45:23 by amalliar          #+#    #+#             */
-/*   Updated: 2020/07/20 22:16:39 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/04 18:51:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		ft_putendl_fd(char *str, int fd);
 int		ft_putnbr_fd(int num, int fd);
 int		ft_putstr(char *str);
 int		ft_putnstr(char *str, int num);
+int		ft_putnstr_fd(char *str, int fd, int num);
 int		ft_putstr_fd(char *str, int fd);
 
 #endif

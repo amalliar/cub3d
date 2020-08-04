@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/07/30 18:28:52 by amalliar         ###   ########.fr        #
+#    Updated: 2020/08/04 18:52:05 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ FT_STDIO   := ft_stdio/ft_get_next_line.c \
               ft_stdio/ft_putnbr_fd.c \
               ft_stdio/ft_putstr.c \
               ft_stdio/ft_putnstr.c \
+              ft_stdio/ft_putnstr_fd.c \
               ft_stdio/ft_putstr_fd.c
 
 FT_STDLIB  := ft_stdlib/ft_abs.c \

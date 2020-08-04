@@ -6,14 +6,30 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:15:08 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/01 15:06:11 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/03 18:38:33 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "colors.h"
 #include "graphics.h"
+#include "X.h"
+#include "Events.h"
 
-int		render_next_frame(t_frame *frame)
+static void		destroy_data(t_frame *frame)
+{
+	mlx_destroy_window(frame->mlx, frame->win);
+}
+
+static int		keypress_handler(int keycode, t_frame *frame)
+{
+	if (keycode == kVK_Escape)
+	{
+		destroy_data(frame);
+		exit(0);
+	}
+}
+
+static int		render_next_frame(t_frame *frame)
 {
 	int		y;
 	int		r;
@@ -50,7 +66,7 @@ int		render_next_frame(t_frame *frame)
 	return (0);
 }
 
-int		main(void)
+int				main(void)
 {
 	t_frame		frame;
 
@@ -62,6 +78,7 @@ int		main(void)
 	frame.img_height = frame.win_height;
 	frame.color = RED;
 	mlx_loop_hook(frame.mlx, render_next_frame, &frame);
+	mlx_hook (frame.win, KeyPress, KeyPressMask, keypress_handler, &frame);
 	mlx_loop(frame.mlx);
 	return (0);
 }
