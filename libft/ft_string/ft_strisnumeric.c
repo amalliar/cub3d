@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ctype.h                                         :+:      :+:    :+:   */
+/*   ft_strisnumeric.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/24 07:26:04 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/05 20:47:33 by amalliar         ###   ########.fr       */
+/*   Created: 2020/08/05 16:49:02 by amalliar          #+#    #+#             */
+/*   Updated: 2020/08/05 16:57:27 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_CTYPE_H
-# define FT_CTYPE_H
+#include "ft_string.h"
+#include "ft_ctype.h"
 
-int		ft_isalnum(int c);
-int		ft_isalpha(int c);
-int		ft_isascii(int c);
-int		ft_isdigit(int c);
-int		ft_isprint(int c);
-int		ft_isspace(int c);
-int		ft_islower(int c);
-int		ft_isupper(int c);
-int		ft_tolower(int c);
-int		ft_toupper(int c);
+/*
+** Returns true if ft_isdigit applies to all characters in the string.
+*/
 
-#endif
+int		ft_strisnumeric(char *str)
+{
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		++str;
+	}
+	return (1);
+}

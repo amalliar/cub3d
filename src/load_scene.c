@@ -6,15 +6,22 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/04 18:31:47 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/05 22:44:57 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "colors.h"
+#include "mlx.h"
 #include "ft_stdio.h"
+#include "ft_stdlib.h"
+#include "ft_string.h"
 #include "ft_list.h"
+#define PARAMS_LOADED				200
+#define MANDATORY_PARAMS_COUNT		8
+#define DEFINED_MAP_OBJECTS			" 102NSEW"
 
-static void		free_words(char **words)
+static void		free_split_tab(char **words)
 {
 	int		i;
 
@@ -45,13 +52,16 @@ static void		set_resolution(t_mlx_data *mlx_data, char **words)
 
 	wc = word_count(words);
 	if (wc != 3)
-		exit_failure("Incorrect number of parameters for resolution: expected 3 but got %s\n", ft_itoa(wc));
-	if (!ft_strisnumeric(words[2]) || !ft_strisnumeric(words[3]))
+		exit_failure("Incorrect number of parameters for resolution: expected 3 but got %s\n", ft_itoa(wc, 10));
+	if ((ft_strchr("-+", words[1][0])) ?
+		!ft_strisnumeric(words[1] + 1) : !ft_strisnumeric(words[1]) || \
+		(ft_strchr("-+", words[2][0])) ?
+		!ft_strisnumeric(words[2] + 1) : !ft_strisnumeric(words[2]))
 		exit_failure("Invalid resolution format: %s %s\n", words[2], words[3]);
 	width = ft_atoi(words[1]);
 	height = ft_atoi(words[2]);
 	if (width <= 0 || height <= 0)
-		exit_failure("Invalid resolution value: %s\n", (width <= 0) ? ft_itoa(width) : ft_itoa(height));
+		exit_failure("Invalid resolution value: %s\n", (width <= 0) ? ft_itoa(width, 10) : ft_itoa(height, 10));
 	mlx_data->width = width;
 	mlx_data->height = height;
 }
@@ -72,9 +82,8 @@ static void		set_texture(t_scene *scene, char **words)
 
 	wc = word_count(words);
 	if (wc != 2)
-		exit_failure("Incorrect number of parameters for texture: expected 2 but got %s\n", ft_itoa(wc));
-	img = mlx_xpm_file_to_image((*scene).mlx_data.mlx, words[1], &width, &height);
-	if (img == NULL)
+		exit_failure("Incorrect number of parameters for texture %s: expected 2 but got %s\n", words[0], ft_itoa(wc, 10));
+	if (!(img = mlx_xpm_file_to_image((*scene).mlx_data.mlx, words[1], &width, &height)))
 		exit_failure("Failed creating mlx image instance from file %s: %s\n", words[1], strerror(errno));
 	if (!ft_strcmp("NO", words[0]))
 		set_mlx_image(&(*scene).textures.walls.north, img, width, height);
@@ -84,8 +93,6 @@ static void		set_texture(t_scene *scene, char **words)
 		set_mlx_image(&(*scene).textures.walls.west, img, width, height);
 	else if (!ft_strcmp("EA", words[0]))
 		set_mlx_image(&(*scene).textures.walls.east, img, width, height);
-	else
-		exit_error("Unknown configuration parameter: %s", words[0]);
 }
 
 static void		set_sprite(t_scene *scene, char **words)
@@ -97,25 +104,11 @@ static void		set_sprite(t_scene *scene, char **words)
 
 	wc = word_count(words);
 	if (wc != 2)
-		exit_failure("Incorrect number of parameters for sprite: expected 2 but got %s\n", ft_itoa(wc));
-	img = mlx_xpm_file_to_image((*scene).mlx_data.mlx, words[1], &width, &height);
-	if (img == NULL)
+		exit_failure("Incorrect number of parameters for sprite: expected 2 but got %s\n", ft_itoa(wc, 10));
+	if (!(img = mlx_xpm_file_to_image((*scene).mlx_data.mlx, words[1], &width, &height)))
 		exit_failure("Failed creating mlx image instance from file %s: %s\n", words[1], strerror(errno));
 	if (!ft_strcmp("S", words[0]))
 		set_mlx_image(&(*scene).sprites.item, img, width, height);
-	else
-		exit_error("Unknown configuration parameter: %s", words[0]);
-}
-
-static int		strisrgb(char *str)
-{
-	while (*str)
-	{
-		if (!(*str >= '0' || *str <= '9' || *str == ','))
-			return (0);
-		++str;
-	}
-	return (1);
 }
 
 static void		set_color(t_colors *colors, char **words)
@@ -124,54 +117,56 @@ static void		set_color(t_colors *colors, char **words)
 	int		r;
 	int		g;
 	int		b;
-	char	*nex_sep;
+	char	**rgb_values;
 
 	wc = word_count(words);
 	if (wc != 2)
-		exit_failure("Incorrect number of parameters for color: expected 2 but got %s\n", ft_itoa(wc));
-	if (!strisrgb(words[1]))
+		exit_failure("Incorrect number of parameters for color: expected 2 but got %s\n", ft_itoa(wc, 10));
+	if (!(rgb_values = ft_split(words[1], ',')))
+		exit_failure("%s\n", strerror(errno));
+	wc = word_count(rgb_values);
+	if (wc != 3)
 		exit_failure("Invalid R,G,B format: %s\n", words[1]);
-	r = ft_atoi(words[1]);
-	if (!(next_sep = ft_strchr(words[1], ',')) || *(next_sep + 1) == '\0')
+	if ((ft_strchr("-+", rgb_values[0][0])) ?
+		!ft_strisnumeric(rgb_values[0] + 1) : !ft_strisnumeric(rgb_values[0]) || \
+		(ft_strchr("-+", rgb_values[1][0])) ?
+		!ft_strisnumeric(rgb_values[1] + 1) : !ft_strisnumeric(rgb_values[1]) || \
+		(ft_strchr("-+", rgb_values[2][0])) ?
+		!ft_strisnumeric(rgb_values[2] + 1) : !ft_strisnumeric(rgb_values[2]))
 		exit_failure("Invalid R,G,B format: %s\n", words[1]);
-	g = ft_atoi(next_sep + 1);
-	if (!(next_sep = ft_strchr(next_sep + 1, ',')) || *(next_sep + 1) == '\0')
-		exit_failure("Invalid R,G,B format: %s\n", words[1]);
-	b = ft_atoi(next_sep + 1);
+	r = ft_atoi(rgb_values[0]);
+	g = ft_atoi(rgb_values[1]);
+	b = ft_atoi(rgb_values[2]);
+	free_split_tab(rgb_values);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		exit_failure("Invalid R,G,B value: %s\n", words[1]);
 	if (!ft_strcmp("F", words[0]))
-		colors->floor = create_color(r, g, b);
+		colors->floor = create_color(0, r, g, b);
 	else if (!ft_strcmp("C", words[0]))
-		colors->ceilling = create_color(r, g, b);
-	else
-		exit_error("Unknown configuration parameter: %s", words[0]);
+		colors->ceilling = create_color(0, r, g, b);
 }
 
 static int		parse_params(t_scene *scene, char *line)
 {
 	static int		unset_params = MANDATORY_PARAMS_COUNT;
-	int				ret;
 	char			**words;
 
+	// TODO: Check for double configuration!
+	if (ft_strisspace(line))
+		return (0);
 	if (!(words = ft_split(line, ' ')))
 		exit_failure("%s\n", strerror(errno));
-	if (words[0][0] == '\0')
-	{
-		free_words(words);
-		return (0);
-	}
-	if (ft_strnstr("R", words[0], sizeof("R") - 1))
+	if (ft_strstr("R", words[0]))
 		set_resolution(&(*scene).mlx_data, words);
-	else if (ft_strnstr("NO SO WE EA", words[0], sizeof("NO SO WE EA") - 1))
-		set_texture(scene, words);
-	else if (ft_strnstr("S", words[0], sizeof("S") - 1))
+	else if (ft_strstr("S", words[0]))
 		set_sprite(scene, words);
-	else if (ft_strnstr("F C", words[0], sizeof("F C") - 1))
+	else if (ft_strstr("F C", words[0]))
 		set_color(&(*scene).colors, words);
+	else if (ft_strstr("NO SO WE EA", words[0]))
+		set_texture(scene, words);
 	else
-		exit_error("Unknown configuration parameter: %s", words[0]);
-	free_words(words);
+		exit_failure("Unknown configuration parameter: %s\n", words[0]);
+	free_split_tab(words);
 	--unset_params;
 	return ((unset_params == 0) ? PARAMS_LOADED : 0);
 }
@@ -193,7 +188,129 @@ static void		load_params(t_scene *scene, int fd)
 	if (ret == -1) 
 		exit_failure("Failed reading from a file descriptor: %s\n", strerror(errno));
 	else if (ret == 0)
-		exit_failure("Scene file is missing mandatory configuration parameters.\n");
+		exit_failure("Scene file is missing mandatory configuration parameters\n");
+}
+
+static size_t	get_cur_line_length(char *line)
+{
+	size_t	len;
+
+	len = ft_strlen(line);
+	while (len > 0)
+	{
+		if (line[len - 1] != ' ')
+			break ;
+		--len;
+	}
+	return (len);
+}
+
+static void		get_map_size(t_list *lst, size_t *max_line_length, size_t *lst_size)
+{
+	size_t	cur_line_length;
+
+	*max_line_length = 0;
+	*lst_size = 0;
+	while (lst)
+	{
+		++*lst_size;
+		cur_line_length = get_cur_line_length(lst->content);
+		if (cur_line_length > *max_line_length)
+			*max_line_length = cur_line_length;
+		lst = lst->next;
+	}
+}
+
+static void		gen_map_line(char *src, char *dest, size_t num)
+{
+	size_t	len;
+
+	len = ft_strlen(src);
+	ft_memcpy(dest, src, len);
+	while(len < num)
+	{
+		dest[len] = ' ';
+		++len;
+	}
+	dest[num] = '\0';
+}
+
+static char		**gen_map(t_list *lst, int *width, int *height)
+{
+	size_t	i;
+	size_t	lst_size;
+	size_t	max_line_length;
+	char	**map;
+
+	get_map_size(lst, &max_line_length, &lst_size);
+	*width = (int)max_line_length;
+	*height = (int)lst_size;
+	if (!(map = malloc(lst_size * sizeof(char *))))
+		exit_failure("%s\n", strerror(errno));
+	i = 0;
+	while (i < lst_size)
+	{
+		if (!(map[i] = malloc(max_line_length + 1)))
+			exit_failure("%s\n", strerror(errno));
+		gen_map_line(lst->content, map[i], max_line_length);
+		lst = lst->next;
+		++i;
+	}
+	return (map);
+}
+
+static void		check_neighbours(t_map_data *map_data, int mx, int my)
+{
+	if (mx > 0 && (map_data->map)[my][mx - 1] == ' ')
+		exit_failure("Map breach detected at position [%s][%s]\n", ft_itoa(mx, 10), ft_itoa(my, 10));
+	if (mx < map_data->width - 1 && (map_data->map)[my][mx + 1] == ' ')
+		exit_failure("Map breach detected at position [%s][%s]\n", ft_itoa(mx, 10), ft_itoa(my, 10));
+	if (my > 0 && (map_data->map)[my - 1][mx] == ' ')
+		exit_failure("Map breach detected at position [%s][%s]\n", ft_itoa(mx, 10), ft_itoa(my, 10));
+	if (my < map_data->height - 1 && (map_data->map)[my + 1][mx] == ' ')
+		exit_failure("Map breach detected at position [%s][%s]\n", ft_itoa(mx, 10), ft_itoa(my, 10));
+	if (ft_strchr(DEFINED_MAP_OBJECTS + 2, (map_data->map)[my][mx]) && \
+		(mx == map_data->width - 1 || my == map_data->height - 1))
+		exit_failure("Map breach detected at position [%s][%s]\n", ft_itoa(mx, 10), ft_itoa(my, 10));
+}
+
+static void		load_player_data(t_player_data *player_data, int x, int y, char obj)
+{
+	if (player_data->orientation != 0)
+		exit_failure("Double initialisation of player\n");
+	player_data->orientation = obj;
+	player_data->pos_x = x;
+	player_data->pos_y = y;
+}
+
+static void		process_map_object(t_scene *scene, int x, int y, char obj)
+{
+	if (!ft_strchr(" 1", obj))
+		check_neighbours(&(*scene).map_data, x, y);
+	if (ft_strchr("NSEW", obj))
+		load_player_data(&(*scene).player_data, x, y, obj);
+}
+
+static void		parse_map(t_scene *scene)
+{
+	int		x;
+	int		y;
+	char	obj;
+
+	y = 0;
+	while (y < (*scene).map_data.height)
+	{
+		x = 0;
+		while (x < (*scene).map_data.width)
+		{
+			obj = (*scene).map_data.map[y][x];
+			if (!ft_strchr(DEFINED_MAP_OBJECTS, obj))
+				exit_failure("Invalid map object at position [%s][%s]: %c\n", ft_itoa(x, 10), ft_itoa(y, 10), obj);
+			process_map_object(scene, x, y, obj);
+			++x;
+		}
+		++y;
+	}
 }
 
 static void		load_map(t_scene *scene, int fd)
@@ -204,9 +321,25 @@ static void		load_map(t_scene *scene, int fd)
 	t_list	*elem;
 
 	line = NULL;
-	lst = NULL;
 	while ((ret = ft_get_next_line(fd, &line)) > 0)
 	{
+		if (!ft_strisspace(line))
+			break ;
+		free(line);
+		line = NULL;
+	}
+	if (ret == -1)
+		exit_failure("Failed reading from a file descriptor: %s\n", strerror(errno));
+	if (line == NULL)
+		exit_failure("Map is empty\n");
+	if (!(elem = ft_lstnew(line)))
+		exit_failure("%s", strerror(errno));
+	lst = NULL;
+	ft_lstadd_back(&lst, elem);
+	while ((ret = ft_get_next_line(fd, &line)) > 0)
+	{
+		if (ft_strisspace(line))
+			break ;
 		if (!(elem = ft_lstnew(line)))
 			exit_failure("%s", strerror(errno));
 		ft_lstadd_back(&lst, elem);
@@ -214,6 +347,11 @@ static void		load_map(t_scene *scene, int fd)
 	}
 	if (ret == -1)
 		exit_failure("Failed reading from a file descriptor: %s\n", strerror(errno));
+	free(line);
+	if (!((*scene).map_data.map = gen_map(lst, &(*scene).map_data.width, &(*scene).map_data.height)))
+		exit_failure("%s\n", strerror(errno));
+	ft_lstclear(&lst, free);
+	parse_map(scene);
 }
 
 void			load_scene(t_scene *scene, char *path)

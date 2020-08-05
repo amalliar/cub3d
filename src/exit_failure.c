@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 18:32:42 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/04 18:52:25 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/05 20:38:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,16 @@ void	exit_failure(char *msg, ...)
 				++msg;
 				ft_putstr_fd(va_arg(ap, char *), STDERR_FILENO);
 			}
+			else if (*msg == 'c')
+			{
+				++msg;
+				ft_putchar_fd((char)va_arg(ap, int), STDERR_FILENO);
+			}
 			continue ;
 		}
 		ft_putstr_fd(msg, STDERR_FILENO);
 		break ;
 	}
+	va_end(ap);
 	exit(EXIT_FAILURE);
 }

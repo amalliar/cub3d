@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/04 21:10:30 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/05 20:41:02 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,32 @@ typedef struct		s_colors
 	unsigned int	ceilling;
 }					t_colors;
 
+typedef struct		s_map_data
+{
+	char			**map;
+	int				width;
+	int				height;
+}					t_map_data;
+
+typedef struct		s_player_data
+{
+	int				pos_x;
+	int				pos_y;
+	char			orientation;
+}					t_player_data;
+
 typedef struct		s_scene
 {
 	t_mlx_data		mlx_data;
 	t_textures		textures;
 	t_sprites		sprites;
 	t_colors		colors;
-	char			**map;
+	t_map_data		map_data;
+	t_player_data	player_data;
 }					t_scene;
 
 void				exit_failure(char *msg, ...);
+void				load_scene(t_scene *scene, char *path);
+
 
 #endif
