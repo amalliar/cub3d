@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:17:56 by amalliar          #+#    #+#             */
-/*   Updated: 2020/07/31 14:15:01 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/07 17:34:51 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		get_alpha(int color);
 int		get_red(int color);
 int		get_green(int color);
 int		get_blue(int color);
-int		add_shade(double distance, int color);
 int		get_opposite(int color);
+int		add_shade(double distance, int color);
 
 #endif

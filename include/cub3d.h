@@ -6,13 +6,21 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/05 20:41:02 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/07 17:56:07 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# define MLX_WINDOW_TITLE			"cub3D"
+# define DEFINED_MAP_OBJECTS		" 102NSEW"
 # define MANDATORY_PARAMS_COUNT		8
+# define PARAMS_LOADED				200
+# define PLAYER_FOV					70
+# define KEY_UP						0
+# define KEY_DOWN					1
+
 # include <fcntl.h>
 # include <unistd.h>
 # include <sys/types.h>
@@ -23,21 +31,25 @@
 # include <math.h>
 # include <stdarg.h>
 
-typedef struct		s_mlx_data
-{
-	void			*mlx;
-	void			*win;
-	int				width;
-	int				height;
-	char			*title;
-}					t_mlx_data;
-
 typedef struct		s_mlx_image
 {
 	void			*img;
 	int				width;
 	int				height;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	char			*addr;
 }					t_mlx_image;
+
+typedef struct		s_mlx_data
+{
+	void			*mlx;
+	void			*win;
+	t_mlx_image		frame;
+	int				width;
+	int				height;
+}					t_mlx_data;
 
 typedef struct		s_walls
 {
@@ -73,10 +85,46 @@ typedef struct		s_map_data
 
 typedef struct		s_player_data
 {
-	int				pos_x;
-	int				pos_y;
-	char			orientation;
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			old_dir_x;
+	double			old_dir_y;
+	double			plane_x;
+	double			plane_y;
+	double			old_plane_x;
+	double			old_plane_y;
+	double			camera_x;
+	double			ray_dir_x;
+	double			ray_dir_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			perp_wall_dist;
+	double			move_speed;
+	double			rot_speed;
+	int				map_x;
+	int				map_y;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
 }					t_player_data;
+
+typedef struct		s_keystates
+{
+	int				kvk_ansi_w;
+	int				kvk_ansi_a;
+	int				kvk_ansi_s;
+	int				kvk_ansi_d;
+	int				kvk_leftarrow;
+	int				kvk_rightarrow;
+}					t_keystates;
 
 typedef struct		s_scene
 {
@@ -86,10 +134,14 @@ typedef struct		s_scene
 	t_colors		colors;
 	t_map_data		map_data;
 	t_player_data	player_data;
+	t_keystates		keystates;
 }					t_scene;
 
 void				exit_failure(char *msg, ...);
 void				load_scene(t_scene *scene, char *path);
+void				render_scene(t_scene *scene);
+int					keypress_handler(int keycode, t_scene *scene);
+int					keyrelease_handler(int keycode, t_scene *scene);
 
 
 #endif

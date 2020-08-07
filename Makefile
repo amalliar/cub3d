@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/08/05 20:37:23 by amalliar         ###   ########.fr        #
+#    Updated: 2020/08/07 14:28:08 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,10 @@ DEPDIR     := .dep
 SRCS       := src/main.c \
               src/exit_failure.c \
               src/load_scene.c \
+              src/render_scene.c \
+	      src/keypress_handler.c \
+	      src/keyrelease_handler.c \
+              src/graphics.c \
               src/colors.c
 OBJS       := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 DEPS       := $(SRCS:$(SRCDIR)/%.c=$(DEPDIR)/%.d)

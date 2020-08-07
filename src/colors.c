@@ -6,9 +6,11 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:07:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/01 14:58:58 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/07 17:37:23 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "colors.h"
 
 int		create_color(int a, int r, int g, int b)
 {

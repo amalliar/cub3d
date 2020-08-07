@@ -6,20 +6,17 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/05 22:44:57 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/07 19:33:35 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "colors.h"
 #include "mlx.h"
+#include "colors.h"
 #include "ft_stdio.h"
 #include "ft_stdlib.h"
 #include "ft_string.h"
 #include "ft_list.h"
-#define PARAMS_LOADED				200
-#define MANDATORY_PARAMS_COUNT		8
-#define DEFINED_MAP_OBJECTS			" 102NSEW"
 
 static void		free_split_tab(char **words)
 {
@@ -50,6 +47,8 @@ static void		set_resolution(t_mlx_data *mlx_data, char **words)
 	int		width;
 	int		height;
 
+	if (mlx_data->width != 0)
+		exit_failure("Double initialisation of resolution");
 	wc = word_count(words);
 	if (wc != 3)
 		exit_failure("Incorrect number of parameters for resolution: expected 3 but got %s\n", ft_itoa(wc, 10));
@@ -62,12 +61,18 @@ static void		set_resolution(t_mlx_data *mlx_data, char **words)
 	height = ft_atoi(words[2]);
 	if (width <= 0 || height <= 0)
 		exit_failure("Invalid resolution value: %s\n", (width <= 0) ? ft_itoa(width, 10) : ft_itoa(height, 10));
-	mlx_data->width = width;
-	mlx_data->height = height;
+	mlx_get_screen_size(mlx_data->mlx, &mlx_data->width, &mlx_data->height);
+	if (width <= mlx_data->width && height <= mlx_data->height)
+	{
+		mlx_data->width = width;
+		mlx_data->height = height;
+	}
 }
 
 static void		set_mlx_image(t_mlx_image *mlx_image, void *img, int width, int height)
 {
+	if (mlx_image->img != NULL)
+		exit_failure("Double initialisation of texture/sprite");
 	mlx_image->img = img;
 	mlx_image->width = width;
 	mlx_image->height = height;
@@ -151,7 +156,6 @@ static int		parse_params(t_scene *scene, char *line)
 	static int		unset_params = MANDATORY_PARAMS_COUNT;
 	char			**words;
 
-	// TODO: Check for double configuration!
 	if (ft_strisspace(line))
 		return (0);
 	if (!(words = ft_split(line, ' ')))
@@ -272,15 +276,44 @@ static void		check_neighbours(t_map_data *map_data, int mx, int my)
 	if (ft_strchr(DEFINED_MAP_OBJECTS + 2, (map_data->map)[my][mx]) && \
 		(mx == map_data->width - 1 || my == map_data->height - 1))
 		exit_failure("Map breach detected at position [%s][%s]\n", ft_itoa(mx, 10), ft_itoa(my, 10));
+	// Possibly need to check diagonals as well.
 }
 
 static void		load_player_data(t_player_data *player_data, int x, int y, char obj)
 {
-	if (player_data->orientation != 0)
-		exit_failure("Double initialisation of player\n");
-	player_data->orientation = obj;
+	if (player_data->pos_x != -1)
+		exit_failure("Double initialisation of player's start position\n");
 	player_data->pos_x = x;
 	player_data->pos_y = y;
+	if (obj == 'N')
+	{
+		player_data->dir_x = 0;
+		player_data->dir_y = -1;
+		player_data->plane_x = -tan(PLAYER_FOV * M_PI / 360);
+		player_data->plane_y = 0;
+	}
+	else if (obj == 'S')
+	{
+		player_data->dir_x = 0;
+		player_data->dir_y = 1;
+		player_data->plane_x = tan(PLAYER_FOV * M_PI / 360);
+		player_data->plane_y = 0;
+
+	}
+	else if (obj == 'E')
+	{
+		player_data->dir_x = 1;
+		player_data->dir_y = 0;
+		player_data->plane_x = 0;
+		player_data->plane_y = -tan(PLAYER_FOV * M_PI / 360);
+	}
+	else if (obj == 'W')
+	{
+		player_data->dir_x = -1;
+		player_data->dir_y = 0;
+		player_data->plane_x = 0;
+		player_data->plane_y = tan(PLAYER_FOV * M_PI / 360);
+	}
 }
 
 static void		process_map_object(t_scene *scene, int x, int y, char obj)
@@ -288,7 +321,10 @@ static void		process_map_object(t_scene *scene, int x, int y, char obj)
 	if (!ft_strchr(" 1", obj))
 		check_neighbours(&(*scene).map_data, x, y);
 	if (ft_strchr("NSEW", obj))
+	{
 		load_player_data(&(*scene).player_data, x, y, obj);
+		((*scene).map_data.map)[y][x] = '0';
+	}
 }
 
 static void		parse_map(t_scene *scene)
@@ -311,6 +347,8 @@ static void		parse_map(t_scene *scene)
 		}
 		++y;
 	}
+	if ((*scene).player_data.pos_x == -1)
+		exit_failure("Map is missing player's start position\n");
 }
 
 static void		load_map(t_scene *scene, int fd)

@@ -6,25 +6,38 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/05 22:53:01 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/07 21:41:27 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
 #include "ft_stdio.h"
+#include "ft_string.h"
 
 static void		init_scene(t_scene *scene)
 {
 	if (((*scene).mlx_data.mlx = mlx_init()) == NULL)
 		exit_failure("Failed creating mlx instance\n");
 	(*scene).mlx_data.win = NULL;
+	(*scene).mlx_data.frame.img = NULL;
+	(*scene).mlx_data.width = 0;
+	(*scene).mlx_data.height = 0;
 	(*scene).textures.walls.north.img = NULL;
 	(*scene).textures.walls.south.img = NULL;
 	(*scene).textures.walls.west.img = NULL;
 	(*scene).textures.walls.east.img = NULL;
 	(*scene).sprites.item.img = NULL;
-	(*scene).player_data.orientation = 0;
+	(*scene).player_data.pos_x = -1;
+	(*scene).player_data.move_speed = 0.01;
+	(*scene).player_data.rot_speed = 0.01;
+	(*scene).keystates.kvk_ansi_w = KEY_UP;
+	(*scene).keystates.kvk_ansi_a = KEY_UP;
+	(*scene).keystates.kvk_ansi_s = KEY_UP;
+	(*scene).keystates.kvk_ansi_d = KEY_UP;
+	(*scene).keystates.kvk_leftarrow = KEY_UP;
+	(*scene).keystates.kvk_rightarrow = KEY_UP;
+
 }
 
 static void		print_map(t_map_data *map_data)
@@ -61,9 +74,21 @@ int				main(int argc, char **argv)
 
 	if (argc < 2)
 		exit_failure("Program requires at least one argument (scene.cub)\n");
+	if (argc > 3)
+		exit_failure("Too many arguments\n");
 	init_scene(&scene);
 	load_scene(&scene, argv[1]);
-	print_scene_data(&scene);
-	// Render scene...
+	//print_scene_data(&scene);
+	if (argc == 3) 
+	{
+		if (!ft_strcmp("--save", argv[2]))
+		{
+			//screenshot();
+			exit(EXIT_SUCCESS);
+		}
+		else
+			exit_failure("Unknown parameter: %s", argv[2]);
+	}
+	render_scene(&scene);
 	return (0);
 }
