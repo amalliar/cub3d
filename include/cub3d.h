@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/07 17:56:07 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/09 19:22:23 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # define DEFINED_MAP_OBJECTS		" 102NSEW"
 # define MANDATORY_PARAMS_COUNT		8
 # define PARAMS_LOADED				200
-# define PLAYER_FOV					70
+# define PLAYER_FOV					80
+# define PLAYER_MOVE_SPEED			0.02
+# define PLAYER_ROT_SPEED			0.012
 # define KEY_UP						0
 # define KEY_DOWN					1
 

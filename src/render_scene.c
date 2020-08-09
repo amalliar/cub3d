@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/07 21:57:07 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/09 19:16:18 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ static void		init_vars(int x, int width, t_player_data *pd)
 	pd->hit = 0;
 }
 
-static void		calc_step_and_sidedist(t_player_data *pd)
-{
+static void		calc_step_and_sidedist(t_player_data *pd) {
 	if (pd->ray_dir_x < 0)
 	{
 		pd->step_x = -1;
@@ -74,7 +73,6 @@ static void		perform_dda(t_player_data *pd, t_map_data *md)
 	}
 }
 
-#include <stdio.h>
 
 static void		calc_draw_start_end(int h, t_player_data *pd)
 {
@@ -84,42 +82,52 @@ static void		calc_draw_start_end(int h, t_player_data *pd)
 		pd->perp_wall_dist = (pd->map_y - pd->pos_y + (1 - pd->step_y) / 2) / pd->ray_dir_y;
 	pd->line_height = (int)(h / pd->perp_wall_dist);
 	pd->draw_start = -pd->line_height / 2 + h / 2;
-	if (pd->draw_start < 0)
+	if (pd->draw_start < 0 || pd->draw_start >= h)
 		pd->draw_start = 0;
 	pd->draw_end = pd->line_height / 2 + h / 2;
-	if (pd->draw_end >= h)
+	if (pd->draw_end >= h || pd->draw_end < 0)
 		pd->draw_end = h - 1;
-	printf("side: %d\n", pd->side);
-	printf("map_x: %d, map_y: %d\n", pd->map_x, pd->map_y);
-	printf("pos_x: %f, pos_y: %f\n", pd->pos_x, pd->pos_y);
-	printf("step_x: %d, step_y: %d\n", pd->step_x, pd->step_y);
-	printf("side_dist_x: %f, side_dist_y: %f\n", pd->side_dist_x, pd->side_dist_y);
-	printf("ray_dir_x: %f, ray_dir_y: %f\n", pd->ray_dir_x, pd->ray_dir_y);
-	printf("perp_wall_dist: %f\n", pd->perp_wall_dist);
-	printf("line_height: %d\n", pd->line_height);
-	printf("h: %d\n", h);
-	printf("draw_start: %d\n", pd->draw_start);
-	printf("draw_end: %d\n", pd->draw_end);
 }
 
 
 static void		process_keystates(t_keystates *ks, t_player_data *pd, t_map_data *md)
 {
+	double		speed_mod;
+
+	if ((ks->kvk_ansi_w == KEY_DOWN || ks->kvk_ansi_s == KEY_DOWN) && (ks->kvk_ansi_a == KEY_DOWN || ks->kvk_ansi_d == KEY_DOWN))
+		speed_mod = 0.50;
+	else
+		speed_mod = 1.0;
 	if (ks->kvk_ansi_w == KEY_DOWN)
 	{
-		if((md->map)[(int)pd->pos_y][(int)(pd->pos_x + pd->dir_x * pd->move_speed)] != '1')
-			pd->pos_x += pd->dir_x * pd->move_speed;
-		if((md->map)[(int)(pd->pos_y + pd->dir_y * pd->move_speed)][(int)pd->pos_x] != '1')
-			pd->pos_y += pd->dir_y * pd->move_speed;
+		if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x + pd->dir_x * pd->move_speed)] != '1')
+			pd->pos_x += pd->dir_x * pd->move_speed * speed_mod;
+		if ((md->map)[(int)(pd->pos_y + pd->dir_y * pd->move_speed)][(int)pd->pos_x] != '1')
+			pd->pos_y += pd->dir_y * pd->move_speed * speed_mod;
 	}
-	else if (ks->kvk_ansi_s == KEY_DOWN)
+	if (ks->kvk_ansi_s == KEY_DOWN)
 	{
-		if((md->map)[(int)pd->pos_y][(int)(pd->pos_x - pd->dir_x * pd->move_speed)] != '1')
-			pd->pos_x -= pd->dir_x * pd->move_speed;
-		if((md->map)[(int)(pd->pos_y - pd->dir_y * pd->move_speed)][(int)pd->pos_x] != '1')
-			pd->pos_y -= pd->dir_y * pd->move_speed;
+		if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x - pd->dir_x * pd->move_speed)] != '1')
+			pd->pos_x -= pd->dir_x * pd->move_speed * speed_mod;
+		if ((md->map)[(int)(pd->pos_y - pd->dir_y * pd->move_speed)][(int)pd->pos_x] != '1')
+			pd->pos_y -= pd->dir_y * pd->move_speed * speed_mod;
 	}
-	else if (ks->kvk_rightarrow == KEY_DOWN)
+	if (ks->kvk_ansi_a == KEY_DOWN)
+	{
+		if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x -pd->dir_y * pd->move_speed)] != '1')
+			pd->pos_x -= pd->dir_y * pd->move_speed * speed_mod;
+		if ((md->map)[(int)(pd->pos_y + pd->dir_x * pd->move_speed)][(int)pd->pos_x] != '1')
+			pd->pos_y += pd->dir_x * pd->move_speed * speed_mod;
+
+	}
+	if (ks->kvk_ansi_d == KEY_DOWN)
+	{
+		if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x +pd->dir_y * pd->move_speed)] != '1')
+			pd->pos_x += pd->dir_y * pd->move_speed * speed_mod;
+		if ((md->map)[(int)(pd->pos_y - pd->dir_x * pd->move_speed)][(int)pd->pos_x] != '1')
+			pd->pos_y -= pd->dir_x * pd->move_speed * speed_mod;
+	}
+	if (ks->kvk_rightarrow == KEY_DOWN)
 	{
 		pd->old_dir_x = pd->dir_x;
 		pd->dir_x = pd->dir_x * cos(-pd->rot_speed) - pd->dir_y * sin(-pd->rot_speed);
@@ -128,7 +136,7 @@ static void		process_keystates(t_keystates *ks, t_player_data *pd, t_map_data *m
 		pd->plane_x = pd->plane_x * cos(-pd->rot_speed) - pd->plane_y * sin(-pd->rot_speed);
 		pd->plane_y = pd->old_plane_x * sin(-pd->rot_speed) + pd->plane_y * cos(-pd->rot_speed);
 	}
-	else if (ks->kvk_leftarrow == KEY_DOWN)
+	if (ks->kvk_leftarrow == KEY_DOWN)
 	{
 		pd->old_dir_x = pd->dir_x;
 		pd->dir_x = pd->dir_x * cos(pd->rot_speed) - pd->dir_y * sin(pd->rot_speed);
@@ -158,7 +166,7 @@ static int		render_next_frame(t_scene *scene)
 		calc_draw_start_end(mlx_data->height, player_data);
 		color = RED;
 		if (player_data->side == 1)
-			color = add_shade(0.75, color);
+			color = add_shade(0.45, color);
 		if (player_data->draw_start > 0)
 			drawverline(&mlx_data->frame, x, 0, player_data->draw_start - 1, (*scene).colors.ceilling);
 		drawverline(&mlx_data->frame, x, player_data->draw_start, player_data->draw_end, color);

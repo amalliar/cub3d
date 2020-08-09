@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:07:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/07 17:37:23 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/08 16:33:36 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int		add_shade(double distance, int color)
 	int 	g;
 	int 	b;
 
-	a = get_alpha(color) >> 24;
-	r = get_red(color) >> 16;
-	g = get_green(color) >> 8;
+	a = get_alpha(color);
+	r = get_red(color);
+	g = get_green(color);
 	b = get_blue(color);
 	r -= r * distance;
 	g -= g * distance;

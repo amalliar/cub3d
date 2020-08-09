@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/07 19:33:35 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/09 20:43:36 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,7 +368,7 @@ static void		load_map(t_scene *scene, int fd)
 	}
 	if (ret == -1)
 		exit_failure("Failed reading from a file descriptor: %s\n", strerror(errno));
-	if (line == NULL)
+	if (ret == 0)
 		exit_failure("Map is empty\n");
 	if (!(elem = ft_lstnew(line)))
 		exit_failure("%s", strerror(errno));

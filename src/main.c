@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/07 21:41:27 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/09 19:53:03 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void		init_scene(t_scene *scene)
 	(*scene).textures.walls.east.img = NULL;
 	(*scene).sprites.item.img = NULL;
 	(*scene).player_data.pos_x = -1;
-	(*scene).player_data.move_speed = 0.01;
-	(*scene).player_data.rot_speed = 0.01;
+	(*scene).player_data.move_speed = PLAYER_MOVE_SPEED;
+	(*scene).player_data.rot_speed = PLAYER_ROT_SPEED;
 	(*scene).keystates.kvk_ansi_w = KEY_UP;
 	(*scene).keystates.kvk_ansi_a = KEY_UP;
 	(*scene).keystates.kvk_ansi_s = KEY_UP;
