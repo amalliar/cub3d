@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:17:56 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/07 17:34:51 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/10 17:15:41 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define NAVY		0x000080
 # define FUCHSIA	0xFF00FF
 # define PURPLE		0x800080
+# define ORANGE		0xFF8127
 
 int		create_color(int a, int r, int g, int b);
 int		get_alpha(int color);

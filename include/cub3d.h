@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/09 19:22:23 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/10 15:46:41 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,6 @@ void				load_scene(t_scene *scene, char *path);
 void				render_scene(t_scene *scene);
 int					keypress_handler(int keycode, t_scene *scene);
 int					keyrelease_handler(int keycode, t_scene *scene);
-
+int					winclose_handler(t_scene *scene);
 
 #endif

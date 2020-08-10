@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/09 20:43:36 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/10 19:52:42 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "mlx.h"
 #include "colors.h"
 #include "ft_stdio.h"
+#include "ft_ctype.h"
 #include "ft_stdlib.h"
 #include "ft_string.h"
 #include "ft_list.h"
@@ -66,8 +67,7 @@ static void		set_resolution(t_mlx_data *mlx_data, char **words)
 	{
 		mlx_data->width = width;
 		mlx_data->height = height;
-	}
-}
+	} }
 
 static void		set_mlx_image(t_mlx_image *mlx_image, void *img, int width, int height)
 {
@@ -197,39 +197,41 @@ static void		load_params(t_scene *scene, int fd)
 
 static size_t	get_cur_line_length(char *line)
 {
-	size_t	len;
+	int		len;
 
 	len = ft_strlen(line);
 	while (len > 0)
 	{
-		if (line[len - 1] != ' ')
+		if (!ft_isspace(line[len - 1]))
 			break ;
 		--len;
 	}
 	return (len);
 }
 
-static void		get_map_size(t_list *lst, size_t *max_line_length, size_t *lst_size)
+static void		get_map_size(t_list *lst, int *width, int *height)
 {
-	size_t	cur_line_length;
+	int		cur_line_length;
 
-	*max_line_length = 0;
-	*lst_size = 0;
+	*width = 0;
+	*height = 0;
 	while (lst)
 	{
-		++*lst_size;
+		++*height;
 		cur_line_length = get_cur_line_length(lst->content);
-		if (cur_line_length > *max_line_length)
-			*max_line_length = cur_line_length;
+		if (cur_line_length > *width)
+			*width = cur_line_length;
 		lst = lst->next;
 	}
 }
 
-static void		gen_map_line(char *src, char *dest, size_t num)
+static void		gen_map_line(char *dest, char *src, int num)
 {
-	size_t	len;
+	int		len;
 
 	len = ft_strlen(src);
+	if (num < len)
+		len = num;
 	ft_memcpy(dest, src, len);
 	while(len < num)
 	{
@@ -241,22 +243,18 @@ static void		gen_map_line(char *src, char *dest, size_t num)
 
 static char		**gen_map(t_list *lst, int *width, int *height)
 {
-	size_t	i;
-	size_t	lst_size;
-	size_t	max_line_length;
+	int		i;
 	char	**map;
 
-	get_map_size(lst, &max_line_length, &lst_size);
-	*width = (int)max_line_length;
-	*height = (int)lst_size;
-	if (!(map = malloc(lst_size * sizeof(char *))))
+	get_map_size(lst, width, height);
+	if (!(map = malloc(*height * sizeof(char *))))
 		exit_failure("%s\n", strerror(errno));
 	i = 0;
-	while (i < lst_size)
+	while (i < *height)
 	{
-		if (!(map[i] = malloc(max_line_length + 1)))
+		if (!(map[i] = malloc(*width + 1)))
 			exit_failure("%s\n", strerror(errno));
-		gen_map_line(lst->content, map[i], max_line_length);
+		gen_map_line(map[i], lst->content, *width);
 		lst = lst->next;
 		++i;
 	}
@@ -289,14 +287,14 @@ static void		load_player_data(t_player_data *player_data, int x, int y, char obj
 	{
 		player_data->dir_x = 0;
 		player_data->dir_y = -1;
-		player_data->plane_x = -tan(PLAYER_FOV * M_PI / 360);
+		player_data->plane_x = tan(PLAYER_FOV * M_PI / 360);
 		player_data->plane_y = 0;
 	}
 	else if (obj == 'S')
 	{
 		player_data->dir_x = 0;
 		player_data->dir_y = 1;
-		player_data->plane_x = tan(PLAYER_FOV * M_PI / 360);
+		player_data->plane_x = -tan(PLAYER_FOV * M_PI / 360);
 		player_data->plane_y = 0;
 
 	}
@@ -305,14 +303,14 @@ static void		load_player_data(t_player_data *player_data, int x, int y, char obj
 		player_data->dir_x = 1;
 		player_data->dir_y = 0;
 		player_data->plane_x = 0;
-		player_data->plane_y = -tan(PLAYER_FOV * M_PI / 360);
+		player_data->plane_y = tan(PLAYER_FOV * M_PI / 360);
 	}
 	else if (obj == 'W')
 	{
 		player_data->dir_x = -1;
 		player_data->dir_y = 0;
 		player_data->plane_x = 0;
-		player_data->plane_y = tan(PLAYER_FOV * M_PI / 360);
+		player_data->plane_y = -tan(PLAYER_FOV * M_PI / 360);
 	}
 }
 
@@ -373,6 +371,7 @@ static void		load_map(t_scene *scene, int fd)
 	if (!(elem = ft_lstnew(line)))
 		exit_failure("%s", strerror(errno));
 	lst = NULL;
+	line = NULL;
 	ft_lstadd_back(&lst, elem);
 	while ((ret = ft_get_next_line(fd, &line)) > 0)
 	{

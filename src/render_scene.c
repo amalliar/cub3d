@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/09 19:16:18 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/10 18:45:15 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static void		process_keystates(t_keystates *ks, t_player_data *pd, t_map_data *m
 		if ((md->map)[(int)(pd->pos_y - pd->dir_y * pd->move_speed)][(int)pd->pos_x] != '1')
 			pd->pos_y -= pd->dir_y * pd->move_speed * speed_mod;
 	}
-	if (ks->kvk_ansi_a == KEY_DOWN)
+	if (ks->kvk_ansi_d == KEY_DOWN)
 	{
 		if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x -pd->dir_y * pd->move_speed)] != '1')
 			pd->pos_x -= pd->dir_y * pd->move_speed * speed_mod;
@@ -120,14 +120,14 @@ static void		process_keystates(t_keystates *ks, t_player_data *pd, t_map_data *m
 			pd->pos_y += pd->dir_x * pd->move_speed * speed_mod;
 
 	}
-	if (ks->kvk_ansi_d == KEY_DOWN)
+	if (ks->kvk_ansi_a == KEY_DOWN)
 	{
 		if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x +pd->dir_y * pd->move_speed)] != '1')
 			pd->pos_x += pd->dir_y * pd->move_speed * speed_mod;
 		if ((md->map)[(int)(pd->pos_y - pd->dir_x * pd->move_speed)][(int)pd->pos_x] != '1')
 			pd->pos_y -= pd->dir_x * pd->move_speed * speed_mod;
 	}
-	if (ks->kvk_rightarrow == KEY_DOWN)
+	if (ks->kvk_leftarrow == KEY_DOWN)
 	{
 		pd->old_dir_x = pd->dir_x;
 		pd->dir_x = pd->dir_x * cos(-pd->rot_speed) - pd->dir_y * sin(-pd->rot_speed);
@@ -136,7 +136,7 @@ static void		process_keystates(t_keystates *ks, t_player_data *pd, t_map_data *m
 		pd->plane_x = pd->plane_x * cos(-pd->rot_speed) - pd->plane_y * sin(-pd->rot_speed);
 		pd->plane_y = pd->old_plane_x * sin(-pd->rot_speed) + pd->plane_y * cos(-pd->rot_speed);
 	}
-	if (ks->kvk_leftarrow == KEY_DOWN)
+	if (ks->kvk_rightarrow == KEY_DOWN)
 	{
 		pd->old_dir_x = pd->dir_x;
 		pd->dir_x = pd->dir_x * cos(pd->rot_speed) - pd->dir_y * sin(pd->rot_speed);
@@ -164,7 +164,7 @@ static int		render_next_frame(t_scene *scene)
 		calc_step_and_sidedist(player_data);
 		perform_dda(player_data, &scene->map_data);
 		calc_draw_start_end(mlx_data->height, player_data);
-		color = RED;
+		color = ORANGE;
 		if (player_data->side == 1)
 			color = add_shade(0.45, color);
 		if (player_data->draw_start > 0)
@@ -193,5 +193,6 @@ void		render_scene(t_scene *scene)
 	mlx_do_key_autorepeatoff(mlx_data->mlx);
 	mlx_hook(mlx_data->win, KEY_PRESS, KEY_PRESS_MASK, keypress_handler, scene);
 	mlx_hook(mlx_data->win, KEY_RELEASE, KEY_RELEASE_MASK, keyrelease_handler, scene);
+	mlx_hook(mlx_data->win, DESTROY_NOTIFY, STRUCTURE_NOTIFY_MASK, winclose_handler, scene);
 	mlx_loop(mlx_data->mlx);
 }
