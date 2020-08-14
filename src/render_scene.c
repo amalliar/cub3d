@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/13 20:47:28 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/14 20:21:25 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static void		perform_dda(t_player_data *pd, t_map_data *md)
 	}
 }
 
-
 static void		calc_draw_start_end(int h, t_player_data *pd)
 {
 	if (pd->side == 0)
@@ -86,7 +85,6 @@ static void		calc_draw_start_end(int h, t_player_data *pd)
 	if (pd->draw_end >= h || pd->draw_end < 0)
 		pd->draw_end = h - 1;
 }
-
 
 static void		process_keystates(t_keystates *ks, t_player_data *pd, t_map_data *md)
 {
@@ -217,7 +215,7 @@ static int		render_next_frame(t_scene *scene)
 	if (scene->render_mode == SCREENSHOT)
 	{
 		if (mlx_image_to_bmp_file(&mlx_data->frame, "screen.bmp"))
-			exit_failure("Failed creating an image \"screen.bmp\": %s\n", strerror(errno));
+			exit_failure("Failed creating image \"screen.bmp\": %s\n", strerror(errno));
 		exit(EXIT_SUCCESS);
 	}
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, (mlx_data->frame).img, 0, 0);

@@ -6,26 +6,22 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/14 14:48:31 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/14 18:32:52 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-// Change defines into enums make groups of related values
 # define MLX_WINDOW_TITLE			"cub3D"
+
 # define DEFINED_MAP_OBJECTS		" 102NSEW"
 # define MANDATORY_PARAMS_COUNT		8
 # define PARAMS_LOADED				200
+
 # define PLAYER_FOV					80
 # define PLAYER_MOVE_SPEED			0.1
 # define PLAYER_ROT_SPEED			0.025
-# define KEY_UP						0
-# define KEY_DOWN					1
-
-# define LOOP						0
-# define SCREENSHOT					1
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -36,6 +32,18 @@
 # include <errno.h>
 # include <math.h>
 # include <stdarg.h>
+
+enum				e_keystates
+{
+	KEY_UP,
+	KEY_DOWN
+};
+
+enum				e_render_modes
+{
+	LOOP,
+	SCREENSHOT
+};
 
 typedef struct		s_mlx_image
 {
@@ -155,6 +163,5 @@ void				render_scene(t_scene *scene, int mode);
 int					keypress_handler(int keycode, t_scene *scene);
 int					keyrelease_handler(int keycode, t_scene *scene);
 int					winclose_handler(t_scene *scene);
-int					mlx_image_to_bmp_file(t_mlx_image *mi, const char *name);
 
 #endif

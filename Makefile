@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/08/13 15:57:58 by amalliar         ###   ########.fr        #
+#    Updated: 2020/08/14 19:12:20 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,10 @@ DEPDIR     := .dep
 SRCS       := src/main.c \
               src/exit_failure.c \
               src/load_scene.c \
+	      src/parse_params.c \
+	      src/parse_params_utils.c \
+	      src/parse_map.c \
+	      src/parse_map_utils.c \
               src/render_scene.c \
 	      src/keypress_handler.c \
 	      src/keyrelease_handler.c \

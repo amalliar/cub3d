@@ -6,13 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/12 19:18:24 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/14 19:56:06 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
-#include "ft_stdio.h"
 #include "ft_string.h"
 
 static void		init_scene(t_scene *scene)
@@ -37,35 +36,6 @@ static void		init_scene(t_scene *scene)
 	(*scene).keystates.kvk_ansi_d = KEY_UP;
 	(*scene).keystates.kvk_leftarrow = KEY_UP;
 	(*scene).keystates.kvk_rightarrow = KEY_UP;
-
-}
-
-static void		print_map(t_map_data *map_data)
-{
-	int		y;
-
-	y = 0;
-	while (y < map_data->height)
-	{
-		ft_printf("%s\n", (map_data->map)[y]);
-		++y;
-	}
-}
-
-static void		print_scene_data(t_scene *scene)
-{
-	ft_printf("Scene Configuration:\n");
-	ft_printf("Resolution is              %dx%d\n", (*scene).mlx_data.width, (*scene).mlx_data.height);
-	ft_printf("North wall texture size is %dx%d\n", (*scene).textures.walls.north.width, (*scene).textures.walls.north.height);
-	ft_printf("South wall texture size is %dx%d\n", (*scene).textures.walls.south.width, (*scene).textures.walls.south.height);
-	ft_printf("West wall texture size is  %dx%d\n", (*scene).textures.walls.west.width, (*scene).textures.walls.west.height);
-	ft_printf("East wall texture size is  %dx%d\n", (*scene).textures.walls.east.width, (*scene).textures.walls.east.height);
-	ft_printf("Sprite size is             %dx%d\n", (*scene).sprites.item.width, (*scene).sprites.item.height);
-	ft_printf("Floor color is             %#x\n", (*scene).colors.floor);
-	ft_printf("Ceilling color is          %#x\n", (*scene).colors.ceilling);
-	ft_printf("Map size is                %dx%d\n", (*scene).map_data.width, (*scene).map_data.height);
-	ft_printf("\n");
-	print_map(&(*scene).map_data);
 }
 
 int				main(int argc, char **argv)
@@ -78,14 +48,12 @@ int				main(int argc, char **argv)
 		exit_failure("Too many arguments\n");
 	init_scene(&scene);
 	load_scene(&scene, argv[1]);
-	//print_scene_data(&scene);
-	if (argc == 3) 
+	if (argc == 3)
 	{
 		if (!ft_strcmp("--save", argv[2]))
 		{
 			scene.render_mode = SCREENSHOT;
 			render_scene(&scene, SCREENSHOT);
-			exit(EXIT_SUCCESS);
 		}
 		else
 			exit_failure("Unknown argument: %s", argv[2]);
