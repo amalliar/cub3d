@@ -6,13 +6,14 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/11 18:34:30 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/14 14:48:31 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+// Change defines into enums make groups of related values
 # define MLX_WINDOW_TITLE			"cub3D"
 # define DEFINED_MAP_OBJECTS		" 102NSEW"
 # define MANDATORY_PARAMS_COUNT		8
@@ -22,6 +23,9 @@
 # define PLAYER_ROT_SPEED			0.025
 # define KEY_UP						0
 # define KEY_DOWN					1
+
+# define LOOP						0
+# define SCREENSHOT					1
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -63,7 +67,7 @@ typedef struct		s_walls
 
 typedef struct		s_sprites
 {
-	t_mlx_image		item;	// Don't know yet what the 'item' will be.
+	t_mlx_image		item;
 }					t_sprites;
 
 typedef struct		s_textures
@@ -107,6 +111,9 @@ typedef struct		s_player_data
 	double			perp_wall_dist;
 	double			move_speed;
 	double			rot_speed;
+	double			wall_x;
+	double			step;
+	double			tex_pos;
 	int				map_x;
 	int				map_y;
 	int				step_x;
@@ -116,6 +123,8 @@ typedef struct		s_player_data
 	int				line_height;
 	int				draw_start;
 	int				draw_end;
+	int				tex_x;
+	int				tex_y;
 }					t_player_data;
 
 typedef struct		s_keystates
@@ -137,13 +146,15 @@ typedef struct		s_scene
 	t_map_data		map_data;
 	t_player_data	player_data;
 	t_keystates		keystates;
+	int				render_mode;
 }					t_scene;
 
-void				exit_failure(char *msg, ...);
+void				exit_failure(char *format, ...);
 void				load_scene(t_scene *scene, char *path);
-void				render_scene(t_scene *scene);
+void				render_scene(t_scene *scene, int mode);
 int					keypress_handler(int keycode, t_scene *scene);
 int					keyrelease_handler(int keycode, t_scene *scene);
 int					winclose_handler(t_scene *scene);
+int					mlx_image_to_bmp_file(t_mlx_image *mi, const char *name);
 
 #endif

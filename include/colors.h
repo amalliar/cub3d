@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:17:56 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/10 17:15:41 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/13 18:07:02 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,11 @@
 # define NAVY		0x000080
 # define FUCHSIA	0xFF00FF
 # define PURPLE		0x800080
-# define ORANGE		0xFF8127
 
 int		create_color(int a, int r, int g, int b);
 int		get_alpha(int color);
 int		get_red(int color);
 int		get_green(int color);
 int		get_blue(int color);
-int		get_opposite(int color);
-int		add_shade(double distance, int color);
 
 #endif

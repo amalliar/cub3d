@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/10 18:45:15 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/13 20:47:28 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "mlx.h"
 #include "events.h"
 #include "graphics.h"
-
-#include "colors.h"
 
 static void		init_vars(int x, int width, t_player_data *pd)
 {
@@ -150,45 +148,97 @@ static void		process_keystates(t_keystates *ks, t_player_data *pd, t_map_data *m
 static int		render_next_frame(t_scene *scene)
 {
 	t_mlx_data		*mlx_data;
-	t_player_data	*player_data;
-	int				x;
+	t_mlx_image		*texture;
+	t_player_data	*pd;
+	t_point			p0;
+	t_point			p1;
 	int				color;
 
 	mlx_data = &scene->mlx_data;
-	player_data = &scene->player_data;
-	process_keystates(&scene->keystates, player_data, &scene->map_data);
-	x = 0;
-	while (x < mlx_data->width)
+	pd = &scene->player_data;
+	process_keystates(&scene->keystates, pd, &scene->map_data);
+	p0.x = 0;
+	while (p0.x < mlx_data->width)
 	{
-		init_vars(x, mlx_data->width, player_data);
-		calc_step_and_sidedist(player_data);
-		perform_dda(player_data, &scene->map_data);
-		calc_draw_start_end(mlx_data->height, player_data);
-		color = ORANGE;
-		if (player_data->side == 1)
-			color = add_shade(0.45, color);
-		if (player_data->draw_start > 0)
-			drawverline(&mlx_data->frame, x, 0, player_data->draw_start - 1, (*scene).colors.ceilling);
-		drawverline(&mlx_data->frame, x, player_data->draw_start, player_data->draw_end, color);
-		if (player_data->draw_end < mlx_data->height - 1)
-			drawverline(&mlx_data->frame, x, player_data->draw_end + 1, mlx_data->height - 1, (*scene).colors.floor);
-		++x;
+		init_vars(p0.x, mlx_data->width, pd);
+		calc_step_and_sidedist(pd);
+		perform_dda(pd, &scene->map_data);
+		calc_draw_start_end(mlx_data->height, pd);
+		if (pd->side == 0)
+		{
+			if (pd->ray_dir_x >= 0)
+				texture = &(*scene).textures.walls.east;
+			else
+				texture = &(*scene).textures.walls.west;
+		}
+		else
+		{
+			if (pd->ray_dir_y >= 0)
+				texture = &(*scene).textures.walls.south;
+			else
+				texture = &(*scene).textures.walls.north;
+		}
+		if (pd->side == 0)
+			pd->wall_x = pd->pos_y + pd->perp_wall_dist * pd->ray_dir_y;
+		else
+			pd->wall_x = pd->pos_x + pd->perp_wall_dist * pd->ray_dir_x;
+		pd->wall_x -= floor((pd->wall_x));
+		pd->tex_x = (int)(pd->wall_x * (double)texture->width);
+		if (pd->side == 0 && pd->ray_dir_x > 0)
+			pd->tex_x = texture->width - pd->tex_x - 1;
+		if (pd->side == 1 && pd->ray_dir_y < 0)
+			pd->tex_x = texture->width - pd->tex_x - 1;
+		pd->step = 1.0 * texture->height / pd->line_height;
+		pd->tex_pos = (pd->draw_start - mlx_data->height / 2 + pd->line_height / 2) * pd->step;
+		p1.x = p0.x;
+		if (pd->draw_start > 0)
+		{
+			p0.y = 0;
+			p1.y = pd->draw_start - 1;
+			drawline(&mlx_data->frame, p0, p1, (*scene).colors.ceilling);
+		}
+		p0.y = pd->draw_start;
+		while (p0.y <= pd->draw_end)
+		{
+			pd->tex_y = (int)pd->tex_pos & (texture->height - 1);
+			pd->tex_pos += pd->step;
+			color = mlx_pixel_get(texture, texture->width - pd->tex_x, pd->tex_y);
+			mlx_pixel_fill(&mlx_data->frame, p0.x, p0.y, color);
+			++p0.y;
+		}
+		if (pd->draw_end < mlx_data->width - 1)
+		{
+			p0.y = pd->draw_end;
+			p1.y = mlx_data->height - 1;
+			drawline(&mlx_data->frame, p0, p1, (*scene).colors.floor);
+		}
+		++p0.x;
+	}
+	if (scene->render_mode == SCREENSHOT)
+	{
+		if (mlx_image_to_bmp_file(&mlx_data->frame, "screen.bmp"))
+			exit_failure("Failed creating an image \"screen.bmp\": %s\n", strerror(errno));
+		exit(EXIT_SUCCESS);
 	}
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, (mlx_data->frame).img, 0, 0);
 	return (0);
 }
 
-void		render_scene(t_scene *scene)
+void		render_scene(t_scene *scene, int mode)
 {
 	t_mlx_data	*mlx_data;
 
 	mlx_data = &(*scene).mlx_data;
-	mlx_data->win = mlx_new_window(mlx_data->mlx, mlx_data->width, \
-		mlx_data->height, MLX_WINDOW_TITLE);
+	(mlx_data->frame).width = mlx_data->width;
+	(mlx_data->frame).height = mlx_data->height;
 	(mlx_data->frame).img = mlx_new_image(mlx_data->mlx, mlx_data->width, \
 		mlx_data->height);
 	(mlx_data->frame).addr = mlx_get_data_addr((mlx_data->frame).img, &(mlx_data->frame).bits_per_pixel, \
 		&(mlx_data->frame).line_length, &(mlx_data->frame).endian);
+	if (mode == SCREENSHOT)
+		render_next_frame(scene);
+	mlx_data->win = mlx_new_window(mlx_data->mlx, mlx_data->width, \
+		mlx_data->height, MLX_WINDOW_TITLE);
 	mlx_loop_hook(mlx_data->mlx, render_next_frame, scene);
 	mlx_do_key_autorepeatoff(mlx_data->mlx);
 	mlx_hook(mlx_data->win, KEY_PRESS, KEY_PRESS_MASK, keypress_handler, scene);

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:21:32 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/09 19:06:54 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/14 14:41:25 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 #include "mlx.h"
 #include "keycodes.h"
 
-int		keypress_handler(int keycode, t_scene *scene)
+static void		switch_states(int *kd, int *ku)
+{
+	*kd = KEY_DOWN;
+	*ku = KEY_UP;
+}
+
+int				keypress_handler(int keycode, t_scene *scene)
 {
 	t_keystates		*ks;
 
@@ -25,34 +31,16 @@ int		keypress_handler(int keycode, t_scene *scene)
 		exit(EXIT_SUCCESS);
 	}
 	else if (keycode == KVK_ANSI_W)
-	{
-		ks->kvk_ansi_w = KEY_DOWN;
-		ks->kvk_ansi_s = KEY_UP;
-	}
+		switch_states(&ks->kvk_ansi_w, &ks->kvk_ansi_s);
 	else if (keycode == KVK_ANSI_S)
-	{
-		ks->kvk_ansi_s = KEY_DOWN;
-		ks->kvk_ansi_w = KEY_UP;
-	}
+		switch_states(&ks->kvk_ansi_s, &ks->kvk_ansi_w);
 	else if (keycode == KVK_ANSI_A)
-	{
-		ks->kvk_ansi_a = KEY_DOWN;
-		ks->kvk_ansi_d = KEY_UP;
-	}
+		switch_states(&ks->kvk_ansi_a, &ks->kvk_ansi_d);
 	else if (keycode == KVK_ANSI_D)
-	{
-		ks->kvk_ansi_d = KEY_DOWN;
-		ks->kvk_ansi_a = KEY_UP;
-	}
+		switch_states(&ks->kvk_ansi_d, &ks->kvk_ansi_a);
 	else if (keycode == KVK_LEFTARROW)
-	{
-		ks->kvk_leftarrow = KEY_DOWN;
-		ks->kvk_rightarrow = KEY_UP;
-	}
+		switch_states(&ks->kvk_leftarrow, &ks->kvk_rightarrow);
 	else if (keycode == KVK_RIGHTARROW)
-	{
-		ks->kvk_rightarrow = KEY_DOWN;
-		ks->kvk_leftarrow = KEY_UP;
-	}
+		switch_states(&ks->kvk_rightarrow, &ks->kvk_leftarrow);
 	return (0);
 }

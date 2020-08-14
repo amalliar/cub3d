@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/10 19:52:42 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/14 14:50:25 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static void		set_mlx_image(t_mlx_image *mlx_image, void *img, int width, int hei
 	mlx_image->img = img;
 	mlx_image->width = width;
 	mlx_image->height = height;
+	mlx_image->addr = mlx_get_data_addr(mlx_image->img, &mlx_image->bits_per_pixel, \
+		&mlx_image->line_length, &mlx_image->endian);
 }
 
 static void		set_texture(t_scene *scene, char **words)
@@ -274,7 +276,6 @@ static void		check_neighbours(t_map_data *map_data, int mx, int my)
 	if (ft_strchr(DEFINED_MAP_OBJECTS + 2, (map_data->map)[my][mx]) && \
 		(mx == map_data->width - 1 || my == map_data->height - 1))
 		exit_failure("Map breach detected at position [%s][%s]\n", ft_itoa(mx, 10), ft_itoa(my, 10));
-	// Possibly need to check diagonals as well.
 }
 
 static void		load_player_data(t_player_data *player_data, int x, int y, char obj)
@@ -399,4 +400,5 @@ void			load_scene(t_scene *scene, char *path)
 		exit_failure("Can't open %s: %s\n", path, strerror(errno));
 	load_params(scene, fd);
 	load_map(scene, fd);
+	close(fd);
 }

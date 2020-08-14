@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/09 19:53:03 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/12 19:18:24 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,14 @@ int				main(int argc, char **argv)
 	{
 		if (!ft_strcmp("--save", argv[2]))
 		{
-			//screenshot();
+			scene.render_mode = SCREENSHOT;
+			render_scene(&scene, SCREENSHOT);
 			exit(EXIT_SUCCESS);
 		}
 		else
-			exit_failure("Unknown parameter: %s", argv[2]);
+			exit_failure("Unknown argument: %s", argv[2]);
 	}
-	render_scene(&scene);
+	scene.render_mode = LOOP;
+	render_scene(&scene, LOOP);
 	return (0);
 }

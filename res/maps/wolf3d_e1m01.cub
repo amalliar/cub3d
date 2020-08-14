@@ -1,10 +1,11 @@
 R 1280 720
 
-NO ./res/textures/dev.xpm
-SO ./res/textures/dev.xpm
-WE ./res/textures/dev.xpm
-EA ./res/textures/dev.xpm
-S ./res/textures/dev.xpm
+NO ./res/textures/dev_N.xpm
+SO ./res/textures/dev_S.xpm
+WE ./res/textures/dev_W.xpm
+EA ./res/textures/dev_E.xpm
+
+S ./res/textures/dev_N.xpm
 
 F 112,112,112
 C 56,56,56

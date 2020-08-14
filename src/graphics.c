@@ -6,71 +6,68 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 20:56:01 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/07 20:49:58 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/14 14:33:16 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
+#include "ft_stdlib.h"
 
-void		mlx_pixel_fill(t_mlx_image *frame, int x, int y, int color)
+void			mlx_pixel_fill(t_mlx_image *img, int x, int y, int color)
 {
-    char	*dst;
+	int		*dst;
 
-	dst = frame->addr + (y * frame->line_length + x * (frame->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	dst = (int *)(img->addr + (y * img->line_length + \
+		x * (img->bits_per_pixel / 8)));
+	*dst = color;
 }
 
-void		drawverline(t_mlx_image *frame, int x, int y0, int y1, int color)
+int				mlx_pixel_get(t_mlx_image *img, int x, int y)
 {
-	while (y0 <= y1)
-	{
-		mlx_pixel_fill(frame, x, y0, color);
-		++y0;
-	}
+	int		*dst;
+
+	dst = (int *)(img->addr + (y * img->line_length + \
+		x * (img->bits_per_pixel / 8)));
+	return (*dst);
 }
 
-/*
-** Bresenham’s Line Algorithm for all octant line draws.
-*/
-
-void		drawline(t_mlx_image *frame, int x0, int y0, int x1, int y1, int color)
+static void		init_vars(t_point *p0, t_point *p1, t_point *d, t_point *s)
 {
-	int		dx;
-	int		dy;
-	int		sx;
-	int		sy;
-	int		err;
-	int		e2;
+	d->x = ft_abs(p1->x - p0->x);
+	s->x = (p0->x < p1->x) ? 1 : -1;
+	d->y = -ft_abs(p1->y - p0->y);
+	s->y = (p0->y < p1->y) ? 1 : -1;
+}
 
-	dx =  ft_abs(x1 - x0);
-	sx = (x0 < x1) ? 1 : -1;
-	dy = -ft_abs(y1 - y0);
-	sy = (y0 < y1) ? 1 : -1;
-	err = dx + dy;
+void			drawline(t_mlx_image *img, t_point p0, t_point p1, int color)
+{
+	t_point		d;
+	t_point		s;
+	int			err;
+	int			e2;
+
+	init_vars(&p0, &p1, &d, &s);
+	err = d.x + d.y;
 	while (1)
 	{
-		mlx_pixel_fill(frame, x0, y0, color);
-		if (x0 == x1 && y0 == y1)
+		mlx_pixel_fill(img, p0.x, p0.y, color);
+		if (p0.x == p1.x && p0.y == p1.y)
 			break ;
 		e2 = 2 * err;
-		if (e2 >= dy)
+		if (e2 >= d.y)
 		{
-			err += dy;
-			x0 += sx;
+			err += d.y;
+			p0.x += s.x;
 		}
-		if (e2 <= dx)
+		if (e2 <= d.x)
 		{
-			err += dx;
-			y0 += sy;
+			err += d.x;
+			p0.y += s.y;
 		}
 	}
 }
 
-/*
-** Midpoint Circle Algorithm.
-*/
-
-void		drawcircle(t_mlx_image *frame, int xm, int ym, int r, int color)
+void			drawcircle(t_mlx_image *img, t_point m, int r, int color)
 {
 	int		x;
 	int		y;
@@ -81,10 +78,10 @@ void		drawcircle(t_mlx_image *frame, int xm, int ym, int r, int color)
 	err = 2 - 2 * r;
 	while (1)
 	{
-		mlx_pixel_fill(frame, xm - x, ym + y, color);
-		mlx_pixel_fill(frame, xm - y, ym - x, color);
-		mlx_pixel_fill(frame, xm + x, ym - y, color);
-		mlx_pixel_fill(frame, xm + y, ym + x, color);
+		mlx_pixel_fill(img, m.x - x, m.y + y, color);
+		mlx_pixel_fill(img, m.x - y, m.y - x, color);
+		mlx_pixel_fill(img, m.x + x, m.y - y, color);
+		mlx_pixel_fill(img, m.x + y, m.y + x, color);
 		r = err;
 		if (r <= y)
 			err += ++y * 2 + 1;
@@ -92,82 +89,5 @@ void		drawcircle(t_mlx_image *frame, int xm, int ym, int r, int color)
 			err += ++x * 2 + 1;
 		if (x >= 0)
 			break ;
-	}
-}
-
-void		drawellipse(t_mlx_image *frame, int x0, int y0, int x1, int y1, int color)
-{
-	int a;
-	int b;
-	int b1;
-	long dx;
-	long dy;
-	long err;
-	long e2;
-
-	a = ft_abs(x1 - x0);
-	b = ft_abs(y1 - y0);
-	b1 = b & 1;
-	dx = 4 * (1 - a) * b * b;
-	dy = 4 * (b1 + 1) * a * a;
-	err = dx + dy + b1 * a * a;
-	if (x0 > x1)
-	{
-		x0 = x1;
-		x1 += a;
-	}
-	if (y0 > y1)
-		y0 = y1;
-	y0 += (b + 1) / 2;
-	y1 = y0-b1;
-	a *= 8 * a;
-	b1 = 8 * b * b;
-	while (1)
-	{
-		mlx_pixel_fill(frame, x1, y0, color);
-		mlx_pixel_fill(frame, x0, y0, color);
-		mlx_pixel_fill(frame, x0, y1, color);
-		mlx_pixel_fill(frame, x1, y1, color);
-		e2 = 2 * err;
-		if (e2 <= dy)
-		{
-			++y0;
-			--y1;
-			dy += a;
-			err += dy;
-		}
-		if (e2 >= dx || 2 * err > dy)
-		{
-			x0++;
-			x1--;
-			dx += b1;
-			err += dx;
-		}
-		if (x0 > x1)
-			break ;
-	}
-	while (y0 - y1 < b)
-	{
-		mlx_pixel_fill(frame, x0 - 1, y0, color);
-		mlx_pixel_fill(frame, x1 + 1, y0++, color);
-		mlx_pixel_fill(frame, x0 - 1, y1, color);
-		mlx_pixel_fill(frame, x1 + 1, y1--, color);
-	}
-}
-
-void		drawpoly(t_mlx_image *frame, int numpoints, int *polypoints, int color)
-{
-	int		i;
-
-	if (numpoints < 4 || \
-		polypoints[0] != polypoints[numpoints * 2 - 2] || \
-		polypoints[1] != polypoints[numpoints * 2 - 1])
-		return ;
-	i = 0;
-	while (i < numpoints - 1)
-	{
-		drawline(frame, polypoints[i * 2], polypoints[i * 2 + 1], \
-			polypoints[i * 2 + 2], polypoints[i * 2 + 3], color);
-		++i;
 	}
 }

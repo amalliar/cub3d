@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/08/10 15:57:48 by amalliar         ###   ########.fr        #
+#    Updated: 2020/08/13 15:57:58 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS       := src/main.c \
 	      src/keyrelease_handler.c \
 	      src/winclose_handler.c \
               src/graphics.c \
+	      src/mlx_image_to_bmp_file.c \
               src/colors.c
 OBJS       := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 DEPS       := $(SRCS:$(SRCDIR)/%.c=$(DEPDIR)/%.d)
