@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:35:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/14 19:59:25 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/15 17:37:37 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void		load_player_data(t_player_data *player_data, int x, int y, \
 {
 	if (player_data->pos_x != -1)
 		exit_failure("Double initialisation of player's start position\n");
-	player_data->pos_x = x;
-	player_data->pos_y = y;
+	player_data->pos_x = x + 0.5;
+	player_data->pos_y = y + 0.5;
 	if (obj == 'N')
 	{
 		set_player_dir(player_data, 0, -1);
