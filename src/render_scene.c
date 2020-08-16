@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/14 20:21:25 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/15 21:56:13 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,8 +210,10 @@ static int		render_next_frame(t_scene *scene)
 			p1.y = mlx_data->height - 1;
 			drawline(&mlx_data->frame, p0, p1, (*scene).colors.floor);
 		}
+		(pd->zbuffer)[p0.x] = pd->perp_wall_dist;
 		++p0.x;
 	}
+	render_sprites(scene);
 	if (scene->render_mode == SCREENSHOT)
 	{
 		if (mlx_image_to_bmp_file(&mlx_data->frame, "screen.bmp"))
@@ -233,6 +235,8 @@ void		render_scene(t_scene *scene, int mode)
 		mlx_data->height);
 	(mlx_data->frame).addr = mlx_get_data_addr((mlx_data->frame).img, &(mlx_data->frame).bits_per_pixel, \
 		&(mlx_data->frame).line_length, &(mlx_data->frame).endian);
+	if (!((*scene).player_data.zbuffer = malloc(mlx_data->width * sizeof(double))))
+		exit_failure("%s\n", strerror(errno));
 	if (mode == SCREENSHOT)
 		render_next_frame(scene);
 	mlx_data->win = mlx_new_window(mlx_data->mlx, mlx_data->width, \

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/14 18:32:52 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/16 13:06:09 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,10 @@ typedef struct		s_walls
 	t_mlx_image		east;
 }					t_walls;
 
-typedef struct		s_sprites
-{
-	t_mlx_image		item;
-}					t_sprites;
-
 typedef struct		s_textures
 {
 	t_walls			walls;
-	t_sprites		sprites;
+	t_mlx_image		sprite;
 }					t_textures;
 
 typedef struct		s_colors
@@ -122,6 +117,7 @@ typedef struct		s_player_data
 	double			wall_x;
 	double			step;
 	double			tex_pos;
+	double			*zbuffer;
 	int				map_x;
 	int				map_y;
 	int				step_x;
@@ -145,11 +141,19 @@ typedef struct		s_keystates
 	int				kvk_rightarrow;
 }					t_keystates;
 
+typedef struct		s_sprite
+{
+	double			x;
+	double			y;
+	double			dist;
+}					t_sprite;
+
 typedef struct		s_scene
 {
 	t_mlx_data		mlx_data;
 	t_textures		textures;
-	t_sprites		sprites;
+	t_sprite		*sprites;
+	int				num_sprites;
 	t_colors		colors;
 	t_map_data		map_data;
 	t_player_data	player_data;
@@ -160,6 +164,7 @@ typedef struct		s_scene
 void				exit_failure(char *format, ...);
 void				load_scene(t_scene *scene, char *path);
 void				render_scene(t_scene *scene, int mode);
+void				render_sprites(t_scene *scene);
 int					keypress_handler(int keycode, t_scene *scene);
 int					keyrelease_handler(int keycode, t_scene *scene);
 int					winclose_handler(t_scene *scene);

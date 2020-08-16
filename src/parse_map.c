@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:35:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/15 17:37:37 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/15 20:46:20 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,16 @@ static void		process_map_object(t_scene *scene, int x, int y, char obj)
 	{
 		load_player_data(&(*scene).player_data, x, y, obj);
 		((*scene).map_data.map)[y][x] = '0';
+	}
+	if (obj == '2')
+	{
+		if (!((*scene).sprites = ft_realloc((*scene).sprites, \
+			(*scene).num_sprites * sizeof(t_sprite), \
+			((*scene).num_sprites + 1) * sizeof(t_sprite))))
+			exit_failure("%s\n", strerror(errno));
+		((*scene).sprites)[(*scene).num_sprites].x = x + 0.5;
+		((*scene).sprites)[(*scene).num_sprites].y = y + 0.5;
+		(*scene).num_sprites += 1;
 	}
 }
 

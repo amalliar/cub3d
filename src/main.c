@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/14 19:56:06 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/15 21:39:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void		init_scene(t_scene *scene)
 	(*scene).textures.walls.south.img = NULL;
 	(*scene).textures.walls.west.img = NULL;
 	(*scene).textures.walls.east.img = NULL;
-	(*scene).sprites.item.img = NULL;
+	(*scene).textures.sprite.img = NULL;
+	(*scene).num_sprites = 0;
 	(*scene).player_data.pos_x = -1;
 	(*scene).player_data.move_speed = PLAYER_MOVE_SPEED;
 	(*scene).player_data.rot_speed = PLAYER_ROT_SPEED;
@@ -37,6 +38,8 @@ static void		init_scene(t_scene *scene)
 	(*scene).keystates.kvk_leftarrow = KEY_UP;
 	(*scene).keystates.kvk_rightarrow = KEY_UP;
 }
+
+#include "ft_stdio.h"
 
 int				main(int argc, char **argv)
 {

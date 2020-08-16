@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/08/05 21:16:35 by amalliar         ###   ########.fr        #
+#    Updated: 2020/08/15 21:22:06 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,8 @@ FT_STDIO   := ft_stdio/ft_get_next_line.c \
 FT_STDLIB  := ft_stdlib/ft_abs.c \
               ft_stdlib/ft_atoi.c \
               ft_stdlib/ft_calloc.c \
+	      ft_stdlib/ft_qsort.c \
+	      ft_stdlib/ft_realloc.c \
 	      ft_stdlib/ft_ftoa.c \
               ft_stdlib/ft_itoa.c \
               ft_stdlib/ft_utoa.c
