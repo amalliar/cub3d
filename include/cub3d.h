@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/16 13:06:09 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/16 19:04:04 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct		s_player_data
 	double			perp_wall_dist;
 	double			move_speed;
 	double			rot_speed;
+	double			speed_mod;
 	double			wall_x;
 	double			step;
 	double			tex_pos;
@@ -148,10 +149,33 @@ typedef struct		s_sprite
 	double			dist;
 }					t_sprite;
 
+typedef struct		s_sprite_data
+{
+	double			sprite_x;
+	double			sprite_y;
+	double			inv_det;
+	double			transform_x;
+	double			transform_y;
+	int				sprite_screen_x;
+	int				v_move_screen;
+	int				sprite_height;
+	int				draw_start_y;
+	int				draw_end_y;
+	int				sprite_width;
+	int				draw_start_x;
+	int				draw_end_x;
+	int				tex_x;
+	int				tex_y;
+	int				d;
+	int				stripe;
+	int				y;
+}					t_sprite_data;
+
 typedef struct		s_scene
 {
 	t_mlx_data		mlx_data;
 	t_textures		textures;
+	t_sprite_data	sprite_data;
 	t_sprite		*sprites;
 	int				num_sprites;
 	t_colors		colors;

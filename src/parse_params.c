@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:05:07 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/15 19:51:00 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/16 15:22:42 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void		set_sprite(t_scene *scene, char **words)
 		"expected 2 but got %s\n", ft_itoa(wc, 10));
 	if (!(img = mlx_xpm_file_to_image((*scene).mlx_data.mlx, words[1], \
 		&width, &height)))
-		exit_failure("Failed creating mlx image from file %s: %s\n", \
+		exit_failure("Failed creating mlx image instance from file %s: %s\n", \
 		words[1], strerror(errno));
 	if (!ft_strcmp("S", words[0]))
 		set_mlx_image(&(*scene).textures.sprite, img, width, height);

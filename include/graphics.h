@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:05:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/15 21:41:10 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/16 20:50:57 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int					mlx_image_to_bmp_file(t_mlx_image *mi, const char *name);
 int					mlx_pixel_get(t_mlx_image *img, int x, int y);
 void				mlx_pixel_fill(t_mlx_image *frame, int x, int y, int color);
 void				drawline(t_mlx_image *frame, t_point p0, t_point p1, \
+						int color);
+void				drawverline(t_mlx_image *img, t_point p0, t_point p1, \
+						int color);
+void				drawhorline(t_mlx_image *img, t_point p0, t_point p1, \
 						int color);
 void				drawcircle(t_mlx_image *frame, t_point m, int r, int color);
 

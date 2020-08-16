@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/15 21:39:39 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/16 14:51:33 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static void		init_scene(t_scene *scene)
 	(*scene).keystates.kvk_leftarrow = KEY_UP;
 	(*scene).keystates.kvk_rightarrow = KEY_UP;
 }
-
-#include "ft_stdio.h"
 
 int				main(int argc, char **argv)
 {
