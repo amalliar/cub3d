@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 20:29:25 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 21:43:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 
 static int		render_next_frame(t_scene *scene)
 {
+	clock_t			r_start;
 	t_mlx_data		*mlx_data;
 
+	r_start = clock();
 	mlx_data = &scene->mlx_data;
 	process_keystates(scene);
 	render_textures(scene);
@@ -32,6 +34,7 @@ static int		render_next_frame(t_scene *scene)
 	}
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, \
 		(*mlx_data).frame.img, 0, 0);
+	mlx_data->frame_time = (double)(clock() - r_start) / CLOCKS_PER_SEC;
 	return (0);
 }
 

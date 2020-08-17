@@ -6,12 +6,13 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:50:36 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 16:14:03 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 21:07:43 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_SCENE_H
 # define RENDER_SCENE_H
+# include <time.h>
 # include "cub3d.h"
 # include "graphics.h"
 

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 20:28:46 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 21:38:33 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 # define DEFINED_MAP_OBJECTS		" 102NSEW"
 # define PLAYER_FOV					80
-# define PLAYER_MOVE_SPEED			0.1
-# define PLAYER_ROT_SPEED			0.025
+# define PLAYER_MOVE_SPEED			6
+# define PLAYER_ROT_SPEED			2
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -57,6 +57,7 @@ typedef struct		s_mlx_data
 {
 	int				width;
 	int				height;
+	double			frame_time;
 	void			*mlx;
 	void			*win;
 	t_mlx_image		frame;
