@@ -6,11 +6,10 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:23:26 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/16 15:47:27 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 16:06:19 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "keycodes.h"
 #include "process_keystates.h"
 

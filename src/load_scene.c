@@ -6,15 +6,13 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/14 19:14:54 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 16:07:15 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "load_scene.h"
 #include "ft_stdio.h"
 #include "ft_string.h"
-#include "ft_list.h"
 
 static void		load_params(t_scene *scene, int fd)
 {

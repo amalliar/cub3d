@@ -6,11 +6,10 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/16 16:40:06 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 20:29:25 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "mlx.h"
 #include "events.h"
 #include "graphics.h"
@@ -45,14 +44,14 @@ static void		init_frame(t_scene *scene)
 	frame = &mlx_data->frame;
 	frame->width = mlx_data->width;
 	frame->height = mlx_data->height;
-	if (!(frame->img = mlx_new_image(mlx_data->mlx, mlx_data->width, \
-		mlx_data->height)))
+	if (!(frame->img = mlx_new_image(mlx_data->mlx, frame->width, \
+		frame->height)))
 		exit_failure("Failed creating mlx image instance: %s\n", \
 			strerror(errno));
 	frame->addr = mlx_get_data_addr(frame->img, &frame->bits_per_pixel, \
 		&frame->line_length, &frame->endian);
 	if (!((*scene).player_data.zbuffer = \
-		malloc(mlx_data->width * sizeof(double))))
+		malloc(frame->width * sizeof(double))))
 		exit_failure("%s\n", strerror(errno));
 }
 

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 18:32:42 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/13 19:22:06 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 15:37:27 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 
 static void		parse_format(char **format, va_list *ap)
 {
+	char	*str;
+
 	if (**format == 's')
 	{
-		ft_putstr_fd(va_arg(*ap, char *), STDERR_FILENO);
+		str = va_arg(*ap, char *);
+		ft_putstr_fd((str == NULL) ? "(null)" : str, STDERR_FILENO);
 		++*format;
 	}
 	else if (**format == 'c')

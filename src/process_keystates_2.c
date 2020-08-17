@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_keystates_utils.c                          :+:      :+:    :+:   */
+/*   process_keystates_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:38:17 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/16 15:49:18 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 16:06:34 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "process_keystates.h"
 
 void		turn_left(t_player_data *pd)

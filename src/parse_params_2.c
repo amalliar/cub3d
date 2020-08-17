@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_params_utils.c                               :+:      :+:    :+:   */
+/*   parse_params_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:06:34 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/14 19:19:51 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 16:08:16 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "load_scene.h"
 #include "colors.h"
 #include "ft_stdlib.h"
@@ -77,7 +76,7 @@ void			set_color(t_colors *colors, char **words)
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		exit_failure("Invalid R,G,B value: %s\n", words[1]);
 	if (!ft_strcmp("F", words[0]))
-		colors->floor = create_color(0, r, g, b);
+		colors->floor = clr_create(0, r, g, b);
 	else if (!ft_strcmp("C", words[0]))
-		colors->ceilling = create_color(0, r, g, b);
+		colors->ceilling = clr_create(0, r, g, b);
 }

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/16 14:51:33 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 20:28:25 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		init_scene(t_scene *scene)
 	(*scene).textures.walls.west.img = NULL;
 	(*scene).textures.walls.east.img = NULL;
 	(*scene).textures.sprite.img = NULL;
-	(*scene).num_sprites = 0;
+	(*scene).sprite_data.num_sprites = 0;
 	(*scene).player_data.pos_x = -1;
 	(*scene).player_data.move_speed = PLAYER_MOVE_SPEED;
 	(*scene).player_data.rot_speed = PLAYER_ROT_SPEED;
@@ -57,7 +57,7 @@ int				main(int argc, char **argv)
 			render_scene(&scene, SCREENSHOT);
 		}
 		else
-			exit_failure("Unknown argument: %s", argv[2]);
+			exit_failure("Unknown argument: %s\n", argv[2]);
 	}
 	scene.render_mode = LOOP;
 	render_scene(&scene, LOOP);

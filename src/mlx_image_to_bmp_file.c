@@ -6,11 +6,15 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 20:15:52 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/14 17:35:46 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 15:32:06 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
+
+#define BYTES_PER_PIXEL			4
+#define FILE_HEADER_SIZE		14
+#define INFO_HEADER_SIZE		40
 
 unsigned char	*create_bmp_file_header(int height, int stride)
 {
@@ -50,26 +54,26 @@ int				mlx_image_to_bmp_file(t_mlx_image *mi, const char *name)
 {
 	static unsigned char	padding[3] = {0, 0, 0};
 	int						y;
-	t_conv_data				cd;
+	t_bmp_data				bd;
 
-	cd.width_in_bytes = mi->width * mi->bits_per_pixel / 8;
-	cd.padding_size = (4 - (cd.width_in_bytes) % 4) % 4;
-	cd.stride = cd.width_in_bytes + cd.padding_size;
-	if ((cd.fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, \
+	bd.width_in_bytes = mi->width * mi->bits_per_pixel / 8;
+	bd.padding_size = (4 - (bd.width_in_bytes) % 4) % 4;
+	bd.stride = bd.width_in_bytes + bd.padding_size;
+	if ((bd.fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, \
 		S_IRUSR | S_IWUSR)) == -1)
 		return (-1);
-	cd.file_header = create_bmp_file_header(mi->height, cd.stride);
-	write(cd.fd, cd.file_header, FILE_HEADER_SIZE);
-	cd.info_header = create_bmp_info_header(-mi->height, mi->width);
-	write(cd.fd, cd.info_header, INFO_HEADER_SIZE);
-	cd.img = (unsigned char *)mi->addr;
+	bd.file_header = create_bmp_file_header(mi->height, bd.stride);
+	write(bd.fd, bd.file_header, FILE_HEADER_SIZE);
+	bd.info_header = create_bmp_info_header(-mi->height, mi->width);
+	write(bd.fd, bd.info_header, INFO_HEADER_SIZE);
+	bd.img = (unsigned char *)mi->addr;
 	y = 0;
 	while (y < mi->height)
 	{
-		write(cd.fd, cd.img + (y * mi->line_length), mi->line_length);
-		write(cd.fd, padding, cd.padding_size);
+		write(bd.fd, bd.img + (y * mi->line_length), mi->line_length);
+		write(bd.fd, padding, bd.padding_size);
 		++y;
 	}
-	close(cd.fd);
+	close(bd.fd);
 	return (0);
 }

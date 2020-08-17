@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphics_utils.c                                   :+:      :+:    :+:   */
+/*   graphics_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 20:36:31 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/16 20:44:28 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 15:25:59 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void			drawverline(t_mlx_image *img, t_point p0, t_point p1, int color)
 		swap(&p0.y, &p1.y);
 	while (p0.y <= p1.y)
 	{
-		mlx_pixel_fill(img, p0.x, p0.y, color);
+		mlx_pixel_set(img, p0.x, p0.y, color);
 		++p0.y;
 	}
 }
@@ -40,7 +40,7 @@ void			drawhorline(t_mlx_image *img, t_point p0, t_point p1, int color)
 		swap(&p0.x, &p1.x);
 	while (p0.x <= p1.x)
 	{
-		mlx_pixel_fill(img, p0.x, p0.y, color);
+		mlx_pixel_set(img, p0.x, p0.y, color);
 		++p0.x;
 	}
 }

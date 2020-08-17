@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/08/16 20:46:39 by amalliar         ###   ########.fr        #
+#    Updated: 2020/08/17 16:21:00 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,26 +23,26 @@ SRCDIR     := src
 OBJDIR     := .obj
 DEPDIR     := .dep
 
-SRCS       := src/main.c \
+SRCS       := src/colors.c \
               src/exit_failure.c \
-              src/load_scene.c \
-	      src/parse_params.c \
-	      src/parse_params_utils.c \
-	      src/parse_map.c \
-	      src/parse_map_utils.c \
-	      src/process_keystates.c \
-	      src/process_keystates_utils.c \
-              src/render_scene.c \
-	      src/render_textures.c \
-	      src/render_textures_utils.c \
-	      src/render_sprites.c \
+              src/graphics.c \
+	      src/graphics_2.c \
 	      src/keypress_handler.c \
 	      src/keyrelease_handler.c \
-	      src/winclose_handler.c \
-              src/graphics.c \
-	      src/graphics_utils.c \
+              src/load_scene.c \
 	      src/mlx_image_to_bmp_file.c \
-              src/colors.c
+	      src/parse_map.c \
+	      src/parse_map_2.c \
+	      src/parse_params.c \
+	      src/parse_params_2.c \
+	      src/process_keystates.c \
+	      src/process_keystates_2.c \
+              src/render_scene.c \
+	      src/render_sprites.c \
+	      src/render_textures.c \
+	      src/render_textures_2.c \
+	      src/winclose_handler.c \
+              src/main.c
 OBJS       := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 DEPS       := $(SRCS:$(SRCDIR)/%.c=$(DEPDIR)/%.d)
 

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/16 19:04:04 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 20:28:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # define MLX_WINDOW_TITLE			"cub3D"
 
 # define DEFINED_MAP_OBJECTS		" 102NSEW"
-# define MANDATORY_PARAMS_COUNT		8
-# define PARAMS_LOADED				200
-
 # define PLAYER_FOV					80
 # define PLAYER_MOVE_SPEED			0.1
 # define PLAYER_ROT_SPEED			0.025
@@ -47,22 +44,22 @@ enum				e_render_modes
 
 typedef struct		s_mlx_image
 {
-	void			*img;
 	int				width;
 	int				height;
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
+	void			*img;
 	char			*addr;
 }					t_mlx_image;
 
 typedef struct		s_mlx_data
 {
+	int				width;
+	int				height;
 	void			*mlx;
 	void			*win;
 	t_mlx_image		frame;
-	int				width;
-	int				height;
 }					t_mlx_data;
 
 typedef struct		s_walls
@@ -81,19 +78,30 @@ typedef struct		s_textures
 
 typedef struct		s_colors
 {
-	unsigned int	floor;
-	unsigned int	ceilling;
+	int				floor;
+	int				ceilling;
 }					t_colors;
 
 typedef struct		s_map_data
 {
-	char			**map;
 	int				width;
 	int				height;
+	char			**map;
 }					t_map_data;
 
 typedef struct		s_player_data
 {
+	int				map_x;
+	int				map_y;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	int				tex_x;
+	int				tex_y;
 	double			pos_x;
 	double			pos_y;
 	double			dir_x;
@@ -119,17 +127,6 @@ typedef struct		s_player_data
 	double			step;
 	double			tex_pos;
 	double			*zbuffer;
-	int				map_x;
-	int				map_y;
-	int				step_x;
-	int				step_y;
-	int				hit;
-	int				side;
-	int				line_height;
-	int				draw_start;
-	int				draw_end;
-	int				tex_x;
-	int				tex_y;
 }					t_player_data;
 
 typedef struct		s_keystates
@@ -151,11 +148,7 @@ typedef struct		s_sprite
 
 typedef struct		s_sprite_data
 {
-	double			sprite_x;
-	double			sprite_y;
-	double			inv_det;
-	double			transform_x;
-	double			transform_y;
+	int				num_sprites;
 	int				sprite_screen_x;
 	int				v_move_screen;
 	int				sprite_height;
@@ -169,26 +162,30 @@ typedef struct		s_sprite_data
 	int				d;
 	int				stripe;
 	int				y;
+	double			sprite_x;
+	double			sprite_y;
+	double			inv_det;
+	double			transform_x;
+	double			transform_y;
 }					t_sprite_data;
 
 typedef struct		s_scene
 {
+	int				render_mode;
 	t_mlx_data		mlx_data;
-	t_textures		textures;
-	t_sprite_data	sprite_data;
-	t_sprite		*sprites;
-	int				num_sprites;
+	t_keystates		keystates;
 	t_colors		colors;
+	t_textures		textures;
+	t_sprite		*sprites;
+	t_sprite_data	sprite_data;
 	t_map_data		map_data;
 	t_player_data	player_data;
-	t_keystates		keystates;
-	int				render_mode;
 }					t_scene;
 
-void				exit_failure(char *format, ...);
 void				load_scene(t_scene *scene, char *path);
 void				render_scene(t_scene *scene, int mode);
 void				render_sprites(t_scene *scene);
+void				exit_failure(char *format, ...);
 int					keypress_handler(int keycode, t_scene *scene);
 int					keyrelease_handler(int keycode, t_scene *scene);
 int					winclose_handler(t_scene *scene);

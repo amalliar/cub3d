@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_textures_utils.c                            :+:      :+:    :+:   */
+/*   render_textures_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/16 20:47:34 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 20:30:05 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "graphics.h"
-#include "render_textures.h"
+#include "render_scene.h"
 
 void			pick_texture(t_scene *scene, t_mlx_image **texture)
 {
@@ -84,7 +82,7 @@ void			fill_stripe(t_scene *scene, t_mlx_image *texture, int x)
 		pd->tex_y = (int)pd->tex_pos & (texture->height - 1);
 		pd->tex_pos += pd->step;
 		color = mlx_pixel_get(texture, texture->width - pd->tex_x, pd->tex_y);
-		mlx_pixel_fill(&mlx_data->frame, p0.x, p0.y, color);
+		mlx_pixel_set(&mlx_data->frame, p0.x, p0.y, color);
 		++p0.y;
 	}
 	p0.y = pd->draw_end;

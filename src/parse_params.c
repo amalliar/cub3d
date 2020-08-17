@@ -6,11 +6,10 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:05:07 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/16 15:22:42 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 20:28:15 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "mlx.h"
 #include "load_scene.h"
 #include "ft_string.h"

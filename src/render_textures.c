@@ -6,12 +6,11 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:52:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/16 16:56:18 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 20:30:41 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "render_textures.h"
+#include "render_scene.h"
 
 static void		init_player_data(t_player_data *pd, int x, int width)
 {

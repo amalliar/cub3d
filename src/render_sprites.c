@@ -6,14 +6,14 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 13:04:05 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/16 19:06:03 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 20:30:20 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "graphics.h"
+#include "render_scene.h"
 #include "ft_stdlib.h"
 #include "ft_stdio.h"
+
 #define U_DIV				1
 #define V_DIV 				1
 #define V_MOVE 				0.0
@@ -70,7 +70,7 @@ static void		draw_sprite(t_scene *scene, t_mlx_data *md, \
 				color = mlx_pixel_get(&(*scene).textures.sprite, sd->tex_x, \
 					sd->tex_y);
 				if (color != BACKGROUND)
-					mlx_pixel_fill(&md->frame, sd->stripe, sd->y, color);
+					mlx_pixel_set(&md->frame, sd->stripe, sd->y, color);
 				++sd->y;
 			}
 		++sd->stripe;
@@ -91,16 +91,17 @@ void			render_sprites(t_scene *scene)
 	md = &scene->mlx_data;
 	pd = &scene->player_data;
 	i = 0;
-	while (i < scene->num_sprites)
+	while (i < (*scene).sprite_data.num_sprites)
 	{
 		(scene->sprites)[i].dist = ((pd->pos_x - (scene->sprites)[i].x) * \
 			(pd->pos_x - (scene->sprites)[i].x) + (pd->pos_y - \
 			(scene->sprites)[i].y) * (pd->pos_y - (scene->sprites)[i].y));
 		++i;
 	}
-	ft_qsort(scene->sprites, scene->num_sprites, sizeof(t_sprite), compar);
+	ft_qsort(scene->sprites, (*scene).sprite_data.num_sprites, \
+		sizeof(t_sprite), compar);
 	i = 0;
-	while (i < scene->num_sprites)
+	while (i < (*scene).sprite_data.num_sprites)
 	{
 		(*scene).sprite_data.sprite_x = (scene->sprites)[i].x - pd->pos_x;
 		(*scene).sprite_data.sprite_y = (scene->sprites)[i].y - pd->pos_y;

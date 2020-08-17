@@ -6,12 +6,13 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:17:56 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/13 18:07:02 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 15:16:53 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLORS_H
 # define COLORS_H
+
 # define WHITE		0xFFFFFF
 # define SILVER		0xC0C0C0
 # define GRAY		0x808080
@@ -29,10 +30,10 @@
 # define FUCHSIA	0xFF00FF
 # define PURPLE		0x800080
 
-int		create_color(int a, int r, int g, int b);
-int		get_alpha(int color);
-int		get_red(int color);
-int		get_green(int color);
-int		get_blue(int color);
+int		clr_create(int a, int r, int g, int b);
+int		clr_get_alpha(int color);
+int		clr_get_red(int color);
+int		clr_get_green(int color);
+int		clr_get_blue(int color);
 
 #endif

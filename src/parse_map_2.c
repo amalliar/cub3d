@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map_utils.c                                  :+:      :+:    :+:   */
+/*   parse_map_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:44:11 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/14 19:34:24 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/17 16:08:31 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "load_scene.h"
 #include "ft_string.h"
 #include "ft_ctype.h"
-#include "ft_list.h"
 #include "ft_stdlib.h"
 
 static size_t	get_cur_line_length(char *line)
