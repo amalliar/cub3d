@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:23:26 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/20 14:56:31 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/20 19:40:21 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,22 @@ static void		move_backward(t_map_data *md, t_player_data *pd)
 
 static void		move_left(t_map_data *md, t_player_data *pd)
 {
-	if (!object_collision(md, pd->pos_x + pd->dir_y * pd->move_speed * \
+	if (!object_collision(md, pd->pos_x - pd->plane_x * pd->move_speed * \
 		pd->speed_mod, pd->pos_y))
-		pd->pos_x += pd->dir_y * pd->move_speed * pd->speed_mod;
-	if (!object_collision(md, pd->pos_x, pd->pos_y - pd->dir_x * \
+		pd->pos_x -= pd->plane_x * pd->move_speed * pd->speed_mod;
+	if (!object_collision(md, pd->pos_x, pd->pos_y - pd->plane_y * \
 		pd->move_speed * pd->speed_mod))
-		pd->pos_y -= pd->dir_x * pd->move_speed * pd->speed_mod;
+		pd->pos_y -= pd->plane_y * pd->move_speed * pd->speed_mod;
 }
 
 static void		move_right(t_map_data *md, t_player_data *pd)
 {
-	if (!object_collision(md, pd->pos_x - pd->dir_y * pd->move_speed * \
+	if (!object_collision(md, pd->pos_x + pd->plane_x * pd->move_speed * \
 		pd->speed_mod, pd->pos_y))
-		pd->pos_x -= pd->dir_y * pd->move_speed * pd->speed_mod;
-	if (!object_collision(md, pd->pos_x, pd->pos_y + pd->dir_x * \
+		pd->pos_x += pd->plane_x * pd->move_speed * pd->speed_mod;
+	if (!object_collision(md, pd->pos_x, pd->pos_y + pd->plane_y * \
 		pd->move_speed * pd->speed_mod))
-		pd->pos_y += pd->dir_x * pd->move_speed * pd->speed_mod;
+		pd->pos_y += pd->plane_y * pd->move_speed * pd->speed_mod;
 }
 
 void			process_keystates(t_scene *scene)
