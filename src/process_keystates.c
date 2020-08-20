@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:23:26 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 21:44:11 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/20 14:56:31 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,41 @@
 
 static void		move_forward(t_map_data *md, t_player_data *pd)
 {
-	if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x + pd->dir_x * \
-		pd->move_speed)] != '1')
+	if (!object_collision(md, pd->pos_x + pd->dir_x * pd->move_speed * \
+		pd->speed_mod, pd->pos_y))
 		pd->pos_x += pd->dir_x * pd->move_speed * pd->speed_mod;
-	if ((md->map)[(int)(pd->pos_y + pd->dir_y * \
-		pd->move_speed)][(int)pd->pos_x] != '1')
+	if (!object_collision(md, pd->pos_x, pd->pos_y + pd->dir_y * \
+		pd->move_speed * pd->speed_mod))
 		pd->pos_y += pd->dir_y * pd->move_speed * pd->speed_mod;
 }
 
 static void		move_backward(t_map_data *md, t_player_data *pd)
 {
-	if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x - pd->dir_x * \
-		pd->move_speed)] != '1')
+	if (!object_collision(md, pd->pos_x - pd->dir_x * pd->move_speed * \
+		pd->speed_mod, pd->pos_y))
 		pd->pos_x -= pd->dir_x * pd->move_speed * pd->speed_mod;
-	if ((md->map)[(int)(pd->pos_y - pd->dir_y * \
-		pd->move_speed)][(int)pd->pos_x] != '1')
+	if (!object_collision(md, pd->pos_x, pd->pos_y - pd->dir_y * \
+		pd->move_speed * pd->speed_mod))
 		pd->pos_y -= pd->dir_y * pd->move_speed * pd->speed_mod;
 }
 
 static void		move_left(t_map_data *md, t_player_data *pd)
 {
-	if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x + pd->dir_y * \
-		pd->move_speed)] != '1')
+	if (!object_collision(md, pd->pos_x + pd->dir_y * pd->move_speed * \
+		pd->speed_mod, pd->pos_y))
 		pd->pos_x += pd->dir_y * pd->move_speed * pd->speed_mod;
-	if ((md->map)[(int)(pd->pos_y - pd->dir_x * \
-		pd->move_speed)][(int)pd->pos_x] != '1')
+	if (!object_collision(md, pd->pos_x, pd->pos_y - pd->dir_x * \
+		pd->move_speed * pd->speed_mod))
 		pd->pos_y -= pd->dir_x * pd->move_speed * pd->speed_mod;
 }
 
 static void		move_right(t_map_data *md, t_player_data *pd)
 {
-	if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x - pd->dir_y * \
-		pd->move_speed)] != '1')
+	if (!object_collision(md, pd->pos_x - pd->dir_y * pd->move_speed * \
+		pd->speed_mod, pd->pos_y))
 		pd->pos_x -= pd->dir_y * pd->move_speed * pd->speed_mod;
-	if ((md->map)[(int)(pd->pos_y + pd->dir_x * \
-		pd->move_speed)][(int)pd->pos_x] != '1')
+	if (!object_collision(md, pd->pos_x, pd->pos_y + pd->dir_x * \
+		pd->move_speed * pd->speed_mod))
 		pd->pos_y += pd->dir_x * pd->move_speed * pd->speed_mod;
 }
 

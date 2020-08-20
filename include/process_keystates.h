@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:47:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 21:43:28 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/20 14:52:13 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 void	set_player_speed(t_player_data *pd, t_mlx_data *mlx_data);
 void	turn_left(t_player_data *pd);
 void	turn_right(t_player_data *pd);
+int		object_collision(t_map_data *md, double pos_x, double pos_y);
 
 #endif
