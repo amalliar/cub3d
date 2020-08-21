@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 21:29:48 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/21 20:31:10 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,10 @@ static void		init_scene(t_scene *scene)
 {
 	if (((*scene).mlx_data.mlx = mlx_init()) == NULL)
 		exit_failure("Failed creating mlx instance\n");
-	(*scene).mlx_data.win = NULL;
-	(*scene).mlx_data.frame.img = NULL;
-	(*scene).mlx_data.width = 0;
-	(*scene).mlx_data.height = 0;
-	(*scene).textures.walls.north.img = NULL;
-	(*scene).textures.walls.south.img = NULL;
-	(*scene).textures.walls.west.img = NULL;
-	(*scene).textures.walls.east.img = NULL;
-	(*scene).textures.sprite.img = NULL;
+	(*scene).mlx_data.width = MLX_WINDOW_WIDTH;
+	(*scene).mlx_data.height = MLX_WINDOW_HEIGHT;
+	(*scene).colors.floor = FLOOR_COLOR;
+	(*scene).colors.ceiling = CEILING_COLOR;
 	(*scene).sprite_data.num_sprites = 0;
 	(*scene).player_data.pos_x = -1;
 	(*scene).keystates.kvk_ansi_w = KEY_UP;

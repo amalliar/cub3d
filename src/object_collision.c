@@ -6,15 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 14:51:10 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/20 14:54:17 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/21 20:36:20 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "process_keystates.h"
 #include "ft_string.h"
-
-#define COLLISION_R		0.20
-#define COLLIDERS		"1"
 
 int		object_collision(t_map_data *md, double pos_x, double pos_y)
 {

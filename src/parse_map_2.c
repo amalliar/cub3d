@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:44:11 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 16:08:31 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/21 18:27:57 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void			check_neighbours(t_map_data *map_data, int mx, int my)
 	if (my < map_data->height - 1 && (map_data->map)[my + 1][mx] == ' ')
 		exit_failure("Map breach detected at position [%s][%s]\n", \
 		ft_itoa(mx, 10), ft_itoa(my, 10));
-	if (ft_strchr(DEFINED_MAP_OBJECTS + 2, (map_data->map)[my][mx]) && \
+	if (ft_strchr(INNER_MAP_OBJECTS, (map_data->map)[my][mx]) && \
 		(mx == map_data->width - 1 || my == map_data->height - 1))
 		exit_failure("Map breach detected at position [%s][%s]\n", \
 		ft_itoa(mx, 10), ft_itoa(my, 10));

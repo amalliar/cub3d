@@ -6,13 +6,14 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:52:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/18 23:21:00 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/21 21:24:18 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_scene.h"
+#include "ft_string.h"
 
-static void		init_dda_vars(t_player_data *pd, int x, int width)
+static void		dda_init_1(t_player_data *pd, int x, int width)
 {
 	pd->camera_x = 2 * x / (double)width - 1;
 	pd->ray_dir_x = pd->dir_x + pd->plane_x * pd->camera_x;
@@ -24,7 +25,7 @@ static void		init_dda_vars(t_player_data *pd, int x, int width)
 	pd->hit = 0;
 }
 
-static void		calc_step_and_sidedist(t_player_data *pd)
+static void		dda_init_2(t_player_data *pd)
 {
 	if (pd->ray_dir_x < 0)
 	{
@@ -48,7 +49,7 @@ static void		calc_step_and_sidedist(t_player_data *pd)
 	}
 }
 
-static void		perform_dda(t_player_data *pd, t_map_data *md)
+static void		dda_run(t_player_data *pd, t_map_data *md)
 {
 	while (pd->hit == 0)
 	{
@@ -64,12 +65,12 @@ static void		perform_dda(t_player_data *pd, t_map_data *md)
 			pd->map_y += pd->step_y;
 			pd->side = 1;
 		}
-		if ((md->map)[pd->map_y][pd->map_x] == '1')
+		if (ft_strchr(BLOCKS, (md->map)[pd->map_y][pd->map_x]))
 			pd->hit = 1;
 	}
 }
 
-static void		calc_draw_start_end(t_player_data *pd, int height)
+static void		calc_stripe_limits(t_player_data *pd, int height)
 {
 	if (pd->side == 0)
 		pd->perp_wall_dist = (pd->map_x - pd->pos_x + \
@@ -98,12 +99,12 @@ void			render_textures(t_scene *scene)
 	x = 0;
 	while (x < mlx_data->width)
 	{
-		init_dda_vars(pd, x, mlx_data->width);
-		calc_step_and_sidedist(pd);
-		perform_dda(pd, &scene->map_data);
-		calc_draw_start_end(pd, mlx_data->height);
-		pick_texture(scene, &texture);
-		calc_tex_x(scene, texture);
+		dda_init_1(pd, x, mlx_data->width);
+		dda_init_2(pd);
+		dda_run(pd, &scene->map_data);
+		calc_stripe_limits(pd, mlx_data->height);
+		select_texture(scene, &texture);
+		calc_texture_x(scene, texture);
 		fill_stripe(scene, texture, x);
 		(pd->zbuffer)[x] = pd->perp_wall_dist;
 		++x;

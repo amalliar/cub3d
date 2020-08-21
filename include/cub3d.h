@@ -6,19 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/19 20:26:04 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/21 23:26:09 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
-# define MLX_WINDOW_TITLE			"cub3D"
-
-# define DEFINED_MAP_OBJECTS		" 102NSEW"
-# define PLAYER_FOV					80
-# define PLAYER_MOVE_SPEED			6
-# define PLAYER_ROT_SPEED			2
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -29,6 +22,7 @@
 # include <errno.h>
 # include <math.h>
 # include <stdarg.h>
+# include "settings.h"
 
 enum				e_keystates
 {
@@ -47,7 +41,7 @@ typedef struct		s_mlx_image
 	int				width;
 	int				height;
 	int				bits_per_pixel;
-	int				line_length;
+	int				line_size;
 	int				endian;
 	void			*img;
 	char			*addr;
@@ -63,24 +57,16 @@ typedef struct		s_mlx_data
 	t_mlx_image		frame;
 }					t_mlx_data;
 
-typedef struct		s_walls
-{
-	t_mlx_image		north;
-	t_mlx_image		south;
-	t_mlx_image		west;
-	t_mlx_image		east;
-}					t_walls;
-
 typedef struct		s_textures
 {
-	t_walls			walls;
-	t_mlx_image		sprite;
+	t_mlx_image		walls[NUM_WALL_TEXTURES];
+	t_mlx_image		objects[NUM_OBJECT_TEXTURES];
 }					t_textures;
 
 typedef struct		s_colors
 {
 	int				floor;
-	int				ceilling;
+	int				ceiling;
 }					t_colors;
 
 typedef struct		s_map_data
@@ -142,6 +128,7 @@ typedef struct		s_keystates
 
 typedef struct		s_sprite
 {
+	int				id_tex;
 	double			x;
 	double			y;
 	double			dist;
@@ -182,6 +169,23 @@ typedef struct		s_scene
 	t_map_data		map_data;
 	t_player_data	player_data;
 }					t_scene;
+
+typedef struct		s_block
+{
+	int				id_tex_n;
+	int				id_tex_s;
+	int				id_tex_e;
+	int				id_tex_w;
+}					t_block;
+
+static t_block		g_blocks[] =
+{
+	{0, 1, 2, 3},
+	{18, 18, 19, 19},
+	{20, 20, 21, 21},
+	{12, 12, 13, 13},
+	{16, 16, 17, 17},
+};
 
 void				load_scene(t_scene *scene, char *path);
 void				render_scene(t_scene *scene, int mode);

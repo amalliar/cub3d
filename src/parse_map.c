@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:35:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 16:36:43 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/21 21:27:04 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,14 @@ static void		load_player_data(t_player_data *player_data, int x, int y, \
 
 static void		process_map_object(t_scene *scene, int x, int y, char obj)
 {
-	if (!ft_strchr(" 1", obj))
+	if (!ft_strchr(OUTER_MAP_OBJECTS, obj))
 		check_neighbours(&(*scene).map_data, x, y);
 	if (ft_strchr("NSEW", obj))
 	{
 		load_player_data(&(*scene).player_data, x, y, obj);
 		((*scene).map_data.map)[y][x] = '0';
 	}
+	/*
 	if (obj == '2')
 	{
 		if (!((*scene).sprites = ft_realloc((*scene).sprites, \
@@ -74,6 +75,7 @@ static void		process_map_object(t_scene *scene, int x, int y, char obj)
 		((*scene).sprites)[(*scene).sprite_data.num_sprites].y = y + 0.5;
 		(*scene).sprite_data.num_sprites += 1;
 	}
+	*/
 }
 
 void			parse_map(t_scene *scene)

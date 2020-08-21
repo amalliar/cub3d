@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 20:15:52 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 15:32:06 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/21 20:21:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int				mlx_image_to_bmp_file(t_mlx_image *mi, const char *name)
 	y = 0;
 	while (y < mi->height)
 	{
-		write(bd.fd, bd.img + (y * mi->line_length), mi->line_length);
+		write(bd.fd, bd.img + (y * mi->line_size), mi->line_size);
 		write(bd.fd, padding, bd.padding_size);
 		++y;
 	}

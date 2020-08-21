@@ -6,35 +6,13 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 16:07:15 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/21 17:20:02 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "load_scene.h"
 #include "ft_stdio.h"
 #include "ft_string.h"
-
-static void		load_params(t_scene *scene, int fd)
-{
-	int		ret;
-	char	*line;
-
-	line = NULL;
-	while ((ret = ft_get_next_line(fd, &line)) > 0)
-	{
-		ret = parse_params(scene, line);
-		free(line);
-		line = NULL;
-		if (ret == PARAMS_LOADED)
-			break ;
-	}
-	if (ret == -1)
-		exit_failure("Failed reading from a file descriptor: %s\n", \
-		strerror(errno));
-	else if (ret == 0)
-		exit_failure("%s", \
-		"Scene file is missing mandatory configuration parameters\n");
-}
 
 static void		skip_empty_lines(int fd, char **line)
 {
@@ -101,7 +79,7 @@ void			load_scene(t_scene *scene, char *path)
 
 	if ((fd = open(path, O_RDONLY)) == -1)
 		exit_failure("Can't open %s: %s\n", path, strerror(errno));
-	load_params(scene, fd);
+	load_textures(scene);
 	load_map(scene, fd);
 	close(fd);
 }

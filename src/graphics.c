@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 20:56:01 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 16:39:38 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/21 20:21:23 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int				mlx_pixel_get(t_mlx_image *img, int x, int y)
 {
 	int		*dst;
 
-	dst = (int *)(img->addr + (y * img->line_length + \
+	dst = (int *)(img->addr + (y * img->line_size + \
 		x * (img->bits_per_pixel / 8)));
 	return (*dst);
 }
@@ -26,7 +26,7 @@ void			mlx_pixel_set(t_mlx_image *img, int x, int y, int color)
 {
 	int		*dst;
 
-	dst = (int *)(img->addr + (y * img->line_length + \
+	dst = (int *)(img->addr + (y * img->line_size + \
 		x * (img->bits_per_pixel / 8)));
 	*dst = color;
 }
