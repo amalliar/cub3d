@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/21 23:26:09 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/22 16:18:50 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <math.h>
 # include <stdarg.h>
 # include "settings.h"
+# include "blocks.h"
 
 enum				e_keystates
 {
@@ -169,23 +170,6 @@ typedef struct		s_scene
 	t_map_data		map_data;
 	t_player_data	player_data;
 }					t_scene;
-
-typedef struct		s_block
-{
-	int				id_tex_n;
-	int				id_tex_s;
-	int				id_tex_e;
-	int				id_tex_w;
-}					t_block;
-
-static t_block		g_blocks[] =
-{
-	{0, 1, 2, 3},
-	{18, 18, 19, 19},
-	{20, 20, 21, 21},
-	{12, 12, 13, 13},
-	{16, 16, 17, 17},
-};
 
 void				load_scene(t_scene *scene, char *path);
 void				render_scene(t_scene *scene, int mode);
