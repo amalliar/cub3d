@@ -10,9 +10,16 @@ NAME       := libmlx.dylib
 INC        := -I.
 #OPTI      := -Ounchecked
 
+# Define some colors for echo:
+LGREEN     := \033[1;32m
+WHITE      := \033[1;37m
+NOC        := \033[0m
+
 all: $(NAME)
 $(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
-	swiftc $(OPTI) $(INC) -o $(NAME) -emit-library $(OBJ) $(C_OBJ) -lz
+	@echo "$(LGREEN)Linking Swift dynamic library $(NAME)$(NOC)"
+	@swiftc $(OPTI) $(INC) -o $(NAME) -emit-library $(OBJ) $(C_OBJ) -lz
+	@echo "Built target $(NAME)"
 
 %.o: %.swift
 	swiftc $(OPTI) $(INC) -parse-as-library -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/21 17:20:02 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/22 20:58:13 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,15 @@ static void		build_map_lst(int fd, char **line, t_list **lst)
 		strerror(errno));
 }
 
-static void		load_map(t_scene *scene, int fd)
+static void		load_map(t_scene *scene, char *path)
 {
+	int		fd;
 	char	*line;
 	t_list	*lst;
 	t_list	*elem;
 
+	if ((fd = open(path, O_RDONLY)) == -1)
+		exit_failure("Can't open %s: %s\n", path, strerror(errno));
 	line = NULL;
 	skip_empty_lines(fd, &line);
 	if (!(elem = ft_lstnew(line)))
@@ -71,15 +74,11 @@ static void		load_map(t_scene *scene, int fd)
 		exit_failure("%s\n", strerror(errno));
 	ft_lstclear(&lst, free);
 	parse_map(scene);
+	close(fd);
 }
 
 void			load_scene(t_scene *scene, char *path)
 {
-	int		fd;
-
-	if ((fd = open(path, O_RDONLY)) == -1)
-		exit_failure("Can't open %s: %s\n", path, strerror(errno));
 	load_textures(scene);
-	load_map(scene, fd);
-	close(fd);
+	load_map(scene, path);
 }

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/22 16:18:50 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/22 22:18:55 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ typedef struct		s_sprite_data
 	int				d;
 	int				stripe;
 	int				y;
+	int				id_tex;
 	double			sprite_x;
 	double			sprite_y;
 	double			inv_det;

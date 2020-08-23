@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:35:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/21 21:27:04 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/22 23:07:09 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,22 @@ static void		load_player_data(t_player_data *player_data, int x, int y, \
 		exit_failure("Double initialisation of player's start position\n");
 	player_data->pos_x = x + 0.5;
 	player_data->pos_y = y + 0.5;
-	if (obj == 'N')
+	if (obj == '^')
 	{
 		set_player_dir(player_data, 0, -1);
 		set_plane_dir(player_data, tan(PLAYER_FOV * M_PI / 360), 0);
 	}
-	else if (obj == 'S')
+	else if (obj == '_')
 	{
 		set_player_dir(player_data, 0, 1);
 		set_plane_dir(player_data, -tan(PLAYER_FOV * M_PI / 360), 0);
 	}
-	else if (obj == 'E')
+	else if (obj == '>')
 	{
 		set_player_dir(player_data, 1, 0);
 		set_plane_dir(player_data, 0, tan(PLAYER_FOV * M_PI / 360));
 	}
-	else if (obj == 'W')
+	else if (obj == '<')
 	{
 		set_player_dir(player_data, -1, 0);
 		set_plane_dir(player_data, 0, -tan(PLAYER_FOV * M_PI / 360));
@@ -57,15 +57,14 @@ static void		load_player_data(t_player_data *player_data, int x, int y, \
 
 static void		process_map_object(t_scene *scene, int x, int y, char obj)
 {
-	if (!ft_strchr(OUTER_MAP_OBJECTS, obj))
+	if (ft_strchr(INNER_MAP_OBJECTS, obj))
 		check_neighbours(&(*scene).map_data, x, y);
-	if (ft_strchr("NSEW", obj))
+	if (ft_strchr("^_<>", obj))
 	{
 		load_player_data(&(*scene).player_data, x, y, obj);
 		((*scene).map_data.map)[y][x] = '0';
 	}
-	/*
-	if (obj == '2')
+	if (ft_strchr(OBJECTS, obj))
 	{
 		if (!((*scene).sprites = ft_realloc((*scene).sprites, \
 			(*scene).sprite_data.num_sprites * sizeof(t_sprite), \
@@ -73,9 +72,10 @@ static void		process_map_object(t_scene *scene, int x, int y, char obj)
 			exit_failure("%s\n", strerror(errno));
 		((*scene).sprites)[(*scene).sprite_data.num_sprites].x = x + 0.5;
 		((*scene).sprites)[(*scene).sprite_data.num_sprites].y = y + 0.5;
+		((*scene).sprites)[(*scene).sprite_data.num_sprites].id_tex = \
+			ft_strchr(OBJECTS, obj) - OBJECTS;
 		(*scene).sprite_data.num_sprites += 1;
 	}
-	*/
 }
 
 void			parse_map(t_scene *scene)

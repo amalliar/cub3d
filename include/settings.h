@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/22 18:25:07 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/23 17:15:38 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 # define FLOOR_COLOR			0x707070
 # define CEILING_COLOR			0x383838
 
-# define DEFINED_MAP_OBJECTS	" !123456789abcdefghijklmnopqrstuvwxyzA0NSEW"
-# define OUTER_MAP_OBJECTS		" !123456789abcdefghijklmnopqrstuvwxyz"
-# define INNER_MAP_OBJECTS		"A0NSEW"
-# define BLOCKS					"!123456789abcdefghijklmnopqrstuvwxyz"
-# define COLLIDERS				"!123456789abcdefghijklmnopqrstuvwxyz"
+# define DEFINED_MAP_OBJECTS	OUTER_MAP_OBJECTS INNER_MAP_OBJECTS
+# define OUTER_MAP_OBJECTS		" " BLOCKS
+# define INNER_MAP_OBJECTS		"0^_<>" OBJECTS
+# define BLOCKS					"!ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# define OBJECTS			"abcdefghijklmnopqrstuvwxyz123456789\"#$%&'()*+,."
+# define COLLIDERS				"!ABCDEFGHIJKLMNOPQRSTUVWXYZbcdilmnq\"#$&"
 # define COLLISION_R			0.20
 
 # define PLAYER_FOV				80
@@ -32,6 +33,6 @@
 # define PLAYER_ROT_SPEED		2
 
 # define NUM_WALL_TEXTURES		46
-# define NUM_OBJECT_TEXTURES	1
+# define NUM_OBJECT_TEXTURES	47
 
 #endif

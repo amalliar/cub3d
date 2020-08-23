@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/21 20:22:02 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/22 22:11:19 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int		render_next_frame(t_scene *scene)
 	mlx_data = &scene->mlx_data;
 	process_keystates(scene);
 	render_textures(scene);
-	//render_sprites(scene);
+	render_sprites(scene);
 	if (scene->render_mode == SCREENSHOT)
 	{
 		if (mlx_image_to_bmp_file(&mlx_data->frame, "screen.bmp"))

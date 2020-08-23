@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/08/21 22:44:52 by amalliar         ###   ########.fr        #
+#    Updated: 2020/08/22 22:22:56 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS       := src/colors.c \
 	      src/process_keystates.c \
 	      src/process_keystates_2.c \
               src/render_scene.c \
+	      src/render_sprites.c \
 	      src/load_textures.c \
 	      src/render_textures.c \
 	      src/render_textures_2.c \

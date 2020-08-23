@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:41:39 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/22 18:15:43 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/22 20:45:17 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,53 @@ enum			e_texture_ids
 
 static char		g_object_texture_paths[NUM_OBJECT_TEXTURES][128] =
 {
-	"./res/textures/objects/lamp.xpm"
+	"./res/textures/objects/00_water_puddle.xpm",
+	"./res/textures/objects/01_green_barrel.xpm",
+	"./res/textures/objects/02_table_with_chairs.xpm",
+	"./res/textures/objects/03_floor_lamp.xpm",
+	"./res/textures/objects/04_golden_chandelier.xpm",
+	"./res/textures/objects/05_hanged_man.xpm",
+	"./res/textures/objects/06_dog_food.xpm",
+	"./res/textures/objects/07_stone_pillar.xpm",
+	"./res/textures/objects/08_green_tree.xpm",
+	"./res/textures/objects/09_skeleton.xpm",
+	"./res/textures/objects/10_sink.xpm",
+	"./res/textures/objects/11_potted_plant.xpm",
+	"./res/textures/objects/12_blue_urn.xpm",
+	"./res/textures/objects/13_bare_table.xpm",
+	"./res/textures/objects/14_green_lamp.xpm",
+	"./res/textures/objects/15_kitchenware.xpm",
+	"./res/textures/objects/16_suit_of_armor.xpm",
+	"./res/textures/objects/17_hanging_cage.xpm",
+	"./res/textures/objects/18_skeletonin_cage.xpm",
+	"./res/textures/objects/19_pile_of_bones.xpm",
+	"./res/textures/objects/20_golden_key.xpm",
+	"./res/textures/objects/21_iron_key.xpm",
+	"./res/textures/objects/22_bed.xpm",
+	"./res/textures/objects/23_pot.xpm",
+	"./res/textures/objects/24_food.xpm",
+	"./res/textures/objects/25_medkit.xpm",
+	"./res/textures/objects/26_ammo.xpm",
+	"./res/textures/objects/27_machine_gun.xpm",
+	"./res/textures/objects/28_chain_gun.xpm",
+	"./res/textures/objects/29_golden_cross.xpm",
+	"./res/textures/objects/30_golden_chalice.xpm",
+	"./res/textures/objects/31_golden_chest.xpm",
+	"./res/textures/objects/32_golden_crown.xpm",
+	"./res/textures/objects/33_one_up.xpm",
+	"./res/textures/objects/34_gibs_skel.xpm",
+	"./res/textures/objects/35_wooden_barrel.xpm",
+	"./res/textures/objects/36_well_full.xpm",
+	"./res/textures/objects/37_well_empty.xpm",
+	"./res/textures/objects/38_gibs_blood.xpm",
+	"./res/textures/objects/39_flag.xpm",
+	"./res/textures/objects/40_shards.xpm",
+	"./res/textures/objects/41_shards_2.xpm",
+	"./res/textures/objects/42_shards_3.xpm",
+	"./res/textures/objects/43_kitchenware_2.xpm",
+	"./res/textures/objects/44_stove.xpm",
+	"./res/textures/objects/45_spears.xpm",
+	"./res/textures/objects/46_vine.xpm"
 };
 
 #endif
