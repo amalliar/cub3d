@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/23 18:45:37 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/23 19:41:18 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int		render_next_frame(t_scene *scene)
 	}
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, \
 		(*mlx_data).frame.img, 0, 0);
+	mlx_do_sync(mlx_data->mlx);
 	mlx_data->frame_time = (double)(clock() - r_start) / CLOCKS_PER_SEC;
 	return (0);
 }
