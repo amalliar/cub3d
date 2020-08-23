@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/22 22:11:19 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/23 18:45:37 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ static int		render_next_frame(t_scene *scene)
 	process_keystates(scene);
 	render_textures(scene);
 	render_sprites(scene);
+	//attempt_item_pickup(scene);
 	if (scene->render_mode == SCREENSHOT)
 	{
-		if (mlx_image_to_bmp_file(&mlx_data->frame, "screen.bmp"))
-			exit_failure("Failed creating image \"screen.bmp\": %s\n", \
+		if (mlx_image_to_bmp_file(&mlx_data->frame))
+			exit_failure("Failed creating a screenshot: %s\n", \
 			strerror(errno));
 		exit(EXIT_SUCCESS);
 	}

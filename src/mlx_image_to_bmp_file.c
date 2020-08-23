@@ -6,37 +6,51 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 20:15:52 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/21 20:21:46 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/23 19:17:21 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
 #define BYTES_PER_PIXEL			4
-#define FILE_HEADER_SIZE		14
-#define INFO_HEADER_SIZE		40
+#define FILE_HEAD_SZ			14
+#define INFO_HEAD_SZ			40
+
+static char		*gen_fname(void)
+{
+	time_t		rawtime;
+	struct tm	*timeinfo;
+	char		*fname;
+
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+	if (!(fname = malloc(64)))
+		exit_failure("%s\n", strerror(errno));
+	strftime(fname, 64, "Screen Shot %F at %I.%M.%S %p.bmp", timeinfo);
+	return (fname);
+}
 
 unsigned char	*create_bmp_file_header(int height, int stride)
 {
 	int						file_size;
-	static unsigned char	file_header[FILE_HEADER_SIZE] = {0};
+	static unsigned char	file_header[FILE_HEAD_SZ] = {0};
 
-	file_size = FILE_HEADER_SIZE + INFO_HEADER_SIZE + (stride * height);
+	file_size = FILE_HEAD_SZ + INFO_HEAD_SZ + (stride * height);
 	file_header[0] = (unsigned char)('B');
 	file_header[1] = (unsigned char)('M');
 	file_header[2] = (unsigned char)(file_size);
 	file_header[3] = (unsigned char)(file_size >> 8);
 	file_header[4] = (unsigned char)(file_size >> 16);
 	file_header[5] = (unsigned char)(file_size >> 24);
-	file_header[10] = (unsigned char)(FILE_HEADER_SIZE + INFO_HEADER_SIZE);
+	file_header[10] = (unsigned char)(FILE_HEAD_SZ + INFO_HEAD_SZ);
 	return (file_header);
 }
 
 unsigned char	*create_bmp_info_header(int height, int width)
 {
-	static unsigned char	info_header[INFO_HEADER_SIZE] = {0};
+	static unsigned char	info_header[INFO_HEAD_SZ] = {0};
 
-	info_header[0] = (unsigned char)(INFO_HEADER_SIZE);
+	info_header[0] = (unsigned char)(INFO_HEAD_SZ);
 	info_header[4] = (unsigned char)(width);
 	info_header[5] = (unsigned char)(width >> 8);
 	info_header[6] = (unsigned char)(width >> 16);
@@ -50,22 +64,23 @@ unsigned char	*create_bmp_info_header(int height, int width)
 	return (info_header);
 }
 
-int				mlx_image_to_bmp_file(t_mlx_image *mi, const char *name)
+int				mlx_image_to_bmp_file(t_mlx_image *mi)
 {
 	static unsigned char	padding[3] = {0, 0, 0};
+	char					*fname;
 	int						y;
 	t_bmp_data				bd;
 
+	fname = gen_fname();
+	if ((bd.fd = open(fname, O_CREAT | O_WRONLY | O_TRUNC, \
+		S_IRUSR | S_IWUSR)) == -1)
+		return (-1);
+	free(fname);
 	bd.width_in_bytes = mi->width * mi->bits_per_pixel / 8;
 	bd.padding_size = (4 - (bd.width_in_bytes) % 4) % 4;
 	bd.stride = bd.width_in_bytes + bd.padding_size;
-	if ((bd.fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, \
-		S_IRUSR | S_IWUSR)) == -1)
-		return (-1);
-	bd.file_header = create_bmp_file_header(mi->height, bd.stride);
-	write(bd.fd, bd.file_header, FILE_HEADER_SIZE);
-	bd.info_header = create_bmp_info_header(-mi->height, mi->width);
-	write(bd.fd, bd.info_header, INFO_HEADER_SIZE);
+	write(bd.fd, create_bmp_file_header(mi->height, bd.stride), FILE_HEAD_SZ);
+	write(bd.fd, create_bmp_info_header(-mi->height, mi->width), INFO_HEAD_SZ);
 	bd.img = (unsigned char *)mi->addr;
 	y = 0;
 	while (y < mi->height)

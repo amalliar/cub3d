@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:21:32 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/14 20:24:53 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/23 18:46:32 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int				keypress_handler(int keycode, t_scene *scene)
 		exit(EXIT_SUCCESS);
 	}
 	else if (keycode == KVK_F13 && \
-		mlx_image_to_bmp_file(&(*scene).mlx_data.frame, "screen.bmp"))
-		exit_failure("Failed creating image \"screen.bmp\": %s\n", \
+		mlx_image_to_bmp_file(&(*scene).mlx_data.frame))
+		exit_failure("Failed creating a screenshot: %s\n", \
 		strerror(errno));
 	else if (keycode == KVK_ANSI_W)
 		switch_states(&ks->kvk_ansi_w, &ks->kvk_ansi_s);
