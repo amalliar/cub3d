@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 14:51:10 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/21 20:36:20 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/24 14:13:01 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,16 @@
 
 int		object_collision(t_map_data *md, double pos_x, double pos_y)
 {
-	double		angle;
-	double		x;
-	double		y;
+	static double	cr = COLLISION_R;
 
-	angle = 0;
-	while (angle < M_PI / 2.0)
-	{
-		x = COLLISION_R * cos(angle);
-		y = COLLISION_R * sin(angle);
-		if (ft_strchr(COLLIDERS, (md->map)[(int)(pos_y + y)][(int)(pos_x - x)])\
-		|| ft_strchr(COLLIDERS, (md->map)[(int)(pos_y - x)][(int)(pos_x - y)])\
-		|| ft_strchr(COLLIDERS, (md->map)[(int)(pos_y - y)][(int)(pos_x + x)])\
-		|| ft_strchr(COLLIDERS, (md->map)[(int)(pos_y + x)][(int)(pos_x + y)]))
-			return (1);
-		angle += M_PI / 180.0;
-	}
+	if (ft_strchr(COLLIDERS, (md->map)[(int)(pos_y)][(int)(pos_x + cr)]) \
+	|| ft_strchr(COLLIDERS, (md->map)[(int)(pos_y)][(int)(pos_x - cr)]) \
+	|| ft_strchr(COLLIDERS, (md->map)[(int)(pos_y + cr)][(int)(pos_x)]) \
+	|| ft_strchr(COLLIDERS, (md->map)[(int)(pos_y - cr)][(int)(pos_x)]) \
+	|| ft_strchr(COLLIDERS, (md->map)[(int)(pos_y + cr)][(int)(pos_x + cr)]) \
+	|| ft_strchr(COLLIDERS, (md->map)[(int)(pos_y - cr)][(int)(pos_x + cr)]) \
+	|| ft_strchr(COLLIDERS, (md->map)[(int)(pos_y + cr)][(int)(pos_x - cr)]) \
+	|| ft_strchr(COLLIDERS, (md->map)[(int)(pos_y - cr)][(int)(pos_x - cr)]))
+		return (1);
 	return (0);
 }
