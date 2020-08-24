@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/22 22:18:55 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/24 12:40:37 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct		s_mlx_data
 {
 	int				width;
 	int				height;
+	int				frames_per_sec;
 	double			frame_time;
 	void			*mlx;
 	void			*win;

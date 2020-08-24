@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/23 19:41:18 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/24 12:46:35 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,22 @@
 #include "graphics.h"
 #include "render_scene.h"
 
+static void		get_frames_per_sec(t_mlx_data *mlx_data, clock_t *r_timer, \
+					int *frames)
+{
+	if ((clock() - *r_timer) / CLOCKS_PER_SEC >= 1)
+	{
+		mlx_data->frames_per_sec = *frames;
+		*frames = 0;
+		*r_timer = clock();
+	}
+}
+
 static int		render_next_frame(t_scene *scene)
 {
+	static clock_t	r_timer = 0;
 	clock_t			r_start;
+	static int		frames = 0;
 	t_mlx_data		*mlx_data;
 
 	r_start = clock();
@@ -37,6 +50,8 @@ static int		render_next_frame(t_scene *scene)
 		(*mlx_data).frame.img, 0, 0);
 	mlx_do_sync(mlx_data->mlx);
 	mlx_data->frame_time = (double)(clock() - r_start) / CLOCKS_PER_SEC;
+	++frames;
+	get_frames_per_sec(mlx_data, &r_timer, &frames);
 	return (0);
 }
 
