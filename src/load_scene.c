@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/22 20:58:13 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/27 22:04:42 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,14 @@ static void		build_map_lst(int fd, char **line, t_list **lst)
 		strerror(errno));
 }
 
+static void		init_player_stats(t_player_data *pd)
+{
+	pd->health = 100;
+	pd->lives = 3;
+	pd->ammo = 8;
+	pd->score = 0;
+}
+
 static void		load_map(t_scene *scene, char *path)
 {
 	int		fd;
@@ -75,6 +83,7 @@ static void		load_map(t_scene *scene, char *path)
 	ft_lstclear(&lst, free);
 	parse_map(scene);
 	close(fd);
+	init_player_stats(&scene->player_data);
 }
 
 void			load_scene(t_scene *scene, char *path)

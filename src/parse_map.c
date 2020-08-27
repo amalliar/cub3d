@@ -6,11 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:35:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/22 23:07:09 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/28 01:34:56 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "load_scene.h"
+#include "item_pickup.h"
 #include "ft_string.h"
 #include "ft_stdlib.h"
 
@@ -74,6 +75,9 @@ static void		process_map_object(t_scene *scene, int x, int y, char obj)
 		((*scene).sprites)[(*scene).sprite_data.num_sprites].y = y + 0.5;
 		((*scene).sprites)[(*scene).sprite_data.num_sprites].id_tex = \
 			ft_strchr(OBJECTS, obj) - OBJECTS;
+		((*scene).sprites)[(*scene).sprite_data.num_sprites].state = \
+			(ft_strchr(PICKUPS, obj)) ? PLACED : NOT_A_PICKUP;
+		((*scene).sprites)[(*scene).sprite_data.num_sprites].type = obj;
 		(*scene).sprite_data.num_sprites += 1;
 	}
 }

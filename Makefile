@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/08/22 22:22:56 by amalliar         ###   ########.fr        #
+#    Updated: 2020/08/27 23:20:47 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,13 @@ SRCDIR     := src
 OBJDIR     := .obj
 DEPDIR     := .dep
 
-SRCS       := src/colors.c \
+SRCS       := src/attempt_item_pickup.c \
+              src/colors.c \
               src/exit_failure.c \
               src/graphics.c \
 	      src/graphics_2.c \
+	      src/item_pickup.c \
+	      src/item_pickup_2.c \
 	      src/keypress_handler.c \
 	      src/keyrelease_handler.c \
               src/load_scene.c \

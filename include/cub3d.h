@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/24 12:40:37 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/27 23:32:51 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ typedef struct		s_map_data
 
 typedef struct		s_player_data
 {
+	int				health;
+	int				lives;
+	int				ammo;
+	int				score;
 	int				map_x;
 	int				map_y;
 	int				step_x;
@@ -131,9 +135,11 @@ typedef struct		s_keystates
 typedef struct		s_sprite
 {
 	int				id_tex;
+	int				state;
 	double			x;
 	double			y;
 	double			dist;
+	char			type;
 }					t_sprite;
 
 typedef struct		s_sprite_data

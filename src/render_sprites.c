@@ -6,11 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 13:04:05 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/22 22:22:10 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/27 23:47:16 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_scene.h"
+#include "item_pickup.h"
 #include "ft_stdlib.h"
 #include "ft_stdio.h"
 
@@ -103,11 +104,14 @@ void			render_sprites(t_scene *scene)
 	i = 0;
 	while (i < (*scene).sprite_data.num_sprites)
 	{
-		(*scene).sprite_data.sprite_x = (scene->sprites)[i].x - pd->pos_x;
-		(*scene).sprite_data.sprite_y = (scene->sprites)[i].y - pd->pos_y;
-		(*scene).sprite_data.id_tex = (scene->sprites)[i].id_tex;
-		init_sprite_data(md, pd, &scene->sprite_data);
-		draw_sprite(scene, md, pd, &scene->sprite_data);
+		if ((scene->sprites)[i].state != TAKEN)
+		{
+			(*scene).sprite_data.sprite_x = (scene->sprites)[i].x - pd->pos_x;
+			(*scene).sprite_data.sprite_y = (scene->sprites)[i].y - pd->pos_y;
+			(*scene).sprite_data.id_tex = (scene->sprites)[i].id_tex;
+			init_sprite_data(md, pd, &scene->sprite_data);
+			draw_sprite(scene, md, pd, &scene->sprite_data);
+		}
 		++i;
 	}
 }

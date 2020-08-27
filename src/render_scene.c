@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/24 12:46:35 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/27 21:27:19 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ static int		render_next_frame(t_scene *scene)
 	r_start = clock();
 	mlx_data = &scene->mlx_data;
 	process_keystates(scene);
+	mlx_do_sync(mlx_data->mlx);
 	render_textures(scene);
 	render_sprites(scene);
-	//attempt_item_pickup(scene);
+	attempt_item_pickup(scene);
 	if (scene->render_mode == SCREENSHOT)
 	{
 		if (mlx_image_to_bmp_file(&mlx_data->frame))
@@ -48,7 +49,6 @@ static int		render_next_frame(t_scene *scene)
 	}
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, \
 		(*mlx_data).frame.img, 0, 0);
-	mlx_do_sync(mlx_data->mlx);
 	mlx_data->frame_time = (double)(clock() - r_start) / CLOCKS_PER_SEC;
 	++frames;
 	get_frames_per_sec(mlx_data, &r_timer, &frames);
