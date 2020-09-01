@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/08/27 23:20:47 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/01 02:53:06 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ DEPDIR     := .dep
 SRCS       := src/attempt_item_pickup.c \
               src/colors.c \
               src/exit_failure.c \
+	      src/expose_handler.c \
               src/graphics.c \
 	      src/graphics_2.c \
 	      src/item_pickup.c \
@@ -39,6 +40,7 @@ SRCS       := src/attempt_item_pickup.c \
 	      src/parse_map_2.c \
 	      src/process_keystates.c \
 	      src/process_keystates_2.c \
+	      src/process_mouse_motion.c \
               src/render_scene.c \
 	      src/render_sprites.c \
 	      src/load_textures.c \

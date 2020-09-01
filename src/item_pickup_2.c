@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:51:42 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/28 01:17:26 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/08/28 02:16:28 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void		attempt_powerup_pickup(t_player_data *pd, t_sprite *obj)
 	if (obj->type == '8')
 	{
 		pd->health = 100;
-		pd->lives += 1;
+		if (pd->lives < 9)
+			pd->lives += 1;
 		pd->ammo = (pd->ammo + 25 <= PLAYER_MAX_AMMO) ? \
 			pd->ammo + 25 : PLAYER_MAX_AMMO;
 		obj->state = TAKEN;

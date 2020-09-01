@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/28 01:40:51 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/01 02:27:17 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define PLAYER_FOV				80
 # define PLAYER_MOVE_SPEED		6
 # define PLAYER_ROT_SPEED		2
+# define PLAYER_MOUSE_SENSE		0.025
 # define PLAYER_MAX_HEALTH		100
 # define PLAYER_MAX_AMMO		99
 # define PLAYER_MAX_PICKUP_DIST	0.50

@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_keystates.h                                :+:      :+:    :+:   */
+/*   expose_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/16 15:47:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/01 01:30:50 by amalliar         ###   ########.fr       */
+/*   Created: 2020/09/01 02:49:23 by amalliar          #+#    #+#             */
+/*   Updated: 2020/09/01 02:55:26 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROCESS_KEYSTATES_H
-# define PROCESS_KEYSTATES_H
-# include "cub3d.h"
+#include "render_scene.h"
+#include "mlx.h"
 
-void	set_player_speed(t_player_data *pd, t_mlx_data *mlx_data);
-void	turn_left(t_player_data *pd, double rot_speed);
-void	turn_right(t_player_data *pd, double rot_speed);
-int		object_collision(t_map_data *md, double pos_x, double pos_y);
+int		expose_handler(t_scene *scene)
+{
+	t_mlx_data		*mlx_data;
 
-#endif
+	mlx_data = &scene->mlx_data;
+	scene->mouse_grabbing = ON;
+	mlx_mouse_hide();
+	mlx_mouse_move(mlx_data->win, mlx_data->width / 2, mlx_data->height / 2);
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/27 21:27:19 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/01 02:56:58 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "events.h"
 #include "graphics.h"
 #include "render_scene.h"
+
+#define MLX_SYNC_IMAGE_WRITABLE		1
+#define MLX_SYNC_WIN_FLUSH_CMD		2
+#define MLX_SYNC_WIN_CMD_COMPLETED	3
 
 static void		get_frames_per_sec(t_mlx_data *mlx_data, clock_t *r_timer, \
 					int *frames)
@@ -36,7 +40,8 @@ static int		render_next_frame(t_scene *scene)
 	r_start = clock();
 	mlx_data = &scene->mlx_data;
 	process_keystates(scene);
-	mlx_do_sync(mlx_data->mlx);
+	process_mouse_motion(scene);
+	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, mlx_data->win);
 	render_textures(scene);
 	render_sprites(scene);
 	attempt_item_pickup(scene);
@@ -85,12 +90,13 @@ void			render_scene(t_scene *scene, int mode)
 		render_next_frame(scene);
 	mlx_data->win = mlx_new_window(mlx_data->mlx, mlx_data->width, \
 		mlx_data->height, MLX_WINDOW_TITLE);
-	mlx_loop_hook(mlx_data->mlx, render_next_frame, scene);
 	mlx_do_key_autorepeatoff(mlx_data->mlx);
 	mlx_hook(mlx_data->win, KEY_PRESS, KEY_PRESS_MASK, keypress_handler, scene);
 	mlx_hook(mlx_data->win, KEY_RELEASE, KEY_RELEASE_MASK, \
 		keyrelease_handler, scene);
+	mlx_hook(mlx_data->win, EXPOSE, EXPOSURE_MASK, expose_handler, scene);
 	mlx_hook(mlx_data->win, DESTROY_NOTIFY, STRUCTURE_NOTIFY_MASK, \
 		winclose_handler, scene);
+	mlx_loop_hook(mlx_data->mlx, render_next_frame, scene);
 	mlx_loop(mlx_data->mlx);
 }

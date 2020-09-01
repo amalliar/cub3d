@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/21 20:31:10 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/01 02:45:44 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void		init_scene(t_scene *scene)
 	(*scene).keystates.kvk_ansi_d = KEY_UP;
 	(*scene).keystates.kvk_leftarrow = KEY_UP;
 	(*scene).keystates.kvk_rightarrow = KEY_UP;
+	(*scene).mouse_grabbing = OFF;
 }
 
 int				main(int argc, char **argv)

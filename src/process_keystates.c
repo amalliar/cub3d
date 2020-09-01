@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:23:26 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/20 19:40:21 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/01 01:31:18 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void			process_keystates(t_scene *scene)
 	if (ks->kvk_ansi_d == KEY_DOWN)
 		move_right(md, pd);
 	if (ks->kvk_leftarrow == KEY_DOWN)
-		turn_left(pd);
+		turn_left(pd, pd->rot_speed);
 	if (ks->kvk_rightarrow == KEY_DOWN)
-		turn_right(pd);
+		turn_right(pd, pd->rot_speed);
 }
