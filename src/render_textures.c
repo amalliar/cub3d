@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:52:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/21 21:24:18 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/01 07:11:04 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ void			render_textures(t_scene *scene)
 	x = 0;
 	while (x < mlx_data->width)
 	{
-		dda_init_1(pd, x, mlx_data->width);
+		dda_init_1(pd, x, (*mlx_data).frame.width);
 		dda_init_2(pd);
 		dda_run(pd, &scene->map_data);
-		calc_stripe_limits(pd, mlx_data->height);
+		calc_stripe_limits(pd, (*mlx_data).frame.height);
 		select_texture(scene, &texture);
 		calc_texture_x(scene, texture);
 		fill_stripe(scene, texture, x);

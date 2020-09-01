@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/01 02:56:58 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/01 08:35:47 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int		render_next_frame(t_scene *scene)
 	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, mlx_data->win);
 	render_textures(scene);
 	render_sprites(scene);
+	render_hud(scene);
 	attempt_item_pickup(scene);
 	if (scene->render_mode == SCREENSHOT)
 	{
@@ -67,10 +68,10 @@ static void		init_frame(t_scene *scene)
 
 	mlx_data = &scene->mlx_data;
 	frame = &mlx_data->frame;
-	frame->width = mlx_data->width;
-	frame->height = mlx_data->height;
-	if (!(frame->img = mlx_new_image(mlx_data->mlx, frame->width, \
-		frame->height)))
+	frame->width = GAME_WINDOW_WIDTH;
+	frame->height = GAME_WINDOW_HEIGHT;
+	if (!(frame->img = mlx_new_image(mlx_data->mlx, mlx_data->width, \
+		mlx_data->height)))
 		exit_failure("Failed creating mlx image instance: %s\n", \
 			strerror(errno));
 	frame->addr = mlx_get_data_addr(frame->img, &frame->bits_per_pixel, \

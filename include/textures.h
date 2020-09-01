@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:41:39 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/22 20:45:17 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/01 06:43:57 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,27 @@ static char		g_object_texture_paths[NUM_OBJECT_TEXTURES][128] =
 	"./res/textures/objects/44_stove.xpm",
 	"./res/textures/objects/45_spears.xpm",
 	"./res/textures/objects/46_vine.xpm"
+};
+
+static char		g_hud_texture_paths[NUM_HUD_TEXTURES][128] =
+{
+	"./res/textures/hud/00_nbr_zero.xpm",
+	"./res/textures/hud/01_nbr_one.xpm",
+	"./res/textures/hud/02_nbr_two.xpm",
+	"./res/textures/hud/03_nbr_three.xpm",
+	"./res/textures/hud/04_nbr_four.xpm",
+	"./res/textures/hud/05_nbr_five.xpm",
+	"./res/textures/hud/06_nbr_six.xpm",
+	"./res/textures/hud/07_nbr_seven.xpm",
+	"./res/textures/hud/08_nbr_eight.xpm",
+	"./res/textures/hud/09_nbr_nine.xpm",
+	"./res/textures/hud/10_main.xpm",
+	"./res/textures/hud/11_wpn_knife.xpm",
+	"./res/textures/hud/12_wpn_pistol.xpm",
+	"./res/textures/hud/13_wpn_machine_gun.xpm",
+	"./res/textures/hud/14_wpn_chain_gun.xpm",
+	"./res/textures/hud/15_golden_key.xpm",
+	"./res/textures/hud/16_iron_key.xpm"
 };
 
 #endif

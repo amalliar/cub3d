@@ -6,16 +6,21 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/01 02:27:17 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/02 00:49:11 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SETTINGS_H
 # define SETTINGS_H
 
-# define MLX_WINDOW_WIDTH		1280
-# define MLX_WINDOW_HEIGHT		720
+# define GAME_WINDOW_WIDTH		1280
+# define GAME_WINDOW_HEIGHT		720
+# define HUD_SCALE				GAME_WINDOW_WIDTH / 304.0
+# define HUD_WIDTH				GAME_WINDOW_WIDTH
+# define HUD_HEIGHT				35 * HUD_SCALE
 # define MLX_WINDOW_TITLE		"cub3D"
+# define MLX_WINDOW_WIDTH		GAME_WINDOW_WIDTH
+# define MLX_WINDOW_HEIGHT		GAME_WINDOW_HEIGHT + HUD_HEIGHT
 
 # define FLOOR_COLOR			0x707070
 # define CEILING_COLOR			0x383838
@@ -38,5 +43,6 @@
 
 # define NUM_WALL_TEXTURES		46
 # define NUM_OBJECT_TEXTURES	47
+# define NUM_HUD_TEXTURES		17
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/01 02:52:05 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/02 00:13:20 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct		s_textures
 {
 	t_mlx_image		walls[NUM_WALL_TEXTURES];
 	t_mlx_image		objects[NUM_OBJECT_TEXTURES];
+	t_mlx_image		hud[NUM_HUD_TEXTURES];
 }					t_textures;
 
 typedef struct		s_colors
@@ -90,6 +91,7 @@ typedef struct		s_player_data
 	int				lives;
 	int				ammo;
 	int				score;
+	int				level;
 	int				map_x;
 	int				map_y;
 	int				step_x;

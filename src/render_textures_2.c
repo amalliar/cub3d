@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/21 22:53:53 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/01 07:12:14 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void			calc_texture_x(t_scene *scene, t_mlx_image *texture)
 	if (pd->side == 1 && pd->ray_dir_y > 0)
 		pd->tex_x = texture->width - pd->tex_x - 1;
 	pd->step = 1.0 * texture->height / pd->line_height;
-	pd->tex_pos = (pd->draw_start - mlx_data->height / 2 + \
+	pd->tex_pos = (pd->draw_start - (*mlx_data).frame.height / 2 + \
 		pd->line_height / 2) * pd->step;
 }
 
@@ -96,6 +96,6 @@ void			fill_stripe(t_scene *scene, t_mlx_image *texture, int x)
 		++p0.y;
 	}
 	p0.y = pd->draw_end;
-	p1.y = mlx_data->height - 1;
+	p1.y = (*mlx_data).frame.height - 1;
 	drawverline(&mlx_data->frame, p0, p1, (*scene).colors.floor);
 }

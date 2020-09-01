@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 21:23:53 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/21 23:30:32 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/01 06:48:11 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,30 @@
 #include "mlx.h"
 #include "textures.h"
 
-static void		load_walls(t_scene *scene)
+static void		int_load_textures(t_scene *scene, t_mlx_image *arr, \
+					char (*paths)[128], int num_textures)
 {
-	t_mlx_image		*walls;
 	int				i;
 
-	walls = (*scene).textures.walls;
 	i = 0;
-	while (i < NUM_WALL_TEXTURES)
+	while (i < num_textures)
 	{
-		if (!(walls[i].img = mlx_xpm_file_to_image((*scene).mlx_data.mlx, \
-			g_wall_texture_paths[i], &walls[i].width, &walls[i].height)))
+		if (!(arr[i].img = mlx_xpm_file_to_image((*scene).mlx_data.mlx, \
+			paths[i], &arr[i].width, &arr[i].height)))
 			exit_failure("Failed creating mlx image instance from file: %s\n", \
-				g_wall_texture_paths[i]);
-		walls[i].addr = mlx_get_data_addr(walls[i].img, \
-			&walls[i].bits_per_pixel, &walls[i].line_size, &walls[i].endian);
-		++i;
-	}
-}
-
-static void		load_objects(t_scene *scene)
-{
-	t_mlx_image		*objects;
-	int				i;
-
-	objects = (*scene).textures.objects;
-	i = 0;
-	while (i < NUM_OBJECT_TEXTURES)
-	{
-		if (!(objects[i].img = mlx_xpm_file_to_image((*scene).mlx_data.mlx, \
-			g_object_texture_paths[i], &objects[i].width, &objects[i].height)))
-			exit_failure("Failed creating mlx image instance from file: %s\n", \
-				g_object_texture_paths[i]);
-		objects[i].addr = mlx_get_data_addr(objects[i].img, \
-			&objects[i].bits_per_pixel, &objects[i].line_size, \
-			&objects[i].endian);
+				paths[i]);
+		arr[i].addr = mlx_get_data_addr(arr[i].img, &arr[i].bits_per_pixel, \
+			&arr[i].line_size, &arr[i].endian);
 		++i;
 	}
 }
 
 void			load_textures(t_scene *scene)
 {
-	load_walls(scene);
-	load_objects(scene);
+	int_load_textures(scene, (*scene).textures.walls, \
+		g_wall_texture_paths, NUM_WALL_TEXTURES);
+	int_load_textures(scene, (*scene).textures.objects, \
+		g_object_texture_paths, NUM_OBJECT_TEXTURES);
+	int_load_textures(scene, (*scene).textures.hud, \
+		g_hud_texture_paths, NUM_HUD_TEXTURES);
 }
