@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/02 05:17:31 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/02 08:46:16 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ typedef struct		s_player_data
 	int				tex_x;
 	int				tex_y;
 	int				p;
-	int				cell_x;
-	int				cell_y;
 	double			pos_x;
 	double			pos_y;
 	double			pos_z;

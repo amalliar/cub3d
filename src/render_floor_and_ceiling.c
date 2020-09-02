@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 02:03:25 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/02 06:06:25 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/02 08:46:36 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static void		calc_block(t_player_data *pd, t_mlx_image *frame)
 static void		calc_texture_xy(t_player_data *pd, t_mlx_image *tex)
 {
 	pd->tex_x = (int)(tex->width * \
-		(pd->floor_x - pd->cell_x)) & (tex->width - 1);
+		(pd->floor_x - pd->map_x)) & (tex->width - 1);
 	pd->tex_y = (int)(tex->height * \
-		(pd->floor_y - pd->cell_y)) & (tex->height - 1);
+		(pd->floor_y - pd->map_y)) & (tex->height - 1);
 }
 
 static void		fill_line(t_player_data *pd, t_mlx_image *frame, \
@@ -44,8 +44,8 @@ static void		fill_line(t_player_data *pd, t_mlx_image *frame, \
 	x = 0;
 	while (x < frame->width)
 	{
-		pd->cell_x = (int)pd->floor_x;
-		pd->cell_y = (int)pd->floor_y;
+		pd->map_x = (int)pd->floor_x;
+		pd->map_y = (int)pd->floor_y;
 		calc_texture_xy(pd, &textures->floor);
 		mlx_pixel_set(frame, x, y, mlx_pixel_get(&textures->floor, \
 			pd->tex_x, pd->tex_y));
