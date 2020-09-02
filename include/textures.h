@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:41:39 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/01 06:43:57 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/02 06:15:15 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,16 @@ static char		g_hud_texture_paths[NUM_HUD_TEXTURES][128] =
 	"./res/textures/hud/14_wpn_chain_gun.xpm",
 	"./res/textures/hud/15_golden_key.xpm",
 	"./res/textures/hud/16_iron_key.xpm"
+};
+
+static char		g_floor_texture_path[1][128] =
+{
+	"./res/textures/floor.xpm"
+};
+
+static char		g_ceiling_texture_path[1][128] =
+{
+	"./res/textures/ceiling.xpm"
 };
 
 #endif

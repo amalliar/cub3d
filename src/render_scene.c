@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/01 08:35:47 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/02 02:09:49 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static int		render_next_frame(t_scene *scene)
 	process_keystates(scene);
 	process_mouse_motion(scene);
 	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, mlx_data->win);
-	render_textures(scene);
+	render_floor_and_ceiling(scene);
+	render_walls(scene);
 	render_sprites(scene);
 	render_hud(scene);
 	attempt_item_pickup(scene);

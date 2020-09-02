@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_textures.c                                  :+:      :+:    :+:   */
+/*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:52:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/01 07:11:04 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/02 02:00:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void		calc_stripe_limits(t_player_data *pd, int height)
 		pd->draw_end = height - 1;
 }
 
-void			render_textures(t_scene *scene)
+void			render_walls(t_scene *scene)
 {
 	t_mlx_data		*mlx_data;
 	t_mlx_image		*texture;

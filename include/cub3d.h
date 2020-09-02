@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/02 00:13:20 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/02 05:17:31 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,9 @@ typedef struct		s_textures
 	t_mlx_image		walls[NUM_WALL_TEXTURES];
 	t_mlx_image		objects[NUM_OBJECT_TEXTURES];
 	t_mlx_image		hud[NUM_HUD_TEXTURES];
+	t_mlx_image		floor;
+	t_mlx_image		ceiling;
 }					t_textures;
-
-typedef struct		s_colors
-{
-	int				floor;
-	int				ceiling;
-}					t_colors;
 
 typedef struct		s_map_data
 {
@@ -103,8 +99,12 @@ typedef struct		s_player_data
 	int				draw_end;
 	int				tex_x;
 	int				tex_y;
+	int				p;
+	int				cell_x;
+	int				cell_y;
 	double			pos_x;
 	double			pos_y;
+	double			pos_z;
 	double			dir_x;
 	double			dir_y;
 	double			old_dir_x;
@@ -115,7 +115,11 @@ typedef struct		s_player_data
 	double			old_plane_y;
 	double			camera_x;
 	double			ray_dir_x;
+	double			ray_dir_x0;
+	double			ray_dir_x1;
 	double			ray_dir_y;
+	double			ray_dir_y0;
+	double			ray_dir_y1;
 	double			side_dist_x;
 	double			side_dist_y;
 	double			delta_dist_x;
@@ -127,6 +131,11 @@ typedef struct		s_player_data
 	double			wall_x;
 	double			step;
 	double			tex_pos;
+	double			row_distance;
+	double			floor_step_x;
+	double			floor_step_y;
+	double			floor_x;
+	double			floor_y;
 	double			*zbuffer;
 }					t_player_data;
 
@@ -180,7 +189,6 @@ typedef struct		s_scene
 	int				mouse_grabbing;
 	t_mlx_data		mlx_data;
 	t_keystates		keystates;
-	t_colors		colors;
 	t_textures		textures;
 	t_sprite		*sprites;
 	t_sprite_data	sprite_data;

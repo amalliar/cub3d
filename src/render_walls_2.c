@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_textures_2.c                                :+:      :+:    :+:   */
+/*   render_walls_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/01 07:12:14 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/02 02:00:53 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,37 +65,22 @@ void			calc_texture_x(t_scene *scene, t_mlx_image *texture)
 		pd->line_height / 2) * pd->step;
 }
 
-static void		init_points(t_point *p0, t_point *p1, int x0, int y1)
-{
-	p0->x = x0;
-	p1->x = x0;
-	p0->y = 0;
-	p1->y = y1;
-}
-
 void			fill_stripe(t_scene *scene, t_mlx_image *texture, int x)
 {
 	t_mlx_data		*mlx_data;
 	t_player_data	*pd;
-	t_point			p0;
-	t_point			p1;
+	int				y;
 	int				color;
 
 	mlx_data = &scene->mlx_data;
 	pd = &scene->player_data;
-	init_points(&p0, &p1, x, pd->draw_start - 1);
-	if (pd->draw_start > 0)
-		drawverline(&mlx_data->frame, p0, p1, (*scene).colors.ceiling);
-	p0.y = pd->draw_start;
-	while (p0.y < pd->draw_end)
+	y = pd->draw_start;
+	while (y < pd->draw_end)
 	{
 		pd->tex_y = (int)pd->tex_pos & (texture->height - 1);
 		pd->tex_pos += pd->step;
 		color = mlx_pixel_get(texture, pd->tex_x, pd->tex_y);
-		mlx_pixel_set(&mlx_data->frame, p0.x, p0.y, color);
-		++p0.y;
+		mlx_pixel_set(&mlx_data->frame, x, y, color);
+		++y;
 	}
-	p0.y = pd->draw_end;
-	p1.y = (*mlx_data).frame.height - 1;
-	drawverline(&mlx_data->frame, p0, p1, (*scene).colors.floor);
 }

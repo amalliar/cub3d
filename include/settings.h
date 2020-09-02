@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/02 00:49:11 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/02 05:17:22 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@
 # define MLX_WINDOW_TITLE		"cub3D"
 # define MLX_WINDOW_WIDTH		GAME_WINDOW_WIDTH
 # define MLX_WINDOW_HEIGHT		GAME_WINDOW_HEIGHT + HUD_HEIGHT
-
-# define FLOOR_COLOR			0x707070
-# define CEILING_COLOR			0x383838
 
 # define DEFINED_MAP_OBJECTS	OUTER_MAP_OBJECTS INNER_MAP_OBJECTS
 # define OUTER_MAP_OBJECTS		" " BLOCKS

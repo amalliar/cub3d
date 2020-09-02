@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 21:23:53 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/01 06:48:11 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/02 05:18:00 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,8 @@ void			load_textures(t_scene *scene)
 		g_object_texture_paths, NUM_OBJECT_TEXTURES);
 	int_load_textures(scene, (*scene).textures.hud, \
 		g_hud_texture_paths, NUM_HUD_TEXTURES);
+	int_load_textures(scene, &(*scene).textures.floor, \
+		g_floor_texture_path, 1);
+	int_load_textures(scene, &(*scene).textures.ceiling, \
+		g_ceiling_texture_path, 1);
 }
