@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 07:31:19 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 14:55:02 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ typedef struct		s_sprite_data
 {
 	int				num_sprites;
 	int				sprite_screen_x;
-	int				v_move_screen;
 	int				sprite_height;
 	int				draw_start_y;
 	int				draw_end_y;

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 13:04:05 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 07:24:24 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 14:57:00 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 #include "item_pickup.h"
 #include "ft_stdlib.h"
 
-#define U_DIV				1
-#define V_DIV 				1
-#define V_MOVE 				0.0
 #define BACKGROUND			0x980088
 
 static void		calc_sprite_dist(t_scene *scene, t_sprite *sprites)
@@ -49,17 +46,14 @@ static void		init_sprite_data(t_mlx_data *md, t_player_data *pd, \
 		pd->plane_x * sd->sprite_y);
 	sd->sprite_screen_x = (int)((*md).frame.width / 2 * (1 + sd->transform_x / \
 		sd->transform_y));
-	sd->v_move_screen = (int)(V_MOVE / sd->transform_y);
-	sd->sprite_height = ft_abs((*md).frame.height / sd->transform_y) / V_DIV;
-	sd->draw_start_y = -sd->sprite_height / 2 + (*md).frame.height / 2 + \
-		sd->v_move_screen;
+	sd->sprite_height = ft_abs((*md).frame.height / sd->transform_y);
+	sd->draw_start_y = -sd->sprite_height / 2 + (*md).frame.height / 2;
 	if (sd->draw_start_y < 0)
 		sd->draw_start_y = 0;
-	sd->draw_end_y = sd->sprite_height / 2 + (*md).frame.height / 2 + \
-		sd->v_move_screen;
+	sd->draw_end_y = sd->sprite_height / 2 + (*md).frame.height / 2;
 	if (sd->draw_end_y >= (*md).frame.height)
 		sd->draw_end_y = (*md).frame.height - 1;
-	sd->sprite_width = ft_abs((*md).frame.height / sd->transform_y) / U_DIV;
+	sd->sprite_width = ft_abs((*md).frame.height / sd->transform_y);
 	sd->draw_start_x = -sd->sprite_width / 2 + sd->sprite_screen_x;
 	if (sd->draw_start_x < 0)
 		sd->draw_start_x = 0;
@@ -84,8 +78,8 @@ static void		draw_sprite(t_scene *scene, t_mlx_data *md, \
 			(*md).frame.width && sd->transform_y < (pd->zbuffer)[sd->stripe])
 			while (sd->y < sd->draw_end_y)
 			{
-				sd->d = (sd->y - sd->v_move_screen) * 256 - (*md).frame.height \
-					* 128 + sd->sprite_height * 128;
+				sd->d = sd->y * 256 - (*md).frame.height * 128 + \
+					sd->sprite_height * 128;
 				sd->tex_y = ((sd->d * \
 	(*scene).textures.objects[sd->id_tex].height) / sd->sprite_height) / 256;
 				color = mlx_pixel_get(&(*scene).textures.objects[sd->id_tex], \

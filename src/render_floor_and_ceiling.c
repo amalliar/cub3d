@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 02:03:25 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 06:17:44 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 11:33:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void			render_floor_and_ceiling(t_scene *scene)
 	frame = &(*scene).mlx_data.frame;
 	pd = &scene->player_data;
 	textures = &scene->textures;
-	y = 0;
+	y = frame->height / 2 + 1;
 	while (y < frame->height)
 	{
 		pd->p = y - frame->height / 2;

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:52:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/02 02:00:39 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 14:12:48 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ static void		calc_stripe_limits(t_player_data *pd, int height)
 			(1 - pd->step_y) / 2) / pd->ray_dir_y;
 	pd->line_height = (int)(height / pd->perp_wall_dist);
 	pd->draw_start = -pd->line_height / 2 + height / 2;
-	if (pd->draw_start < 0 || pd->draw_start >= height)
+	if (pd->draw_start < 0)
 		pd->draw_start = 0;
 	pd->draw_end = pd->line_height / 2 + height / 2;
-	if (pd->draw_end < 0 || pd->draw_end >= height)
+	if (pd->draw_end >= height)
 		pd->draw_end = height - 1;
 }
 
