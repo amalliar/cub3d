@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 20:36:31 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/02 00:57:53 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 06:28:23 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ void			drawhorline(t_mlx_image *img, t_point p0, t_point p1, int color)
 	}
 }
 
+/*
+** Scales and copies mlx_image *src to mlx_image *dst, p0 is the
+** upper left corner from which the image is drawn.
+*/
+
 void			latch_image(t_mlx_image *dst, t_mlx_image *src, \
 					t_point p0, double scale)
 {
@@ -75,17 +80,24 @@ void			latch_image(t_mlx_image *dst, t_mlx_image *src, \
 	}
 }
 
-void			latch_number(t_mlx_image *dst, t_mlx_image *src, \
+/*
+** Latches given number to an mlx_image *dst, p0 is the
+** upper left corner from which the last digit is drawn.
+**
+** The rest of the digits are shifted to the right.
+*/
+
+void			latch_number(t_mlx_image *dst, t_mlx_image *arr, \
 					int nbr, t_point p0)
 {
 	if (nbr == 0)
 	{
-		latch_image(dst, src, p0, HUD_SCALE);
+		latch_image(dst, arr, p0, HUD_SCALE);
 		return ;
 	}
 	while (nbr > 0)
 	{
-		latch_image(dst, src + nbr % 10, p0, HUD_SCALE);
+		latch_image(dst, arr + nbr % 10, p0, HUD_SCALE);
 		nbr /= 10;
 		p0.x -= 8 * HUD_SCALE;
 	}

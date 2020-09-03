@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 02:03:25 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/02 08:46:36 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 06:17:44 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,13 @@ static void		fill_line(t_player_data *pd, t_mlx_image *frame, \
 					t_textures *textures, int y)
 {
 	int		x;
+	int		tex_size_differs;
 
+	if ((*textures).floor.width != (*textures).ceiling.width || \
+		(*textures).floor.height != (*textures).ceiling.height)
+		tex_size_differs = 1;
+	else
+		tex_size_differs = 0;
 	x = 0;
 	while (x < frame->width)
 	{
@@ -49,7 +55,8 @@ static void		fill_line(t_player_data *pd, t_mlx_image *frame, \
 		calc_texture_xy(pd, &textures->floor);
 		mlx_pixel_set(frame, x, y, mlx_pixel_get(&textures->floor, \
 			pd->tex_x, pd->tex_y));
-		calc_texture_xy(pd, &textures->ceiling);
+		if (tex_size_differs)
+			calc_texture_xy(pd, &textures->ceiling);
 		mlx_pixel_set(frame, x, frame->height - y - 1, \
 			mlx_pixel_get(&textures->ceiling, pd->tex_x, pd->tex_y));
 		pd->floor_x += pd->floor_step_x;

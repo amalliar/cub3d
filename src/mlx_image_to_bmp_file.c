@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 20:15:52 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/23 19:17:21 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 05:54:42 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define FILE_HEAD_SZ			14
 #define INFO_HEAD_SZ			40
 
-static char		*gen_fname(void)
+static char		*gen_file_name(void)
 {
 	time_t		rawtime;
 	struct tm	*timeinfo;
@@ -71,7 +71,7 @@ int				mlx_image_to_bmp_file(t_mlx_image *mi)
 	int						y;
 	t_bmp_data				bd;
 
-	fname = gen_fname();
+	fname = gen_file_name();
 	if ((bd.fd = open(fname, O_CREAT | O_WRONLY | O_TRUNC, \
 		S_IRUSR | S_IWUSR)) == -1)
 		return (-1);

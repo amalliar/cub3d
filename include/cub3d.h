@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/02 08:46:16 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 07:31:19 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ enum				e_render_modes
 
 enum				e_states
 {
-	OFF,
-	ON
+	ENABLED,
+	DISABLED
 };
 
 typedef struct		s_mlx_image
@@ -58,7 +58,7 @@ typedef struct		s_mlx_data
 {
 	int				width;
 	int				height;
-	int				frames_per_sec;
+	int				frames_per_second;
 	double			frame_time;
 	void			*mlx;
 	void			*win;
@@ -183,7 +183,7 @@ typedef struct		s_sprite_data
 
 typedef struct		s_scene
 {
-	int				render_mode;
+	int				render_started;
 	int				mouse_grabbing;
 	t_mlx_data		mlx_data;
 	t_keystates		keystates;
@@ -195,7 +195,8 @@ typedef struct		s_scene
 }					t_scene;
 
 void				load_scene(t_scene *scene, char *path);
-void				render_scene(t_scene *scene, int mode);
+void				render_scene(t_scene *scene);
+void				take_screenshot(t_scene *scene);
 void				exit_failure(char *format, ...);
 
 #endif

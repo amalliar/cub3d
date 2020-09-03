@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:50:36 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/02 02:09:34 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 07:19:48 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "cub3d.h"
 # include "graphics.h"
 
-void	render_scene(t_scene *scene, int mode);
+void	init_frame(t_scene *scene);
+void	render_scene(t_scene *scene);
 void	process_keystates(t_scene *scene);
 void	process_mouse_motion(t_scene *scene);
 void	render_floor_and_ceiling(t_scene *scene);

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/27 22:04:42 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 05:32:44 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void		init_player_stats(t_player_data *pd)
 	pd->lives = 3;
 	pd->ammo = 8;
 	pd->score = 0;
+	pd->level += 1;
 }
 
 static void		load_map(t_scene *scene, char *path)

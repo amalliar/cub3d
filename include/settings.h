@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/02 05:17:22 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 05:55:33 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define BLOCKS					"!ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # define OBJECTS			"abcdefghijklmnopqrstuvwxyz123456789\"#$%&'()*+,."
 # define COLLIDERS				"!ABCDEFGHIJKLMNOPQRSTUVWXYZbcdilmnq\"#$&"
-# define COLLISION_R			0.20
+# define COLLISION_RADIUS		0.20
 
 # define PLAYER_FOV				80
 # define PLAYER_MOVE_SPEED		6

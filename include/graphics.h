@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:05:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/01 23:58:51 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 06:24:51 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int					mlx_pixel_get(t_mlx_image *img, int x, int y);
 void				mlx_pixel_set(t_mlx_image *img, int x, int y, int color);
 void				latch_image(t_mlx_image *dst, t_mlx_image *src, \
 						t_point p0, double scale);
-void				latch_number(t_mlx_image *dst, t_mlx_image *src, \
+void				latch_number(t_mlx_image *dst, t_mlx_image *arr, \
 						int nbr, t_point p0);
 void				drawline(t_mlx_image *frame, t_point p0, t_point p1, \
 						int color);

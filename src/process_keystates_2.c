@@ -6,11 +6,15 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:38:17 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/01 02:24:34 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 05:59:24 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "process_keystates.h"
+
+/*
+** Player moves independent of current frame rate.
+*/
 
 void		set_player_speed(t_player_data *pd, t_mlx_data *mlx_data)
 {
