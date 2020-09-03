@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/02 02:45:15 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/03 04:47:34 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,18 +66,18 @@ WHITE      := \033[1;37m
 NOC        := \033[0m
 
 all: $(NAME)
-$(NAME): $(OBJS) | $(LIBFT) $(LIBMLX)
+$(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
 	@echo "$(LGREEN)Linking executable $(NAME)$(NOC)"
 	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBS) -o $@
 	@echo "Built target $(NAME)"
 .PHONY: all
 
-$(LIBFT):
+$(LIBFT): NONE
 	@$(MAKE) -C ./libft
-
-$(LIBMLX):
+$(LIBMLX): NONE
 	@$(MAKE) -C ./libmlx MAKEFLAGS= -j 1
 	@cp ./libmlx/libmlx.dylib .
+.PHONY: NONE
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(DEPDIR)/%.d | $(OBJDIR) $(DEPDIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -MMD -MF $(DEPDIR)/$*.tmp -c -o $@ $<
