@@ -6,21 +6,30 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 07:32:46 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/03 09:49:20 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
 #include "ft_string.h"
+#include "ft_stdlib.h"
 
 static void		init_scene(t_scene *scene)
 {
-	if (((*scene).mlx_data.mlx = mlx_init()) == NULL)
+	t_mlx_data		*mlx_data;
+
+	mlx_data = &scene->mlx_data;
+	if ((mlx_data->mlx = mlx_init()) == NULL)
 		exit_failure("Failed creating mlx instance\n");
-	(*scene).mlx_data.win = NULL;
-	(*scene).mlx_data.width = MLX_WINDOW_WIDTH;
-	(*scene).mlx_data.height = MLX_WINDOW_HEIGHT;
+	mlx_data->win = NULL;
+	mlx_get_screen_size(mlx_data->mlx, &mlx_data->width, &mlx_data->height);
+	if (mlx_data->width < MLX_WINDOW_WIDTH || \
+		mlx_data->height < MLX_WINDOW_HEIGHT)
+		exit_failure("Resolution %sx%s is unsupported by this screen.\n", \
+			ft_itoa(MLX_WINDOW_WIDTH, 10), ft_itoa(MLX_WINDOW_HEIGHT, 10));
+	mlx_data->width = MLX_WINDOW_WIDTH;
+	mlx_data->height = MLX_WINDOW_HEIGHT;
 	(*scene).sprite_data.num_sprites = 0;
 	(*scene).player_data.pos_x = -1;
 	(*scene).player_data.level = 0;
