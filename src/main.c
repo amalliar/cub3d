@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/04 07:48:20 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/04 10:40:52 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 #include "mlx.h"
 #include "ft_string.h"
 #include "ft_stdlib.h"
+
+static void		init_keystates(t_keystates *ks)
+{
+	ks->kvk_ansi_w = KEY_UP;
+	ks->kvk_ansi_a = KEY_UP;
+	ks->kvk_ansi_s = KEY_UP;
+	ks->kvk_ansi_d = KEY_UP;
+	ks->kvk_leftarrow = KEY_UP;
+	ks->kvk_rightarrow = KEY_UP;
+	ks->kvk_uparrow = KEY_UP;
+	ks->kvk_downarrow = KEY_UP;
+}
 
 static void		init_scene(t_scene *scene)
 {
@@ -33,14 +45,7 @@ static void		init_scene(t_scene *scene)
 	(*scene).sprite_data.num_sprites = 0;
 	(*scene).player_data.pos_x = -1;
 	(*scene).player_data.level = 0;
-	(*scene).keystates.kvk_ansi_w = KEY_UP;
-	(*scene).keystates.kvk_ansi_a = KEY_UP;
-	(*scene).keystates.kvk_ansi_s = KEY_UP;
-	(*scene).keystates.kvk_ansi_d = KEY_UP;
-	(*scene).keystates.kvk_leftarrow = KEY_UP;
-	(*scene).keystates.kvk_rightarrow = KEY_UP;
-	(*scene).keystates.kvk_uparrow = KEY_UP;
-	(*scene).keystates.kvk_downarrow = KEY_UP;
+	init_keystates(&scene->keystates);
 	(*scene).mouse_grabbing = DISABLED;
 	(*scene).render_started = 0;
 }

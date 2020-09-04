@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 18:58:28 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/04 19:40:07 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/04 09:27:33 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@
 # define KVK_SHIFT					0x38
 # define KVK_CAPSLOCK				0x39
 # define KVK_OPTION					0x3A
-# define KVK_CONTROL				0x3B
+# define KVK_CONTROL				0x100
 # define KVK_RIGHTCOMMAND			0x36
 # define KVK_RIGHTSHIFT				0x3C
 # define KVK_RIGHTOPTION			0x3D
