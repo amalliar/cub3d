@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 00:23:08 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 06:02:34 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/04 08:04:15 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include "mlx.h"
 #include "graphics.h"
 
-#define CENTER_X	MLX_WINDOW_WIDTH / 2
-#define CENTER_Y	MLX_WINDOW_HEIGHT / 2
+#define CENTER_X	GAME_WINDOW_WIDTH / 2
+#define CENTER_Y	GAME_WINDOW_HEIGHT / 2
 
 /*
-** Note: we only need one function per rotation axis - the direction is
-** determined by the sign of the delta.x / delta.y parameter.
+** Note: we only need one function to rotate about the z-axis - the direction is
+** determined by the sign of the delta.x parameter.
 */
 
 void		process_mouse_motion(t_scene *scene)
@@ -34,8 +34,7 @@ void		process_mouse_motion(t_scene *scene)
 	mlx_data = &scene->mlx_data;
 	mlx_mouse_get_pos(mlx_data->win, &pos.x, &pos.y);
 	delta.x = pos.x - CENTER_X;
-	delta.y = pos.y - CENTER_Y;
-	turn_right(&scene->player_data, delta.x * mlx_data->frame_time * \
+	rotate_right(&scene->player_data, delta.x * mlx_data->frame_time * \
 		PLAYER_MOUSE_SENSE);
 	mlx_mouse_move(mlx_data->win, CENTER_X, CENTER_Y);
 }

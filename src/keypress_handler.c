@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:21:32 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 07:31:47 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/04 07:27:59 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,9 @@ int				keypress_handler(int keycode, t_scene *scene)
 		switch_states(&ks->kvk_leftarrow, &ks->kvk_rightarrow);
 	else if (keycode == KVK_RIGHTARROW)
 		switch_states(&ks->kvk_rightarrow, &ks->kvk_leftarrow);
+	else if (keycode == KVK_UPARROW)
+		switch_states(&ks->kvk_uparrow, &ks->kvk_downarrow);
+	else if (keycode == KVK_DOWNARROW)
+		switch_states(&ks->kvk_downarrow, &ks->kvk_uparrow);
 	return (0);
 }

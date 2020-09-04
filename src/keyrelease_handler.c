@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:25:47 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/07 17:54:25 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/04 07:29:09 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,9 @@ int		keyrelease_handler(int keycode, t_scene *scene)
 		ks->kvk_leftarrow = KEY_UP;
 	else if (keycode == KVK_RIGHTARROW)
 		ks->kvk_rightarrow = KEY_UP;
+	else if (keycode == KVK_UPARROW)
+		ks->kvk_uparrow = KEY_UP;
+	else if (keycode == KVK_DOWNARROW)
+		ks->kvk_downarrow = KEY_UP;
 	return (0);
 }

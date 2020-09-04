@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 13:04:05 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 14:57:00 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/04 06:59:23 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int		compar(const void *p1, const void *p2)
 	return (((t_sprite *)p2)->dist - ((t_sprite *)p1)->dist);
 }
 
-static void		init_sprite_data(t_mlx_data *md, t_player_data *pd, \
+static void		init_sprite_data(t_mlx_image *frame, t_player_data *pd, \
 					t_sprite_data *sd)
 {
 	sd->inv_det = 1.0 / (pd->plane_x * pd->dir_y - pd->dir_x * pd->plane_y);
@@ -44,25 +44,28 @@ static void		init_sprite_data(t_mlx_data *md, t_player_data *pd, \
 		pd->dir_x * sd->sprite_y);
 	sd->transform_y = sd->inv_det * (-pd->plane_y * sd->sprite_x + \
 		pd->plane_x * sd->sprite_y);
-	sd->sprite_screen_x = (int)((*md).frame.width / 2 * (1 + sd->transform_x / \
+	sd->sprite_screen_x = (int)(frame->width / 2 * (1 + sd->transform_x / \
 		sd->transform_y));
-	sd->sprite_height = ft_abs((*md).frame.height / sd->transform_y);
-	sd->draw_start_y = -sd->sprite_height / 2 + (*md).frame.height / 2;
+	sd->v_move_screen = pd->pitch + pd->pos_z / sd->transform_y;
+	sd->sprite_height = ft_abs(frame->height / sd->transform_y);
+	sd->draw_start_y = -sd->sprite_height / 2 + frame->height / 2 + \
+		sd->v_move_screen;
 	if (sd->draw_start_y < 0)
 		sd->draw_start_y = 0;
-	sd->draw_end_y = sd->sprite_height / 2 + (*md).frame.height / 2;
-	if (sd->draw_end_y >= (*md).frame.height)
-		sd->draw_end_y = (*md).frame.height - 1;
-	sd->sprite_width = ft_abs((*md).frame.height / sd->transform_y);
+	sd->draw_end_y = sd->sprite_height / 2 + frame->height / 2 + \
+		sd->v_move_screen;
+	if (sd->draw_end_y >= frame->height)
+		sd->draw_end_y = frame->height - 1;
+	sd->sprite_width = ft_abs(frame->height / sd->transform_y);
 	sd->draw_start_x = -sd->sprite_width / 2 + sd->sprite_screen_x;
 	if (sd->draw_start_x < 0)
 		sd->draw_start_x = 0;
 	sd->draw_end_x = sd->sprite_width / 2 + sd->sprite_screen_x;
-	if (sd->draw_end_x >= (*md).frame.width)
-		sd->draw_end_x = (*md).frame.width - 1;
+	if (sd->draw_end_x >= frame->width)
+		sd->draw_end_x = frame->width - 1;
 }
 
-static void		draw_sprite(t_scene *scene, t_mlx_data *md, \
+static void		draw_sprite(t_scene *scene, t_mlx_image *frame, \
 					t_player_data *pd, t_sprite_data *sd)
 {
 	int		color;
@@ -75,17 +78,17 @@ static void		draw_sprite(t_scene *scene, t_mlx_data *md, \
 			/ sd->sprite_width) / 256;
 		sd->y = sd->draw_start_y;
 		if (sd->transform_y > 0 && sd->stripe > 0 && sd->stripe < \
-			(*md).frame.width && sd->transform_y < (pd->zbuffer)[sd->stripe])
+			frame->width && sd->transform_y < (pd->zbuffer)[sd->stripe])
 			while (sd->y < sd->draw_end_y)
 			{
-				sd->d = sd->y * 256 - (*md).frame.height * 128 + \
-					sd->sprite_height * 128;
+				sd->d = (sd->y - sd->v_move_screen) * 256 - frame->height * \
+					128 + sd->sprite_height * 128;
 				sd->tex_y = ((sd->d * \
 	(*scene).textures.objects[sd->id_tex].height) / sd->sprite_height) / 256;
 				color = mlx_pixel_get(&(*scene).textures.objects[sd->id_tex], \
 					sd->tex_x, sd->tex_y);
 				if (color != BACKGROUND)
-					mlx_pixel_set(&md->frame, sd->stripe, sd->y, color);
+					mlx_pixel_set(frame, sd->stripe, sd->y, color);
 				++sd->y;
 			}
 		++sd->stripe;
@@ -112,8 +115,8 @@ void			render_sprites(t_scene *scene)
 			sd->sprite_x = sprites[i].x - pd->pos_x;
 			sd->sprite_y = sprites[i].y - pd->pos_y;
 			sd->id_tex = sprites[i].id_tex;
-			init_sprite_data(&scene->mlx_data, pd, sd);
-			draw_sprite(scene, &scene->mlx_data, pd, sd);
+			init_sprite_data(&(*scene).mlx_data.frame, pd, sd);
+			draw_sprite(scene, &(*scene).mlx_data.frame, pd, sd);
 		}
 		++i;
 	}

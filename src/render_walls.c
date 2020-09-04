@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:52:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 14:12:48 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/04 06:28:50 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,12 @@ static void		calc_stripe_limits(t_player_data *pd, int height)
 		pd->perp_wall_dist = (pd->map_y - pd->pos_y + \
 			(1 - pd->step_y) / 2) / pd->ray_dir_y;
 	pd->line_height = (int)(height / pd->perp_wall_dist);
-	pd->draw_start = -pd->line_height / 2 + height / 2;
+	pd->draw_start = -pd->line_height / 2 + height / 2 + pd->pitch + \
+		(pd->pos_z / pd->perp_wall_dist);
 	if (pd->draw_start < 0)
 		pd->draw_start = 0;
-	pd->draw_end = pd->line_height / 2 + height / 2;
+	pd->draw_end = pd->line_height / 2 + height / 2 + pd->pitch + \
+		(pd->pos_z / pd->perp_wall_dist);
 	if (pd->draw_end >= height)
 		pd->draw_end = height - 1;
 }
@@ -97,7 +99,7 @@ void			render_walls(t_scene *scene)
 	mlx_data = &scene->mlx_data;
 	pd = &scene->player_data;
 	x = 0;
-	while (x < mlx_data->width)
+	while (x < (*mlx_data).frame.width)
 	{
 		dda_init_1(pd, x, (*mlx_data).frame.width);
 		dda_init_2(pd);

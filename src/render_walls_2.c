@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/02 02:00:53 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/04 06:33:52 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void			calc_texture_x(t_scene *scene, t_mlx_image *texture)
 	if (pd->side == 1 && pd->ray_dir_y > 0)
 		pd->tex_x = texture->width - pd->tex_x - 1;
 	pd->step = 1.0 * texture->height / pd->line_height;
-	pd->tex_pos = (pd->draw_start - (*mlx_data).frame.height / 2 + \
+	pd->tex_pos = (pd->draw_start - pd->pitch - \
+		(pd->pos_z / pd->perp_wall_dist) - (*mlx_data).frame.height / 2 + \
 		pd->line_height / 2) * pd->step;
 }
 

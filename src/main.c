@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 09:49:20 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/04 07:48:20 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static void		init_scene(t_scene *scene)
 	(*scene).keystates.kvk_ansi_d = KEY_UP;
 	(*scene).keystates.kvk_leftarrow = KEY_UP;
 	(*scene).keystates.kvk_rightarrow = KEY_UP;
+	(*scene).keystates.kvk_uparrow = KEY_UP;
+	(*scene).keystates.kvk_downarrow = KEY_UP;
 	(*scene).mouse_grabbing = DISABLED;
 	(*scene).render_started = 0;
 }

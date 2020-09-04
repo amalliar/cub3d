@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 14:55:02 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/04 07:26:14 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <errno.h>
 # include <math.h>
 # include <stdarg.h>
+# include <stdbool.h>
 # include "settings.h"
 # include "blocks.h"
 
@@ -112,6 +113,8 @@ typedef struct		s_player_data
 	double			old_plane_x;
 	double			old_plane_y;
 	double			camera_x;
+	double			camera_z;
+	double			pitch;
 	double			ray_dir_x;
 	double			ray_dir_x0;
 	double			ray_dir_x1;
@@ -125,7 +128,6 @@ typedef struct		s_player_data
 	double			perp_wall_dist;
 	double			move_speed;
 	double			rot_speed;
-	double			speed_mod;
 	double			wall_x;
 	double			step;
 	double			tex_pos;
@@ -135,6 +137,7 @@ typedef struct		s_player_data
 	double			floor_x;
 	double			floor_y;
 	double			*zbuffer;
+	bool			is_floor;
 }					t_player_data;
 
 typedef struct		s_keystates
@@ -145,6 +148,8 @@ typedef struct		s_keystates
 	int				kvk_ansi_d;
 	int				kvk_leftarrow;
 	int				kvk_rightarrow;
+	int				kvk_uparrow;
+	int				kvk_downarrow;
 }					t_keystates;
 
 typedef struct		s_sprite
@@ -160,6 +165,7 @@ typedef struct		s_sprite
 typedef struct		s_sprite_data
 {
 	int				num_sprites;
+	int				v_move_screen;
 	int				sprite_screen_x;
 	int				sprite_height;
 	int				draw_start_y;
