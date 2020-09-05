@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/04 10:40:52 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/05 05:48:04 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void		init_scene(t_scene *scene)
 	mlx_data->height = MLX_WINDOW_HEIGHT;
 	(*scene).sprite_data.num_sprites = 0;
 	(*scene).player_data.pos_x = -1;
+	(*scene).player_data.v0 = 0;
 	(*scene).player_data.level = 0;
 	init_keystates(&scene->keystates);
 	(*scene).mouse_grabbing = DISABLED;

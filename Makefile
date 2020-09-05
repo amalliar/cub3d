@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/03 05:40:35 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/04 13:41:55 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS       := src/attempt_item_pickup.c \
 	      src/process_keystates.c \
 	      src/process_keystates_2.c \
 	      src/process_mouse_motion.c \
+	      src/process_physics.c \
 	      src/render_floor_and_ceiling.c \
 	      src/render_hud.c \
               src/render_scene.c \

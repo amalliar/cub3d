@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/04 07:26:14 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/05 05:40:25 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct		s_player_data
 	double			floor_x;
 	double			floor_y;
 	double			*zbuffer;
+	double			v0;
 	bool			is_floor;
 }					t_player_data;
 

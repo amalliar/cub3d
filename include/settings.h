@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 05:55:33 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/05 05:20:50 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define PLAYER_MAX_HEALTH		100
 # define PLAYER_MAX_AMMO		99
 # define PLAYER_MAX_PICKUP_DIST	0.50
+# define PLAYER_JUMP_HEIGHT		250
+# define GRAVITY				9.807 * 1000
 
 # define NUM_WALL_TEXTURES		46
 # define NUM_OBJECT_TEXTURES	47
