@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/04 06:33:52 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/06 13:29:48 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void			select_texture(t_scene *scene, t_mlx_image **texture)
 
 	pd = &scene->player_data;
 	walls = (*scene).textures.walls;
-	block_id = get_block_id((*scene).map_data.map[pd->map_y][pd->map_x]);
+	block_id = get_block_id((*scene).map_data.map[(int)pd->map_y][(int)pd->map_x]);
 	if (pd->side == 0)
 	{
 		if (pd->ray_dir_x >= 0)

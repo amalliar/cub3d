@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:47:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 11:12:10 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/06 13:38:21 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void	rotate_right(t_player_data *pd, double rot_speed);
 void	rotate_up(t_player_data *pd, double rot_speed);
 void	rotate_down(t_player_data *pd, double rot_speed);
 int		object_collision(t_scene *scene, double px, double py);
+int		door_collision(t_scene *scene, double px, double py);
 
 #endif

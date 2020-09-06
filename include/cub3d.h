@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 10:01:48 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/06 13:34:25 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ typedef struct		s_player_data
 	int				ammo;
 	int				score;
 	int				level;
-	int				map_x;
-	int				map_y;
 	int				step_x;
 	int				step_y;
 	int				hit;
@@ -112,6 +110,8 @@ typedef struct		s_player_data
 	double			pos_x;
 	double			pos_y;
 	double			pos_z;
+	double			map_x;
+	double			map_y;
 	double			dir_x;
 	double			dir_y;
 	double			old_dir_x;

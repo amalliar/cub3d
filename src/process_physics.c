@@ -6,11 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 13:15:58 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 11:42:47 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/06 13:43:49 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_scene.h"
+#include "process_keystates.h"
 
 static void		process_player_jump(t_player_data *pd, double frame_time)
 {
@@ -25,11 +26,13 @@ static void		process_player_jump(t_player_data *pd, double frame_time)
 	}
 }
 
-static void		process_door_states(t_door *doors, int num_doors, \
-					t_player_data *pd, double frame_time)
+static void		process_door_states(t_scene *scene, t_door *doors, \
+					int num_doors, double frame_time)
 {
-	int		i;
+	t_player_data	*pd;
+	int				i;
 
+	pd = &scene->player_data;
 	i = 0;
 	while (i < num_doors)
 	{
@@ -56,9 +59,14 @@ static void		process_door_states(t_door *doors, int num_doors, \
 		{
 			if (doors[i].c_timer < 6.0)
 				doors[i].c_timer += frame_time;
-			if (doors[i].c_timer >= 6.0 && \
-				(doors[i].x != (int)pd->pos_x || doors[i].y != (int)pd->pos_y))
-				doors[i].state = CLOSING;
+			if (doors[i].c_timer >= 6.0)
+			{
+				doors[i].state = CLOSED;
+				if (door_collision(scene, pd->pos_x, pd->pos_y))
+					doors[i].state = OPEN;
+				else
+					doors[i].state = CLOSING;
+			}
 		}
 		++i;
 	}
@@ -72,6 +80,6 @@ void			process_physics(t_scene *scene)
 	mlx_data = &scene->mlx_data;
 	pd = &scene->player_data;
 	process_player_jump(pd, mlx_data->frame_time);
-	process_door_states(scene->doors, scene->num_doors, pd, \
+	process_door_states(scene, scene->doors, scene->num_doors, \
 		mlx_data->frame_time);
 }

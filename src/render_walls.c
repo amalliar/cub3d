@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:52:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/04 06:28:50 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/06 13:30:17 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		dda_run(t_player_data *pd, t_map_data *md)
 			pd->map_y += pd->step_y;
 			pd->side = 1;
 		}
-		if (ft_strchr(BLOCKS, (md->map)[pd->map_y][pd->map_x]))
+		if (ft_strchr(BLOCKS, (md->map)[(int)pd->map_y][(int)pd->map_x]))
 			pd->hit = 1;
 	}
 }

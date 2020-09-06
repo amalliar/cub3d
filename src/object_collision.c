@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 14:51:10 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 11:20:59 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/06 13:36:54 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "keypress_handler.h"
 #include "ft_string.h"
 
-static int		door_collision(t_scene *scene, double px, double py)
+int				door_collision(t_scene *scene, double px, double py)
 {
 	t_map_data		*md;
 	static double	cr = COLLISION_RADIUS;
