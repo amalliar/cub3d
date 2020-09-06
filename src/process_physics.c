@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 13:15:58 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 11:14:36 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/06 11:42:47 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,11 @@ static void		process_door_states(t_door *doors, int num_doors, \
 		}
 		else if (doors[i].state == OPEN)
 		{
-			if (doors[i].x == (int)pd->pos_x && doors[i].y == (int)pd->pos_y)
-				doors[i].c_timer = 0.0;
-			else
+			if (doors[i].c_timer < 6.0)
 				doors[i].c_timer += frame_time;
-			if (doors[i].c_timer >= 6.0)
-			{
+			if (doors[i].c_timer >= 6.0 && \
+				(doors[i].x != (int)pd->pos_x || doors[i].y != (int)pd->pos_y))
 				doors[i].state = CLOSING;
-			}
 		}
 		++i;
 	}
