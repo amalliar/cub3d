@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:35:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/04 06:56:23 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/06 09:16:29 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,39 @@ static void		load_player_data(t_player_data *player_data, int x, int y, \
 	}
 }
 
+static void		load_sprite_data(t_scene *scene, int x, int y, char obj)
+{
+	t_sprite_data	*sd;
+
+	sd = &scene->sprite_data;
+	if (!(scene->sprites = ft_realloc(scene->sprites, \
+		sd->num_sprites * sizeof(t_sprite), \
+		(sd->num_sprites + 1) * sizeof(t_sprite))))
+		exit_failure("%s\n", strerror(errno));
+	(scene->sprites)[sd->num_sprites].x = x + 0.5;
+	(scene->sprites)[sd->num_sprites].y = y + 0.5;
+	(scene->sprites)[sd->num_sprites].id_tex = \
+		ft_strchr(OBJECTS, obj) - OBJECTS;
+	(scene->sprites)[sd->num_sprites].state = \
+		(ft_strchr(PICKUPS, obj)) ? PLACED : NOT_A_PICKUP;
+	(scene->sprites)[sd->num_sprites].type = obj;
+	sd->num_sprites += 1;
+}
+
+static void		load_door_data(t_scene *scene, int x, int y, char obj)
+{
+	if (!(scene->doors = ft_realloc(scene->doors, \
+		scene->num_doors * sizeof(t_door), \
+		(scene->num_doors + 1) * sizeof(t_door))))
+		exit_failure("%s\n", strerror(errno));
+	(scene->doors)[scene->num_doors].x = x;
+	(scene->doors)[scene->num_doors].y = y;
+	(scene->doors)[scene->num_doors].state = CLOSED;
+	(scene->doors)[scene->num_doors].s_timer = 1.0;
+	(scene->doors)[scene->num_doors].type = obj;
+	scene->num_doors += 1;
+}
+
 static void		process_map_object(t_scene *scene, int x, int y, char obj)
 {
 	if (ft_strchr(INNER_MAP_OBJECTS, obj))
@@ -66,21 +99,10 @@ static void		process_map_object(t_scene *scene, int x, int y, char obj)
 		load_player_data(&(*scene).player_data, x, y, obj);
 		((*scene).map_data.map)[y][x] = '0';
 	}
-	if (ft_strchr(OBJECTS, obj))
-	{
-		if (!((*scene).sprites = ft_realloc((*scene).sprites, \
-			(*scene).sprite_data.num_sprites * sizeof(t_sprite), \
-			((*scene).sprite_data.num_sprites + 1) * sizeof(t_sprite))))
-			exit_failure("%s\n", strerror(errno));
-		((*scene).sprites)[(*scene).sprite_data.num_sprites].x = x + 0.5;
-		((*scene).sprites)[(*scene).sprite_data.num_sprites].y = y + 0.5;
-		((*scene).sprites)[(*scene).sprite_data.num_sprites].id_tex = \
-			ft_strchr(OBJECTS, obj) - OBJECTS;
-		((*scene).sprites)[(*scene).sprite_data.num_sprites].state = \
-			(ft_strchr(PICKUPS, obj)) ? PLACED : NOT_A_PICKUP;
-		((*scene).sprites)[(*scene).sprite_data.num_sprites].type = obj;
-		(*scene).sprite_data.num_sprites += 1;
-	}
+	else if (ft_strchr(OBJECTS, obj))
+		load_sprite_data(scene, x, y, obj);
+	else if (ft_strchr(DOORS, obj))
+		load_door_data(scene, x, y, obj);
 }
 
 void			parse_map(t_scene *scene)

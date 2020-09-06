@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/05 05:48:04 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/06 08:36:05 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void		init_scene(t_scene *scene)
 	mlx_data->width = MLX_WINDOW_WIDTH;
 	mlx_data->height = MLX_WINDOW_HEIGHT;
 	(*scene).sprite_data.num_sprites = 0;
+	(*scene).num_doors = 0;
 	(*scene).player_data.pos_x = -1;
 	(*scene).player_data.v0 = 0;
 	(*scene).player_data.level = 0;

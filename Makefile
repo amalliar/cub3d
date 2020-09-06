@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/04 13:41:55 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/06 10:48:21 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS       := src/attempt_item_pickup.c \
 	      src/object_collision.c \
 	      src/parse_map.c \
 	      src/parse_map_2.c \
+	      src/process_interact_request.c \
 	      src/process_keystates.c \
 	      src/process_keystates_2.c \
 	      src/process_mouse_motion.c \

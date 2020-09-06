@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:41:39 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/02 06:15:15 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/06 11:16:57 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ static char		g_wall_texture_paths[NUM_WALL_TEXTURES][128] =
 	"./res/textures/walls/42_red_brick_eagle_banner.xpm",
 	"./res/textures/walls/43_red_brick_eagle_banner_dark.xpm",
 	"./res/textures/walls/44_elevator_down_front.xpm",
-	"./res/textures/walls/45_elevator_down_side.xpm"
+	"./res/textures/walls/45_elevator_down_side.xpm",
+	"./res/textures/walls/46_cyan_metal_door.xpm",
+	"./res/textures/walls/47_cyan_metal_door_dark.xpm",
+	"./res/textures/walls/48_cyan_metal_door_frame.xpm",
+	"./res/textures/walls/49_cyan_metal_door_frame_dark.xpm"
 };
 
 enum			e_texture_ids
@@ -112,7 +116,11 @@ enum			e_texture_ids
 	RED_BRICK_EAGLE_BANNER,
 	RED_BRICK_EAGLE_BANNER_DARK,
 	ELEVATOR_DOWN_FRONT,
-	ELEVATOR_DOWN_SIDE
+	ELEVATOR_DOWN_SIDE,
+	CYAN_METAL_DOOR,
+	CYAN_METAL_DOOR_DARK,
+	CYAN_METAL_DOOR_FRAME,
+	CYAN_METAL_DOOR_FRAME_DARK
 };
 
 static char		g_object_texture_paths[NUM_OBJECT_TEXTURES][128] =

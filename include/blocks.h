@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 16:18:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/22 18:16:22 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/05 07:15:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,18 @@ static t_block		g_blocks[] =
 		ELEVATOR_DOWN_FRONT,
 		ELEVATOR_DOWN_SIDE,
 		ELEVATOR_DOWN_SIDE,
+	},
+	{
+		CYAN_METAL_DOOR,
+		CYAN_METAL_DOOR,
+		CYAN_METAL_DOOR_FRAME_DARK,
+		CYAN_METAL_DOOR_FRAME_DARK
+	},
+	{
+		CYAN_METAL_DOOR_FRAME,
+		CYAN_METAL_DOOR_FRAME,
+		CYAN_METAL_DOOR_DARK,
+		CYAN_METAL_DOOR_DARK
 	}
 };
 

@@ -6,14 +6,11 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:21:32 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/05 05:49:48 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/06 10:46:42 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "mlx.h"
-#include "keycodes.h"
-#include "graphics.h"
+#include "keypress_handler.h"
 
 static void		switch_states(int *kd, int *ku)
 {
@@ -53,5 +50,7 @@ int				keypress_handler(int keycode, t_scene *scene)
 		(*scene).player_data.pos_z = -200;
 	else if (keycode == KVK_SPACE && (*scene).player_data.pos_z == 0)
 		(*scene).player_data.v0 = sqrt(2 * GRAVITY * PLAYER_JUMP_HEIGHT);
+	else if (keycode == KVK_ANSI_E)
+		process_interact_request(scene);
 	return (0);
 }

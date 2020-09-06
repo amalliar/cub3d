@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/05 05:40:25 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/06 10:01:48 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ enum				e_states
 {
 	ENABLED,
 	DISABLED
+};
+
+enum				e_door_states
+{
+	OPEN,
+	CLOSED,
+	OPENING,
+	CLOSING
 };
 
 typedef struct		s_mlx_image
@@ -187,16 +195,28 @@ typedef struct		s_sprite_data
 	double			transform_y;
 }					t_sprite_data;
 
+typedef struct		s_door
+{
+	int				x;
+	int				y;
+	int				state;
+	double			s_timer;
+	double			c_timer;
+	char			type;
+}					t_door;
+
 typedef struct		s_scene
 {
 	int				render_started;
 	int				mouse_grabbing;
+	int				num_doors;
 	t_mlx_data		mlx_data;
 	t_keystates		keystates;
 	t_textures		textures;
 	t_sprite		*sprites;
 	t_sprite_data	sprite_data;
 	t_map_data		map_data;
+	t_door			*doors;
 	t_player_data	player_data;
 }					t_scene;
 
