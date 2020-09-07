@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:05:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 06:24:51 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/07 09:56:52 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,25 @@ typedef struct		s_point
 	int				x;
 	int				y;
 }					t_point;
+
+typedef struct		s_fpoint
+{
+	double			x;
+	double			y;
+}					t_fpoint;
+
+typedef struct		s_segment
+{
+	t_fpoint		p0;
+	t_fpoint		p1;
+}					t_segment;
+
+typedef struct		s_line
+{
+	double			a;
+	double			b;
+	double			c;
+}					t_line;
 
 typedef struct		s_bmp_data
 {

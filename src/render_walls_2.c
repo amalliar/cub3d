@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 13:29:48 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/07 17:42:41 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void			select_texture(t_scene *scene, t_mlx_image **texture)
 
 	pd = &scene->player_data;
 	walls = (*scene).textures.walls;
-	block_id = get_block_id((*scene).map_data.map[(int)pd->map_y][(int)pd->map_x]);
+	if (pd->door_hit)
+		block_id = get_block_id((*scene).map_data.map[pd->door->y][pd->door->x]);
+	else
+		block_id = get_block_id((*scene).map_data.map[(int)pd->map_y][(int)pd->map_x]);
 	if (pd->side == 0)
 	{
 		if (pd->ray_dir_x >= 0)
@@ -54,7 +57,13 @@ void			calc_texture_x(t_scene *scene, t_mlx_image *texture)
 		pd->wall_x = pd->pos_y + pd->perp_wall_dist * pd->ray_dir_y;
 	else
 		pd->wall_x = pd->pos_x + pd->perp_wall_dist * pd->ray_dir_x;
+	if (pd->door_hit == 2)
+		pd->wall_x += pd->door->s_timer;
 	pd->wall_x -= floor(pd->wall_x);
+	if (pd->ray_dir_x < 0 && pd->door_hit && pd->door->type == 'O')
+		pd->wall_x = 1.0 - pd->wall_x;
+	if (pd->ray_dir_y > 0 && pd->door_hit && pd->door->type == 'N')
+		pd->wall_x = 1.0 - pd->wall_x;
 	pd->tex_x = (int)(pd->wall_x * (double)texture->width);
 	if (pd->side == 0 && pd->ray_dir_x < 0)
 		pd->tex_x = texture->width - pd->tex_x - 1;

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 13:34:25 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/07 09:48:14 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,19 @@ typedef struct		s_map_data
 	char			**map;
 }					t_map_data;
 
+typedef struct		s_door
+{
+	int				x;
+	int				y;
+	int				state;
+	double			s_timer;
+	double			c_timer;
+	char			type;
+}					t_door;
+
 typedef struct		s_player_data
 {
+	t_door			*door;
 	int				health;
 	int				lives;
 	int				ammo;
@@ -100,6 +111,7 @@ typedef struct		s_player_data
 	int				step_x;
 	int				step_y;
 	int				hit;
+	int				door_hit;
 	int				side;
 	int				line_height;
 	int				draw_start;
@@ -194,16 +206,6 @@ typedef struct		s_sprite_data
 	double			transform_x;
 	double			transform_y;
 }					t_sprite_data;
-
-typedef struct		s_door
-{
-	int				x;
-	int				y;
-	int				state;
-	double			s_timer;
-	double			c_timer;
-	char			type;
-}					t_door;
 
 typedef struct		s_scene
 {
