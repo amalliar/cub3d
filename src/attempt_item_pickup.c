@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 21:27:45 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/28 01:28:27 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/08 15:24:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		attempt_item_pickup(t_scene *scene)
 
 	pd = &scene->player_data;
 	i = (*scene).sprite_data.num_sprites - 1;
-	while (i >= 0 && (scene->sprites)[i].dist <= PLAYER_MAX_PICKUP_DIST)
+	while (i >= 0 && sqrt((scene->sprites)[i].dist) <= PLAYER_MAX_PICKUP_DIST)
 	{
 		if ((scene->sprites)[i--].state == PLACED)
 		{

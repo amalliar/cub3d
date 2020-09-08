@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 13:04:05 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/04 06:59:23 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/08 15:22:36 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,14 @@ static void		calc_sprite_dist(t_scene *scene, t_sprite *sprites)
 
 static int		compar(const void *p1, const void *p2)
 {
-	return (((t_sprite *)p2)->dist - ((t_sprite *)p1)->dist);
+	double		delta;
+
+	delta = ((t_sprite *)p2)->dist - ((t_sprite *)p1)->dist;
+	if (delta < 0)
+		return (-1);
+	if (delta > 0)
+		return (1);
+	return (0);
 }
 
 static void		init_sprite_data(t_mlx_image *frame, t_player_data *pd, \
