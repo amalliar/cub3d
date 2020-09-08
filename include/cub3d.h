@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/07 09:48:14 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/08 14:10:01 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,31 @@ enum				e_door_states
 	OPENING,
 	CLOSING
 };
+
+typedef struct		s_point
+{
+	int				x;
+	int				y;
+}					t_point;
+
+typedef struct		s_fpoint
+{
+	double			x;
+	double			y;
+}					t_fpoint;
+
+typedef struct		s_segment
+{
+	t_fpoint		p0;
+	t_fpoint		p1;
+}					t_segment;
+
+typedef struct		s_line
+{
+	double			a;
+	double			b;
+	double			c;
+}					t_line;
 
 typedef struct		s_mlx_image
 {
@@ -103,6 +128,12 @@ typedef struct		s_door
 typedef struct		s_player_data
 {
 	t_door			*door;
+	t_segment		f1;
+	t_segment		f2;
+	t_segment		sd;
+	t_segment		ray;
+	t_line			line1;
+	t_line			line2;
 	int				health;
 	int				lives;
 	int				ammo;

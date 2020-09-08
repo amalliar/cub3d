@@ -6,40 +6,16 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:05:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/07 09:56:52 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/08 14:17:50 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 # include <time.h>
+# include <float.h>
 # include "cub3d.h"
 # include "mlx.h"
-
-typedef struct		s_point
-{
-	int				x;
-	int				y;
-}					t_point;
-
-typedef struct		s_fpoint
-{
-	double			x;
-	double			y;
-}					t_fpoint;
-
-typedef struct		s_segment
-{
-	t_fpoint		p0;
-	t_fpoint		p1;
-}					t_segment;
-
-typedef struct		s_line
-{
-	double			a;
-	double			b;
-	double			c;
-}					t_line;
 
 typedef struct		s_bmp_data
 {
@@ -64,5 +40,7 @@ void				drawverline(t_mlx_image *img, t_point p0, t_point p1, \
 void				drawhorline(t_mlx_image *img, t_point p0, t_point p1, \
 						int color);
 void				drawcircle(t_mlx_image *frame, t_point m, int r, int color);
+void				segment_to_line(t_segment *segm, t_line *line);
+bool				intersect(t_line *m, t_line *n, t_fpoint *r);
 
 #endif
