@@ -6,12 +6,32 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/07 17:42:41 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/08 11:14:40 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_scene.h"
+#include "render_walls.h"
 #include "ft_string.h"
+
+void			check_door_hit(t_scene *scene, t_player_data *pd, \
+					t_map_data *md)
+{
+	t_fpoint	d0;
+	t_fpoint	d1;
+
+	if (!ft_strchr(DOORS, (md->map)[(int)pd->pos_y][(int)pd->pos_x]))
+		return ;
+	d0.x = (int)pd->pos_x - (pd->ray_dir_x < 0);
+	d0.y = (int)pd->pos_y - (pd->ray_dir_y < 0);
+	d1.x = d0.x + 1;
+	d1.y = d0.y + 1;
+	if (pd->map_x >= d0.x && pd->map_x <= d1.x && \
+		pd->map_y >= d0.y && pd->map_y <= d1.y)
+	{
+		pd->door = get_door(scene, (int)pd->pos_x, (int)pd->pos_y);
+		pd->door_hit = 1;
+	}
+}
 
 int				get_block_id(char block)
 {
@@ -21,15 +41,16 @@ int				get_block_id(char block)
 void			select_texture(t_scene *scene, t_mlx_image **texture)
 {
 	t_player_data	*pd;
+	t_map_data		*md;
 	t_mlx_image		*walls;
 	int				block_id;
 
 	pd = &scene->player_data;
+	md = &scene->map_data;
 	walls = (*scene).textures.walls;
-	if (pd->door_hit)
-		block_id = get_block_id((*scene).map_data.map[pd->door->y][pd->door->x]);
-	else
-		block_id = get_block_id((*scene).map_data.map[(int)pd->map_y][(int)pd->map_x]);
+	block_id = get_block_id((pd->door_hit) ? \
+		(md->map)[pd->door->y][pd->door->x] : \
+		(md->map)[(int)pd->map_y][(int)pd->map_x]);
 	if (pd->side == 0)
 	{
 		if (pd->ray_dir_x >= 0)
@@ -60,9 +81,8 @@ void			calc_texture_x(t_scene *scene, t_mlx_image *texture)
 	if (pd->door_hit == 2)
 		pd->wall_x += pd->door->s_timer;
 	pd->wall_x -= floor(pd->wall_x);
-	if (pd->ray_dir_x < 0 && pd->door_hit && pd->door->type == 'O')
-		pd->wall_x = 1.0 - pd->wall_x;
-	if (pd->ray_dir_y > 0 && pd->door_hit && pd->door->type == 'N')
+	if ((pd->door_hit == 2 && pd->door->type == 'O' && pd->ray_dir_x < 0) || \
+		(pd->door_hit == 2 && pd->door->type == 'N' && pd->ray_dir_y > 0))
 		pd->wall_x = 1.0 - pd->wall_x;
 	pd->tex_x = (int)(pd->wall_x * (double)texture->width);
 	if (pd->side == 0 && pd->ray_dir_x < 0)

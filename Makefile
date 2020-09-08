@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/06 10:48:21 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/08 11:18:43 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS       := src/attempt_item_pickup.c \
 	      src/load_textures.c \
 	      src/render_walls.c \
 	      src/render_walls_2.c \
+	      src/render_walls_3.c \
 	      src/take_screenshot.c \
 	      src/winclose_handler.c \
               src/main.c
