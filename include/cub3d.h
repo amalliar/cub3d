@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 12:59:17 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 16:35:43 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,7 @@ typedef struct		s_scene
 	int				render_started;
 	int				mouse_grabbing;
 	int				num_doors;
+	t_mlx_image		crosshairs[NUM_CROSSHAIRS];
 	t_mlx_data		mlx_data;
 	t_keystates		keystates;
 	t_textures		textures;

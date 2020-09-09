@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 12:59:24 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 18:20:52 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,14 @@
 # define PLAYER_MAX_PICKUP_DIST	0.50
 # define PLAYER_MAX_INTERACT_DIST	1.0
 # define PLAYER_JUMP_HEIGHT		250
+# define PLAYER_CROSSHAIR		0
+# define CROSSHAIR_SCALE		1.0
 # define GRAVITY				9.807 * 1000
 
 # define NUM_WALL_TEXTURES		52
 # define NUM_OBJECT_TEXTURES	47
 # define NUM_HUD_TEXTURES		17
 # define NUM_FACES_TEXTURES		24
+# define NUM_CROSSHAIRS			1
 
 #endif

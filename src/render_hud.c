@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 07:21:24 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 14:42:38 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 17:45:16 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,19 @@ static void		update_face(t_scene *scene)
 	}
 }
 
+static void		draw_crosshair(t_scene *scene)
+{
+	t_mlx_image		*frame;
+	t_mlx_image		*cross;
+	t_point			p0;
+
+	frame = &(*scene).mlx_data.frame;
+	cross = scene->crosshairs + PLAYER_CROSSHAIR;
+	p0.x = frame->width / 2 - (cross->width / 2) * CROSSHAIR_SCALE;
+	p0.y = frame->height / 2 - (cross->height / 2) * CROSSHAIR_SCALE;
+	latch_image(frame, cross, p0, CROSSHAIR_SCALE);
+}
+
 void			render_hud(t_scene *scene)
 {
 	t_mlx_data		*mlx_data;
@@ -76,4 +89,5 @@ void			render_hud(t_scene *scene)
 	latch_number(&mlx_data->frame, hud, pd->health, p0);
 	p0.x += 42 * HUD_SCALE;
 	latch_number(&mlx_data->frame, hud, pd->ammo, p0);
+	draw_crosshair(scene);
 }

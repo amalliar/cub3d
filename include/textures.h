@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:41:39 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 13:09:26 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 18:25:21 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,6 +236,11 @@ static char		g_floor_texture_path[1][128] =
 static char		g_ceiling_texture_path[1][128] =
 {
 	"./res/textures/ceiling.xpm"
+};
+
+static char		g_crosshairs_path[NUM_CROSSHAIRS][128] =
+{
+	"./res/crosshairs/00_cross.xpm"
 };
 
 #endif

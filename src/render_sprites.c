@@ -6,15 +6,14 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 13:04:05 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/08 15:22:36 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 18:27:05 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_scene.h"
 #include "item_pickup.h"
+#include "colors.h"
 #include "ft_stdlib.h"
-
-#define BACKGROUND			0x980088
 
 static void		calc_sprite_dist(t_scene *scene, t_sprite *sprites)
 {
@@ -94,7 +93,7 @@ static void		draw_sprite(t_scene *scene, t_mlx_image *frame, \
 	(*scene).textures.objects[sd->id_tex].height) / sd->sprite_height) / 256;
 				color = mlx_pixel_get(&(*scene).textures.objects[sd->id_tex], \
 					sd->tex_x, sd->tex_y);
-				if (color != BACKGROUND)
+				if (color != INVIS)
 					mlx_pixel_set(frame, sd->stripe, sd->y, color);
 				++sd->y;
 			}

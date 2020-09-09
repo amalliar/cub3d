@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:17:56 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 15:16:53 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 18:26:38 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define NAVY		0x000080
 # define FUCHSIA	0xFF00FF
 # define PURPLE		0x800080
+# define INVIS		0x980088
 
 int		clr_create(int a, int r, int g, int b);
 int		clr_get_alpha(int color);

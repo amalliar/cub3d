@@ -6,11 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 20:36:31 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/03 06:28:23 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 18:27:26 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
+#include "colors.h"
 
 static void		swap(int *p0, int *p1)
 {
@@ -54,28 +55,28 @@ void			latch_image(t_mlx_image *dst, t_mlx_image *src, \
 					t_point p0, double scale)
 {
 	t_point		draw_end;
-	double		tex_x;
-	double		tex_y;
+	t_fpoint	tex;
 	double		step;
 	int			start_x;
+	int			color;
 
 	step = 1.0 / scale;
 	draw_end.x = p0.x + (int)(src->width * scale);
 	draw_end.y = p0.y + (int)(src->height * scale);
 	start_x = p0.x;
-	tex_y = 0;
+	tex.y = 0;
 	while (p0.y < draw_end.y)
 	{
 		p0.x = start_x;
-		tex_x = 0;
+		tex.x = 0;
 		while (p0.x < draw_end.x)
 		{
-			mlx_pixel_set(dst, p0.x, p0.y, mlx_pixel_get(src, \
-				(int)tex_x, (int)tex_y));
-			tex_x += step;
+			if ((color = mlx_pixel_get(src, (int)tex.x, (int)tex.y)) != INVIS)
+				mlx_pixel_set(dst, p0.x, p0.y, color);
+			tex.x += step;
 			++p0.x;
 		}
-		tex_y += step;
+		tex.y += step;
 		++p0.y;
 	}
 }
