@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:41:39 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 10:58:54 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 13:09:26 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,35 @@ static char		g_hud_texture_paths[NUM_HUD_TEXTURES][128] =
 	"./res/textures/hud/14_wpn_chain_gun.xpm",
 	"./res/textures/hud/15_golden_key.xpm",
 	"./res/textures/hud/16_iron_key.xpm"
+};
+
+static char		g_faces_texture_paths[NUM_FACES_TEXTURES][128] =
+{
+	"./res/textures/faces/00_left.xpm",
+	"./res/textures/faces/01_center.xpm",
+	"./res/textures/faces/02_right.xpm",
+	"./res/textures/faces/03_left.xpm",
+	"./res/textures/faces/04_center.xpm",
+	"./res/textures/faces/05_right.xpm",
+	"./res/textures/faces/06_left.xpm",
+	"./res/textures/faces/07_center.xpm",
+	"./res/textures/faces/08_right.xpm",
+	"./res/textures/faces/09_left.xpm",
+	"./res/textures/faces/10_center.xpm",
+	"./res/textures/faces/11_right.xpm",
+	"./res/textures/faces/12_left.xpm",
+	"./res/textures/faces/13_center.xpm",
+	"./res/textures/faces/14_right.xpm",
+	"./res/textures/faces/15_left.xpm",
+	"./res/textures/faces/16_center.xpm",
+	"./res/textures/faces/17_right.xpm",
+	"./res/textures/faces/18_left.xpm",
+	"./res/textures/faces/19_center.xpm",
+	"./res/textures/faces/20_right.xpm",
+	"./res/textures/faces/21_grin.xpm",
+	"./res/textures/faces/22_dead.xpm",
+	"./res/textures/faces/23_god.xpm",
+
 };
 
 static char		g_floor_texture_path[1][128] =
