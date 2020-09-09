@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:41:39 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 11:16:57 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 10:58:54 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ static char		g_wall_texture_paths[NUM_WALL_TEXTURES][128] =
 	"./res/textures/walls/46_cyan_metal_door.xpm",
 	"./res/textures/walls/47_cyan_metal_door_dark.xpm",
 	"./res/textures/walls/48_cyan_metal_door_frame.xpm",
-	"./res/textures/walls/49_cyan_metal_door_frame_dark.xpm"
+	"./res/textures/walls/49_cyan_metal_door_frame_dark.xpm",
+	"./res/textures/walls/50_elevator_door.xpm",
+	"./res/textures/walls/51_elevator_door_dark.xpm"
 };
 
 enum			e_texture_ids
@@ -120,7 +122,9 @@ enum			e_texture_ids
 	CYAN_METAL_DOOR,
 	CYAN_METAL_DOOR_DARK,
 	CYAN_METAL_DOOR_FRAME,
-	CYAN_METAL_DOOR_FRAME_DARK
+	CYAN_METAL_DOOR_FRAME_DARK,
+	ELEVATOR_DOOR,
+	ELEVATOR_DOOR_DARK
 };
 
 static char		g_object_texture_paths[NUM_OBJECT_TEXTURES][128] =

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/08 11:14:40 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 12:07:30 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ void			calc_texture_x(t_scene *scene, t_mlx_image *texture)
 	if (pd->door_hit == 2)
 		pd->wall_x += pd->door->s_timer;
 	pd->wall_x -= floor(pd->wall_x);
-	if ((pd->door_hit == 2 && pd->door->type == 'O' && pd->ray_dir_x < 0) || \
-		(pd->door_hit == 2 && pd->door->type == 'N' && pd->ray_dir_y > 0))
+	if ((pd->door_hit == 2 && ft_strchr(EW, pd->door->type) && \
+		pd->ray_dir_x < 0) || (pd->door_hit == 2 && ft_strchr(NS, \
+		pd->door->type) && pd->ray_dir_y > 0))
 		pd->wall_x = 1.0 - pd->wall_x;
 	pd->tex_x = (int)(pd->wall_x * (double)texture->width);
 	if (pd->side == 0 && pd->ray_dir_x < 0)

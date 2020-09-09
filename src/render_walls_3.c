@@ -6,11 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 11:07:53 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/08 14:15:37 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 12:09:44 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_walls.h"
+#include "ft_string.h"
 
 static inline void		init_fpoint(t_fpoint *p, double x, double y)
 {
@@ -20,7 +21,7 @@ static inline void		init_fpoint(t_fpoint *p, double x, double y)
 
 static void				init_line_segments(t_player_data *pd)
 {
-	if (pd->door->type == 'N')
+	if (ft_strchr(NS, pd->door->type))
 	{
 		init_fpoint(&(*pd).f1.p0, pd->map_x, pd->map_y);
 		init_fpoint(&(*pd).f1.p1, pd->map_x, pd->map_y + 1.0);
@@ -51,25 +52,26 @@ static bool				door_hit(t_player_data *pd)
 
 	segment_to_line(&pd->ray, &pd->line1);
 	segment_to_line(&pd->sd, &pd->line2);
-	if (intersect(&pd->line1, &pd->line2, &r) && \
-	((pd->door->type == 'N' && r.x >= (*pd).sd.p0.x && r.x <= (*pd).sd.p1.x) ||\
-	(pd->door->type == 'O' && r.y >= (*pd).sd.p0.y && r.y <= (*pd).sd.p1.y)))
+	if (intersect(&pd->line1, &pd->line2, &r) && ((ft_strchr(NS, \
+pd->door->type) && r.x >= (*pd).sd.p0.x && r.x <= (*pd).sd.p1.x) || (ft_strchr(\
+EW, pd->door->type) && r.y >= (*pd).sd.p0.y && r.y <= (*pd).sd.p1.y)))
 		pd->door_hit = 2;
 	segment_to_line(&pd->f1, &pd->line2);
-	if (!pd->door_hit && intersect(&pd->line1, &pd->line2, &r) && \
-	((pd->door->type == 'N' && r.y >= (*pd).f1.p0.y && r.y <= (*pd).f1.p1.y) ||\
-	(pd->door->type == 'O' && r.x >= (*pd).f1.p0.x && r.x <= (*pd).f1.p1.x)))
+	if (!pd->door_hit && intersect(&pd->line1, &pd->line2, &r) && ((ft_strchr(\
+NS, pd->door->type) && r.y >= (*pd).f1.p0.y && r.y <= (*pd).f1.p1.y) || (\
+ft_strchr(EW, pd->door->type) && r.x >= (*pd).f1.p0.x && r.x <= (*pd).f1.p1.x)))
 		pd->door_hit = 1;
 	segment_to_line(&pd->f2, &pd->line2);
-	if (!pd->door_hit && intersect(&pd->line1, &pd->line2, &r) && \
-	((pd->door->type == 'N' && r.y >= (*pd).f2.p0.y && r.y <= (*pd).f2.p1.y) ||\
-	(pd->door->type == 'O' && r.x >= (*pd).f2.p0.x && r.x <= (*pd).f2.p1.x)))
+	if (!pd->door_hit && intersect(&pd->line1, &pd->line2, &r) && ((ft_strchr(\
+NS, pd->door->type) && r.y >= (*pd).f2.p0.y && r.y <= (*pd).f2.p1.y) || (\
+ft_strchr(EW, pd->door->type) && r.x >= (*pd).f2.p0.x && r.x <= (*pd).f2.p1.x)))
 		pd->door_hit = 1;
 	if (!pd->door_hit)
 		return (false);
 	pd->map_x = (pd->ray_dir_x > 0) ? r.x : r.x - 1.0;
 	pd->map_y = (pd->ray_dir_y > 0) ? r.y : r.y - 1.0;
-	pd->side = (pd->door->type == 'N') ? pd->door_hit == 2 : pd->door_hit != 2;
+	pd->side = (ft_strchr(NS, pd->door->type)) ? \
+		pd->door_hit == 2 : pd->door_hit != 2;
 	return (true);
 }
 

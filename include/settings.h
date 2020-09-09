@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 11:16:32 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 12:05:41 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@
 # define INNER_MAP_OBJECTS		"0^_<>" OBJECTS
 # define BLOCKS					"!ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # define OBJECTS			"abcdefghijklmnopqrstuvwxyz123456789\"#$%&'()*+,."
-# define DOORS					"NO"
-# define COLLIDERS				"!ABCDEFGHIJKLMPQRSTUVWXYZbcdilmnq\"#$&"
+# define NS						"NP"
+# define EW						"OQ"
+# define DOORS					NS EW
+# define COLLIDERS				"!ABCDEFGHIJKLMRSTUVWXYZbcdilmnq\"#$&"
 # define COLLISION_RADIUS		0.20
 
 # define PLAYER_FOV				80
@@ -42,7 +44,7 @@
 # define PLAYER_JUMP_HEIGHT		250
 # define GRAVITY				9.807 * 1000
 
-# define NUM_WALL_TEXTURES		50
+# define NUM_WALL_TEXTURES		52
 # define NUM_OBJECT_TEXTURES	47
 # define NUM_HUD_TEXTURES		17
 
