@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 08:36:05 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/09 14:58:50 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void		init_scene(t_scene *scene)
 	(*scene).player_data.pos_x = -1;
 	(*scene).player_data.v0 = 0;
 	(*scene).player_data.level = 0;
+	(*scene).player_data.faceframe = 1;
 	init_keystates(&scene->keystates);
 	(*scene).mouse_grabbing = DISABLED;
 	(*scene).render_started = 0;
