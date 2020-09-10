@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 12:07:30 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/10 10:26:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,22 @@
 void			check_door_hit(t_scene *scene, t_player_data *pd, \
 					t_map_data *md)
 {
-	t_fpoint	d0;
-	t_fpoint	d1;
+	t_fpoint	wall;
 
 	if (!ft_strchr(DOORS, (md->map)[(int)pd->pos_y][(int)pd->pos_x]))
 		return ;
-	d0.x = (int)pd->pos_x - (pd->ray_dir_x < 0);
-	d0.y = (int)pd->pos_y - (pd->ray_dir_y < 0);
-	d1.x = d0.x + 1;
-	d1.y = d0.y + 1;
-	if (pd->map_x >= d0.x && pd->map_x <= d1.x && \
-		pd->map_y >= d0.y && pd->map_y <= d1.y)
+	if (pd->side == 0)
+	{
+		wall.x = pd->map_x + (pd->ray_dir_x < 0);
+		wall.y = pd->pos_y + pd->perp_wall_dist * pd->ray_dir_y;
+	}
+	else
+	{
+		wall.x = pd->pos_x + pd->perp_wall_dist * pd->ray_dir_x;
+		wall.y = pd->map_y + (pd->ray_dir_y < 0);
+	}
+	if (wall.x >= (int)pd->pos_x && wall.x <= (int)pd->pos_x + 1 && \
+		wall.y >= (int)pd->pos_y && wall.y <= (int)pd->pos_y + 1)
 	{
 		pd->door = get_door(scene, (int)pd->pos_x, (int)pd->pos_y);
 		pd->door_hit = 1;
