@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 07:21:24 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 17:45:16 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/10 10:43:31 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void		draw_face(t_scene *scene)
 
 static void		update_face(t_scene *scene)
 {
-	static int			facecount = 0;
+	static unsigned		facecount = 0;
 	static clock_t		r_timer = 0;
 	t_mlx_data			*mlx_data;
 	t_player_data		*pd;
