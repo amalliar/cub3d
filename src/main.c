@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 14:58:50 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/11 15:13:49 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "ft_string.h"
 #include "ft_stdlib.h"
 
-static void		init_keystates(t_keystates *ks)
+static void		init_key_and_button_states(t_key_states *ks, t_button_states *bs)
 {
 	ks->kvk_ansi_w = KEY_UP;
 	ks->kvk_ansi_a = KEY_UP;
@@ -25,6 +25,12 @@ static void		init_keystates(t_keystates *ks)
 	ks->kvk_rightarrow = KEY_UP;
 	ks->kvk_uparrow = KEY_UP;
 	ks->kvk_downarrow = KEY_UP;
+	bs->mb_left = KEY_UP;
+	bs->mb_right = KEY_UP;
+	bs->mb_middle = KEY_UP;
+	bs->mb_wheel_up = KEY_UP;
+	bs->mb_wheel_down = KEY_UP;
+
 }
 
 static void		init_scene(t_scene *scene)
@@ -47,8 +53,11 @@ static void		init_scene(t_scene *scene)
 	(*scene).player_data.pos_x = -1;
 	(*scene).player_data.v0 = 0;
 	(*scene).player_data.level = 0;
+	(*scene).player_data.facecount = 0;
+	(*scene).player_data.r_facetimer = 0;
 	(*scene).player_data.faceframe = 1;
-	init_keystates(&scene->keystates);
+	(*scene).player_data.effects.chaingun_acquired = 0;
+	init_key_and_button_states(&scene->key_states, &scene->button_states);
 	(*scene).mouse_grabbing = DISABLED;
 	(*scene).render_started = 0;
 }

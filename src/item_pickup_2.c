@@ -6,11 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:51:42 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/28 02:16:28 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/11 15:09:41 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "item_pickup.h"
+#include "key_press_handler.h"
 
 void		attempt_powerup_pickup(t_player_data *pd, t_sprite *obj)
 {
@@ -51,7 +52,20 @@ void		attempt_treasure_pickup(t_player_data *pd, t_sprite *obj)
 
 void		attempt_weapon_pickup(t_player_data *pd, t_sprite *obj)
 {
-	(void)pd;
-	(void)obj;
-	return ;
+	int		id;
+
+	id = obj->type - '0';
+	if (!(pd->weapons)[id].unlocked || pd->ammo < PLAYER_MAX_AMMO)
+	{
+		pd->ammo = (pd->ammo + 6 <= PLAYER_MAX_AMMO) ? \
+			pd->ammo + 6 : PLAYER_MAX_AMMO;
+		if (!(pd->weapons)[id].unlocked)
+		{
+			(pd->weapons)[id].unlocked = true;
+			switch_weapon(pd, id);
+			if (id == 3)
+				(*pd).effects.chaingun_acquired = clock();
+		}
+		obj->state = TAKEN;
+	}
 }

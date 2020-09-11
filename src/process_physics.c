@@ -6,12 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 13:15:58 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 13:43:49 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/11 16:15:45 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_scene.h"
-#include "process_keystates.h"
+#include "process_key_states.h"
 
 static void		process_player_jump(t_player_data *pd, double frame_time)
 {
@@ -72,6 +72,32 @@ static void		process_door_states(t_scene *scene, t_door *doors, \
 	}
 }
 
+static void		process_weapon_state(t_player_data *pd)
+{
+	static clock_t		r_timer = 0;
+	t_weapon			*wpn;
+
+	wpn = pd->active_weapon;
+	if ((wpn->state == IDLE && wpn->frame == 0) || \
+		(double)(clock() - r_timer) / CLOCKS_PER_SEC < wpn->animation_speed / NUM_WEAPON_FRAMES)
+		return ;
+	if (wpn->type == HITSCAN)
+	{
+		pd->ammo -= (wpn->frame == 2) + (wpn->frame == 3 && wpn->id == 3);
+		if (pd->ammo < 0)
+			pd->ammo = 0;
+		if (pd->ammo == 0)
+			wpn->state = IDLE;
+	}
+	if (wpn->firing_mode == FULL_AUTO && wpn->state == FIRING && (wpn->frame == 2 || wpn->frame == 3))
+		wpn->frame = (wpn->frame == 2) ? 3 : 2;
+	else
+		wpn->frame = (wpn->frame + 1) % 5;
+	if (wpn->frame == 0 && wpn->firing_mode == SEMI_AUTO)
+		wpn->state = IDLE;
+	r_timer = clock();
+}
+
 void			process_physics(t_scene *scene)
 {
 	t_mlx_data			*mlx_data;
@@ -82,4 +108,5 @@ void			process_physics(t_scene *scene)
 	process_player_jump(pd, mlx_data->frame_time);
 	process_door_states(scene, scene->doors, scene->num_doors, \
 		mlx_data->frame_time);
+	process_weapon_state(&scene->player_data);
 }

@@ -6,12 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 00:23:08 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/04 08:04:15 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/10 19:55:02 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_scene.h"
-#include "process_keystates.h"
+#include "process_key_states.h"
 #include "mlx.h"
 #include "graphics.h"
 

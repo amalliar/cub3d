@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 16:35:43 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/11 16:14:55 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,24 @@ enum				e_door_states
 	CLOSED,
 	OPENING,
 	CLOSING
+};
+
+enum				e_weapon_types
+{
+	MELEE,
+	HITSCAN
+};
+
+enum				e_weapon_firing_modes
+{
+	SEMI_AUTO,
+	FULL_AUTO
+};
+
+enum				e_weapon_states
+{
+	IDLE,
+	FIRING
 };
 
 typedef struct		s_point
@@ -126,8 +144,29 @@ typedef struct		s_door
 	char			type;
 }					t_door;
 
+typedef struct		s_weapon
+{
+	int				id;
+	int				type;
+	int				firing_mode;
+	int				state;
+	int				frame;
+	bool			unlocked;
+	double			animation_speed;
+	t_mlx_image		frames[NUM_WEAPON_FRAMES];
+	t_mlx_image		*hudpic;
+}					t_weapon;
+
+typedef struct		s_effects
+{
+	clock_t			chaingun_acquired;
+}					t_effects;
+
 typedef struct		s_player_data
 {
+	t_weapon		weapons[NUM_WEAPONS];
+	t_weapon		*active_weapon;
+	t_effects		effects;
 	t_door			*door;
 	t_segment		f1;
 	t_segment		f2;
@@ -135,6 +174,8 @@ typedef struct		s_player_data
 	t_segment		ray;
 	t_line			line1;
 	t_line			line2;
+	clock_t			r_facetimer;
+	unsigned		facecount;
 	int				faceframe;
 	int				health;
 	int				lives;
@@ -194,7 +235,7 @@ typedef struct		s_player_data
 	bool			is_floor;
 }					t_player_data;
 
-typedef struct		s_keystates
+typedef struct		s_key_states
 {
 	int				kvk_ansi_w;
 	int				kvk_ansi_a;
@@ -204,7 +245,16 @@ typedef struct		s_keystates
 	int				kvk_rightarrow;
 	int				kvk_uparrow;
 	int				kvk_downarrow;
-}					t_keystates;
+}					t_key_states;
+
+typedef struct		s_button_states
+{
+	int				mb_left;
+	int				mb_right;
+	int				mb_middle;
+	int				mb_wheel_up;
+	int				mb_wheel_down;
+}					t_button_states;
 
 typedef struct		s_sprite
 {
@@ -247,7 +297,8 @@ typedef struct		s_scene
 	int				num_doors;
 	t_mlx_image		crosshairs[NUM_CROSSHAIRS];
 	t_mlx_data		mlx_data;
-	t_keystates		keystates;
+	t_key_states	key_states;
+	t_button_states	button_states;
 	t_textures		textures;
 	t_sprite		*sprites;
 	t_sprite_data	sprite_data;

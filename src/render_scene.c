@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/04 12:54:33 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/10 20:05:38 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		render_next_frame(t_scene *scene)
 
 	r_start = clock();
 	mlx_data = &scene->mlx_data;
-	process_keystates(scene);
+	process_key_states(scene);
 	process_mouse_motion(scene);
 	process_physics(scene);
 	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, mlx_data->win);
@@ -83,9 +83,11 @@ void			render_scene(t_scene *scene)
 	mlx_data->win = mlx_new_window(mlx_data->mlx, mlx_data->width, \
 		mlx_data->height, MLX_WINDOW_TITLE);
 	mlx_do_key_autorepeatoff(mlx_data->mlx);
-	mlx_hook(mlx_data->win, KEY_PRESS, KEY_PRESS_MASK, keypress_handler, scene);
+	mlx_hook(mlx_data->win, KEY_PRESS, KEY_PRESS_MASK, key_press_handler, scene);
 	mlx_hook(mlx_data->win, KEY_RELEASE, KEY_RELEASE_MASK, \
-		keyrelease_handler, scene);
+		key_release_handler, scene);
+	mlx_hook(mlx_data->win, BUTTON_PRESS, BUTTON_PRESS_MASK, button_press_handler, scene);
+	mlx_hook(mlx_data->win, BUTTON_RELEASE, BUTTON_RELEASE_MASK, button_release_handler, scene);
 	mlx_hook(mlx_data->win, EXPOSE, EXPOSURE_MASK, expose_handler, scene);
 	mlx_hook(mlx_data->win, DESTROY_NOTIFY, STRUCTURE_NOTIFY_MASK, \
 		winclose_handler, scene);

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 21:23:53 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 16:38:05 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/11 13:11:49 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,12 @@ void			load_textures(t_scene *scene)
 		g_ceiling_texture_path, 1);
 	int_load_textures(scene, scene->crosshairs, \
 		g_crosshairs_path, NUM_CROSSHAIRS);
+	int_load_textures(scene, ((*scene).player_data.weapons)[0].frames, \
+		g_wpn_knife_texture_paths, NUM_WEAPON_FRAMES);
+	int_load_textures(scene, ((*scene).player_data.weapons)[1].frames, \
+		g_wpn_pistol_texture_paths, NUM_WEAPON_FRAMES);
+	int_load_textures(scene, ((*scene).player_data.weapons)[2].frames, \
+		g_wpn_machinegun_texture_paths, NUM_WEAPON_FRAMES);
+	int_load_textures(scene, ((*scene).player_data.weapons)[3].frames, \
+		g_wpn_chaingun_texture_paths, NUM_WEAPON_FRAMES);
 }

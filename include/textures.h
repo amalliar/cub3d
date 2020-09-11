@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:41:39 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 18:25:21 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/10 12:39:15 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,42 @@ static char		g_ceiling_texture_path[1][128] =
 static char		g_crosshairs_path[NUM_CROSSHAIRS][128] =
 {
 	"./res/crosshairs/00_cross.xpm"
+};
+
+static char		g_wpn_knife_texture_paths[NUM_WEAPON_FRAMES][128] =
+{
+	"./res/weapons/knife/00_frame.xpm",
+	"./res/weapons/knife/01_frame.xpm",
+	"./res/weapons/knife/02_frame.xpm",
+	"./res/weapons/knife/03_frame.xpm",
+	"./res/weapons/knife/04_frame.xpm"
+};
+
+static char		g_wpn_pistol_texture_paths[NUM_WEAPON_FRAMES][128] =
+{
+	"./res/weapons/pistol/00_frame.xpm",
+	"./res/weapons/pistol/01_frame.xpm",
+	"./res/weapons/pistol/02_frame.xpm",
+	"./res/weapons/pistol/03_frame.xpm",
+	"./res/weapons/pistol/04_frame.xpm"
+};
+
+static char		g_wpn_machinegun_texture_paths[NUM_WEAPON_FRAMES][128] =
+{
+	"./res/weapons/machinegun/00_frame.xpm",
+	"./res/weapons/machinegun/01_frame.xpm",
+	"./res/weapons/machinegun/02_frame.xpm",
+	"./res/weapons/machinegun/03_frame.xpm",
+	"./res/weapons/machinegun/04_frame.xpm"
+};
+
+static char		g_wpn_chaingun_texture_paths[NUM_WEAPON_FRAMES][128] =
+{
+	"./res/weapons/chaingun/00_frame.xpm",
+	"./res/weapons/chaingun/01_frame.xpm",
+	"./res/weapons/chaingun/02_frame.xpm",
+	"./res/weapons/chaingun/03_frame.xpm",
+	"./res/weapons/chaingun/04_frame.xpm"
 };
 
 #endif

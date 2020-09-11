@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyrelease_handler.c                               :+:      :+:    :+:   */
+/*   key_release_handler.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:25:47 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/05 05:40:15 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/10 19:44:56 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "keycodes.h"
 
-int		keyrelease_handler(int keycode, t_scene *scene)
+int		key_release_handler(int keycode, t_scene *scene)
 {
-	t_keystates		*ks;
+	t_key_states		*ks;
 
-	ks = &scene->keystates;
+	ks = &scene->key_states;
 	if (keycode == KVK_ANSI_W)
 		ks->kvk_ansi_w = KEY_UP;
 	else if (keycode == KVK_ANSI_A)

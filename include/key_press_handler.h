@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_walls.h                                     :+:      :+:    :+:   */
+/*   key_press_handler.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/08 11:11:44 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/10 19:56:06 by amalliar         ###   ########.fr       */
+/*   Created: 2020/09/06 10:44:40 by amalliar          #+#    #+#             */
+/*   Updated: 2020/09/11 13:07:35 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_WALLS_H
-# define RENDER_WALLS_H
-# include "render_scene.h"
-# include "key_press_handler.h"
-# include "graphics.h"
+#ifndef KEY_PRESS_HANDLER_H
+# define KEY_PRESS_HANDLER_H
 
-void	calc_texture_x(t_scene *scene, t_mlx_image *texture);
-void	check_door_hit(t_scene *scene, t_player_data *pd, t_map_data *md);
-void	extend_ray(t_scene *scene);
-void	fill_stripe(t_scene *scene, t_mlx_image *texture, int x);
-void	select_texture(t_scene *scene, t_mlx_image **texture);
+# include "cub3d.h"
+# include "mlx.h"
+# include "keycodes.h"
+# include "graphics.h"
+# include "ft_stdlib.h"
+# include "ft_string.h"
+
+int			key_press_handler(int keycode, t_scene *scene);
+void		process_interact_request(t_scene *scene);
+void		switch_weapon(t_player_data *pd, int id);
+t_door		*get_door(t_scene *scene, int door_x, int door_y);
 
 #endif

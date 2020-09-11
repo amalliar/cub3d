@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_keystates.c                                :+:      :+:    :+:   */
+/*   process_key_states.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:23:26 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 11:23:24 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/10 20:02:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keycodes.h"
-#include "process_keystates.h"
+#include "process_key_states.h"
 
 static void		move_forward(t_scene *scene, t_player_data *pd)
 {
@@ -53,12 +53,12 @@ static void		move_right(t_scene *scene, t_player_data *pd)
 		pd->pos_y += pd->plane_y * pd->move_speed;
 }
 
-void			process_keystates(t_scene *scene)
+void			process_key_states(t_scene *scene)
 {
-	t_keystates		*ks;
+	t_key_states		*ks;
 	t_player_data	*pd;
 
-	ks = &scene->keystates;
+	ks = &scene->key_states;
 	pd = &scene->player_data;
 	set_player_speed(pd, ks, (*scene).mlx_data.frame_time);
 	if (ks->kvk_ansi_w == KEY_DOWN)

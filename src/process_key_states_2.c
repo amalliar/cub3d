@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_keystates_2.c                              :+:      :+:    :+:   */
+/*   process_key_states_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:38:17 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/04 10:37:36 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/10 19:54:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process_keystates.h"
+#include "process_key_states.h"
 
 /*
 ** Player moves independent of current frame rate.
 */
 
-void		set_player_speed(t_player_data *pd, t_keystates *ks, \
+void		set_player_speed(t_player_data *pd, t_key_states *ks, \
 				double frame_time)
 {
 	double		speed_mod;

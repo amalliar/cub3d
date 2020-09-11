@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keypress_handler.c                                 :+:      :+:    :+:   */
+/*   key_press_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:21:32 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 10:46:42 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/11 13:06:42 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keypress_handler.h"
+#include "key_press_handler.h"
 
 static void		switch_states(int *kd, int *ku)
 {
@@ -18,11 +18,22 @@ static void		switch_states(int *kd, int *ku)
 	*ku = KEY_UP;
 }
 
-int				keypress_handler(int keycode, t_scene *scene)
+void			switch_weapon(t_player_data *pd, int id)
 {
-	t_keystates		*ks;
+	if ((pd->weapons)[id].unlocked == false)
+		return ;
+	pd->active_weapon->frame = 0;
+	pd->active_weapon->state = IDLE;
+	pd->active_weapon = pd->weapons + id;
+}
 
-	ks = &scene->keystates;
+int				key_press_handler(int keycode, t_scene *scene)
+{
+	t_player_data		*pd;
+	t_key_states		*ks;
+
+	ks = &scene->key_states;
+	pd = &scene->player_data;
 	if (keycode == KVK_ESCAPE)
 	{
 		mlx_destroy_window((*scene).mlx_data.mlx, (*scene).mlx_data.win);
@@ -38,6 +49,16 @@ int				keypress_handler(int keycode, t_scene *scene)
 		switch_states(&ks->kvk_ansi_a, &ks->kvk_ansi_d);
 	else if (keycode == KVK_ANSI_D)
 		switch_states(&ks->kvk_ansi_d, &ks->kvk_ansi_a);
+	else if (keycode == KVK_ANSI_E)
+		process_interact_request(scene);
+	else if (keycode == KVK_ANSI_1)
+		switch_weapon(pd, 0);
+	else if (keycode == KVK_ANSI_2)
+		switch_weapon(pd, 1);
+	else if (keycode == KVK_ANSI_3)
+		switch_weapon(pd, 2);
+	else if (keycode == KVK_ANSI_4)
+		switch_weapon(pd, 3);
 	else if (keycode == KVK_LEFTARROW)
 		switch_states(&ks->kvk_leftarrow, &ks->kvk_rightarrow);
 	else if (keycode == KVK_RIGHTARROW)
@@ -46,11 +67,9 @@ int				keypress_handler(int keycode, t_scene *scene)
 		switch_states(&ks->kvk_uparrow, &ks->kvk_downarrow);
 	else if (keycode == KVK_DOWNARROW)
 		switch_states(&ks->kvk_downarrow, &ks->kvk_uparrow);
-	else if (keycode == KVK_CONTROL && (*scene).player_data.pos_z == 0)
-		(*scene).player_data.pos_z = -200;
-	else if (keycode == KVK_SPACE && (*scene).player_data.pos_z == 0)
-		(*scene).player_data.v0 = sqrt(2 * GRAVITY * PLAYER_JUMP_HEIGHT);
-	else if (keycode == KVK_ANSI_E)
-		process_interact_request(scene);
+	else if (keycode == KVK_CONTROL && pd->pos_z == 0)
+		pd->pos_z = -200;
+	else if (keycode == KVK_SPACE && pd->pos_z == 0)
+		pd->v0 = sqrt(2 * GRAVITY * PLAYER_JUMP_HEIGHT);
 	return (0);
 }

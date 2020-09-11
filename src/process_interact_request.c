@@ -6,11 +6,11 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 10:38:15 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 10:44:17 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/10 19:47:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keypress_handler.h"
+#include "key_press_handler.h"
 
 static void		switch_door_state(t_door *door)
 {

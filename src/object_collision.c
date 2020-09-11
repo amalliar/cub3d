@@ -6,12 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 14:51:10 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/06 13:36:54 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/10 19:54:10 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process_keystates.h"
-#include "keypress_handler.h"
+#include "process_key_states.h"
+#include "key_press_handler.h"
 #include "ft_string.h"
 
 int				door_collision(t_scene *scene, double px, double py)

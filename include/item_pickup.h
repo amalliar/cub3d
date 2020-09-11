@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:05:51 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/28 01:15:51 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/11 12:54:24 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define KEY_PICKUPS		""
 # define POWERUP_PICKUPS	"8"
 # define TREASURE_PICKUPS	"4567"
-# define WEAPON_PICKUPS		""
+# define WEAPON_PICKUPS		"23"
 # define PU1 AMMO_PICKUPS GIBS_PICKUPS HEALTH_PICKUPS KEY_PICKUPS
 # define PU2 POWERUP_PICKUPS TREASURE_PICKUPS WEAPON_PICKUPS
 # define PICKUPS PU1 PU2

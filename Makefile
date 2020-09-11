@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/08 14:16:51 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/10 20:04:28 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ OBJDIR     := .obj
 DEPDIR     := .dep
 
 SRCS       := src/attempt_item_pickup.c \
+              src/button_press_handler.c \
+	      src/button_release_handler.c \
               src/colors.c \
               src/exit_failure.c \
 	      src/expose_handler.c \
@@ -32,16 +34,16 @@ SRCS       := src/attempt_item_pickup.c \
 	      src/graphics_3.c \
 	      src/item_pickup.c \
 	      src/item_pickup_2.c \
-	      src/keypress_handler.c \
-	      src/keyrelease_handler.c \
+	      src/key_press_handler.c \
+	      src/key_release_handler.c \
               src/load_scene.c \
 	      src/mlx_image_to_bmp_file.c \
 	      src/object_collision.c \
 	      src/parse_map.c \
 	      src/parse_map_2.c \
 	      src/process_interact_request.c \
-	      src/process_keystates.c \
-	      src/process_keystates_2.c \
+	      src/process_key_states.c \
+	      src/process_key_states_2.c \
 	      src/process_mouse_motion.c \
 	      src/process_physics.c \
 	      src/render_floor_and_ceiling.c \

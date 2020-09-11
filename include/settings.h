@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 18:20:52 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/11 12:39:49 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define PLAYER_JUMP_HEIGHT		250
 # define PLAYER_CROSSHAIR		0
 # define CROSSHAIR_SCALE		1.0
+# define WEAPON_SCALE			2.4
 # define GRAVITY				9.807 * 1000
 
 # define NUM_WALL_TEXTURES		52
@@ -51,5 +52,7 @@
 # define NUM_HUD_TEXTURES		17
 # define NUM_FACES_TEXTURES		24
 # define NUM_CROSSHAIRS			1
+# define NUM_WEAPONS			4
+# define NUM_WEAPON_FRAMES		5
 
 #endif

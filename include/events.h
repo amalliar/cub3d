@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 20:33:22 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/04 21:06:03 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/10 16:41:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,10 +145,10 @@
 ** Note that 0 is already defined above as "AnyButton".
 */
 
-# define BUTTON1					1
-# define BUTTON2					2
-# define BUTTON3					3
-# define BUTTON4					4
-# define BUTTON5					5
+# define MB_LEFT						1
+# define MB_RIGHT						2
+# define MB_MIDDLE						3
+# define MB_WHEEL_UP					4
+# define MB_WHEEL_DOWN					5
 
 #endif
