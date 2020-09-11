@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/10 20:04:28 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/11 19:10:06 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,37 +25,37 @@ DEPDIR     := .dep
 
 SRCS       := src/attempt_item_pickup.c \
               src/button_press_handler.c \
-	      src/button_release_handler.c \
+              src/button_release_handler.c \
               src/colors.c \
               src/exit_failure.c \
-	      src/expose_handler.c \
+              src/expose_handler.c \
               src/graphics.c \
-	      src/graphics_2.c \
-	      src/graphics_3.c \
-	      src/item_pickup.c \
-	      src/item_pickup_2.c \
-	      src/key_press_handler.c \
-	      src/key_release_handler.c \
+              src/graphics_2.c \
+              src/graphics_3.c \
+              src/item_pickup.c \
+              src/item_pickup_2.c \
+              src/key_press_handler.c \
+              src/key_release_handler.c \
               src/load_scene.c \
-	      src/mlx_image_to_bmp_file.c \
-	      src/object_collision.c \
-	      src/parse_map.c \
-	      src/parse_map_2.c \
-	      src/process_interact_request.c \
-	      src/process_key_states.c \
-	      src/process_key_states_2.c \
-	      src/process_mouse_motion.c \
-	      src/process_physics.c \
-	      src/render_floor_and_ceiling.c \
-	      src/render_hud.c \
+              src/mlx_image_to_bmp_file.c \
+              src/object_collision.c \
+              src/parse_map.c \
+              src/parse_map_2.c \
+              src/process_interact_request.c \
+              src/process_key_states.c \
+              src/process_key_states_2.c \
+              src/process_mouse_motion.c \
+              src/process_physics.c \
+              src/render_floor_and_ceiling.c \
+              src/render_hud.c \
               src/render_scene.c \
-	      src/render_sprites.c \
-	      src/load_textures.c \
-	      src/render_walls.c \
-	      src/render_walls_2.c \
-	      src/render_walls_3.c \
-	      src/take_screenshot.c \
-	      src/winclose_handler.c \
+              src/render_sprites.c \
+              src/load_textures.c \
+              src/render_walls.c \
+              src/render_walls_2.c \
+              src/render_walls_3.c \
+              src/take_screenshot.c \
+              src/winclose_handler.c \
               src/main.c
 OBJS       := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 DEPS       := $(SRCS:$(SRCDIR)/%.c=$(DEPDIR)/%.d)
@@ -63,7 +63,7 @@ DEPS       := $(SRCS:$(SRCDIR)/%.c=$(DEPDIR)/%.d)
 # Run multiple threads.
 MAKEFLAGS  = -j 4 --output-sync=recurse --no-print-directory
 
-# Protect against make incorrectly setting 'last modified' attribute 
+# Protect against make incorrectly setting 'last modified' attribute
 # when running in parallel (-j flag).
 POST_COMPILE = mv -f $(DEPDIR)/$*.tmp $(DEPDIR)/$*.d && touch $@
 
@@ -72,12 +72,22 @@ LGREEN     := \033[1;32m
 WHITE      := \033[1;37m
 NOC        := \033[0m
 
-all: $(NAME)
+all:
+	@git checkout -f master
+	@$(MAKE) re
+.PHONY: all
+
+linux:
+	@git checkout -f linux
+	@$(MAKE) re
+.PHONY: linux
+
+bonus: $(NAME)
 $(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
 	@echo "$(LGREEN)Linking executable $(NAME)$(NOC)"
 	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBS) -o $@
 	@echo "Built target $(NAME)"
-.PHONY: all
+.PHONY: bonus
 
 $(LIBFT): NONE
 	@$(MAKE) -C ./libft
@@ -87,7 +97,7 @@ $(LIBMLX): NONE
 .PHONY: NONE
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(DEPDIR)/%.d | $(OBJDIR) $(DEPDIR)
-	$(CC) $(CFLAGS) $(INCLUDE) -MMD -MF $(DEPDIR)/$*.tmp -c -o $@ $<
+	$(CC) $(CFLAGS) $(INCLUDE) -MMD -MF $(DEPDIR)/$*.tmp -c $< -o $@
 	@$(POST_COMPILE)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
@@ -120,6 +130,8 @@ re:
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
+	@echo "... bonus"
+	@echo "... linux"
 	@echo "... clean"
 	@echo "... fclean"
 	@echo "... re"
