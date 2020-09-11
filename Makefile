@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/08/17 16:21:00 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/30 18:20:20 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,18 @@ $(NAME): $(OBJS) | $(LIBFT) $(LIBMLX)
 	@echo "Built target $(NAME)"
 .PHONY: all
 
+bonus:
+	@$(MAKE) fclean
+	@git checkout -f bonus
+	@$(MAKE)
+.PHONY: bonus
+
+linux:
+	@$(MAKE) fclean
+	@git checkout -f linux
+	@$(MAKE)
+.PHONY: linux
+
 $(LIBFT):
 	@$(MAKE) -C ./libft
 
@@ -106,6 +118,8 @@ re:
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
+	@echo "... bonus"
+	@echo "... linux"
 	@echo "... clean"
 	@echo "... fclean"
 	@echo "... re"
