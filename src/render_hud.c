@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 07:21:24 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 19:05:00 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 22:33:06 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static void		draw_weapon(t_scene *scene)
 	p0.y = mlx_data->height - G_HUD_HEIGHT + 5 * G_HUD_SCALE;
 	latch_image(&mlx_data->frame, weapon->hudpic, p0, G_HUD_SCALE);
 	p0.x = G_GAME_WINDOW_WIDTH / 2 - 32 * G_HUD_SCALE * PL_WEAPON_SCALE;
-	p0.y = mlx_data->height - G_HUD_HEIGHT - 64 * G_HUD_SCALE * PL_WEAPON_SCALE;
+	p0.y = mlx_data->height - G_HUD_HEIGHT - 63.9 * G_HUD_SCALE * PL_WEAPON_SCALE;
 	latch_image(&mlx_data->frame, weapon->frames + weapon->frame, \
 		p0, G_HUD_SCALE * PL_WEAPON_SCALE);
 }
