@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expose_handler.c                                   :+:      :+:    :+:   */
+/*   render_hud.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/01 02:49:23 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 16:01:51 by amalliar         ###   ########.fr       */
+/*   Created: 2020/09/12 18:39:52 by amalliar          #+#    #+#             */
+/*   Updated: 2020/09/12 19:24:51 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "render_scene.h"
+#ifndef RENDER_HUD_H
+# define RENDER_HUD_H
 
-int		expose_handler(t_scene *scene)
-{
-	t_mlx_data		*mlx_data;
+# include "graphics.h"
 
-	mlx_data = &scene->mlx_data;
-	scene->mouse_grabbing = ENABLED;
-	mlx_mouse_hide();
-	mlx_mouse_move(mlx_data->win, mlx_data->width / 2, mlx_data->height / 2);
-	return (0);
-}
+void		draw_crosshair(t_scene *scene);
+
+#endif

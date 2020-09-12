@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/11 19:10:06 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/12 19:35:03 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS       := src/attempt_item_pickup.c \
               src/key_press_handler.c \
               src/key_release_handler.c \
               src/load_scene.c \
+              src/load_scene_2.c \
               src/mlx_image_to_bmp_file.c \
               src/object_collision.c \
               src/parse_map.c \
@@ -48,12 +49,14 @@ SRCS       := src/attempt_item_pickup.c \
               src/process_physics.c \
               src/render_floor_and_ceiling.c \
               src/render_hud.c \
+	      src/render_hud_2.c \
               src/render_scene.c \
               src/render_sprites.c \
               src/load_textures.c \
               src/render_walls.c \
               src/render_walls_2.c \
               src/render_walls_3.c \
+              src/switch_weapon.c \
               src/take_screenshot.c \
               src/winclose_handler.c \
               src/main.c
@@ -73,13 +76,15 @@ WHITE      := \033[1;37m
 NOC        := \033[0m
 
 all:
+	@$(MAKE) fclean
 	@git checkout -f master
-	@$(MAKE) re
+	@$(MAKE) all
 .PHONY: all
 
 linux:
+	@$(MAKE) fclean
 	@git checkout -f linux
-	@$(MAKE) re
+	@$(MAKE) all
 .PHONY: linux
 
 bonus: $(NAME)

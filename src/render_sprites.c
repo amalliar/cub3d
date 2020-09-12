@@ -6,14 +6,14 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 13:04:05 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 18:27:05 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 18:51:38 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_scene.h"
-#include "item_pickup.h"
 #include "colors.h"
 #include "ft_stdlib.h"
+#include "item_pickup.h"
+#include "render_scene.h"
 
 static void		calc_sprite_dist(t_scene *scene, t_sprite *sprites)
 {

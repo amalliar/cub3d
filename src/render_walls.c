@@ -6,12 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:52:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/08 11:13:53 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 19:07:08 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_walls.h"
 #include "ft_string.h"
+#include "render_walls.h"
 
 static void		dda_init_1(t_player_data *pd, int x, int width)
 {
@@ -65,11 +65,11 @@ static void		dda_run(t_scene *scene, t_player_data *pd, t_map_data *md)
 			pd->map_y += pd->step_y;
 			pd->side = 1;
 		}
-		if (ft_strchr(BLOCKS, (md->map)[(int)pd->map_y][(int)pd->map_x]))
+		if (ft_strchr(MP_BLOCKS, (md->map)[(int)pd->map_y][(int)pd->map_x]))
 		{
 			pd->hit = 1;
 			pd->door_hit = 0;
-			if (ft_strchr(DOORS, (md->map)[(int)pd->map_y][(int)pd->map_x]))
+			if (ft_strchr(MP_DOORS, (md->map)[(int)pd->map_y][(int)pd->map_x]))
 				extend_ray(scene);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 14:14:44 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/08 14:16:23 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 13:14:52 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static inline double	det(double a, double b, double c, double d)
 	return (a * d - b * c);
 }
 
-bool					intersect(t_line *m, t_line *n, t_fpoint *r)
+bool					intersect(t_line *m, t_line *n, t_fpoint *res)
 {
 	double		zn;
 
 	zn = det(m->a, m->b, n->a, n->b);
 	if (fabs(zn) < DBL_EPSILON)
 		return (false);
-	r->x = -det(m->c, m->b, n->c, n->b) / zn;
-	r->y = -det(m->a, m->c, n->a, n->c) / zn;
+	res->x = -det(m->c, m->b, n->c, n->b) / zn;
+	res->y = -det(m->a, m->c, n->a, n->c) / zn;
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:23:26 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/10 20:02:46 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 16:40:12 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void		move_right(t_scene *scene, t_player_data *pd)
 
 void			process_key_states(t_scene *scene)
 {
-	t_key_states		*ks;
+	t_key_states	*ks;
 	t_player_data	*pd;
 
 	ks = &scene->key_states;

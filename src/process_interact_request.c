@@ -6,10 +6,11 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 10:38:15 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/10 19:47:39 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 19:01:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "graphics.h"
 #include "key_press_handler.h"
 
 static void		switch_door_state(t_door *door)
@@ -40,14 +41,13 @@ void			process_interact_request(t_scene *scene)
 {
 	t_player_data	*pd;
 	t_map_data		*md;
-	int				obj_x;
-	int				obj_y;
+	t_point			obj;
 
 	pd = &scene->player_data;
 	md = &scene->map_data;
-	obj_x = (int)(pd->pos_x + pd->dir_x * PLAYER_MAX_INTERACT_DIST);
-	obj_y = (int)(pd->pos_y + pd->dir_y * PLAYER_MAX_INTERACT_DIST);
-	if (ft_strchr(DOORS, (md->map)[obj_y][obj_x]) && \
-		(obj_x != (int)pd->pos_x || obj_y != (int)pd->pos_y))
-		switch_door_state(get_door(scene, obj_x, obj_y));
+	obj.x = (int)(pd->pos_x + pd->dir_x * PL_MAX_INTERACT_DIST);
+	obj.y = (int)(pd->pos_y + pd->dir_y * PL_MAX_INTERACT_DIST);
+	if (ft_strchr(MP_DOORS, (md->map)[obj.y][obj.x]) && \
+		(obj.x != (int)pd->pos_x || obj.y != (int)pd->pos_y))
+		switch_door_state(get_door(scene, obj.x, obj.y));
 }

@@ -6,13 +6,13 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/11 16:15:22 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 14:19:33 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "load_scene.h"
 #include "ft_stdio.h"
 #include "ft_string.h"
+#include "load_scene.h"
 
 static void		skip_empty_lines(int fd, char **line)
 {
@@ -59,47 +59,6 @@ static void		init_player_stats(t_player_data *pd)
 	pd->score = 0;
 	pd->level += 1;
 	pd->pitch = 0;
-}
-
-static void		init_player_weapons(t_player_data *pd, t_mlx_image *hud)
-{
-	(pd->weapons)[0].id = 0;
-	(pd->weapons)[0].type = MELEE;
-	(pd->weapons)[0].firing_mode = SEMI_AUTO;
-	(pd->weapons)[0].state = IDLE;
-	(pd->weapons)[0].frame = 0;
-	(pd->weapons)[0].animation_speed = 0.1;
-	(pd->weapons)[0].hudpic = hud + 11;
-	(pd->weapons)[0].unlocked = true;
-
-	(pd->weapons)[1].id = 1;
-	(pd->weapons)[1].type = HITSCAN;
-	(pd->weapons)[1].firing_mode = SEMI_AUTO;
-	(pd->weapons)[1].state = IDLE;
-	(pd->weapons)[1].frame = 0;
-	(pd->weapons)[1].animation_speed = 0.1;
-	(pd->weapons)[1].hudpic = hud + 12;
-	(pd->weapons)[1].unlocked = true;
-
-	(pd->weapons)[2].id = 2;
-	(pd->weapons)[2].type = HITSCAN;
-	(pd->weapons)[2].firing_mode = FULL_AUTO;
-	(pd->weapons)[2].state = IDLE;
-	(pd->weapons)[2].frame = 0;
-	(pd->weapons)[2].animation_speed = 0.2;
-	(pd->weapons)[2].hudpic = hud + 13;
-	(pd->weapons)[2].unlocked = false;
-
-	(pd->weapons)[3].id = 3;
-	(pd->weapons)[3].type = HITSCAN;
-	(pd->weapons)[3].firing_mode = FULL_AUTO;
-	(pd->weapons)[3].state = IDLE;
-	(pd->weapons)[3].frame = 0;
-	(pd->weapons)[3].animation_speed = 0.2;
-	(pd->weapons)[3].hudpic = hud + 14;
-	(pd->weapons)[3].unlocked = false;
-
-	pd->active_weapon = pd->weapons + 1;
 }
 
 static void		load_map(t_scene *scene, char *path)

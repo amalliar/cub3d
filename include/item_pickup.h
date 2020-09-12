@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:05:51 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/11 12:54:24 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 15:55:26 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	attempt_gibs_pickup(t_player_data *pd, t_sprite *obj);
 void	attempt_health_pickup(t_player_data *pd, t_sprite *obj);
 void	attempt_key_pickup(t_player_data *pd, t_sprite *obj);
 void	attempt_powerup_pickup(t_player_data *pd, t_sprite *obj);
-void	attempt_treasure_pickup(t_player_data *pd, t_sprite *obj);
+void	attempt_treasur_pickup(t_player_data *pd, t_sprite *obj);
 void	attempt_weapon_pickup(t_player_data *pd, t_sprite *obj);
 
 #endif

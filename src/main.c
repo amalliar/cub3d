@@ -6,16 +6,31 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/11 15:13:49 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 13:54:49 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "mlx.h"
-#include "ft_string.h"
 #include "ft_stdlib.h"
+#include "ft_string.h"
+#include "mlx.h"
 
-static void		init_key_and_button_states(t_key_states *ks, t_button_states *bs)
+static void		init_mlx_data(t_mlx_data *mlx_data)
+{
+	if (!(mlx_data->mlx = mlx_init()))
+		exit_failure("Failed creating mlx instance\n");
+	mlx_data->win = NULL;
+	mlx_get_screen_size(mlx_data->mlx, &mlx_data->width, &mlx_data->height);
+	if (mlx_data->width < G_MLX_WINDOW_WIDTH || \
+		mlx_data->height < G_MLX_WINDOW_HEIGHT)
+		exit_failure("Resolution %sx%s is unsupported by this screen.\n", \
+			ft_itoa(G_MLX_WINDOW_WIDTH, 10), ft_itoa(G_MLX_WINDOW_HEIGHT, 10));
+	mlx_data->width = G_MLX_WINDOW_WIDTH;
+	mlx_data->height = G_MLX_WINDOW_HEIGHT;
+}
+
+static void		init_key_and_button_states(t_key_states *ks, \
+					t_button_states *bs)
 {
 	ks->kvk_ansi_w = KEY_UP;
 	ks->kvk_ansi_a = KEY_UP;
@@ -30,24 +45,12 @@ static void		init_key_and_button_states(t_key_states *ks, t_button_states *bs)
 	bs->mb_middle = KEY_UP;
 	bs->mb_wheel_up = KEY_UP;
 	bs->mb_wheel_down = KEY_UP;
-
 }
 
 static void		init_scene(t_scene *scene)
 {
-	t_mlx_data		*mlx_data;
-
-	mlx_data = &scene->mlx_data;
-	if ((mlx_data->mlx = mlx_init()) == NULL)
-		exit_failure("Failed creating mlx instance\n");
-	mlx_data->win = NULL;
-	mlx_get_screen_size(mlx_data->mlx, &mlx_data->width, &mlx_data->height);
-	if (mlx_data->width < MLX_WINDOW_WIDTH || \
-		mlx_data->height < MLX_WINDOW_HEIGHT)
-		exit_failure("Resolution %sx%s is unsupported by this screen.\n", \
-			ft_itoa(MLX_WINDOW_WIDTH, 10), ft_itoa(MLX_WINDOW_HEIGHT, 10));
-	mlx_data->width = MLX_WINDOW_WIDTH;
-	mlx_data->height = MLX_WINDOW_HEIGHT;
+	init_mlx_data(&scene->mlx_data);
+	init_key_and_button_states(&scene->key_states, &scene->button_states);
 	(*scene).sprite_data.num_sprites = 0;
 	(*scene).num_doors = 0;
 	(*scene).player_data.pos_x = -1;
@@ -56,16 +59,17 @@ static void		init_scene(t_scene *scene)
 	(*scene).player_data.facecount = 0;
 	(*scene).player_data.r_facetimer = 0;
 	(*scene).player_data.faceframe = 1;
-	(*scene).player_data.effects.chaingun_acquired = 0;
-	init_key_and_button_states(&scene->key_states, &scene->button_states);
-	(*scene).mouse_grabbing = DISABLED;
+	(*scene).player_data.effects.r_bj_evil_grin = 0;
 	(*scene).render_started = 0;
+	(*scene).mouse_grabbing = DISABLED;
 }
 
 static void		get_render_mode(int argc, char **argv, int *render_mode)
 {
 	if (argc < 2)
 		exit_failure("Program requires at least one argument (scene.cub)\n");
+	if (!ft_strmatch("*.cub", argv[1]))
+		exit_failure("Unknown file type: %s\n", argv[1]);
 	if (argc > 3)
 		exit_failure("Too many arguments\n");
 	if (argc == 3)

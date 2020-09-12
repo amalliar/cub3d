@@ -6,19 +6,19 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/10 10:26:39 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 19:06:34 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_walls.h"
 #include "ft_string.h"
+#include "render_walls.h"
 
 void			check_door_hit(t_scene *scene, t_player_data *pd, \
 					t_map_data *md)
 {
 	t_fpoint	wall;
 
-	if (!ft_strchr(DOORS, (md->map)[(int)pd->pos_y][(int)pd->pos_x]))
+	if (!ft_strchr(MP_DOORS, (md->map)[(int)pd->pos_y][(int)pd->pos_x]))
 		return ;
 	if (pd->side == 0)
 	{
@@ -40,7 +40,7 @@ void			check_door_hit(t_scene *scene, t_player_data *pd, \
 
 int				get_block_id(char block)
 {
-	return (ft_strchr(BLOCKS, block) - BLOCKS);
+	return (ft_strchr(MP_BLOCKS, block) - MP_BLOCKS);
 }
 
 void			select_texture(t_scene *scene, t_mlx_image **texture)

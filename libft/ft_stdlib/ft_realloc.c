@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 20:01:01 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/15 20:07:04 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 13:03:36 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 	new = malloc(new_size);
 	if (new != NULL)
 		ft_memcpy(new, ptr, (old_size < new_size) ? old_size : new_size);
-	free(ptr);
+	if (old_size != 0)
+		free(ptr);
 	return (new);
 }

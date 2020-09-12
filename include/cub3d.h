@@ -6,25 +6,25 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/11 16:14:55 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 13:10:35 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <stdlib.h>
-# include <string.h>
 # include <errno.h>
+# include <fcntl.h>
 # include <math.h>
 # include <stdarg.h>
 # include <stdbool.h>
-# include "settings.h"
+# include <stdlib.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
 # include "blocks.h"
+# include "settings.h"
 
 enum				e_keystates
 {
@@ -152,14 +152,14 @@ typedef struct		s_weapon
 	int				state;
 	int				frame;
 	bool			unlocked;
-	double			animation_speed;
+	double			min_frame_time;
 	t_mlx_image		frames[NUM_WEAPON_FRAMES];
 	t_mlx_image		*hudpic;
 }					t_weapon;
 
 typedef struct		s_effects
 {
-	clock_t			chaingun_acquired;
+	clock_t			r_bj_evil_grin;
 }					t_effects;
 
 typedef struct		s_player_data
@@ -295,21 +295,21 @@ typedef struct		s_scene
 	int				render_started;
 	int				mouse_grabbing;
 	int				num_doors;
-	t_mlx_image		crosshairs[NUM_CROSSHAIRS];
-	t_mlx_data		mlx_data;
-	t_key_states	key_states;
 	t_button_states	button_states;
-	t_textures		textures;
+	t_door			*doors;
+	t_key_states	key_states;
+	t_map_data		map_data;
+	t_mlx_data		mlx_data;
+	t_mlx_image		crosshairs[NUM_CROSSHAIRS];
+	t_player_data	player_data;
 	t_sprite		*sprites;
 	t_sprite_data	sprite_data;
-	t_map_data		map_data;
-	t_door			*doors;
-	t_player_data	player_data;
+	t_textures		textures;
 }					t_scene;
 
+void				exit_failure(char *format, ...);
 void				load_scene(t_scene *scene, char *path);
 void				render_scene(t_scene *scene);
 void				take_screenshot(t_scene *scene);
-void				exit_failure(char *format, ...);
 
 #endif

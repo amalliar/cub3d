@@ -6,12 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 02:03:25 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/04 06:57:53 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 18:26:04 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_scene.h"
 #include "mlx.h"
+#include "render_scene.h"
 
 static void		calc_block(t_player_data *pd, t_mlx_image *frame)
 {

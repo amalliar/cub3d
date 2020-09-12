@@ -6,12 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 20:36:31 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 18:27:26 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 18:58:01 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
 #include "colors.h"
+#include "graphics.h"
 
 static void		swap(int *p0, int *p1)
 {
@@ -93,13 +93,13 @@ void			latch_number(t_mlx_image *dst, t_mlx_image *arr, \
 {
 	if (nbr == 0)
 	{
-		latch_image(dst, arr, p0, HUD_SCALE);
+		latch_image(dst, arr, p0, G_HUD_SCALE);
 		return ;
 	}
 	while (nbr > 0)
 	{
-		latch_image(dst, arr + nbr % 10, p0, HUD_SCALE);
+		latch_image(dst, arr + nbr % 10, p0, G_HUD_SCALE);
 		nbr /= 10;
-		p0.x -= 8 * HUD_SCALE;
+		p0.x -= 8 * G_HUD_SCALE;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 15:47:06 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/11 12:45:54 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 15:59:17 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@ static void		fire_weapon(t_player_data *pd)
 
 	wpn = pd->active_weapon;
 	if (pd->ammo > 0 || wpn->type == MELEE)
-	{
 		wpn->state = FIRING;
-	}
 }
 
-int		button_press_handler(int button, int x, int y, t_scene *scene)
+int				button_press_handler(int button, int x, int y, t_scene *scene)
 {
 	t_button_states		*bs;
 	t_player_data		*pd;

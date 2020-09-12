@@ -6,13 +6,13 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/10 20:05:38 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 19:26:42 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "events.h"
 #include "graphics.h"
+#include "mlx.h"
 #include "render_scene.h"
 
 static void		get_frames_per_second(t_mlx_data *mlx_data, clock_t *r_timer, \
@@ -61,10 +61,10 @@ void			init_frame(t_scene *scene)
 	mlx_data = &scene->mlx_data;
 	frame = &mlx_data->frame;
 	pd = &scene->player_data;
-	frame->width = GAME_WINDOW_WIDTH;
-	frame->height = GAME_WINDOW_HEIGHT;
-	if (!(frame->img = mlx_new_image(mlx_data->mlx, mlx_data->width, \
-		mlx_data->height)))
+	frame->width = G_GAME_WINDOW_WIDTH;
+	frame->height = G_GAME_WINDOW_HEIGHT;
+	if (!(frame->img = mlx_new_image(mlx_data->mlx, \
+		mlx_data->width, mlx_data->height)))
 		exit_failure("Failed creating mlx image instance: %s\n", \
 			strerror(errno));
 	frame->addr = mlx_get_data_addr(frame->img, &frame->bits_per_pixel, \
@@ -81,14 +81,18 @@ void			render_scene(t_scene *scene)
 	mlx_data = &scene->mlx_data;
 	init_frame(scene);
 	mlx_data->win = mlx_new_window(mlx_data->mlx, mlx_data->width, \
-		mlx_data->height, MLX_WINDOW_TITLE);
+		mlx_data->height, G_MLX_WINDOW_TITLE);
 	mlx_do_key_autorepeatoff(mlx_data->mlx);
-	mlx_hook(mlx_data->win, KEY_PRESS, KEY_PRESS_MASK, key_press_handler, scene);
+	mlx_hook(mlx_data->win, KEY_PRESS, KEY_PRESS_MASK, \
+		key_press_handler, scene);
 	mlx_hook(mlx_data->win, KEY_RELEASE, KEY_RELEASE_MASK, \
 		key_release_handler, scene);
-	mlx_hook(mlx_data->win, BUTTON_PRESS, BUTTON_PRESS_MASK, button_press_handler, scene);
-	mlx_hook(mlx_data->win, BUTTON_RELEASE, BUTTON_RELEASE_MASK, button_release_handler, scene);
-	mlx_hook(mlx_data->win, EXPOSE, EXPOSURE_MASK, expose_handler, scene);
+	mlx_hook(mlx_data->win, BUTTON_PRESS, BUTTON_PRESS_MASK, \
+		button_press_handler, scene);
+	mlx_hook(mlx_data->win, BUTTON_RELEASE, BUTTON_RELEASE_MASK, \
+		button_release_handler, scene);
+	mlx_hook(mlx_data->win, EXPOSE, EXPOSURE_MASK, \
+		expose_handler, scene);
 	mlx_hook(mlx_data->win, DESTROY_NOTIFY, STRUCTURE_NOTIFY_MASK, \
 		winclose_handler, scene);
 	mlx_loop_hook(mlx_data->mlx, render_next_frame, scene);

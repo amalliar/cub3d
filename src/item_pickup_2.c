@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:51:42 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/11 15:09:41 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 19:00:13 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void		attempt_powerup_pickup(t_player_data *pd, t_sprite *obj)
 		pd->health = 100;
 		if (pd->lives < 9)
 			pd->lives += 1;
-		pd->ammo = (pd->ammo + 25 <= PLAYER_MAX_AMMO) ? \
-			pd->ammo + 25 : PLAYER_MAX_AMMO;
+		pd->ammo = (pd->ammo + 25 <= PL_MAX_AMMO) ? \
+			pd->ammo + 25 : PL_MAX_AMMO;
 		obj->state = TAKEN;
 	}
 }
 
-void		attempt_treasure_pickup(t_player_data *pd, t_sprite *obj)
+void		attempt_treasur_pickup(t_player_data *pd, t_sprite *obj)
 {
 	if (obj->type == '4')
 	{
@@ -55,16 +55,16 @@ void		attempt_weapon_pickup(t_player_data *pd, t_sprite *obj)
 	int		id;
 
 	id = obj->type - '0';
-	if (!(pd->weapons)[id].unlocked || pd->ammo < PLAYER_MAX_AMMO)
+	if (!(pd->weapons)[id].unlocked || pd->ammo < PL_MAX_AMMO)
 	{
-		pd->ammo = (pd->ammo + 6 <= PLAYER_MAX_AMMO) ? \
-			pd->ammo + 6 : PLAYER_MAX_AMMO;
+		pd->ammo = (pd->ammo + 6 <= PL_MAX_AMMO) ? \
+			pd->ammo + 6 : PL_MAX_AMMO;
 		if (!(pd->weapons)[id].unlocked)
 		{
 			(pd->weapons)[id].unlocked = true;
 			switch_weapon(pd, id);
 			if (id == 3)
-				(*pd).effects.chaingun_acquired = clock();
+				(pd->effects).r_bj_evil_grin = clock();
 		}
 		obj->state = TAKEN;
 	}
