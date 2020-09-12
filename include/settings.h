@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 17:14:41 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/12 20:54:16 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define PL_JUMP_HEIGHT			250
 # define PL_MAX_AMMO			99
 # define PL_MAX_HEALTH			100
-# define PL_MAX_INTERACT_DIST	1.0
+# define PL_MAX_INTERACT_DIST	0.80
 # define PL_MAX_PICKUP_DIST		0.50
 # define PL_MOUSE_SENSE			0.025
 # define PL_MOVE_SPEED			6
