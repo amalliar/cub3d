@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 13:54:49 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/13 19:00:11 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ static void		init_scene(t_scene *scene)
 	(*scene).player_data.effects.r_bj_evil_grin = 0;
 	(*scene).render_started = 0;
 	(*scene).mouse_grabbing = DISABLED;
+	SDL_Init(SDL_INIT_AUDIO);
+	initAudio();
 }
 
 static void		get_render_mode(int argc, char **argv, int *render_mode)

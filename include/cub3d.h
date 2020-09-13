@@ -6,13 +6,14 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 13:10:35 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/13 18:44:42 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <SDL2/SDL.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
@@ -23,6 +24,7 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <unistd.h>
+# include "audio.h"
 # include "blocks.h"
 # include "settings.h"
 
@@ -305,9 +307,12 @@ typedef struct		s_scene
 	t_sprite		*sprites;
 	t_sprite_data	sprite_data;
 	t_textures		textures;
+	Audio			*music[NUM_MUSIC_TRACKS];
+	Audio			*sounds[NUM_SOUNDS];
 }					t_scene;
 
 void				exit_failure(char *format, ...);
+void				load_audio(t_scene *scene);
 void				load_scene(t_scene *scene, char *path);
 void				render_scene(t_scene *scene);
 void				take_screenshot(t_scene *scene);

@@ -6,12 +6,13 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 13:15:58 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 19:15:33 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/13 18:33:33 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "process_key_states.h"
 #include "render_scene.h"
+#include "snd.h"
 
 static void		process_player_jump(t_player_data *pd, double frame_time)
 {
@@ -40,7 +41,10 @@ static void		attempt_door_auto_closing(t_scene *scene, t_door *doors, \
 		if (door_collision(scene, pd->pos_x, pd->pos_y))
 			doors[i].state = OPEN;
 		else
+		{
+			playSoundFromMemory((scene->sounds)[SND_DOOR], G_SOUNDS_VOLUME);
 			doors[i].state = CLOSING;
+		}
 	}
 }
 
@@ -74,7 +78,7 @@ static void		process_door_states(t_scene *scene, t_door *doors, \
 			attempt_door_auto_closing(scene, doors, i - 1, frame_time);
 }
 
-static void		process_weapon_state(t_player_data *pd)
+static void		process_weapon_state(t_scene *scene, t_player_data *pd)
 {
 	static clock_t		r_timer = 0;
 	t_weapon			*wpn;
@@ -85,6 +89,8 @@ static void		process_weapon_state(t_player_data *pd)
 		return ;
 	if (wpn->type == HITSCAN)
 	{
+		if (wpn->frame == 2)
+			playSoundFromMemory((scene->sounds)[wpn->id], G_SOUNDS_VOLUME);
 		pd->ammo -= ((wpn->frame == 2) + (wpn->frame == 3 && wpn->id == 3));
 		if (pd->ammo <= 0)
 		{
@@ -92,6 +98,8 @@ static void		process_weapon_state(t_player_data *pd)
 			wpn->state = IDLE;
 		}
 	}
+	else if (wpn->frame == 0)
+		playSoundFromMemory((scene->sounds)[wpn->id], G_SOUNDS_VOLUME);
 	if (wpn->firing_mode == FULL_AUTO && wpn->state == FIRING && \
 		(wpn->frame == 2 || wpn->frame == 3))
 		wpn->frame = (wpn->frame == 2) ? 3 : 2;
@@ -112,5 +120,5 @@ void			process_physics(t_scene *scene)
 	process_player_jump(pd, mlx_data->frame_time);
 	process_door_states(scene, scene->doors, scene->num_doors, \
 		mlx_data->frame_time);
-	process_weapon_state(&scene->player_data);
+	process_weapon_state(scene, &scene->player_data);
 }

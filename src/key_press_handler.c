@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:21:32 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 18:59:51 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/13 19:50:24 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static void		process_misc(int keycode, t_scene *scene)
 {
 	if (keycode == KVK_ESCAPE)
 	{
+		endAudio();
+		SDL_Quit();
 		mlx_destroy_window((scene->mlx_data).mlx, (scene->mlx_data).win);
 		exit(EXIT_SUCCESS);
 	}

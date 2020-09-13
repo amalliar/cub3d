@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/12 19:35:03 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/13 19:54:40 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,11 @@ SHELL      := /bin/sh
 CC         := clang
 CFLAGS     := -Wall -Wextra -fdiagnostics-color -g -pipe \
               -march=native -O2
-INCLUDE    := -I./include -I./libft/include -I./libmlx
+INCLUDE    := -I./include -I./libft/include -I./libmlx -I./libsdl2/include
 NAME       := cub3D
 LIBFT      := ./libft/libft.a
 LIBMLX     := ./libmlx/libmlx.dylib
-LIBS       := -L./libft -lft -L./libmlx -lmlx -framework OpenGL -framework AppKit
+LIBS       := -L./libft -lft -L./libmlx -lmlx -framework OpenGL -framework AppKit -L./libsdl2 -lSDL2-2.0.0
 SRCDIR     := src
 OBJDIR     := .obj
 DEPDIR     := .dep
@@ -36,8 +36,10 @@ SRCS       := src/attempt_item_pickup.c \
               src/item_pickup_2.c \
               src/key_press_handler.c \
               src/key_release_handler.c \
+	      src/load_audio.c \
               src/load_scene.c \
               src/load_scene_2.c \
+              src/load_textures.c \
               src/mlx_image_to_bmp_file.c \
               src/object_collision.c \
               src/parse_map.c \
@@ -52,7 +54,6 @@ SRCS       := src/attempt_item_pickup.c \
 	      src/render_hud_2.c \
               src/render_scene.c \
               src/render_sprites.c \
-              src/load_textures.c \
               src/render_walls.c \
               src/render_walls_2.c \
               src/render_walls_3.c \
@@ -90,7 +91,7 @@ linux:
 bonus: $(NAME)
 $(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
 	@echo "$(LGREEN)Linking executable $(NAME)$(NOC)"
-	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBS) -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) ./libsdl2/audio.c $(OBJS) $(LIBS) -o $@
 	@echo "Built target $(NAME)"
 .PHONY: bonus
 
@@ -129,7 +130,7 @@ fclean: clean
 
 re:
 	$(MAKE) fclean
-	$(MAKE) all
+	$(MAKE) bonus
 .PHONY: re
 
 help:

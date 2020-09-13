@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 14:19:33 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/13 19:27:36 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,15 @@ static void		load_map(t_scene *scene, char *path)
 	ft_lstclear(&lst, free);
 	parse_map(scene);
 	close(fd);
+	playMusicFromMemory((scene->music)[(scene->player_data).level], \
+		G_MUSIC_VOLUME);
 	init_player_stats(&scene->player_data);
 	init_player_weapons(&scene->player_data, (*scene).textures.hud);
 }
 
 void			load_scene(t_scene *scene, char *path)
 {
+	load_audio(scene);
 	load_textures(scene);
 	load_map(scene, path);
 }

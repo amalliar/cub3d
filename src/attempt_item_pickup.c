@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 21:27:45 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 15:55:07 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/13 19:15:27 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ void		attempt_item_pickup(t_scene *scene)
 		if ((scene->sprites)[i].state == PLACED)
 		{
 			if (ft_strchr(AMMO_PICKUPS, (scene->sprites)[i].type))
-				attempt_ammo_pickup(&scene->player_data, scene->sprites + i);
+				attempt_ammo_pickup(scene, scene->sprites + i);
 			else if (ft_strchr(GIBS_PICKUPS, (scene->sprites)[i].type))
-				attempt_gibs_pickup(&scene->player_data, scene->sprites + i);
+				attempt_gibs_pickup(scene, scene->sprites + i);
 			else if (ft_strchr(HEALTH_PICKUPS, (scene->sprites)[i].type))
-				attempt_health_pickup(&scene->player_data, scene->sprites + i);
+				attempt_health_pickup(scene, scene->sprites + i);
 			else if (ft_strchr(KEY_PICKUPS, scene->sprites[i].type))
-				attempt_key_pickup(&scene->player_data, scene->sprites + i);
+				attempt_key_pickup(scene, scene->sprites + i);
 			else if (ft_strchr(POWERUP_PICKUPS, (scene->sprites)[i].type))
-				attempt_powerup_pickup(&scene->player_data, scene->sprites + i);
+				attempt_powerup_pickup(scene, scene->sprites + i);
 			else if (ft_strchr(TREASURE_PICKUPS, (scene->sprites)[i].type))
-				attempt_treasur_pickup(&scene->player_data, scene->sprites + i);
+				attempt_treasur_pickup(scene, scene->sprites + i);
 			else if (ft_strchr(WEAPON_PICKUPS, (scene->sprites)[i].type))
-				attempt_weapon_pickup(&scene->player_data, scene->sprites + i);
+				attempt_weapon_pickup(scene, scene->sprites + i);
 		}
 		--i;
 	}

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 20:54:16 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/13 19:43:55 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define G_MLX_WINDOW_TITLE		"cub3D"
 # define G_MLX_WINDOW_WIDTH		G_GAME_WINDOW_WIDTH
 # define G_MLX_WINDOW_HEIGHT	G_GAME_WINDOW_HEIGHT + G_HUD_HEIGHT
+# define G_MUSIC_VOLUME			SDL_MIX_MAXVOLUME / 100 * 15
+# define G_SOUNDS_VOLUME		SDL_MIX_MAXVOLUME / 100 * 20
 
 # define SV_GRAVITY				9.807 * 1000
 
@@ -55,5 +57,7 @@
 # define NUM_WALL_TEXTURES		52
 # define NUM_WEAPONS			4
 # define NUM_WEAPON_FRAMES		5
+# define NUM_MUSIC_TRACKS		1
+# define NUM_SOUNDS				8
 
 #endif
