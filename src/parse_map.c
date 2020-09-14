@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:35:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 19:02:15 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/14 18:59:51 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,20 @@ static void		load_door_data(t_scene *scene, int x, int y, char obj)
 	scene->num_doors += 1;
 }
 
+static void		load_secret_data(t_scene *scene, int x, int y, char obj)
+{
+	if (!(scene->secrets = ft_realloc(scene->secrets, \
+		scene->num_secrets * sizeof(t_secret), \
+		(scene->num_secrets + 1) * sizeof(t_secret))))
+		exit_failure("%s\n", strerror(errno));
+	(scene->secrets)[scene->num_secrets].x = x;
+	(scene->secrets)[scene->num_secrets].y = y;
+	(scene->secrets)[scene->num_secrets].state = INACTIVE;
+	(scene->secrets)[scene->num_secrets].s_timer = 0.0;
+	(scene->secrets)[scene->num_secrets].type = obj;
+	scene->num_secrets += 1;
+}
+
 static void		process_map_object(t_scene *scene, int x, int y, char obj)
 {
 	if (ft_strchr(MP_INNER_OBJECTS, obj))
@@ -103,6 +117,8 @@ static void		process_map_object(t_scene *scene, int x, int y, char obj)
 		load_sprite_data(scene, x, y, obj);
 	else if (ft_strchr(MP_DOORS, obj))
 		load_door_data(scene, x, y, obj);
+	else if (ft_strchr(MP_SECRETS, obj))
+		load_secret_data(scene, x, y, obj);
 }
 
 void			parse_map(t_scene *scene)

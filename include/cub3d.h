@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/13 18:44:42 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/14 21:54:58 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ enum				e_door_states
 	CLOSING
 };
 
+enum				e_secret_states
+{
+	INACTIVE,
+	ACTIVE
+};
+
 enum				e_weapon_types
 {
 	MELEE,
@@ -69,7 +75,8 @@ enum				e_weapon_firing_modes
 enum				e_weapon_states
 {
 	IDLE,
-	FIRING
+	FIRING,
+	EMPTY
 };
 
 typedef struct		s_point
@@ -145,6 +152,15 @@ typedef struct		s_door
 	double			c_timer;
 	char			type;
 }					t_door;
+
+typedef struct		s_secret
+{
+	int				x;
+	int				y;
+	int				state;
+	double			s_timer;
+	char			type;
+}					t_secret;
 
 typedef struct		s_weapon
 {
@@ -297,8 +313,10 @@ typedef struct		s_scene
 	int				render_started;
 	int				mouse_grabbing;
 	int				num_doors;
+	int				num_secrets;
 	t_button_states	button_states;
 	t_door			*doors;
+	t_secret		*secrets;
 	t_key_states	key_states;
 	t_map_data		map_data;
 	t_mlx_data		mlx_data;

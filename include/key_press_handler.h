@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 10:44:40 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 16:54:18 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/14 18:31:32 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 int			key_press_handler(int keycode, t_scene *scene);
 t_door		*get_door(t_scene *scene, int door_x, int door_y);
+t_secret	*get_secret(t_scene *scene, int secr_x, int secr_y);
 void		process_interact_request(t_scene *scene);
 void		switch_weapon(t_player_data *pd, int id, t_scene *scene);
 

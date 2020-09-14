@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/13 19:00:11 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/14 18:21:11 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void		init_scene(t_scene *scene)
 	init_key_and_button_states(&scene->key_states, &scene->button_states);
 	(*scene).sprite_data.num_sprites = 0;
 	(*scene).num_doors = 0;
+	(*scene).num_secrets = 0;
 	(*scene).player_data.pos_x = -1;
 	(*scene).player_data.v0 = 0;
 	(*scene).player_data.level = 0;

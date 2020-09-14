@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 16:18:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/09 11:18:12 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/14 19:47:11 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,30 @@ static t_block		g_blocks[] =
 		ELEVATOR_DOOR_DARK,
 		ELEVATOR_DOOR_DARK
 	},
+	{
+		WOODEN_EAGLE_PICTURE,
+		WOODEN_EAGLE_PICTURE,
+		WOODEN_EAGLE_PICTURE_DARK,
+		WOODEN_EAGLE_PICTURE_DARK
+	},
+	{
+		GREY_STONE_HITLER_PICTURE,
+		GREY_STONE_HITLER_PICTURE,
+		GREY_STONE_HITLER_PICTURE_DARK,
+		GREY_STONE_HITLER_PICTURE_DARK,
+	},
+	{
+		GREY_STONE_WALL,
+		GREY_STONE_WALL,
+		GREY_STONE_WALL_DARK,
+		GREY_STONE_WALL_DARK,
+	},
+	{
+		GREY_STONE_WALL,
+		GREY_STONE_WALL,
+		GREY_STONE_WALL_DARK,
+		GREY_STONE_WALL_DARK,
+	}
 };
 
 #endif

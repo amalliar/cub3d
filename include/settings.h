@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 17:09:17 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/14 21:57:45 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,19 @@
 
 # define SV_GRAVITY				9.807 * 1000
 
-# define MP_DEFINED_OBJECTS		MP_OUTER_OBJECTS MP_INNER_OBJECTS
+# define MP_OBJECTS			"abcdefghijklmnopqrstuvwxyz123456789\"#$%&'()*+,."
+# define MP_BLOCKS				"!ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # define MP_OUTER_OBJECTS		" " MP_BLOCKS
 # define MP_INNER_OBJECTS		"0^_<>" MP_OBJECTS
-# define MP_BLOCKS				"!ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-# define MP_OBJECTS			"abcdefghijklmnopqrstuvwxyz123456789\"#$%&'()*+,."
+# define MP_DEFINED_OBJECTS		MP_OUTER_OBJECTS MP_INNER_OBJECTS
 # define NS						"NP"
 # define EW						"OQ"
 # define MP_DOORS				NS EW
+# define MP_NSECRETS			"S"
+# define MP_SSECRETS			"T"
+# define MP_ESECRETS			""
+# define MP_WSECRETS			"RU"
+# define MP_SECRETS				MP_NSECRETS MP_SSECRETS MP_ESECRETS MP_WSECRETS
 # define MP_COLLIDERS			"!ABCDEFGHIJKLMRSTUVWXYZbcdilmnq\"#$&"
 # define MP_COLLISION_RADIUS	0.20
 
@@ -58,6 +63,6 @@
 # define NUM_WEAPONS			4
 # define NUM_WEAPON_FRAMES		5
 # define NUM_MUSIC_TRACKS		1
-# define NUM_SOUNDS				17
+# define NUM_SOUNDS				19
 
 #endif

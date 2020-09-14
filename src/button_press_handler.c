@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 15:47:06 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/13 18:30:05 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/14 21:42:59 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 #include "events.h"
 #include "snd.h"
 
-static void		fire_weapon(t_player_data *pd)
+static void		fire_weapon(t_scene *scene)
 {
+	t_player_data	*pd;
 	t_weapon		*wpn;
 
+	pd = &scene->player_data;
 	wpn = pd->active_weapon;
 	if (pd->ammo > 0 || wpn->type == MELEE)
 		wpn->state = FIRING;
+	else
+		playSoundFromMemory((scene->sounds)[SND_EMPTYCLIP], G_SOUNDS_VOLUME);
 }
 
 int				button_press_handler(int button, int x, int y, t_scene *scene)
@@ -35,7 +39,7 @@ int				button_press_handler(int button, int x, int y, t_scene *scene)
 	if (button == MB_LEFT)
 	{
 		bs->mb_left = KEY_DOWN;
-		fire_weapon(pd);
+		fire_weapon(scene);
 	}
 	return (0);
 }
