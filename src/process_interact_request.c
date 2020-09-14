@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 10:38:15 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/13 16:26:55 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/14 13:49:12 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,22 @@ void			process_interact_request(t_scene *scene)
 	t_player_data	*pd;
 	t_map_data		*md;
 	t_point			obj;
+	double			dist;
 
 	pd = &scene->player_data;
 	md = &scene->map_data;
-	obj.x = (int)(pd->pos_x + pd->dir_x * PL_MAX_INTERACT_DIST);
-	obj.y = (int)(pd->pos_y + pd->dir_y * PL_MAX_INTERACT_DIST);
-	if (ft_strchr(MP_DOORS, (md->map)[obj.y][obj.x]) && \
-		(obj.x != (int)pd->pos_x || obj.y != (int)pd->pos_y))
+	dist = PL_MAX_INTERACT_DIST;
+	while (dist > 0)
 	{
-		playSoundFromMemory((scene->sounds)[SND_DOOR], G_SOUNDS_VOLUME);
-		switch_door_state(get_door(scene, obj.x, obj.y));
+		obj.x = (int)(pd->pos_x + pd->dir_x * dist);
+		obj.y = (int)(pd->pos_y + pd->dir_y * dist);
+		if (ft_strchr(MP_DOORS, (md->map)[obj.y][obj.x]) && \
+			(obj.x != (int)pd->pos_x || obj.y != (int)pd->pos_y))
+		{
+			playSoundFromMemory((scene->sounds)[SND_DOOR], G_SOUNDS_VOLUME);
+			switch_door_state(get_door(scene, obj.x, obj.y));
+			return ;
+		}
+		dist -= 0.1;
 	}
 }
