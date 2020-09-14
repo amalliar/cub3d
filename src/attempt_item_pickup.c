@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 21:27:45 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/13 19:15:27 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/14 17:04:28 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void		attempt_item_pickup(t_scene *scene)
 			else if (ft_strchr(POWERUP_PICKUPS, (scene->sprites)[i].type))
 				attempt_powerup_pickup(scene, scene->sprites + i);
 			else if (ft_strchr(TREASURE_PICKUPS, (scene->sprites)[i].type))
-				attempt_treasur_pickup(scene, scene->sprites + i);
+				attempt_treasur_pickup(scene, scene->sprites + i, \
+					&scene->player_data);
 			else if (ft_strchr(WEAPON_PICKUPS, (scene->sprites)[i].type))
 				attempt_weapon_pickup(scene, scene->sprites + i);
 		}

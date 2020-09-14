@@ -6,11 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:21:32 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/13 19:50:24 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/14 16:53:22 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_press_handler.h"
+#include "snd.h"
 
 static void		switch_states(int *kd, int *ku)
 {
@@ -19,7 +20,7 @@ static void		switch_states(int *kd, int *ku)
 }
 
 static void		process_movement(int keycode, t_key_states *ks, \
-					t_player_data *pd)
+					t_player_data *pd, t_scene *scene)
 {
 	if (keycode == KVK_ANSI_W)
 		switch_states(&ks->kvk_ansi_w, &ks->kvk_ansi_s);
@@ -40,19 +41,23 @@ static void		process_movement(int keycode, t_key_states *ks, \
 	else if (keycode == KVK_CONTROL && pd->pos_z == 0)
 		pd->pos_z = -200;
 	else if (keycode == KVK_SPACE && pd->pos_z == 0)
+	{
+		playSoundFromMemory((scene->sounds)[SND_JUMP], G_SOUNDS_VOLUME);
 		pd->v0 = sqrt(2 * SV_GRAVITY * PL_JUMP_HEIGHT);
+	}
 }
 
-static void		process_weapon_switch(int keycode, t_player_data *pd)
+static void		process_weapon_switch(int keycode, t_player_data *pd, \
+					t_scene *scene)
 {
 	if (keycode == KVK_ANSI_1)
-		switch_weapon(pd, 0);
+		switch_weapon(pd, 0, scene);
 	else if (keycode == KVK_ANSI_2)
-		switch_weapon(pd, 1);
+		switch_weapon(pd, 1, scene);
 	else if (keycode == KVK_ANSI_3)
-		switch_weapon(pd, 2);
+		switch_weapon(pd, 2, scene);
 	else if (keycode == KVK_ANSI_4)
-		switch_weapon(pd, 3);
+		switch_weapon(pd, 3, scene);
 }
 
 static void		process_misc(int keycode, t_scene *scene)
@@ -77,8 +82,8 @@ int				key_press_handler(int keycode, t_scene *scene)
 
 	ks = &scene->key_states;
 	pd = &scene->player_data;
-	process_movement(keycode, ks, pd);
-	process_weapon_switch(keycode, pd);
+	process_movement(keycode, ks, pd, scene);
+	process_weapon_switch(keycode, pd, scene);
 	process_misc(keycode, scene);
 	return (0);
 }

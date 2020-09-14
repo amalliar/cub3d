@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/13 19:43:55 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/14 17:09:17 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define G_MLX_WINDOW_TITLE		"cub3D"
 # define G_MLX_WINDOW_WIDTH		G_GAME_WINDOW_WIDTH
 # define G_MLX_WINDOW_HEIGHT	G_GAME_WINDOW_HEIGHT + G_HUD_HEIGHT
-# define G_MUSIC_VOLUME			SDL_MIX_MAXVOLUME / 100 * 15
-# define G_SOUNDS_VOLUME		SDL_MIX_MAXVOLUME / 100 * 20
+# define G_MUSIC_VOLUME			SDL_MIX_MAXVOLUME / 100.0 * 5
+# define G_SOUNDS_VOLUME		SDL_MIX_MAXVOLUME / 100.0 * 15
 
 # define SV_GRAVITY				9.807 * 1000
 
@@ -42,7 +42,7 @@
 # define PL_JUMP_HEIGHT			250
 # define PL_MAX_AMMO			99
 # define PL_MAX_HEALTH			100
-# define PL_MAX_INTERACT_DIST	0.80
+# define PL_MAX_INTERACT_DIST	0.85
 # define PL_MAX_PICKUP_DIST		0.50
 # define PL_MOUSE_SENSE			0.025
 # define PL_MOVE_SPEED			6
@@ -58,6 +58,6 @@
 # define NUM_WEAPONS			4
 # define NUM_WEAPON_FRAMES		5
 # define NUM_MUSIC_TRACKS		1
-# define NUM_SOUNDS				8
+# define NUM_SOUNDS				17
 
 #endif

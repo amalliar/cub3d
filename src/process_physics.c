@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 13:15:58 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/13 18:33:33 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/14 17:01:01 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void		attempt_door_auto_closing(t_scene *scene, t_door *doors, \
 					int i, double frame_time)
 {
 	t_player_data		*pd;
+	double				vperc;
 
 	pd = &scene->player_data;
 	if (doors[i].c_timer < 6.0)
@@ -42,7 +43,12 @@ static void		attempt_door_auto_closing(t_scene *scene, t_door *doors, \
 			doors[i].state = OPEN;
 		else
 		{
-			playSoundFromMemory((scene->sounds)[SND_DOOR], G_SOUNDS_VOLUME);
+			vperc = 100.0 - sqrt(pow(pd->pos_x - doors[i].x - 0.5, 2) + \
+				pow(pd->pos_y - doors[i].y - 0.5, 2)) * 3.5;
+			if (vperc < 0)
+				vperc = 0;
+			playSoundFromMemory((scene->sounds)[SND_DOOR], \
+				G_SOUNDS_VOLUME * vperc / 100.0);
 			doors[i].state = CLOSING;
 		}
 	}
