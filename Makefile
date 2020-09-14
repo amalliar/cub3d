@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/13 19:54:40 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/14 13:54:51 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,13 @@ LGREEN     := \033[1;32m
 WHITE      := \033[1;37m
 NOC        := \033[0m
 
+bonus: $(NAME)
+$(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
+	@echo "$(LGREEN)Linking executable $(NAME)$(NOC)"
+	$(CC) $(CFLAGS) $(INCLUDE) ./libsdl2/audio.c $(OBJS) $(LIBS) -o $@
+	@echo "Built target $(NAME)"
+.PHONY: bonus
+
 all:
 	@$(MAKE) fclean
 	@git checkout -f master
@@ -87,13 +94,6 @@ linux:
 	@git checkout -f linux
 	@$(MAKE) all
 .PHONY: linux
-
-bonus: $(NAME)
-$(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
-	@echo "$(LGREEN)Linking executable $(NAME)$(NOC)"
-	$(CC) $(CFLAGS) $(INCLUDE) ./libsdl2/audio.c $(OBJS) $(LIBS) -o $@
-	@echo "Built target $(NAME)"
-.PHONY: bonus
 
 $(LIBFT): NONE
 	@$(MAKE) -C ./libft
