@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:52:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 19:07:08 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/15 17:28:14 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ static void		dda_run(t_scene *scene, t_player_data *pd, t_map_data *md)
 		{
 			pd->hit = 1;
 			pd->door_hit = 0;
-			if (ft_strchr(MP_DOORS, (md->map)[(int)pd->map_y][(int)pd->map_x]))
+			pd->secret_hit = 0;
+			if (ft_strchr(MP_SPECIAL_BLOCKS, \
+				(md->map)[(int)pd->map_y][(int)pd->map_x]))
 				extend_ray(scene);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 21:54:58 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/15 16:42:49 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,9 +186,10 @@ typedef struct		s_player_data
 	t_weapon		*active_weapon;
 	t_effects		effects;
 	t_door			*door;
-	t_segment		f1;
-	t_segment		f2;
-	t_segment		sd;
+	t_secret		*secret;
+	t_segment		s1;
+	t_segment		s2;
+	t_segment		s3;
 	t_segment		ray;
 	t_line			line1;
 	t_line			line2;
@@ -204,6 +205,7 @@ typedef struct		s_player_data
 	int				step_y;
 	int				hit;
 	int				door_hit;
+	int				secret_hit;
 	int				side;
 	int				line_height;
 	int				draw_start;

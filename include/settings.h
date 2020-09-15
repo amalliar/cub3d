@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 21:57:45 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/15 15:21:32 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define MP_ESECRETS			""
 # define MP_WSECRETS			"RU"
 # define MP_SECRETS				MP_NSECRETS MP_SSECRETS MP_ESECRETS MP_WSECRETS
+# define MP_SPECIAL_BLOCKS		MP_DOORS MP_SECRETS
 # define MP_COLLIDERS			"!ABCDEFGHIJKLMRSTUVWXYZbcdilmnq\"#$&"
 # define MP_COLLISION_RADIUS	0.20
 
