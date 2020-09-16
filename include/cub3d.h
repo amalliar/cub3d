@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/15 16:42:49 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/16 18:12:03 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,18 @@ enum				e_weapon_states
 	EMPTY
 };
 
+enum				e_enemie_states
+{
+	EN_IDLE,
+	EN_WALKING_1,
+	EN_WALKING_2,
+	EN_WALKING_3,
+	EN_WALKING_4,
+	EN_HIT,
+	EN_DEAD,
+	EN_SHOOTING
+};
+
 typedef struct		s_point
 {
 	int				x;
@@ -130,6 +142,7 @@ typedef struct		s_textures
 {
 	t_mlx_image		walls[NUM_WALL_TEXTURES];
 	t_mlx_image		objects[NUM_OBJECT_TEXTURES];
+	t_mlx_image		guard[NUM_GUARD_TEXTURES];
 	t_mlx_image		hud[NUM_HUD_TEXTURES];
 	t_mlx_image		faces[NUM_FACES_TEXTURES];
 	t_mlx_image		floor;

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:41:39 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/10 12:39:15 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/16 18:04:53 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,58 @@ static char		g_wpn_chaingun_texture_paths[NUM_WEAPON_FRAMES][128] =
 	"./res/weapons/chaingun/02_frame.xpm",
 	"./res/weapons/chaingun/03_frame.xpm",
 	"./res/weapons/chaingun/04_frame.xpm"
+};
+
+static char		g_guard_texture_paths[NUM_GUARD_TEXTURES][128] =
+{
+	"./res/textures/guard/00_en_idle.xpm",
+	"./res/textures/guard/01_en_idle.xpm",
+	"./res/textures/guard/02_en_idle.xpm",
+	"./res/textures/guard/03_en_idle.xpm",
+	"./res/textures/guard/04_en_idle.xpm",
+	"./res/textures/guard/05_en_idle.xpm",
+	"./res/textures/guard/06_en_idle.xpm",
+	"./res/textures/guard/07_en_idle.xpm",
+	"./res/textures/guard/08_en_walking_1.xpm",
+	"./res/textures/guard/09_en_walking_1.xpm",
+	"./res/textures/guard/10_en_walking_1.xpm",
+	"./res/textures/guard/11_en_walking_1.xpm",
+	"./res/textures/guard/12_en_walking_1.xpm",
+	"./res/textures/guard/13_en_walking_1.xpm",
+	"./res/textures/guard/14_en_walking_1.xpm",
+	"./res/textures/guard/15_en_walking_1.xpm",
+	"./res/textures/guard/16_en_walking_2.xpm",
+	"./res/textures/guard/17_en_walking_2.xpm",
+	"./res/textures/guard/18_en_walking_2.xpm",
+	"./res/textures/guard/19_en_walking_2.xpm",
+	"./res/textures/guard/20_en_walking_2.xpm",
+	"./res/textures/guard/21_en_walking_2.xpm",
+	"./res/textures/guard/22_en_walking_2.xpm",
+	"./res/textures/guard/23_en_walking_2.xpm",
+	"./res/textures/guard/24_en_walking_3.xpm",
+	"./res/textures/guard/25_en_walking_3.xpm",
+	"./res/textures/guard/26_en_walking_3.xpm",
+	"./res/textures/guard/27_en_walking_3.xpm",
+	"./res/textures/guard/28_en_walking_3.xpm",
+	"./res/textures/guard/29_en_walking_3.xpm",
+	"./res/textures/guard/30_en_walking_3.xpm",
+	"./res/textures/guard/31_en_walking_3.xpm",
+	"./res/textures/guard/32_en_walking_4.xpm",
+	"./res/textures/guard/33_en_walking_4.xpm",
+	"./res/textures/guard/34_en_walking_4.xpm",
+	"./res/textures/guard/35_en_walking_4.xpm",
+	"./res/textures/guard/36_en_walking_4.xpm",
+	"./res/textures/guard/37_en_walking_4.xpm",
+	"./res/textures/guard/38_en_walking_4.xpm",
+	"./res/textures/guard/39_en_walking_4.xpm",
+	"./res/textures/guard/40_en_dead.xpm",
+	"./res/textures/guard/41_en_dead.xpm",
+	"./res/textures/guard/42_en_dead.xpm",
+	"./res/textures/guard/43_en_dead.xpm",
+	"./res/textures/guard/44_en_dead.xpm",
+	"./res/textures/guard/45_en_shooting.xpm",
+	"./res/textures/guard/46_en_shooting.xpm",
+	"./res/textures/guard/47_en_shooting.xpm"
 };
 
 #endif
