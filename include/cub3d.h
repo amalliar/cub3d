@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/16 21:12:21 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/16 21:43:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,16 @@ enum				e_weapon_states
 	EMPTY
 };
 
+enum	e_object_states
+{
+	PLACED,
+	TAKEN,
+	NOT_A_PICKUP
+};
+
 enum				e_enemie_states
 {
-	EN_IDLE,
+	EN_IDLE = 4,
 	EN_WALKING_1,
 	EN_WALKING_2,
 	EN_WALKING_3,
@@ -293,6 +300,8 @@ typedef struct		s_sprite
 {
 	t_mlx_image		*tex;
 	int				state;
+	double			dir_x;
+	double			dir_y;
 	double			x;
 	double			y;
 	double			dist;

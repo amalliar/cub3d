@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/16 17:58:48 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/16 22:02:54 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@
 # define SV_GRAVITY				9.807 * 1000
 
 # define MP_OBJECTS			"abcdefghijklmnopqrstuvwxyz123456789\"#$%&'()*+,."
+# define MP_ENEMIES				"|~{}"
 # define MP_BLOCKS				"!ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # define MP_OUTER_OBJECTS		" " MP_BLOCKS
-# define MP_INNER_OBJECTS		"0^_<>" MP_OBJECTS
+# define MP_INNER_OBJECTS		"0^_<>" MP_OBJECTS MP_ENEMIES
 # define MP_DEFINED_OBJECTS		MP_OUTER_OBJECTS MP_INNER_OBJECTS
 # define NS						"NP"
 # define EW						"OQ"

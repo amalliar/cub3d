@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:05:51 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 17:04:11 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/16 21:43:26 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@
 # define PICKUPS PU1 PU2
 
 # include "cub3d.h"
-
-enum	e_object_states
-{
-	PLACED,
-	TAKEN,
-	NOT_A_PICKUP
-};
 
 void	attempt_ammo_pickup(t_scene *scene, t_sprite *obj);
 void	attempt_gibs_pickup(t_scene *scene, t_sprite *obj);

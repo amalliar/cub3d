@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:35:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/16 21:17:45 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/16 22:03:38 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,48 @@ static void		load_object_data(t_scene *scene, int x, int y, char obj)
 	sd->num_sprites += 1;
 }
 
+static void		set_enemie_dir(t_sprite *sp)
+{
+	if (ft_strchr("|", sp->type))
+	{
+		sp->dir_x = 0;
+		sp->dir_y = -1;
+	}
+	else if (ft_strchr("~", sp->type))
+	{
+		sp->dir_x = 0;
+		sp->dir_y = 1;
+	}
+	else if (ft_strchr("{", sp->type))
+	{
+		sp->dir_x = -1;
+		sp->dir_y = 0;
+	}
+	else if (ft_strchr("}", sp->type))
+	{
+		sp->dir_x = 1;
+		sp->dir_y = 0;
+	}
+}
+
+static void		load_enemie_data(t_scene *scene, int x, int y, char obj)
+{
+	t_sprite_data	*sd;
+
+	sd = &scene->sprite_data;
+	if (!(scene->sprites = ft_realloc(scene->sprites, \
+		sd->num_sprites * sizeof(t_sprite), \
+		(sd->num_sprites + 1) * sizeof(t_sprite))))
+		exit_failure("%s\n", strerror(errno));
+	(scene->sprites)[sd->num_sprites].x = x + 0.5;
+	(scene->sprites)[sd->num_sprites].y = y + 0.5;
+	(scene->sprites)[sd->num_sprites].type = obj;
+	set_enemie_dir(scene->sprites + sd->num_sprites);
+	(scene->sprites)[sd->num_sprites].state = EN_IDLE;
+	(scene->sprites)[sd->num_sprites].tex = (scene->textures).guard;
+	sd->num_sprites += 1;
+}
+
 static void		load_door_data(t_scene *scene, int x, int y, char obj)
 {
 	if (!(scene->doors = ft_realloc(scene->doors, \
@@ -115,6 +157,8 @@ static void		process_map_object(t_scene *scene, int x, int y, char obj)
 	}
 	else if (ft_strchr(MP_OBJECTS, obj))
 		load_object_data(scene, x, y, obj);
+	else if (ft_strchr(MP_ENEMIES, obj))
+		load_enemie_data(scene, x, y, obj);
 	else if (ft_strchr(MP_DOORS, obj))
 		load_door_data(scene, x, y, obj);
 	else if (ft_strchr(MP_SECRETS, obj))
