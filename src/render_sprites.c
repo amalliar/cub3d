@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 13:04:05 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 18:51:38 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/16 21:19:36 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		calc_sprite_dist(t_scene *scene, t_sprite *sprites)
 
 	pd = &scene->player_data;
 	i = 0;
-	while (i < (*scene).sprite_data.num_sprites)
+	while (i < (scene->sprite_data).num_sprites)
 	{
 		sprites[i].dist = (pow(pd->pos_x - sprites[i].x, 2) + \
 			pow(pd->pos_y - sprites[i].y, 2));
@@ -71,7 +71,7 @@ static void		init_sprite_data(t_mlx_image *frame, t_player_data *pd, \
 		sd->draw_end_x = frame->width - 1;
 }
 
-static void		draw_sprite(t_scene *scene, t_mlx_image *frame, \
+static void		draw_sprite(t_sprite *sp, t_mlx_image *frame, \
 					t_player_data *pd, t_sprite_data *sd)
 {
 	int		color;
@@ -80,8 +80,7 @@ static void		draw_sprite(t_scene *scene, t_mlx_image *frame, \
 	while (sd->stripe < sd->draw_end_x)
 	{
 		sd->tex_x = (int)(256 * (sd->stripe - (-sd->sprite_width / 2 + \
-		sd->sprite_screen_x)) * (*scene).textures.objects[sd->id_tex].width \
-			/ sd->sprite_width) / 256;
+		sd->sprite_screen_x)) * sp->tex->width / sd->sprite_width) / 256;
 		sd->y = sd->draw_start_y;
 		if (sd->transform_y > 0 && sd->stripe > 0 && sd->stripe < \
 			frame->width && sd->transform_y < (pd->zbuffer)[sd->stripe])
@@ -89,10 +88,9 @@ static void		draw_sprite(t_scene *scene, t_mlx_image *frame, \
 			{
 				sd->d = (sd->y - sd->v_move_screen) * 256 - frame->height * \
 					128 + sd->sprite_height * 128;
-				sd->tex_y = ((sd->d * \
-	(*scene).textures.objects[sd->id_tex].height) / sd->sprite_height) / 256;
-				color = mlx_pixel_get(&(*scene).textures.objects[sd->id_tex], \
-					sd->tex_x, sd->tex_y);
+				sd->tex_y = ((sd->d * sp->tex->height) \
+					/ sd->sprite_height) / 256;
+				color = mlx_pixel_get(sp->tex, sd->tex_x, sd->tex_y);
 				if (color != INVIS)
 					mlx_pixel_set(frame, sd->stripe, sd->y, color);
 				++sd->y;
@@ -120,9 +118,8 @@ void			render_sprites(t_scene *scene)
 		{
 			sd->sprite_x = sprites[i].x - pd->pos_x;
 			sd->sprite_y = sprites[i].y - pd->pos_y;
-			sd->id_tex = sprites[i].id_tex;
-			init_sprite_data(&(*scene).mlx_data.frame, pd, sd);
-			draw_sprite(scene, &(*scene).mlx_data.frame, pd, sd);
+			init_sprite_data(&(scene->mlx_data).frame, pd, sd);
+			draw_sprite(sprites + i, &(scene->mlx_data).frame, pd, sd);
 		}
 		++i;
 	}

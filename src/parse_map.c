@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:35:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 18:59:51 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/16 21:17:45 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void		load_player_data(t_player_data *player_data, int x, int y, \
 	}
 }
 
-static void		load_sprite_data(t_scene *scene, int x, int y, char obj)
+static void		load_object_data(t_scene *scene, int x, int y, char obj)
 {
 	t_sprite_data	*sd;
 
@@ -68,8 +68,8 @@ static void		load_sprite_data(t_scene *scene, int x, int y, char obj)
 		exit_failure("%s\n", strerror(errno));
 	(scene->sprites)[sd->num_sprites].x = x + 0.5;
 	(scene->sprites)[sd->num_sprites].y = y + 0.5;
-	(scene->sprites)[sd->num_sprites].id_tex = \
-		ft_strchr(MP_OBJECTS, obj) - MP_OBJECTS;
+	(scene->sprites)[sd->num_sprites].tex = (scene->textures).objects + \
+		(ft_strchr(MP_OBJECTS, obj) - MP_OBJECTS);
 	(scene->sprites)[sd->num_sprites].state = \
 		(ft_strchr(PICKUPS, obj)) ? PLACED : NOT_A_PICKUP;
 	(scene->sprites)[sd->num_sprites].type = obj;
@@ -114,7 +114,7 @@ static void		process_map_object(t_scene *scene, int x, int y, char obj)
 		((*scene).map_data.map)[y][x] = '0';
 	}
 	else if (ft_strchr(MP_OBJECTS, obj))
-		load_sprite_data(scene, x, y, obj);
+		load_object_data(scene, x, y, obj);
 	else if (ft_strchr(MP_DOORS, obj))
 		load_door_data(scene, x, y, obj);
 	else if (ft_strchr(MP_SECRETS, obj))

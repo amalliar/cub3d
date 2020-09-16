@@ -55,6 +55,9 @@ dkms.conf
 # Ctags files
 tags
 
+# Vim swap files.
+*.swp
+
 # Apple shit
 .DS_Store
 *.swiftdoc
