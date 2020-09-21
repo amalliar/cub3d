@@ -6,14 +6,14 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:05:51 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/16 21:43:26 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/22 02:23:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITEM_PICKUP_H
 # define ITEM_PICKUP_H
 
-# define AMMO_PICKUPS		"1"
+# define AMMO_PICKUPS		"1."
 # define GIBS_PICKUPS		""
 # define HEALTH_PICKUPS		"gyz"
 # define KEY_PICKUPS		""

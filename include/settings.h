@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/16 22:02:54 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/22 02:20:01 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 # define PL_ROT_SPEED			2
 # define PL_CROSSHAIR_SCALE		1.0
 # define PL_WEAPON_SCALE		2.4
+# define PL_ATTACK_DELTA		0.20
 
 # define NUM_CROSSHAIRS			1
 # define NUM_FACES_TEXTURES		24
@@ -66,6 +67,6 @@
 # define NUM_WEAPONS			4
 # define NUM_WEAPON_FRAMES		5
 # define NUM_MUSIC_TRACKS		1
-# define NUM_SOUNDS				19
+# define NUM_SOUNDS				20
 
 #endif

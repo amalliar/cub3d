@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 20:38:20 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 18:21:11 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/21 22:52:21 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void		init_scene(t_scene *scene)
 	(*scene).mouse_grabbing = DISABLED;
 	SDL_Init(SDL_INIT_AUDIO);
 	initAudio();
+	srand(time(NULL));
 }
 
 static void		get_render_mode(int argc, char **argv, int *render_mode)

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:35:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/16 22:03:38 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/22 00:57:40 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void		load_player_data(t_player_data *player_data, int x, int y, \
 
 static void		load_object_data(t_scene *scene, int x, int y, char obj)
 {
+	t_sprite		*this_sprite;
 	t_sprite_data	*sd;
 
 	sd = &scene->sprite_data;
@@ -66,13 +67,14 @@ static void		load_object_data(t_scene *scene, int x, int y, char obj)
 		sd->num_sprites * sizeof(t_sprite), \
 		(sd->num_sprites + 1) * sizeof(t_sprite))))
 		exit_failure("%s\n", strerror(errno));
-	(scene->sprites)[sd->num_sprites].x = x + 0.5;
-	(scene->sprites)[sd->num_sprites].y = y + 0.5;
-	(scene->sprites)[sd->num_sprites].tex = (scene->textures).objects + \
+	this_sprite = scene->sprites + sd->num_sprites;
+	this_sprite->x = x + 0.5;
+	this_sprite->y = y + 0.5;
+	this_sprite->tex = (scene->textures).objects + \
 		(ft_strchr(MP_OBJECTS, obj) - MP_OBJECTS);
-	(scene->sprites)[sd->num_sprites].state = \
+	this_sprite->state = \
 		(ft_strchr(PICKUPS, obj)) ? PLACED : NOT_A_PICKUP;
-	(scene->sprites)[sd->num_sprites].type = obj;
+	this_sprite->type = obj;
 	sd->num_sprites += 1;
 }
 
@@ -80,28 +82,29 @@ static void		set_enemie_dir(t_sprite *sp)
 {
 	if (ft_strchr("|", sp->type))
 	{
-		sp->dir_x = 0;
-		sp->dir_y = -1;
+		sp->e_data->dir_x = 0;
+		sp->e_data->dir_y = -1;
 	}
 	else if (ft_strchr("~", sp->type))
 	{
-		sp->dir_x = 0;
-		sp->dir_y = 1;
+		sp->e_data->dir_x = 0;
+		sp->e_data->dir_y = 1;
 	}
 	else if (ft_strchr("{", sp->type))
 	{
-		sp->dir_x = -1;
-		sp->dir_y = 0;
+		sp->e_data->dir_x = -1;
+		sp->e_data->dir_y = 0;
 	}
 	else if (ft_strchr("}", sp->type))
 	{
-		sp->dir_x = 1;
-		sp->dir_y = 0;
+		sp->e_data->dir_x = 1;
+		sp->e_data->dir_y = 0;
 	}
 }
 
 static void		load_enemie_data(t_scene *scene, int x, int y, char obj)
 {
+	t_sprite		*this_sprite;
 	t_sprite_data	*sd;
 
 	sd = &scene->sprite_data;
@@ -109,40 +112,52 @@ static void		load_enemie_data(t_scene *scene, int x, int y, char obj)
 		sd->num_sprites * sizeof(t_sprite), \
 		(sd->num_sprites + 1) * sizeof(t_sprite))))
 		exit_failure("%s\n", strerror(errno));
-	(scene->sprites)[sd->num_sprites].x = x + 0.5;
-	(scene->sprites)[sd->num_sprites].y = y + 0.5;
-	(scene->sprites)[sd->num_sprites].type = obj;
-	set_enemie_dir(scene->sprites + sd->num_sprites);
-	(scene->sprites)[sd->num_sprites].state = EN_IDLE;
-	(scene->sprites)[sd->num_sprites].tex = (scene->textures).guard;
+	this_sprite = scene->sprites + sd->num_sprites;
+	this_sprite->x = x + 0.5;
+	this_sprite->y = y + 0.5;
+	this_sprite->type = obj;
+	this_sprite->tex = (scene->textures).guard;
+	if (!(this_sprite->e_data = malloc(sizeof(t_enemie_data))))
+		exit_failure("%s\n", strerror(errno));
+	set_enemie_dir(this_sprite);
+	this_sprite->e_data->state = &g_grdstand;
+	this_sprite->e_data->is_alive = true;
+	this_sprite->e_data->r_timer = 0;
+	this_sprite->e_data->health = 25;
 	sd->num_sprites += 1;
 }
 
 static void		load_door_data(t_scene *scene, int x, int y, char obj)
 {
+	t_door		*this_door;
+
 	if (!(scene->doors = ft_realloc(scene->doors, \
 		scene->num_doors * sizeof(t_door), \
 		(scene->num_doors + 1) * sizeof(t_door))))
 		exit_failure("%s\n", strerror(errno));
-	(scene->doors)[scene->num_doors].x = x;
-	(scene->doors)[scene->num_doors].y = y;
-	(scene->doors)[scene->num_doors].state = CLOSED;
-	(scene->doors)[scene->num_doors].s_timer = 1.0;
-	(scene->doors)[scene->num_doors].type = obj;
+	this_door = scene->doors + scene->num_doors;
+	this_door->x = x;
+	this_door->y = y;
+	this_door->state = CLOSED;
+	this_door->s_timer = 1.0;
+	this_door->type = obj;
 	scene->num_doors += 1;
 }
 
 static void		load_secret_data(t_scene *scene, int x, int y, char obj)
 {
+	t_secret	*this_secret;
+
 	if (!(scene->secrets = ft_realloc(scene->secrets, \
 		scene->num_secrets * sizeof(t_secret), \
 		(scene->num_secrets + 1) * sizeof(t_secret))))
 		exit_failure("%s\n", strerror(errno));
-	(scene->secrets)[scene->num_secrets].x = x;
-	(scene->secrets)[scene->num_secrets].y = y;
-	(scene->secrets)[scene->num_secrets].state = INACTIVE;
-	(scene->secrets)[scene->num_secrets].s_timer = 0.0;
-	(scene->secrets)[scene->num_secrets].type = obj;
+	this_secret = scene->secrets + scene->num_secrets;
+	this_secret->x = x;
+	this_secret->y = y;
+	this_secret->state = INACTIVE;
+	this_secret->s_timer = 0.0;
+	this_secret->type = obj;
 	scene->num_secrets += 1;
 }
 

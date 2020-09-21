@@ -6,14 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 13:15:58 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 22:07:11 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/22 02:01:57 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process_key_states.h"
-#include "render_scene.h"
-#include "snd.h"
-#include "ft_string.h"
+#include "process_physics.h"
+#include "graphics.h"
 
 static void		process_player_jump(t_player_data *pd, double frame_time)
 {
@@ -131,6 +129,69 @@ static void		process_secret_states(t_scene *scene, t_secret *secrets, \
 	}
 }
 
+static double	get_line_dist(t_line *line, double x0, double y0)
+{
+	return (fabs(line->a * x0 + line->b * y0 + line->c) / \
+			sqrt(line->a * line->a + line->b * line->b));
+}
+
+static t_sprite *get_attack_target(t_scene *scene, t_player_data *pd)
+{
+	t_sprite	*sprites;
+	t_sprite	*target;
+	double		old_delta;
+	double		new_delta;
+	double		max_dist;
+	int			i;
+
+	target = NULL;
+	(pd->ray).p0.x = pd->pos_x;
+	(pd->ray).p0.y = pd->pos_y;
+	(pd->ray).p1.x = pd->pos_x + pd->dir_x;
+	(pd->ray).p1.y = pd->pos_y + pd->dir_y;
+	segment_to_line(&pd->ray, &pd->line1);
+	old_delta = PL_ATTACK_DELTA;
+	max_dist = pow((pd->zbuffer)[G_GAME_WINDOW_WIDTH / 2], 2);
+	sprites = scene->sprites;
+	i = (scene->sprite_data).num_sprites - 1;
+	while (i >= 0)
+	{
+		if (sprites[i].dist >= max_dist)
+			break ;
+		if (ft_strchr(MP_ENEMIES, sprites[i].type))
+		{
+			new_delta = get_line_dist(&pd->line1, sprites[i].x, sprites[i].y);
+			if (new_delta < old_delta && sprites[i].e_data->is_alive)
+			{
+				target = sprites + i;
+				old_delta = new_delta;
+			}
+		}
+		--i;
+	}
+	return (target);
+}
+
+static void		player_attack(t_scene *scene, t_player_data *pd)
+{
+	t_sprite	*target;
+	int			dist;
+	int			rand1;
+	int			rand2;
+	int			damage;
+
+	target = get_attack_target(scene, pd);
+	if (target == NULL)
+		return ;
+	dist = round(sqrt(target->dist));
+	rand1 = rand() % 256;
+	rand2 = rand() % 256;
+	damage = (dist < 2) ? rand2 / 4 : rand2 / 6;
+	target->e_data->health -= damage;
+	target->e_data->state = &g_grdpain;
+	target->e_data->r_timer = 0;
+}
+
 static void		process_weapon_state(t_scene *scene, t_player_data *pd)
 {
 	static clock_t		r_timer = 0;
@@ -151,7 +212,9 @@ static void		process_weapon_state(t_scene *scene, t_player_data *pd)
 	{
 		if (wpn->frame == 2)
 			playSoundFromMemory((scene->sounds)[wpn->id], G_SOUNDS_VOLUME);
-		pd->ammo -= ((wpn->frame == 2) + (wpn->frame == 3 && wpn->id == 3));
+		if ((wpn->frame == 2) || (wpn->frame == 3 && wpn->id == 3))
+			player_attack(scene, pd);
+		pd->ammo -= ((wpn->frame == 2) || (wpn->frame == 3 && wpn->id == 3));
 		if (pd->ammo <= 0)
 		{
 			pd->ammo = 0;
@@ -183,4 +246,5 @@ void			process_physics(t_scene *scene)
 	process_secret_states(scene, scene->secrets, scene->num_secrets, \
 		mlx_data->frame_time);
 	process_weapon_state(scene, &scene->player_data);
+	process_enemie_states(scene);
 }

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/16 21:43:39 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/22 02:39:08 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "audio.h"
 # include "blocks.h"
 # include "settings.h"
+# include "snd.h"
 
 enum				e_keystates
 {
@@ -84,18 +85,6 @@ enum	e_object_states
 	PLACED,
 	TAKEN,
 	NOT_A_PICKUP
-};
-
-enum				e_enemie_states
-{
-	EN_IDLE = 4,
-	EN_WALKING_1,
-	EN_WALKING_2,
-	EN_WALKING_3,
-	EN_WALKING_4,
-	EN_HIT,
-	EN_DEAD,
-	EN_SHOOTING
 };
 
 typedef struct		s_point
@@ -296,12 +285,31 @@ typedef struct		s_button_states
 	int				mb_wheel_down;
 }					t_button_states;
 
+typedef struct		s_estate
+{
+	bool			rotate;
+	int				shapenum;
+	double			s_max_time;
+	void			(*func)();
+	int				soundnum;
+	struct s_estate	*next;
+}					t_estate;
+
+typedef struct		s_enemie_data
+{
+	t_estate		*state;
+	int				health;
+	bool			is_alive;
+	double			dir_x;
+	double			dir_y;
+	clock_t			r_timer;
+}					t_enemie_data;
+
 typedef struct		s_sprite
 {
 	t_mlx_image		*tex;
+	t_enemie_data	*e_data;
 	int				state;
-	double			dir_x;
-	double			dir_y;
 	double			x;
 	double			y;
 	double			dist;
@@ -357,5 +365,27 @@ void				load_audio(t_scene *scene);
 void				load_scene(t_scene *scene, char *path);
 void				render_scene(t_scene *scene);
 void				take_screenshot(t_scene *scene);
+void				drop_ammo(t_scene *scene, t_sprite *en);
+
+static t_estate		g_grdstand = \
+{true, spr_grd_stand_0, 0, NULL, -1, &g_grdstand};
+
+static t_estate		g_grdpain = \
+{false, spr_grd_pain_0, 0.5, NULL, -1, &g_grdstand};
+
+/*
+statetype s_grdshoot1 	= {false,SPR_GRD_SHOOT1,20,NULL,NULL,&s_grdshoot2};
+statetype s_grdshoot2 	= {false,SPR_GRD_SHOOT2,20,NULL,T_Shoot,&s_grdshoot3};
+statetype s_grdshoot3 	= {false,SPR_GRD_SHOOT3,20,NULL,NULL,&s_grdchase1};
+*/
+
+static t_estate		g_grddie3 = \
+{false, spr_grd_dead, 0, NULL, -1, &g_grddie3};
+static t_estate		g_grddie2 = \
+{false, spr_grd_die_2, 0.1, drop_ammo, -1, &g_grddie3};
+static t_estate		g_grddie1 = \
+{false, spr_grd_die_1, 0.1, NULL, -1, &g_grddie2};
+static t_estate		g_grddie0 = \
+{false, spr_grd_die_0, 0.1, NULL, SND_DEATH, &g_grddie1};
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:41:39 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/16 18:04:53 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/22 02:20:37 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ static char		g_object_texture_paths[NUM_OBJECT_TEXTURES][128] =
 	"./res/textures/objects/43_kitchenware_2.xpm",
 	"./res/textures/objects/44_stove.xpm",
 	"./res/textures/objects/45_spears.xpm",
-	"./res/textures/objects/46_vine.xpm"
+	"./res/textures/objects/46_ammo_drop.xpm",
 };
 
 static char		g_hud_texture_paths[NUM_HUD_TEXTURES][128] =
@@ -329,6 +329,19 @@ static char		g_guard_texture_paths[NUM_GUARD_TEXTURES][128] =
 	"./res/textures/guard/45_en_shooting.xpm",
 	"./res/textures/guard/46_en_shooting.xpm",
 	"./res/textures/guard/47_en_shooting.xpm"
+};
+
+enum		e_spr_grd_ids
+{
+	spr_grd_stand_0 = 0,
+	spr_grd_pain_0 = 40,
+	spr_grd_die_0,
+	spr_grd_die_1,
+	spr_grd_die_2,
+	spr_grd_dead,
+	spr_grd_shoot_0,
+	spr_grd_shoot_1,
+	spr_grd_shoot_2
 };
 
 #endif

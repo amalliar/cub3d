@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 16:19:16 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 21:10:14 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/21 23:27:45 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static char		g_sounds_paths[NUM_SOUNDS][128] =
 	"./res/sounds/15_jump.wav",
 	"./res/sounds/16_wpnswitch.wav",
 	"./res/sounds/17_secret.wav",
-	"./res/sounds/18_emptyclip.wav"
+	"./res/sounds/18_emptyclip.wav",
+	"./res/sounds/19_death.wav"
 };
 
 enum			e_sounds_ids
@@ -63,7 +64,8 @@ enum			e_sounds_ids
 	SND_JUMP,
 	SND_WPNSWITCH,
 	SND_SECRET,
-	SND_EMPTYCLIP
+	SND_EMPTYCLIP,
+	SND_DEATH
 };
 
 #endif

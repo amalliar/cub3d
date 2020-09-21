@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:08:48 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/13 19:25:29 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/22 02:22:21 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ void	attempt_ammo_pickup(t_scene *scene, t_sprite *obj)
 		playSoundFromMemory((scene->sounds)[SND_AMMO], G_SOUNDS_VOLUME);
 		pd->ammo = (pd->ammo + 8 <= PL_MAX_AMMO) ? \
 			pd->ammo + 8 : PL_MAX_AMMO;
+		obj->state = TAKEN;
+	}
+	else if (obj->type == '.' && pd->ammo < PL_MAX_AMMO)
+	{
+		playSoundFromMemory((scene->sounds)[SND_AMMO], G_SOUNDS_VOLUME);
+		pd->ammo = (pd->ammo + 4 <= PL_MAX_AMMO) ? \
+			pd->ammo + 4 : PL_MAX_AMMO;
 		obj->state = TAKEN;
 	}
 }
