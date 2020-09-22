@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 22:17:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/22 02:20:47 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/22 22:26:22 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,34 +35,6 @@ static int		get_sprite_angle(t_sprite *sp, t_player_data *pd)
 	return ((int)round(res_angle / 45.0) % 8);
 }
 
-static void		int_process_enemie_state(t_scene *scene, t_sprite *en)
-{
-	t_enemie_data	*ed;
-
-	ed = en->e_data;
-	if (ed->health <= 0 && ed->is_alive)
-	{
-		ed->is_alive = false;
-		ed->state = &g_grddie0;
-	}
-	if (ed->state->soundnum > 0 && ed->r_timer == 0)
-		playSoundFromMemory((scene->sounds)[ed->state->soundnum], \
-			G_SOUNDS_VOLUME);
-	else if (ed->r_timer == 0)
-		ed->r_timer = clock();
-	if (ed->state->s_max_time > 0 && \
-	(double)(clock() - ed->r_timer) / CLOCKS_PER_SEC >= ed->state->s_max_time)
-	{
-		ed->state = ed->state->next;
-		ed->r_timer = 0;
-	}
-	en->tex = (scene->textures).guard + ed->state->shapenum;
-	if (ed->state->rotate)
-		en->tex += get_sprite_angle(en, &scene->player_data);
-	if (ed->state->func != NULL && ed->r_timer == 0)
-		ed->state->func(scene, en);
-}
-
 void		drop_ammo(t_scene *scene, t_sprite *en)
 {
 	t_sprite		*this_sprite;
@@ -82,6 +54,46 @@ void		drop_ammo(t_scene *scene, t_sprite *en)
 	sd->num_sprites += 1;
 }
 
+static void		int_process_enemie_state(t_scene *scene, int sprite_id)
+{
+	t_sprite		*en;
+	t_enemie_data	*ed;
+	double			vperc;
+
+	en = scene->sprites + sprite_id;
+	ed = en->e_data;
+	if (ed->r_timer == 0)
+	{
+
+		if (ed->state->soundnum > 0)
+		{
+			vperc = 100.0 - sqrt(en->dist) * 3.5;
+			if (vperc < 0)
+				vperc = 0;
+			playSoundFromMemory((scene->sounds)[ed->state->soundnum], \
+				G_SOUNDS_VOLUME * vperc / 100.0);
+		}
+		if (ed->state->fonce != NULL)
+			ed->state->fonce(scene, en);
+		ed->r_timer = clock();
+	}
+	en = scene->sprites + sprite_id;
+	ed = en->e_data;
+	if (ed->state->falways != NULL)
+		ed->state->falways(scene, en);
+	en = scene->sprites + sprite_id;
+	ed = en->e_data;
+	en->tex = (scene->textures).guard + ed->state->shapenum;
+	if (ed->state->rotate)
+		en->tex += get_sprite_angle(en, &scene->player_data);
+	if (ed->state->s_max_time > 0 && \
+	(double)(clock() - ed->r_timer) / CLOCKS_PER_SEC >= ed->state->s_max_time)
+	{
+		ed->state = ed->state->next;
+		ed->r_timer = 0;
+	}
+}
+
 void		process_enemie_states(t_scene *scene)
 {
 	t_sprite_data	*sd;
@@ -92,7 +104,7 @@ void		process_enemie_states(t_scene *scene)
 	while (i < sd->num_sprites)
 	{
 		if (ft_strchr(MP_ENEMIES, (scene->sprites)[i].type))
-			int_process_enemie_state(scene, scene->sprites + i);
+			int_process_enemie_state(scene, i);
 		++i;
 	}
 }

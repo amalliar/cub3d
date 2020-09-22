@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/22 02:20:01 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/22 22:22:09 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@
 # define NUM_WEAPONS			4
 # define NUM_WEAPON_FRAMES		5
 # define NUM_MUSIC_TRACKS		1
-# define NUM_SOUNDS				20
+# define NUM_SOUNDS				21
 
 #endif

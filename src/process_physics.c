@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 13:15:58 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/22 02:01:57 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/22 22:26:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,10 @@ static t_sprite *get_attack_target(t_scene *scene, t_player_data *pd)
 	(pd->ray).p1.y = pd->pos_y + pd->dir_y;
 	segment_to_line(&pd->ray, &pd->line1);
 	old_delta = PL_ATTACK_DELTA;
-	max_dist = pow((pd->zbuffer)[G_GAME_WINDOW_WIDTH / 2], 2);
+	if (pd->active_weapon->id == 0)
+		max_dist = 1.5;
+	else
+		max_dist = pow((pd->zbuffer)[G_GAME_WINDOW_WIDTH / 2], 2);
 	sprites = scene->sprites;
 	i = (scene->sprite_data).num_sprites - 1;
 	while (i >= 0)
@@ -186,9 +189,18 @@ static void		player_attack(t_scene *scene, t_player_data *pd)
 	dist = round(sqrt(target->dist));
 	rand1 = rand() % 256;
 	rand2 = rand() % 256;
-	damage = (dist < 2) ? rand2 / 4 : rand2 / 6;
+	if (pd->active_weapon->id == 0)
+		damage = rand2 / 16;
+	else
+		damage = (dist < 2) ? rand2 / 4 : rand2 / 6;
 	target->e_data->health -= damage;
-	target->e_data->state = &g_grdpain;
+	if (target->e_data->health > 0)
+		target->e_data->state = &g_grdpain;
+	else
+	{
+		target->e_data->is_alive = false;
+		target->e_data->state = &g_grddie0;
+	}
 	target->e_data->r_timer = 0;
 }
 
@@ -223,6 +235,8 @@ static void		process_weapon_state(t_scene *scene, t_player_data *pd)
 	}
 	else if (wpn->frame == 0)
 		playSoundFromMemory((scene->sounds)[wpn->id], G_SOUNDS_VOLUME);
+	else if (wpn->frame == 2)
+		player_attack(scene, pd);
 	if (wpn->firing_mode == FULL_AUTO && wpn->state == FIRING && \
 		(wpn->frame == 2 || wpn->frame == 3))
 		wpn->frame = (wpn->frame == 2) ? 3 : 2;
