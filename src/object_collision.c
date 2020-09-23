@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 14:51:10 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 15:31:20 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/23 06:06:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 #include "process_key_states.h"
 #include "snd.h"
 
-int			door_collision(t_scene *scene, double px, double py)
+int			door_collision(t_scene *scene, double px, double py, double cr)
 {
 	t_map_data		*md;
-	static double	cr = MP_COLLISION_RADIUS;
 
 	md = &scene->map_data;
 	if ((ft_strchr(MP_DOORS, (md->map)[(int)py][(int)(px + cr)]) && \
@@ -41,10 +40,9 @@ int			door_collision(t_scene *scene, double px, double py)
 	return (0);
 }
 
-int			object_collision(t_scene *scene, double px, double py)
+int			object_collision(t_scene *scene, double px, double py, double cr)
 {
 	t_map_data		*md;
-	static double	cr = MP_COLLISION_RADIUS;
 
 	md = &scene->map_data;
 	if (ft_strchr(MP_COLLIDERS, (md->map)[(int)py][(int)(px + cr)]) \
@@ -55,10 +53,7 @@ int			object_collision(t_scene *scene, double px, double py)
 	|| ft_strchr(MP_COLLIDERS, (md->map)[(int)(py - cr)][(int)(px + cr)]) \
 	|| ft_strchr(MP_COLLIDERS, (md->map)[(int)(py + cr)][(int)(px - cr)]) \
 	|| ft_strchr(MP_COLLIDERS, (md->map)[(int)(py - cr)][(int)(px - cr)]) \
-	|| door_collision(scene, px, py))
-	{
-		playSoundFromMemory((scene->sounds)[SND_WALLHIT], G_SOUNDS_VOLUME / 2);
+	|| door_collision(scene, px, py, cr))
 		return (1);
-	}
 	return (0);
 }

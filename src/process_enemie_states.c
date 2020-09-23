@@ -6,65 +6,67 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 22:17:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/22 22:26:22 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/24 00:40:38 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
-#include "process_physics.h"
-#include "ft_stdlib.h"
+#include "process_enemie_states.h"
 
-static int		get_sprite_angle(t_sprite *sp, t_player_data *pd)
+t_estate		g_grdstand = \
+{true, spr_grd_stand_0, 0, check_player_presence, NULL, -1, &g_grdstand};
+
+t_estate		g_grdshoot0 = \
+{false, spr_grd_shoot_0, 0.5, NULL, start_player_tracking, -1, &g_grdshoot1};
+t_estate		g_grdshoot1 = \
+{false, spr_grd_shoot_1, 0.5, NULL, NULL, -1, &g_grdshoot2};
+t_estate		g_grdshoot2 = \
+{false, spr_grd_shoot_2, 0.5, NULL, NULL, SND_PISTOL, &g_grdshoot3};
+t_estate		g_grdshoot3 = \
+{false, spr_grd_shoot_2, 0.1, NULL, check_player_presence, -1, &g_grdstand};
+
+t_estate		g_grdpain = \
+{false, spr_grd_pain_0, 0.5, NULL, NULL, SND_PAIN, &g_grdshoot0};
+
+t_estate		g_grddie0 = \
+{false, spr_grd_die_0, 0.1, NULL, NULL, SND_DEATH, &g_grddie1};
+t_estate		g_grddie1 = \
+{false, spr_grd_die_1, 0.1, NULL, NULL, -1, &g_grddie2};
+t_estate		g_grddie2 = \
+{false, spr_grd_die_2, 0.1, NULL, NULL, -1, &g_grddie3};
+t_estate		g_grddie3 = \
+{false, spr_grd_dead, 0, NULL, drop_ammo, -1, &g_grddie3};
+
+static int		get_view_angle(t_sprite *sp, t_player_data *pd)
 {
 	t_fpoint	delta;
-	double		mp_angle;
-	double		sp_angle;
-	double		res_angle;
+	double		map_angle;
+	double		sprite_angle;
+	double		view_angle;
 
 	delta.x = pd->pos_x - sp->x;
 	delta.y = pd->pos_y - sp->y;
-	mp_angle = atan2(delta.y, delta.x) * 180 / M_PI;
-	sp_angle = atan2(sp->e_data->dir_y, sp->e_data->dir_x) * 180 / M_PI;
-	if (mp_angle < 0)
-		mp_angle = 360 + mp_angle;
-	if (sp_angle < 0)
-		sp_angle = 360 + sp_angle;
-	res_angle = sp_angle - mp_angle;
-	if (res_angle < 0)
-		res_angle = 360 + res_angle;
-	return ((int)round(res_angle / 45.0) % 8);
+	map_angle = atan2(delta.y, delta.x) * 180 / M_PI;
+	sprite_angle = atan2(sp->e_data->dir_y, sp->e_data->dir_x) * 180 / M_PI;
+	if (map_angle < 0)
+		map_angle = 360 + map_angle;
+	if (sprite_angle < 0)
+		sprite_angle = 360 + sprite_angle;
+	view_angle = sprite_angle - map_angle;
+	if (view_angle < 0)
+		view_angle = 360 + view_angle;
+	return ((int)round(view_angle / 45.0) % 8);
 }
 
-void		drop_ammo(t_scene *scene, t_sprite *en)
-{
-	t_sprite		*this_sprite;
-	t_sprite_data	*sd;
-
-	sd = &scene->sprite_data;
-	if (!(scene->sprites = ft_realloc(scene->sprites, \
-		sd->num_sprites * sizeof(t_sprite), \
-		(sd->num_sprites + 1) * sizeof(t_sprite))))
-		exit_failure("%s\n", strerror(errno));
-	this_sprite = scene->sprites + sd->num_sprites;
-	this_sprite->x = en->x - 0.1;
-	this_sprite->y = en->y;
-	this_sprite->tex = (scene->textures).objects + 26;
-	this_sprite->state = PLACED;
-	this_sprite->type = '.';
-	sd->num_sprites += 1;
-}
-
-static void		int_process_enemie_state(t_scene *scene, int sprite_id)
+static void		int_process_enemie_state(t_scene *scene, int spritenum)
 {
 	t_sprite		*en;
 	t_enemie_data	*ed;
 	double			vperc;
 
-	en = scene->sprites + sprite_id;
+	en = scene->sprites + spritenum;
 	ed = en->e_data;
 	if (ed->r_timer == 0)
 	{
-
 		if (ed->state->soundnum > 0)
 		{
 			vperc = 100.0 - sqrt(en->dist) * 3.5;
@@ -77,24 +79,22 @@ static void		int_process_enemie_state(t_scene *scene, int sprite_id)
 			ed->state->fonce(scene, en);
 		ed->r_timer = clock();
 	}
-	en = scene->sprites + sprite_id;
-	ed = en->e_data;
-	if (ed->state->falways != NULL)
-		ed->state->falways(scene, en);
-	en = scene->sprites + sprite_id;
+	en = scene->sprites + spritenum;
 	ed = en->e_data;
 	en->tex = (scene->textures).guard + ed->state->shapenum;
 	if (ed->state->rotate)
-		en->tex += get_sprite_angle(en, &scene->player_data);
+		en->tex += get_view_angle(en, &scene->player_data);
 	if (ed->state->s_max_time > 0 && \
 	(double)(clock() - ed->r_timer) / CLOCKS_PER_SEC >= ed->state->s_max_time)
 	{
 		ed->state = ed->state->next;
 		ed->r_timer = 0;
 	}
+	if (ed->state->falways != NULL)
+		ed->state->falways(scene, en);
 }
 
-void		process_enemie_states(t_scene *scene)
+void			process_enemie_states(t_scene *scene)
 {
 	t_sprite_data	*sd;
 	int				i;

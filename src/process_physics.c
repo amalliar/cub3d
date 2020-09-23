@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 13:15:58 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/22 22:26:39 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/23 06:07:32 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		attempt_door_auto_closing(t_scene *scene, t_door *doors, \
 	if (doors[i].c_timer >= 6.0)
 	{
 		doors[i].state = CLOSED;
-		if (door_collision(scene, pd->pos_x, pd->pos_y))
+		if (door_collision(scene, pd->pos_x, pd->pos_y, MP_COLLISION_RADIUS))
 			doors[i].state = OPEN;
 		else
 		{

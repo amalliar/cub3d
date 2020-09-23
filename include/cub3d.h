@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/22 22:23:03 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/24 00:25:47 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,6 +301,7 @@ typedef struct		s_enemie_data
 	t_estate		*state;
 	int				health;
 	bool			is_alive;
+	bool			is_tracking_player;
 	double			dir_x;
 	double			dir_y;
 	clock_t			r_timer;
@@ -366,29 +367,16 @@ void				load_audio(t_scene *scene);
 void				load_scene(t_scene *scene, char *path);
 void				render_scene(t_scene *scene);
 void				take_screenshot(t_scene *scene);
-void				drop_ammo(t_scene *scene, t_sprite *en);
-//void				check_player_presence(t_scene *scene, t_sprite *en);
 
-static t_estate		g_grdstand = \
-{true, spr_grd_stand_0, 0, NULL, NULL, -1, &g_grdstand};
-
-static t_estate		g_grdshoot2 = \
-{false, spr_grd_shoot_2, 0.5, NULL, NULL, -1, &g_grdstand};
-static t_estate		g_grdshoot1 = \
-{false, spr_grd_shoot_1, 0.5, NULL, NULL, -1, &g_grdshoot2};
-static t_estate g_grdshoot0 = \
-{false, spr_grd_shoot_0, 0.5, NULL, NULL, -1, &g_grdshoot1};
-
-static t_estate		g_grdpain = \
-{false, spr_grd_pain_0, 0.5, NULL, NULL, SND_PAIN, &g_grdshoot0};
-
-static t_estate		g_grddie3 = \
-{false, spr_grd_dead, 0, NULL, drop_ammo, -1, &g_grddie3};
-static t_estate		g_grddie2 = \
-{false, spr_grd_die_2, 0.1, NULL, NULL, -1, &g_grddie3};
-static t_estate		g_grddie1 = \
-{false, spr_grd_die_1, 0.1, NULL, NULL, -1, &g_grddie2};
-static t_estate		g_grddie0 = \
-{false, spr_grd_die_0, 0.1, NULL, NULL, SND_DEATH, &g_grddie1};
+extern t_estate		g_grdstand;
+extern t_estate		g_grdshoot0;
+extern t_estate		g_grdshoot1;
+extern t_estate		g_grdshoot2;
+extern t_estate		g_grdshoot3;
+extern t_estate		g_grdpain;
+extern t_estate		g_grddie0;
+extern t_estate		g_grddie1;
+extern t_estate		g_grddie2;
+extern t_estate		g_grddie3;
 
 #endif

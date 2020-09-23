@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:35:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/22 00:57:40 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/23 09:53:04 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ static void		load_enemie_data(t_scene *scene, int x, int y, char obj)
 	set_enemie_dir(this_sprite);
 	this_sprite->e_data->state = &g_grdstand;
 	this_sprite->e_data->is_alive = true;
+	this_sprite->e_data->is_tracking_player = false;
 	this_sprite->e_data->r_timer = 0;
 	this_sprite->e_data->health = 25;
 	sd->num_sprites += 1;
