@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 00:25:47 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/24 02:13:52 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <sys/uio.h>
 # include <unistd.h>
 # include "audio.h"
-# include "blocks.h"
 # include "settings.h"
 # include "snd.h"
 
@@ -144,6 +143,14 @@ typedef struct		s_textures
 	t_mlx_image		floor;
 	t_mlx_image		ceiling;
 }					t_textures;
+
+typedef struct		s_block
+{
+	int				id_tex_n;
+	int				id_tex_s;
+	int				id_tex_e;
+	int				id_tex_w;
+}					t_block;
 
 typedef struct		s_map_data
 {

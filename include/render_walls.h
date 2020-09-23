@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 11:11:44 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 13:21:28 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/24 02:15:56 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "graphics.h"
 # include "key_press_handler.h"
 # include "render_scene.h"
+# include "textures.h"
 
 void	calc_texture_x(t_scene *scene, t_mlx_image *texture);
 void	check_door_hit(t_scene *scene, t_player_data *pd, t_map_data *md);

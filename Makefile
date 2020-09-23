@@ -6,14 +6,14 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/24 00:30:46 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/24 01:24:49 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL      := /bin/sh
 CC         := clang
 CFLAGS     := -Wall -Wextra -fdiagnostics-color -g -pipe \
-              -march=native -O2
+              -march=native -O2 -flto
 INCLUDE    := -I./include -I./libft/include -I./libmlx -I./libsdl2/include
 NAME       := cub3D
 LIBFT      := ./libft/libft.a
