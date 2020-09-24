@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 22:17:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 00:40:38 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/24 03:25:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_estate		g_grdshoot0 = \
 t_estate		g_grdshoot1 = \
 {false, spr_grd_shoot_1, 0.5, NULL, NULL, -1, &g_grdshoot2};
 t_estate		g_grdshoot2 = \
-{false, spr_grd_shoot_2, 0.5, NULL, NULL, SND_PISTOL, &g_grdshoot3};
+{false, spr_grd_shoot_2, 0.5, NULL, enemie_attack, SND_PISTOL, &g_grdshoot3};
 t_estate		g_grdshoot3 = \
 {false, spr_grd_shoot_2, 0.1, NULL, check_player_presence, -1, &g_grdstand};
 

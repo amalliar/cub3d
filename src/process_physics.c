@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 13:15:58 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/23 06:07:32 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/24 04:37:55 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ static double	get_line_dist(t_line *line, double x0, double y0)
 			sqrt(line->a * line->a + line->b * line->b));
 }
 
-static t_sprite *get_attack_target(t_scene *scene, t_player_data *pd)
+static t_sprite	*get_attack_target(t_scene *scene, t_player_data *pd)
 {
 	t_sprite	*sprites;
 	t_sprite	*target;

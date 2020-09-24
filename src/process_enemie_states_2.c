@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 00:28:11 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 00:44:15 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/24 04:37:00 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void				adjust_view_dir(t_scene *scene, t_sprite *en)
 	pd = &scene->player_data;
 	dist = sqrt(en->dist);
 	en->e_data->dir_x = (pd->pos_x - en->x) / dist;
-	en->e_data->dir_y = (pd->pos_y - en->y) / dist; 
+	en->e_data->dir_y = (pd->pos_y - en->y) / dist;
 }
 
 static t_fpoint		get_closest_line_point(t_line *line, double x0, double y0)
@@ -48,7 +48,7 @@ static t_fpoint		get_closest_line_point(t_line *line, double x0, double y0)
 
 	res.x = (line->b * (line->b * x0 - line->a * y0) - line->a * line->c) / \
 		(line->a * line->a + line->b * line->b);
-	res.y = (line->a * (-line->b * x0 + line->a * y0) -line->b * line->c) / \
+	res.y = (line->a * (-line->b * x0 + line->a * y0) - line->b * line->c) / \
 		(line->a * line->a + line->b * line->b);
 	return (res);
 }
@@ -76,7 +76,7 @@ static bool			view_is_obstructed(t_scene *scene, t_sprite *en)
 	return (false);
 }
 
-void			check_player_presence(t_scene *scene, t_sprite *en)
+void				check_player_presence(t_scene *scene, t_sprite *en)
 {
 	t_player_data		*pd;
 	t_fpoint			inter;
@@ -113,11 +113,60 @@ void			check_player_presence(t_scene *scene, t_sprite *en)
 	vperc = 100.0 - sqrt(en->dist) * 3.5;
 	if (vperc < 0)
 		vperc = 0;
-	playSoundFromMemory((scene->sounds)[SND_HALT], G_SOUNDS_VOLUME * vperc / 100.0);
+	playSoundFromMemory((scene->sounds)[SND_HALT], \
+		G_SOUNDS_VOLUME * vperc / 100.0);
 }
 
-void			start_player_tracking(t_scene *scene, t_sprite *en)
+void				start_player_tracking(t_scene *scene, t_sprite *en)
 {
 	(void)scene;
 	en->e_data->is_tracking_player = true;
+}
+
+void				enemie_attack(t_scene *scene, t_sprite *en)
+{
+	t_player_data	*pd;
+	t_key_states	*ks;
+	int				dist;
+	int				speed;
+	int				look;
+	int				rand1;
+	int				rand2;
+	int				damage;
+
+	dist = sqrt(en->dist);
+	if (en->e_data->is_tracking_player)
+		adjust_view_dir(scene, en);
+	if (dist > EN_MAX_VIEWING_DISTANCE || \
+		view_is_obstructed(scene, en))
+		return ;
+	pd = &scene->player_data;
+	ks = &scene->key_states;
+	if ((ks->kvk_ansi_w == KEY_DOWN || ks->kvk_ansi_s == KEY_DOWN || \
+		ks->kvk_ansi_a == KEY_DOWN || ks->kvk_ansi_d == KEY_DOWN) && \
+		pd->pos_z >= 0)
+		speed = 160;
+	else
+		speed = 256;
+	look = (en->is_visible) ? 16 : 8;
+	rand1 = rand() % 256;
+	rand2 = rand() % 256;
+	if (rand1 >= (speed - (dist * look)))
+		return ;
+	if (dist < 2)
+		damage = rand2 / 4;
+	else if (dist >= 2 && dist < 4)
+		damage = rand2 / 8;
+	else
+		damage = rand2 / 16;
+	pd->health -= damage;
+	if (pd->health < 0)
+		pd->health = 0;
+	if (pd->health == 0)
+		playSoundFromMemory((scene->sounds)[SND_PLAYER_DEATH], G_SOUNDS_VOLUME);
+	else if (damage < 20)
+		playSoundFromMemory((scene->sounds)[SND_PLAYER_PAIN], G_SOUNDS_VOLUME);
+	else
+		playSoundFromMemory((scene->sounds)[SND_PLAYER_PAIN_CRITICAL], \
+			G_SOUNDS_VOLUME);
 }

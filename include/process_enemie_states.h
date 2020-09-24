@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 00:23:36 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 02:17:12 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/24 03:25:23 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 void	drop_ammo(t_scene *scene, t_sprite *en);
 void	check_player_presence(t_scene *scene, t_sprite *en);
 void	start_player_tracking(t_scene *scene, t_sprite *en);
+void	enemie_attack(t_scene *scene, t_sprite *en);
 
 #endif

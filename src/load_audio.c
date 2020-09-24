@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 16:16:24 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 02:22:52 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/24 04:24:56 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ char		g_sounds_paths[NUM_SOUNDS][128] =
 	"./res/sounds/18_emptyclip.wav",
 	"./res/sounds/19_death.wav",
 	"./res/sounds/20_pain.wav",
-	"./res/sounds/21_halt.wav"
+	"./res/sounds/21_halt.wav",
+	"./res/sounds/22_player_pain.wav",
+	"./res/sounds/23_player_pain_critical.wav",
+	"./res/sounds/24_player_death.wav"
 };
 
 void		load_audio(t_scene *scene)

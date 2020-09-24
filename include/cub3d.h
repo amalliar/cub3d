@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 02:13:52 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/24 03:52:29 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,6 +323,7 @@ typedef struct		s_sprite
 	double			y;
 	double			dist;
 	char			type;
+	bool			is_visible;
 }					t_sprite;
 
 typedef struct		s_sprite_data

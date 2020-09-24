@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 13:04:05 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/16 21:19:36 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/24 04:10:54 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static void		draw_sprite(t_sprite *sp, t_mlx_image *frame, \
 	int		color;
 
 	sd->stripe = sd->draw_start_x;
+	sp->is_visible = false;
 	while (sd->stripe < sd->draw_end_x)
 	{
 		sd->tex_x = (int)(256 * (sd->stripe - (-sd->sprite_width / 2 + \
@@ -92,7 +93,10 @@ static void		draw_sprite(t_sprite *sp, t_mlx_image *frame, \
 					/ sd->sprite_height) / 256;
 				color = mlx_pixel_get(sp->tex, sd->tex_x, sd->tex_y);
 				if (color != INVIS)
+				{
 					mlx_pixel_set(frame, sd->stripe, sd->y, color);
+					sp->is_visible = true;
+				}
 				++sd->y;
 			}
 		++sd->stripe;
