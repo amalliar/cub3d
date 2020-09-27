@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 07:21:24 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/13 18:43:04 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/25 03:49:14 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,12 @@ static void		draw_face(t_scene *scene)
 		pd->facecount = 0;
 		pd->r_facetimer = clock();
 	}
-	latch_image(&mlx_data->frame, \
-		faces + 3 * ((100 - pd->health) / 16) + pd->faceframe, p0, G_HUD_SCALE);
+	else if (scene->game_state == GS_DEATH)
+		latch_image(&mlx_data->frame, \
+			faces + 22, p0, G_HUD_SCALE);
+	else
+		latch_image(&mlx_data->frame, \
+			faces + 3 * ((100 - pd->health) / 16) + pd->faceframe, p0, G_HUD_SCALE);
 }
 
 static void		draw_weapon(t_scene *scene)

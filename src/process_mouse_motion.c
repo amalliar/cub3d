@@ -6,17 +6,13 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 00:23:08 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 19:03:00 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 06:26:00 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
 #include "mlx.h"
 #include "process_key_states.h"
 #include "render_scene.h"
-
-#define CENTER_X	G_GAME_WINDOW_WIDTH / 2
-#define CENTER_Y	G_GAME_WINDOW_HEIGHT / 2
 
 /*
 ** Note: we only need one function to rotate about the z-axis - the direction is
@@ -33,8 +29,8 @@ void		process_mouse_motion(t_scene *scene)
 		return ;
 	mlx_data = &scene->mlx_data;
 	mlx_mouse_get_pos(mlx_data->win, &pos.x, &pos.y);
-	delta.x = pos.x - CENTER_X;
+	delta.x = pos.x - G_CENTER_X;
 	rotate_right(&scene->player_data, delta.x * mlx_data->frame_time * \
 		PL_MOUSE_SENSE);
-	mlx_mouse_move(mlx_data->win, CENTER_X, CENTER_Y);
+	mlx_mouse_move(mlx_data->win, G_CENTER_X, G_CENTER_Y);
 }

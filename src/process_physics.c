@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 13:15:58 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 04:37:55 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/26 03:59:05 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ static t_sprite	*get_attack_target(t_scene *scene, t_player_data *pd)
 	if (pd->active_weapon->id == 0)
 		max_dist = 1.5;
 	else
-		max_dist = pow((pd->zbuffer)[G_GAME_WINDOW_WIDTH / 2], 2);
+		max_dist = (pd->zbuffer)[G_GAME_WINDOW_WIDTH / 2];
 	sprites = scene->sprites;
 	i = (scene->sprite_data).num_sprites - 1;
 	while (i >= 0)
@@ -186,7 +186,7 @@ static void		player_attack(t_scene *scene, t_player_data *pd)
 	target = get_attack_target(scene, pd);
 	if (target == NULL)
 		return ;
-	dist = round(sqrt(target->dist));
+	dist = round(target->dist);
 	rand1 = rand() % 256;
 	rand2 = rand() % 256;
 	if (pd->active_weapon->id == 0)
@@ -260,5 +260,4 @@ void			process_physics(t_scene *scene)
 	process_secret_states(scene, scene->secrets, scene->num_secrets, \
 		mlx_data->frame_time);
 	process_weapon_state(scene, &scene->player_data);
-	process_enemie_states(scene);
 }

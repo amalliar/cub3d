@@ -6,21 +6,21 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:21:32 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 16:53:22 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 05:36:37 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_press_handler.h"
 #include "snd.h"
 
-static void		switch_states(int *kd, int *ku)
+static inline void	switch_states(int *kd, int *ku)
 {
 	*kd = KEY_DOWN;
 	*ku = KEY_UP;
 }
 
-static void		process_movement(int keycode, t_key_states *ks, \
-					t_player_data *pd, t_scene *scene)
+static void			process_movement(int keycode, t_key_states *ks, \
+						t_player_data *pd, t_scene *scene)
 {
 	if (keycode == KVK_ANSI_W)
 		switch_states(&ks->kvk_ansi_w, &ks->kvk_ansi_s);
@@ -42,13 +42,13 @@ static void		process_movement(int keycode, t_key_states *ks, \
 		pd->pos_z = -200;
 	else if (keycode == KVK_SPACE && pd->pos_z == 0)
 	{
-		playSoundFromMemory((scene->sounds)[SND_JUMP], G_SOUNDS_VOLUME);
 		pd->v0 = sqrt(2 * SV_GRAVITY * PL_JUMP_HEIGHT);
+		playSoundFromMemory((scene->sounds)[SND_JUMP], G_SOUNDS_VOLUME);
 	}
 }
 
-static void		process_weapon_switch(int keycode, t_player_data *pd, \
-					t_scene *scene)
+static void			process_weapon_switch(int keycode, t_player_data *pd, \
+						t_scene *scene)
 {
 	if (keycode == KVK_ANSI_1)
 		switch_weapon(pd, 0, scene);
@@ -60,7 +60,7 @@ static void		process_weapon_switch(int keycode, t_player_data *pd, \
 		switch_weapon(pd, 3, scene);
 }
 
-static void		process_misc(int keycode, t_scene *scene)
+static void			process_misc(int keycode, t_scene *scene)
 {
 	if (keycode == KVK_ESCAPE)
 	{
@@ -72,18 +72,20 @@ static void		process_misc(int keycode, t_scene *scene)
 	else if (keycode == KVK_F13)
 		take_screenshot(scene);
 	else if (keycode == KVK_ANSI_E)
-		process_interact_request(scene);
+		process_interact_request(scene, &scene->player_data, &scene->map_data);
 }
 
-int				key_press_handler(int keycode, t_scene *scene)
+int					key_press_handler(int keycode, t_scene *scene)
 {
 	t_player_data		*pd;
 	t_key_states		*ks;
 
 	ks = &scene->key_states;
 	pd = &scene->player_data;
+	process_misc(keycode, scene);
+	if (scene->game_state != GS_NORMAL)
+		return (0);
 	process_movement(keycode, ks, pd, scene);
 	process_weapon_switch(keycode, pd, scene);
-	process_misc(keycode, scene);
 	return (0);
 }

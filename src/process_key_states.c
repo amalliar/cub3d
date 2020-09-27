@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:23:26 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/23 08:56:50 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 06:15:22 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void			process_key_states(t_scene *scene)
 
 	ks = &scene->key_states;
 	pd = &scene->player_data;
-	set_player_speed(pd, ks, (*scene).mlx_data.frame_time);
+	set_player_speed(pd, ks, (scene->mlx_data).frame_time);
 	if (ks->kvk_ansi_w == KEY_DOWN)
 		move_forward(scene, pd);
 	if (ks->kvk_ansi_s == KEY_DOWN)

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 19:26:42 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/26 03:53:41 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int		render_next_frame(t_scene *scene)
 	static int		frames = 0;
 	t_mlx_data		*mlx_data;
 
+	if (process_game_state(scene) != GS_NORMAL)
+		return (0);
 	r_start = clock();
 	mlx_data = &scene->mlx_data;
 	process_key_states(scene);
@@ -44,8 +46,10 @@ static int		render_next_frame(t_scene *scene)
 	render_sprites(scene);
 	render_hud(scene);
 	attempt_item_pickup(scene);
+	process_enemie_states(scene);
+	process_effects(scene);
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, \
-		(*mlx_data).frame.img, 0, 0);
+		(mlx_data->frame).img, 0, 0);
 	mlx_data->frame_time = (double)(clock() - r_start) / CLOCKS_PER_SEC;
 	++frames;
 	get_frames_per_second(mlx_data, &r_timer, &frames);

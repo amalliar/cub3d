@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 21:23:53 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 02:04:38 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/26 04:21:34 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "mlx.h"
 #include "settings.h"
 
-char		g_wall_texture_paths[NUM_WALL_TEXTURES][128] =
+char			g_wall_texture_paths[NUM_WALL_TEXTURES][128] =
 {
 	"./res/textures/walls/00_dev_n.xpm",
 	"./res/textures/walls/01_dev_s.xpm",
@@ -70,7 +70,7 @@ char		g_wall_texture_paths[NUM_WALL_TEXTURES][128] =
 	"./res/textures/walls/51_elevator_door_dark.xpm"
 };
 
-char		g_object_texture_paths[NUM_OBJECT_TEXTURES][128] =
+char			g_object_texture_paths[NUM_OBJECT_TEXTURES][128] =
 {
 	"./res/textures/objects/00_water_puddle.xpm",
 	"./res/textures/objects/01_green_barrel.xpm",
@@ -121,7 +121,7 @@ char		g_object_texture_paths[NUM_OBJECT_TEXTURES][128] =
 	"./res/textures/objects/46_ammo_drop.xpm",
 };
 
-char		g_hud_texture_paths[NUM_HUD_TEXTURES][128] =
+char			g_hud_texture_paths[NUM_HUD_TEXTURES][128] =
 {
 	"./res/textures/hud/00_nbr_zero.xpm",
 	"./res/textures/hud/01_nbr_one.xpm",
@@ -142,7 +142,7 @@ char		g_hud_texture_paths[NUM_HUD_TEXTURES][128] =
 	"./res/textures/hud/16_iron_key.xpm"
 };
 
-char		g_faces_texture_paths[NUM_FACES_TEXTURES][128] =
+char			g_faces_texture_paths[NUM_FACES_TEXTURES][128] =
 {
 	"./res/textures/faces/00_left.xpm",
 	"./res/textures/faces/01_center.xpm",
@@ -171,22 +171,22 @@ char		g_faces_texture_paths[NUM_FACES_TEXTURES][128] =
 
 };
 
-char		g_floor_texture_path[1][128] =
+char			g_floor_texture_path[1][128] =
 {
 	"./res/textures/floor.xpm"
 };
 
-char		g_ceiling_texture_path[1][128] =
+char			g_ceiling_texture_path[1][128] =
 {
 	"./res/textures/ceiling.xpm"
 };
 
-char		g_crosshairs_path[NUM_CROSSHAIRS][128] =
+char			g_crosshairs_path[NUM_CROSSHAIRS][128] =
 {
 	"./res/crosshairs/00_cross.xpm"
 };
 
-char		g_wpn_knife_texture_paths[NUM_WEAPON_FRAMES][128] =
+char			g_wpn_knife_texture_paths[NUM_WEAPON_FRAMES][128] =
 {
 	"./res/weapons/knife/00_frame.xpm",
 	"./res/weapons/knife/01_frame.xpm",
@@ -195,7 +195,7 @@ char		g_wpn_knife_texture_paths[NUM_WEAPON_FRAMES][128] =
 	"./res/weapons/knife/04_frame.xpm"
 };
 
-char		g_wpn_pistol_texture_paths[NUM_WEAPON_FRAMES][128] =
+char			g_wpn_pistol_texture_paths[NUM_WEAPON_FRAMES][128] =
 {
 	"./res/weapons/pistol/00_frame.xpm",
 	"./res/weapons/pistol/01_frame.xpm",
@@ -204,7 +204,7 @@ char		g_wpn_pistol_texture_paths[NUM_WEAPON_FRAMES][128] =
 	"./res/weapons/pistol/04_frame.xpm"
 };
 
-char		g_wpn_machinegun_texture_paths[NUM_WEAPON_FRAMES][128] =
+char			g_wpn_machinegun_texture_paths[NUM_WEAPON_FRAMES][128] =
 {
 	"./res/weapons/machinegun/00_frame.xpm",
 	"./res/weapons/machinegun/01_frame.xpm",
@@ -213,7 +213,7 @@ char		g_wpn_machinegun_texture_paths[NUM_WEAPON_FRAMES][128] =
 	"./res/weapons/machinegun/04_frame.xpm"
 };
 
-char		g_wpn_chaingun_texture_paths[NUM_WEAPON_FRAMES][128] =
+char			g_wpn_chaingun_texture_paths[NUM_WEAPON_FRAMES][128] =
 {
 	"./res/weapons/chaingun/00_frame.xpm",
 	"./res/weapons/chaingun/01_frame.xpm",
@@ -222,7 +222,7 @@ char		g_wpn_chaingun_texture_paths[NUM_WEAPON_FRAMES][128] =
 	"./res/weapons/chaingun/04_frame.xpm"
 };
 
-char		g_guard_texture_paths[NUM_GUARD_TEXTURES][128] =
+char			g_guard_texture_paths[NUM_GUARD_TEXTURES][128] =
 {
 	"./res/textures/guard/00_en_idle.xpm",
 	"./res/textures/guard/01_en_idle.xpm",
@@ -274,7 +274,7 @@ char		g_guard_texture_paths[NUM_GUARD_TEXTURES][128] =
 	"./res/textures/guard/47_en_shooting.xpm"
 };
 
-static void	int_load_textures(t_scene *scene, t_mlx_image *arr, \
+static void		int_load_textures(t_scene *scene, t_mlx_image *arr, \
 					char (*paths)[128], int num_textures)
 {
 	int				i;
@@ -282,7 +282,7 @@ static void	int_load_textures(t_scene *scene, t_mlx_image *arr, \
 	i = 0;
 	while (i < num_textures)
 	{
-		if (!(arr[i].img = mlx_xpm_file_to_image((*scene).mlx_data.mlx, \
+		if (!(arr[i].img = mlx_xpm_file_to_image((scene->mlx_data).mlx, \
 			paths[i], &arr[i].width, &arr[i].height)))
 			exit_failure("Failed creating mlx image instance from file: %s\n", \
 				paths[i]);
@@ -292,7 +292,7 @@ static void	int_load_textures(t_scene *scene, t_mlx_image *arr, \
 	}
 }
 
-void		load_textures(t_scene *scene)
+void			load_textures(t_scene *scene)
 {
 	int_load_textures(scene, (scene->textures).walls, \
 		g_wall_texture_paths, NUM_WALL_TEXTURES);

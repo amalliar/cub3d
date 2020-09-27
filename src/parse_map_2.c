@@ -6,14 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:44:11 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 19:02:34 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/26 08:00:29 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ctype.h"
-#include "ft_stdlib.h"
-#include "ft_string.h"
 #include "load_scene.h"
+#include "parse_map.h"
 
 static size_t	get_cur_line_length(char *line)
 {
@@ -81,22 +79,22 @@ char			**gen_map(t_list *lst, int *width, int *height)
 	return (map);
 }
 
-void			check_neighbours(t_map_data *map_data, int mx, int my)
+void			check_neighbours(t_map_data *md, int mx, int my)
 {
-	if (mx > 0 && (map_data->map)[my][mx - 1] == ' ')
+	if (mx > 0 && (md->map)[my][mx - 1] == ' ')
 		exit_failure("Map breach detected at position [%s][%s]\n", \
 		ft_itoa(mx, 10), ft_itoa(my, 10));
-	if (mx < map_data->width - 1 && (map_data->map)[my][mx + 1] == ' ')
+	if (mx < md->width - 1 && (md->map)[my][mx + 1] == ' ')
 		exit_failure("Map breach detected at position [%s][%s]\n", \
 		ft_itoa(mx, 10), ft_itoa(my, 10));
-	if (my > 0 && (map_data->map)[my - 1][mx] == ' ')
+	if (my > 0 && (md->map)[my - 1][mx] == ' ')
 		exit_failure("Map breach detected at position [%s][%s]\n", \
 		ft_itoa(mx, 10), ft_itoa(my, 10));
-	if (my < map_data->height - 1 && (map_data->map)[my + 1][mx] == ' ')
+	if (my < md->height - 1 && (md->map)[my + 1][mx] == ' ')
 		exit_failure("Map breach detected at position [%s][%s]\n", \
 		ft_itoa(mx, 10), ft_itoa(my, 10));
-	if (ft_strchr(MP_INNER_OBJECTS, (map_data->map)[my][mx]) && \
-		(mx == map_data->width - 1 || my == map_data->height - 1))
+	if (ft_strchr(MP_INNER_OBJECTS, (md->map)[my][mx]) && \
+		(mx == md->width - 1 || my == md->height - 1))
 		exit_failure("Map breach detected at position [%s][%s]\n", \
 		ft_itoa(mx, 10), ft_itoa(my, 10));
 }

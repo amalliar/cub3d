@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 20:36:31 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 18:58:01 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/26 03:09:47 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void			latch_image(t_mlx_image *dst, t_mlx_image *src, \
 		tex.x = 0;
 		while (p0.x < draw_end.x)
 		{
-			if ((color = mlx_pixel_get(src, (int)tex.x, (int)tex.y)) != INVIS)
+			if ((color = mlx_pixel_get(src, (int)tex.x, (int)tex.y)) != CLR_NAN)
 				mlx_pixel_set(dst, p0.x, p0.y, color);
 			tex.x += step;
 			++p0.x;
@@ -85,7 +85,7 @@ void			latch_image(t_mlx_image *dst, t_mlx_image *src, \
 ** Latches given number to an mlx_image *dst, p0 is the
 ** upper left corner from which the last digit is drawn.
 **
-** The rest of the digits are shifted to the right.
+** The rest of the digits are shifted to the left.
 */
 
 void			latch_number(t_mlx_image *dst, t_mlx_image *arr, \

@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/24 01:24:49 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/27 05:04:39 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS       := src/attempt_item_pickup.c \
               src/button_press_handler.c \
               src/button_release_handler.c \
               src/colors.c \
+              src/colors_2.c \
               src/exit_failure.c \
               src/expose_handler.c \
               src/graphics.c \
@@ -36,7 +37,7 @@ SRCS       := src/attempt_item_pickup.c \
               src/item_pickup_2.c \
               src/key_press_handler.c \
               src/key_release_handler.c \
-	      src/load_audio.c \
+              src/load_audio.c \
               src/load_scene.c \
               src/load_scene_2.c \
               src/load_textures.c \
@@ -44,8 +45,13 @@ SRCS       := src/attempt_item_pickup.c \
               src/object_collision.c \
               src/parse_map.c \
               src/parse_map_2.c \
-	      src/process_enemie_states.c \
-	      src/process_enemie_states_2.c \
+              src/parse_map_3.c \
+              src/process_effects.c \
+              src/process_enemie_states.c \
+              src/process_enemie_states_2.c \
+              src/process_enemie_states_3.c \
+              src/process_enemie_states_4.c \
+              src/process_game_state.c \
               src/process_interact_request.c \
               src/process_key_states.c \
               src/process_key_states_2.c \
@@ -53,7 +59,7 @@ SRCS       := src/attempt_item_pickup.c \
               src/process_physics.c \
               src/render_floor_and_ceiling.c \
               src/render_hud.c \
-	      src/render_hud_2.c \
+              src/render_hud_2.c \
               src/render_scene.c \
               src/render_sprites.c \
               src/render_walls.c \
@@ -62,7 +68,8 @@ SRCS       := src/attempt_item_pickup.c \
               src/switch_weapon.c \
               src/take_screenshot.c \
               src/winclose_handler.c \
-              src/main.c
+              src/main.c \
+              src/main_2.c
 OBJS       := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 DEPS       := $(SRCS:$(SRCDIR)/%.c=$(DEPDIR)/%.d)
 

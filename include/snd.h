@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 16:19:16 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 04:24:33 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/25 06:30:51 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ enum			e_sounds_ids
 	SND_HALT,
 	SND_PLAYER_PAIN,
 	SND_PLAYER_PAIN_CRITICAL,
-	SND_PLAYER_DEATH
+	SND_PLAYER_DEATH,
+	SND_ROSTER
 };
 
 #endif

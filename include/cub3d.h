@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 03:52:29 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/25 06:19:17 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,17 @@
 # include "settings.h"
 # include "snd.h"
 
-enum				e_keystates
+enum				e_game_states
+{
+	GS_NORMAL,
+	GS_DEATH,
+	GS_RESTART,
+	GS_RESPAWN,
+	GS_END,
+	GS_HALT
+};
+
+enum				e_key_states
 {
 	KEY_UP,
 	KEY_DOWN
@@ -194,6 +204,10 @@ typedef struct		s_weapon
 typedef struct		s_effects
 {
 	clock_t			r_bj_evil_grin;
+	clock_t			r_item_pickup;
+	clock_t			r_player_hit;
+	clock_t			r_player_dead;
+	clock_t			r_player_respawn;
 }					t_effects;
 
 typedef struct		s_player_data
@@ -231,6 +245,8 @@ typedef struct		s_player_data
 	int				p;
 	double			pos_x;
 	double			pos_y;
+	double			default_pos_x;
+	double			default_pos_y;
 	double			pos_z;
 	double			map_x;
 	double			map_y;
@@ -238,8 +254,12 @@ typedef struct		s_player_data
 	double			dir_y;
 	double			old_dir_x;
 	double			old_dir_y;
+	double			default_dir_x;
+	double			default_dir_y;
 	double			plane_x;
 	double			plane_y;
+	double			default_plane_x;
+	double			default_plane_y;
 	double			old_plane_x;
 	double			old_plane_y;
 	double			camera_x;
@@ -351,6 +371,7 @@ typedef struct		s_sprite_data
 
 typedef struct		s_scene
 {
+	int				game_state;
 	int				render_started;
 	int				mouse_grabbing;
 	int				num_doors;

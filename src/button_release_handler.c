@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 15:59:46 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/11 12:52:11 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/26 03:04:44 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int		button_release_handler(int button, int x, int y, t_scene *scene)
 
 	(void)x;
 	(void)y;
+	if (scene->game_state != GS_NORMAL)
+		return (0);
 	bs = &scene->button_states;
 	wpn = (*scene).player_data.active_weapon;
 	if (button == MB_LEFT)

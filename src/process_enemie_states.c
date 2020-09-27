@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 22:17:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 03:25:46 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/26 08:23:06 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_estate		g_grddie1 = \
 t_estate		g_grddie2 = \
 {false, spr_grd_die_2, 0.1, NULL, NULL, -1, &g_grddie3};
 t_estate		g_grddie3 = \
-{false, spr_grd_dead, 0, NULL, drop_ammo, -1, &g_grddie3};
+{false, spr_grd_dead, 0, NULL, drop_ammo_and_score_points, -1, &g_grddie3};
 
 static int		get_view_angle(t_sprite *sp, t_player_data *pd)
 {
@@ -57,28 +57,33 @@ static int		get_view_angle(t_sprite *sp, t_player_data *pd)
 	return ((int)round(view_angle / 45.0) % 8);
 }
 
+static void		int_process_first_run(t_scene *scene, t_sprite *en, \
+					t_enemie_data *ed)
+{
+	double		vperc;
+
+	if (ed->state->soundnum > 0)
+	{
+		vperc = 100.0 - en->dist * 3.5;
+		if (vperc < 0)
+			vperc = 0;
+		playSoundFromMemory((scene->sounds)[ed->state->soundnum], \
+			G_SOUNDS_VOLUME * vperc / 100.0);
+	}
+	if (ed->state->fonce != NULL)
+		ed->state->fonce(scene, en);
+	ed->r_timer = clock();
+}
+
 static void		int_process_enemie_state(t_scene *scene, int spritenum)
 {
 	t_sprite		*en;
 	t_enemie_data	*ed;
-	double			vperc;
 
 	en = scene->sprites + spritenum;
 	ed = en->e_data;
 	if (ed->r_timer == 0)
-	{
-		if (ed->state->soundnum > 0)
-		{
-			vperc = 100.0 - sqrt(en->dist) * 3.5;
-			if (vperc < 0)
-				vperc = 0;
-			playSoundFromMemory((scene->sounds)[ed->state->soundnum], \
-				G_SOUNDS_VOLUME * vperc / 100.0);
-		}
-		if (ed->state->fonce != NULL)
-			ed->state->fonce(scene, en);
-		ed->r_timer = clock();
-	}
+		int_process_first_run(scene, en, ed);
 	en = scene->sprites + spritenum;
 	ed = en->e_data;
 	en->tex = (scene->textures).guard + ed->state->shapenum;

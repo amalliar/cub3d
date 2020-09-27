@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 04:24:18 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 06:25:44 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 
 # define G_GAME_WINDOW_WIDTH	1280
 # define G_GAME_WINDOW_HEIGHT	720
+# define G_CENTER_X				G_GAME_WINDOW_WIDTH / 2
+# define G_CENTER_Y				G_GAME_WINDOW_HEIGHT / 2
 # define G_HUD_SCALE			G_GAME_WINDOW_WIDTH / 304.0
 # define G_HUD_WIDTH			G_GAME_WINDOW_WIDTH
 # define G_HUD_HEIGHT			35 * G_HUD_SCALE
 # define G_MLX_WINDOW_TITLE		"cub3D"
 # define G_MLX_WINDOW_WIDTH		G_GAME_WINDOW_WIDTH
 # define G_MLX_WINDOW_HEIGHT	G_GAME_WINDOW_HEIGHT + G_HUD_HEIGHT
-# define G_MUSIC_VOLUME			SDL_MIX_MAXVOLUME / 100.0 * 5
-# define G_SOUNDS_VOLUME		SDL_MIX_MAXVOLUME / 100.0 * 15
+# define G_MUSIC_VOLUME			SDL_MIX_MAXVOLUME / 100.0 * 8
+# define G_SOUNDS_VOLUME		SDL_MIX_MAXVOLUME / 100.0 * 16
 
 # define SV_GRAVITY				9.807 * 1000
 
@@ -67,6 +69,6 @@
 # define NUM_WEAPONS			4
 # define NUM_WEAPON_FRAMES		5
 # define NUM_MUSIC_TRACKS		1
-# define NUM_SOUNDS				25
+# define NUM_SOUNDS				26
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:38:17 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 17:13:46 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 06:17:24 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 void		set_player_speed(t_player_data *pd, t_key_states *ks, \
 				double frame_time)
 {
-	double		speed_mod;
+	double		speed_modifier;
 
-	speed_mod = 1.0;
+	speed_modifier = 1.0;
 	if ((ks->kvk_ansi_w == KEY_DOWN || ks->kvk_ansi_s == KEY_DOWN) && \
 		(ks->kvk_ansi_a == KEY_DOWN || ks->kvk_ansi_d == KEY_DOWN))
-		speed_mod = 0.50;
+		speed_modifier = 0.50;
 	if (pd->pos_z < 0)
-		speed_mod /= 2.0;
-	pd->move_speed = frame_time * PL_MOVE_SPEED * speed_mod;
+		speed_modifier /= 2.0;
+	pd->move_speed = frame_time * PL_MOVE_SPEED * speed_modifier;
 	pd->rot_speed = frame_time * PL_ROT_SPEED;
 }
 
