@@ -6,37 +6,42 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/26 03:53:41 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 11:27:21 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "events.h"
-#include "graphics.h"
-#include "mlx.h"
 #include "render_scene.h"
 
-static void		get_frames_per_second(t_mlx_data *mlx_data, clock_t *r_timer, \
-					int *frames)
+static void		render_fps_counter(t_mlx_data *mlx_data)
 {
-	if ((clock() - *r_timer) / CLOCKS_PER_SEC >= 1)
+	static clock_t	r_timer = 0;
+	static int		frames = 0;
+	char			*str;
+
+	if (PL_SHOW_FPS)
 	{
-		mlx_data->frames_per_second = *frames;
-		*frames = 0;
-		*r_timer = clock();
+		str = ft_itoa(mlx_data->frames_per_second, 10);
+		mlx_string_put(mlx_data->mlx, mlx_data->win, 20, 20, CLR_LIME, str);
+		free(str);
 	}
+	if ((clock() - r_timer) / CLOCKS_PER_SEC >= 1)
+	{
+		mlx_data->frames_per_second = frames;
+		frames = 0;
+		r_timer = clock();
+	}
+	++frames;
 }
 
 static int		render_next_frame(t_scene *scene)
 {
-	static clock_t	r_timer = 0;
 	clock_t			r_start;
-	static int		frames = 0;
 	t_mlx_data		*mlx_data;
 
 	if (process_game_state(scene) != GS_NORMAL)
 		return (0);
-	r_start = clock();
 	mlx_data = &scene->mlx_data;
+	r_start = clock();
 	process_key_states(scene);
 	process_mouse_motion(scene);
 	process_physics(scene);
@@ -50,9 +55,8 @@ static int		render_next_frame(t_scene *scene)
 	process_effects(scene);
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, \
 		(mlx_data->frame).img, 0, 0);
+	render_fps_counter(mlx_data);
 	mlx_data->frame_time = (double)(clock() - r_start) / CLOCKS_PER_SEC;
-	++frames;
-	get_frames_per_second(mlx_data, &r_timer, &frames);
 	return (0);
 }
 
@@ -84,8 +88,10 @@ void			render_scene(t_scene *scene)
 
 	mlx_data = &scene->mlx_data;
 	init_frame(scene);
-	mlx_data->win = mlx_new_window(mlx_data->mlx, mlx_data->width, \
-		mlx_data->height, G_MLX_WINDOW_TITLE);
+	if (!(mlx_data->win = mlx_new_window(mlx_data->mlx, mlx_data->width, \
+		mlx_data->height, G_MLX_WINDOW_TITLE)))
+		exit_failure("Failed creating mlx window instance: %s\n", \
+			strerror(errno));
 	mlx_do_key_autorepeatoff(mlx_data->mlx);
 	mlx_hook(mlx_data->win, KEY_PRESS, KEY_PRESS_MASK, \
 		key_press_handler, scene);

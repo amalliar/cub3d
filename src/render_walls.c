@@ -6,11 +6,10 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:52:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/15 22:56:09 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 11:48:40 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_string.h"
 #include "render_walls.h"
 
 static void		dda_init_1(t_player_data *pd, int x, int width)
@@ -106,14 +105,15 @@ void			render_walls(t_scene *scene)
 	mlx_data = &scene->mlx_data;
 	pd = &scene->player_data;
 	x = 0;
-	while (x < (*mlx_data).frame.width)
+	while (x < (mlx_data->frame).width)
 	{
-		dda_init_1(pd, x, (*mlx_data).frame.width);
+		dda_init_1(pd, x, (mlx_data->frame).width);
 		dda_init_2(pd);
 		dda_run(scene, pd, &scene->map_data);
-		calc_stripe_limits(pd, (*mlx_data).frame.height);
+		calc_stripe_limits(pd, (mlx_data->frame).height);
 		check_door_hit(scene, pd, &scene->map_data);
-		select_texture(scene, &texture);
+		select_texture(&scene->player_data, &scene->map_data, \
+			(scene->textures).walls, &texture);
 		calc_texture_x(scene, texture);
 		fill_stripe(scene, texture, x);
 		(pd->zbuffer)[x] = pd->perp_wall_dist;

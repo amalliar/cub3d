@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/27 05:04:39 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/27 12:13:10 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,9 @@ SRCS       := src/attempt_item_pickup.c \
               src/process_key_states_2.c \
               src/process_mouse_motion.c \
               src/process_physics.c \
+              src/process_physics_2.c \
+              src/process_physics_3.c \
+              src/process_physics_4.c \
               src/render_floor_and_ceiling.c \
               src/render_hud.c \
               src/render_hud_2.c \
@@ -65,6 +68,7 @@ SRCS       := src/attempt_item_pickup.c \
               src/render_walls.c \
               src/render_walls_2.c \
               src/render_walls_3.c \
+              src/render_walls_4.c \
               src/switch_weapon.c \
               src/take_screenshot.c \
               src/winclose_handler.c \

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 10:44:40 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 05:35:59 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:15:29 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "graphics.h"
 # include "keycodes.h"
 # include "mlx.h"
+# include "snd.h"
 
 int			key_press_handler(int keycode, t_scene *scene);
 t_door		*get_door(t_scene *scene, int door_x, int door_y);

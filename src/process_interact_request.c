@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 10:38:15 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 05:46:23 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:29:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,15 @@ void				process_interact_request(t_scene *scene, \
 	t_secret		*secret;
 	double			dist;
 
-	dist = PL_MAX_INTERACT_DIST;
-	while (dist > 0)
+	dist = 0;
+	while (dist <= PL_MAX_INTERACT_DIST)
 	{
 		ray = calculate_ray_position(pd, dist);
 		if (ft_strchr(MP_DOORS, (md->map)[ray.y][ray.x]) && \
 			(ray.x != (int)pd->pos_x || ray.y != (int)pd->pos_y))
-		{
-			switch_door_state(scene, get_door(scene, ray.x, ray.y));
-			return ;
-		}
-		if (ft_strchr(MP_SECRETS, (md->map)[ray.y][ray.x]))
+			return ((void)switch_door_state(scene, \
+				get_door(scene, ray.x, ray.y)));
+		else if (ft_strchr(MP_SECRETS, (md->map)[ray.y][ray.x]))
 		{
 			secret = get_secret(scene, ray.x, ray.y);
 			if (secret->state == IDLE)
@@ -90,6 +88,8 @@ void				process_interact_request(t_scene *scene, \
 			secret->state = ACTIVE;
 			return ;
 		}
-		dist -= 0.1;
+		else if (ft_strchr(MP_COLLIDERS, (md->map)[ray.y][ray.x]))
+			return ;
+		dist += 0.1;
 	}
 }

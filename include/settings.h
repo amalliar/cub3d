@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 06:25:44 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 10:55:20 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define MP_COLLIDERS			"!ABCDEFGHIJKLMRSTUVWXYZbcdilmnq\"#$&"
 # define MP_COLLISION_RADIUS	0.20
 
+# define PL_SHOW_FPS			1
 # define PL_CROSSHAIR			0
 # define PL_FOV					80
 # define PL_JUMP_HEIGHT			250

@@ -6,14 +6,17 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:50:36 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 05:23:13 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 10:58:08 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_SCENE_H
 # define RENDER_SCENE_H
 # include <time.h>
+# include "colors.h"
 # include "cub3d.h"
+# include "events.h"
+# include "ft_stdlib.h"
 # include "graphics.h"
 # include "mlx.h"
 

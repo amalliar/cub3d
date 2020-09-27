@@ -6,11 +6,10 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 02:09:26 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 11:47:04 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_string.h"
 #include "render_walls.h"
 
 t_block			g_blocks[] =
@@ -174,21 +173,16 @@ void			check_door_hit(t_scene *scene, t_player_data *pd, \
 	}
 }
 
-int				get_block_id(char block)
+static int		get_block_id(char block)
 {
 	return (ft_strchr(MP_BLOCKS, block) - MP_BLOCKS);
 }
 
-void			select_texture(t_scene *scene, t_mlx_image **texture)
+void			select_texture(t_player_data *pd, t_map_data *md, \
+					t_mlx_image *walls, t_mlx_image **texture)
 {
-	t_player_data	*pd;
-	t_map_data		*md;
-	t_mlx_image		*walls;
 	int				block_id;
 
-	pd = &scene->player_data;
-	md = &scene->map_data;
-	walls = (*scene).textures.walls;
 	if (pd->door_hit)
 		block_id = get_block_id((md->map)[pd->door->y][pd->door->x]);
 	else if (pd->secret_hit)

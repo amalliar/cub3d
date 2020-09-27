@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 22:18:56 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/25 07:21:40 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 08:39:05 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,8 @@
 # include "snd.h"
 # include "ft_string.h"
 
+void	player_attack(t_scene *scene);
+void	process_secret_states(t_scene *scene);
+void	process_weapon_state(t_scene *scene);
 
 #endif

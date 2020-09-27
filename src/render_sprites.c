@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 13:04:05 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/25 07:25:22 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 11:38:16 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "item_pickup.h"
 #include "render_scene.h"
 
-static void		calc_sprite_dist(t_scene *scene, t_sprite *sprites)
+static void		calculate_sprite_distances(t_scene *scene, t_sprite *sprites)
 {
 	t_player_data	*pd;
 	int				i;
@@ -69,6 +69,7 @@ static void		init_sprite_data(t_mlx_image *frame, t_player_data *pd, \
 	sd->draw_end_x = sd->sprite_width / 2 + sd->sprite_screen_x;
 	if (sd->draw_end_x >= frame->width)
 		sd->draw_end_x = frame->width - 1;
+	sd->stripe = sd->draw_start_x;
 }
 
 static void		draw_sprite(t_sprite *sp, t_mlx_image *frame, \
@@ -76,8 +77,6 @@ static void		draw_sprite(t_sprite *sp, t_mlx_image *frame, \
 {
 	int		color;
 
-	sd->stripe = sd->draw_start_x;
-	sp->is_visible = false;
 	while (sd->stripe < sd->draw_end_x)
 	{
 		sd->tex_x = (int)(256 * (sd->stripe - (-sd->sprite_width / 2 + \
@@ -113,7 +112,7 @@ void			render_sprites(t_scene *scene)
 	sprites = scene->sprites;
 	sd = &scene->sprite_data;
 	pd = &scene->player_data;
-	calc_sprite_dist(scene, sprites);
+	calculate_sprite_distances(scene, sprites);
 	ft_qsort(sprites, sd->num_sprites, sizeof(t_sprite), compar);
 	i = 0;
 	while (i < sd->num_sprites)
@@ -122,6 +121,7 @@ void			render_sprites(t_scene *scene)
 		{
 			sd->sprite_x = sprites[i].x - pd->pos_x;
 			sd->sprite_y = sprites[i].y - pd->pos_y;
+			sprites[i].is_visible = false;
 			init_sprite_data(&(scene->mlx_data).frame, pd, sd);
 			draw_sprite(sprites + i, &(scene->mlx_data).frame, pd, sd);
 		}
