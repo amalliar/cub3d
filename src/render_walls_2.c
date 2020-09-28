@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 11:47:04 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/28 15:19:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,12 @@ t_block			g_blocks[] =
 		GREY_STONE_WALL,
 		GREY_STONE_WALL_DARK,
 		GREY_STONE_WALL_DARK,
+	},
+	{
+		GREY_STONE_BANNER,
+		GREY_STONE_BANNER,
+		GREY_STONE_BANNER_DARK,
+		GREY_STONE_BANNER_DARK,
 	}
 };
 

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 05:43:24 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/26 05:45:24 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/28 14:25:33 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void			load_enemie_data(t_scene *scene, int x, int y, char obj)
 	if (!(this_sprite->e_data = malloc(sizeof(t_enemie_data))))
 		exit_failure("%s\n", strerror(errno));
 	set_enemie_dir(this_sprite);
-	this_sprite->e_data->state = &g_grdstand;
+	this_sprite->e_data->state = (SV_NO_WAR) ? &g_grdidle : &g_grdstand;
 	this_sprite->e_data->is_alive = true;
 	this_sprite->e_data->is_tracking_player = false;
 	this_sprite->e_data->r_timer = 0;

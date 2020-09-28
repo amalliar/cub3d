@@ -6,14 +6,14 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 00:23:36 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 04:59:46 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/28 14:04:13 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROCESS_ENEMIE_STATES_H
 # define PROCESS_ENEMIE_STATES_H
 # define EN_MAX_VIEWING_DIST	20
-# define EN_INTERACT_DIST		10
+# define EN_INTERACT_DIST		4
 
 # include "ft_stdlib.h"
 # include "graphics.h"

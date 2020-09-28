@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 09:54:08 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/28 14:24:20 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -397,6 +397,7 @@ void				load_scene(t_scene *scene, char *path);
 void				render_scene(t_scene *scene);
 void				take_screenshot(t_scene *scene);
 
+extern t_estate		g_grdidle;
 extern t_estate		g_grdstand;
 extern t_estate		g_grdshoot0;
 extern t_estate		g_grdshoot1;

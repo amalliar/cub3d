@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 10:55:20 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/28 15:57:36 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define G_SOUNDS_VOLUME		SDL_MIX_MAXVOLUME / 100.0 * 16
 
 # define SV_GRAVITY				9.807 * 1000
+# define SV_NO_WAR				0
+# define SV_SHOW_FPS			1
 
 # define MP_OBJECTS			"abcdefghijklmnopqrstuvwxyz123456789\"#$%&'()*+,."
 # define MP_ENEMIES				"|~{}"
@@ -39,14 +41,13 @@
 # define MP_DOORS				NS EW
 # define MP_NSECRETS			"S"
 # define MP_SSECRETS			"T"
-# define MP_ESECRETS			""
+# define MP_ESECRETS			"V"
 # define MP_WSECRETS			"RU"
 # define MP_SECRETS				MP_NSECRETS MP_SSECRETS MP_ESECRETS MP_WSECRETS
 # define MP_SPECIAL_BLOCKS		MP_DOORS MP_SECRETS
 # define MP_COLLIDERS			"!ABCDEFGHIJKLMRSTUVWXYZbcdilmnq\"#$&"
 # define MP_COLLISION_RADIUS	0.20
 
-# define PL_SHOW_FPS			1
 # define PL_CROSSHAIR			0
 # define PL_FOV					80
 # define PL_JUMP_HEIGHT			250

@@ -6,26 +6,30 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 22:17:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/26 08:23:06 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/28 16:11:04 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "process_enemie_states.h"
 
+t_estate		g_grdidle = \
+{true, spr_grd_stand_0, 0, NULL, NULL, -1, &g_grdidle};
+
 t_estate		g_grdstand = \
 {true, spr_grd_stand_0, 0, check_player_presence, NULL, -1, &g_grdstand};
 
 t_estate		g_grdshoot0 = \
-{false, spr_grd_shoot_0, 0.5, NULL, start_player_tracking, -1, &g_grdshoot1};
+{false, spr_grd_shoot_0, 0.4, NULL, start_player_tracking, -1, &g_grdshoot1};
 t_estate		g_grdshoot1 = \
-{false, spr_grd_shoot_1, 0.5, NULL, NULL, -1, &g_grdshoot2};
+{false, spr_grd_shoot_1, 0.4, NULL, NULL, -1, &g_grdshoot2};
 t_estate		g_grdshoot2 = \
-{false, spr_grd_shoot_2, 0.5, NULL, enemie_attack, SND_PISTOL, &g_grdshoot3};
+{false, spr_grd_shoot_2, 0.4, NULL, enemie_attack, SND_PISTOL, &g_grdshoot3};
 t_estate		g_grdshoot3 = \
 {false, spr_grd_shoot_2, 0.1, NULL, check_player_presence, -1, &g_grdstand};
 
 t_estate		g_grdpain = \
-{false, spr_grd_pain_0, 0.5, NULL, NULL, SND_PAIN, &g_grdshoot0};
+{false, spr_grd_pain_0, 0.5, NULL, start_player_tracking, SND_PAIN, \
+	&g_grdshoot0};
 
 t_estate		g_grddie0 = \
 {false, spr_grd_die_0, 0.1, NULL, NULL, SND_DEATH, &g_grddie1};

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 07:09:37 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 08:36:55 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/28 14:16:14 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,22 @@ static t_sprite		*find_target(t_scene *scene, t_sprite *sprites, \
 						double max_dist)
 {
 	t_sprite	*target;
-	double		old_delta;
-	double		new_delta;
+	double		delta;
 	int			i;
 
-	old_delta = PL_ATTACK_DELTA;
 	target = NULL;
 	i = (scene->sprite_data).num_sprites - 1;
 	while (i >= 0)
 	{
 		if (sprites[i].dist >= max_dist)
 			return (target);
-		if (ft_strchr(MP_ENEMIES, sprites[i].type))
+		if (ft_strchr(MP_ENEMIES, sprites[i].type) && \
+			sprites[i].e_data->is_alive)
 		{
-			new_delta = get_line_dist(&(scene->player_data).line1, \
+			delta = get_line_dist(&(scene->player_data).line1, \
 				sprites[i].x, sprites[i].y);
-			if (new_delta < old_delta && sprites[i].e_data->is_alive)
-			{
-				target = sprites + i;
-				old_delta = new_delta;
-			}
+			if (delta <= PL_ATTACK_DELTA)
+				return (sprites + i);
 		}
 		--i;
 	}

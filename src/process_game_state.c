@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 05:25:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 06:26:50 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/28 16:13:38 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ static void		render_death_animation(t_scene *scene)
 static void		restart_level(t_scene *scene)
 {
 	t_player_data	*pd;
-	t_effects		*effects;
 
 	pd = &scene->player_data;
-	effects = &pd->effects;
 	if (--pd->lives < 0)
 	{
 		scene->game_state = GS_END;
@@ -57,9 +55,10 @@ static void		restart_level(t_scene *scene)
 	pd->dir_y = pd->default_dir_y;
 	pd->plane_x = pd->default_plane_x;
 	pd->plane_y = pd->default_plane_y;
+	pd->active_weapon->state = IDLE;
 	pd->active_weapon->frame = 0;
 	pd->active_weapon = pd->weapons + 1;
-	effects->r_player_respawn = clock();
+	(pd->effects).r_player_respawn = clock();
 	scene->game_state = GS_RESPAWN;
 }
 
