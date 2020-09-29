@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:05:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/25 01:07:59 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 10:51:56 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void				drawhorline(t_mlx_image *img, t_point p0, t_point p1, \
 						int color);
 void				drawline(t_mlx_image *frame, t_point p0, t_point p1, \
 						int color);
+void				draw_rectangle(t_mlx_image *frame, t_point p0, \
+						t_point p2, int color);
 void				drawverline(t_mlx_image *img, t_point p0, t_point p1, \
 						int color);
 void				latch_image(t_mlx_image *dst, t_mlx_image *src, t_point p0,\

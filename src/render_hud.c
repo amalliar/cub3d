@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 07:21:24 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 09:30:51 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 10:49:14 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,6 @@ void			render_hud(t_scene *scene)
 		(scene->textures).faces);
 	draw_weapon(scene);
 	draw_crosshair(scene);
+	if (SV_SHOW_FPS)
+		draw_fps_box(scene);
 }

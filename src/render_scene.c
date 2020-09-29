@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/28 15:57:51 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/28 16:29:49 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		render_fps_counter(t_mlx_data *mlx_data)
 	if (SV_SHOW_FPS)
 	{
 		str = ft_itoa(mlx_data->frames_per_second, 10);
-		mlx_string_put(mlx_data->mlx, mlx_data->win, 20, 20, CLR_YELLOW, str);
+		mlx_string_put(mlx_data->mlx, mlx_data->win, 1, 5, CLR_YELLOW, str);
 		free(str);
 	}
 	if ((clock() - r_timer) / CLOCKS_PER_SEC >= 1)

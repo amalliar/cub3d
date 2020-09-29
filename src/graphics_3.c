@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 14:14:44 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/26 03:12:58 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 10:43:54 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,25 @@ void					add_color_mask(t_mlx_image *frame, t_point res, \
 			old_color = mlx_pixel_get(frame, x, y);
 			old_color = clr_mix(old_color, color, opacity);
 			mlx_pixel_set(frame, x, y, old_color);
+			++x;
+		}
+		++y;
+	}
+}
+
+void					draw_rectangle(t_mlx_image *frame, t_point p0, \
+							t_point p1, int color)
+{
+	int		x;
+	int		y;
+
+	y = p0.y;
+	while (y <= p1.y)
+	{
+		x = p0.x;
+		while (x <= p1.x)
+		{
+			mlx_pixel_set(frame, x, y, color);
 			++x;
 		}
 		++y;
