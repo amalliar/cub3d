@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 21:23:53 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/28 15:28:04 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 12:09:18 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,6 +274,11 @@ char			g_guard_texture_paths[NUM_GUARD_TEXTURES][128] =
 	"./res/textures/guard/47_en_shooting.xpm"
 };
 
+char			g_menu_texture_paths[NUM_MENU_TEXTURES][128] =
+{
+	"./res/textures/menu/00_game_over.xpm"
+};
+
 static void		int_load_textures(t_scene *scene, t_mlx_image *arr, \
 					char (*paths)[128], int num_textures)
 {
@@ -302,8 +307,7 @@ void			load_textures(t_scene *scene)
 		g_hud_texture_paths, NUM_HUD_TEXTURES);
 	int_load_textures(scene, (scene->textures).faces, \
 		g_faces_texture_paths, NUM_FACES_TEXTURES);
-	int_load_textures(scene, &(scene->textures).floor, \
-		g_floor_texture_path, 1);
+	int_load_textures(scene, &(scene->textures).floor, g_floor_texture_path, 1);
 	int_load_textures(scene, &(scene->textures).ceiling, \
 		g_ceiling_texture_path, 1);
 	int_load_textures(scene, scene->crosshairs, \
@@ -318,4 +322,6 @@ void			load_textures(t_scene *scene)
 		g_wpn_chaingun_texture_paths, NUM_WEAPON_FRAMES);
 	int_load_textures(scene, (scene->textures).guard, \
 		g_guard_texture_paths, NUM_GUARD_TEXTURES);
+	int_load_textures(scene, (scene->textures).menu, \
+		g_menu_texture_paths, NUM_MENU_TEXTURES);
 }

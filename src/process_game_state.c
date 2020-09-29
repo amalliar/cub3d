@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 05:25:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/28 16:13:38 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 12:19:31 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void		render_death_animation(t_scene *scene)
 	}
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, \
 		(mlx_data->frame).img, 0, 0);
+	render_fps_counter(mlx_data);
 }
 
 static void		restart_level(t_scene *scene)
@@ -84,11 +85,34 @@ static void		render_respawn_animation(t_scene *scene)
 	}
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, \
 		(mlx_data->frame).img, 0, 0);
+	render_fps_counter(mlx_data);
 }
 
 static void		render_endgame_screen(t_scene *scene)
 {
+	t_mlx_data		*mlx_data;
+	t_point			p0;
+	t_point			p1;
+	t_point			res;
+
 	playSoundFromMemory((scene->sounds)[SND_ROSTER], G_SOUNDS_VOLUME);
+	mlx_data = &scene->mlx_data;
+	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, mlx_data->win);
+	init_point(&res, G_MLX_WINDOW_WIDTH, G_MLX_WINDOW_HEIGHT);
+	add_color_mask(&mlx_data->frame, res, CLR_BLOOD, 1);
+	init_point(&p0, 0, 64 * G_HUD_SCALE);
+	init_point(&p1, G_GAME_WINDOW_WIDTH, p0.y + 16 * G_HUD_SCALE);
+	draw_rectangle(&mlx_data->frame, p0, p1, CLR_BLACK);
+	p0.y = p1.y + G_HUD_SCALE / 2 + 2;
+	p1.y = p0.y + G_HUD_SCALE / 2;
+	draw_rectangle(&mlx_data->frame, p0, p1, CLR_BLACK);
+	p0.x = G_GAME_WINDOW_WIDTH / 2 - ((scene->textures).menu)[0].width * \
+		(G_HUD_SCALE / 1.5) / 2;
+	p0.y = 61 * G_HUD_SCALE;
+	latch_image(&mlx_data->frame, (scene->textures).menu, p0, \
+		G_HUD_SCALE / 1.5);
+	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, \
+		(mlx_data->frame).img, 0, 0);
 	scene->game_state = GS_HALT;
 }
 

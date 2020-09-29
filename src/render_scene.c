@@ -6,13 +6,13 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/28 16:29:49 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 11:16:41 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_scene.h"
 
-static void		render_fps_counter(t_mlx_data *mlx_data)
+void			render_fps_counter(t_mlx_data *mlx_data)
 {
 	static clock_t	r_timer = 0;
 	static int		frames = 0;

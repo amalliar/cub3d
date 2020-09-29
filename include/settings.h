@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/28 15:57:36 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 11:51:24 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@
 # define NUM_OBJECT_TEXTURES	47
 # define NUM_GUARD_TEXTURES		48
 # define NUM_WALL_TEXTURES		52
+# define NUM_MENU_TEXTURES		1
 # define NUM_WEAPONS			4
 # define NUM_WEAPON_FRAMES		5
 # define NUM_MUSIC_TRACKS		1

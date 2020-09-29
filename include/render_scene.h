@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:50:36 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 10:58:08 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 11:17:07 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	process_key_states(t_scene *scene);
 void	process_mouse_motion(t_scene *scene);
 void	process_physics(t_scene *scene);
 void	render_floor_and_ceiling(t_scene *scene);
+void	render_fps_counter(t_mlx_data *mlx_data);
 void	render_hud(t_scene *scene);
 void	render_scene(t_scene *scene);
 void	render_sprites(t_scene *scene);

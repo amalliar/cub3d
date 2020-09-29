@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:05:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/29 10:51:56 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 12:17:45 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct		s_bmp_data
 }					t_bmp_data;
 
 bool				intersect(t_line *m, t_line *n, t_fpoint *res);
+void				init_point(t_point *p, int x, int y);
 int					mlx_image_to_bmp_file(t_mlx_image *mi);
 int					mlx_pixel_get(t_mlx_image *img, int x, int y);
 void				add_color_mask(t_mlx_image *frame, t_point res, \

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/28 14:24:20 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 11:52:18 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ typedef struct		s_textures
 	t_mlx_image		guard[NUM_GUARD_TEXTURES];
 	t_mlx_image		hud[NUM_HUD_TEXTURES];
 	t_mlx_image		faces[NUM_FACES_TEXTURES];
+	t_mlx_image		menu[NUM_MENU_TEXTURES];
 	t_mlx_image		floor;
 	t_mlx_image		ceiling;
 }					t_textures;
