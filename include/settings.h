@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/29 11:51:24 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 15:50:00 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define EW						"OQ"
 # define MP_DOORS				NS EW
 # define MP_NSECRETS			"S"
-# define MP_SSECRETS			"T"
+# define MP_SSECRETS			"TW"
 # define MP_ESECRETS			"V"
 # define MP_WSECRETS			"RU"
 # define MP_SECRETS				MP_NSECRETS MP_SSECRETS MP_ESECRETS MP_WSECRETS
@@ -67,7 +67,7 @@
 # define NUM_HUD_TEXTURES		17
 # define NUM_OBJECT_TEXTURES	47
 # define NUM_GUARD_TEXTURES		48
-# define NUM_WALL_TEXTURES		52
+# define NUM_WALL_TEXTURES		53
 # define NUM_MENU_TEXTURES		1
 # define NUM_WEAPONS			4
 # define NUM_WEAPON_FRAMES		5

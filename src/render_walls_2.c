@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/28 15:19:39 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 15:58:41 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,19 @@ t_block			g_blocks[] =
 		GREY_STONE_BANNER,
 		GREY_STONE_BANNER_DARK,
 		GREY_STONE_BANNER_DARK,
-	}
+	},
+	{
+		BLUE_TILE_WALL,
+		BLUE_TILE_WALL,
+		BLUE_TILE_WALL_DARK,
+		BLUE_TILE_WALL_DARK
+	},
+	{
+		CARMACK_AND_ROMERO,
+		CARMACK_AND_ROMERO,
+		CARMACK_AND_ROMERO,
+		CARMACK_AND_ROMERO,
+	},
 };
 
 void			check_door_hit(t_scene *scene, t_player_data *pd, \

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:41:39 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/24 02:05:08 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 15:53:45 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ enum		e_texture_ids
 	CYAN_METAL_DOOR_FRAME,
 	CYAN_METAL_DOOR_FRAME_DARK,
 	ELEVATOR_DOOR,
-	ELEVATOR_DOOR_DARK
+	ELEVATOR_DOOR_DARK,
+	CARMACK_AND_ROMERO
 };
 
 enum		e_spr_grd_ids
