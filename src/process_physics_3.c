@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 07:09:37 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/28 14:16:14 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 10:28:54 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_sprite		*find_target(t_scene *scene, t_sprite *sprites, \
 		if (sprites[i].dist >= max_dist)
 			return (target);
 		if (ft_strchr(MP_ENEMIES, sprites[i].type) && \
-			sprites[i].e_data->is_alive)
+			sprites[i].e_data->is_alive && sprites[i].is_visible)
 		{
 			delta = get_line_dist(&(scene->player_data).line1, \
 				sprites[i].x, sprites[i].y);
