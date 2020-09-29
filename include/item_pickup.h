@@ -6,14 +6,14 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:05:51 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 17:04:11 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/22 02:23:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITEM_PICKUP_H
 # define ITEM_PICKUP_H
 
-# define AMMO_PICKUPS		"1"
+# define AMMO_PICKUPS		"1."
 # define GIBS_PICKUPS		""
 # define HEALTH_PICKUPS		"gyz"
 # define KEY_PICKUPS		""
@@ -25,13 +25,6 @@
 # define PICKUPS PU1 PU2
 
 # include "cub3d.h"
-
-enum	e_object_states
-{
-	PLACED,
-	TAKEN,
-	NOT_A_PICKUP
-};
 
 void	attempt_ammo_pickup(t_scene *scene, t_sprite *obj);
 void	attempt_gibs_pickup(t_scene *scene, t_sprite *obj);

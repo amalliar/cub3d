@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 05:22:23 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 18:46:42 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:16:30 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		take_screenshot(t_scene *scene)
 {
 	t_mlx_image		*frame;
 
-	frame = &(*scene).mlx_data.frame;
+	frame = &(scene->mlx_data).frame;
 	if (!scene->render_started)
 	{
 		init_frame(scene);

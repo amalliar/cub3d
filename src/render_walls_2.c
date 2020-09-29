@@ -6,12 +6,165 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/15 16:47:23 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 15:58:41 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_string.h"
 #include "render_walls.h"
+
+t_block			g_blocks[] =
+{
+	{
+		DEV_N,
+		DEV_S,
+		DEV_E,
+		DEV_W
+	},
+	{
+		BLUE_TILE_WALL,
+		BLUE_TILE_WALL,
+		BLUE_TILE_WALL_DARK,
+		BLUE_TILE_WALL_DARK
+	},
+	{
+		BLUE_TILE_WALL_2,
+		BLUE_TILE_WALL_2,
+		BLUE_TILE_WALL_2_DARK,
+		BLUE_TILE_WALL_2_DARK
+	},
+	{
+		BLUE_TILE_DOOR,
+		BLUE_TILE_DOOR,
+		BLUE_TILE_DOOR_DARK,
+		BLUE_TILE_DOOR_DARK
+	},
+	{
+		BLUE_TILE_SKEL,
+		BLUE_TILE_SKEL,
+		BLUE_TILE_SKEL_DARK,
+		BLUE_TILE_SKEL_DARK
+	},
+	{
+		GREY_STONE_WALL,
+		GREY_STONE_WALL,
+		GREY_STONE_WALL_DARK,
+		GREY_STONE_WALL_DARK,
+	},
+	{
+		GREY_STONE_WALL_2,
+		GREY_STONE_WALL_2,
+		GREY_STONE_WALL_2_DARK,
+		GREY_STONE_WALL_2_DARK,
+	},
+	{
+		GREY_STONE_ARCH,
+		GREY_STONE_ARCH,
+		GREY_STONE_ARCH_DARK,
+		GREY_STONE_ARCH_DARK
+	},
+	{
+		GREY_STONE_HITLER_PICTURE,
+		GREY_STONE_HITLER_PICTURE,
+		GREY_STONE_HITLER_PICTURE_DARK,
+		GREY_STONE_HITLER_PICTURE_DARK,
+	},
+	{
+		GREY_STONE_BANNER,
+		GREY_STONE_BANNER,
+		GREY_STONE_BANNER_DARK,
+		GREY_STONE_BANNER_DARK,
+	},
+	{
+		WOODEN_WALL,
+		WOODEN_WALL,
+		WOODEN_WALL_DARK,
+		WOODEN_WALL_DARK
+	},
+	{
+		WOODEN_EAGLE_PICTURE,
+		WOODEN_EAGLE_PICTURE,
+		WOODEN_EAGLE_PICTURE_DARK,
+		WOODEN_EAGLE_PICTURE_DARK
+	},
+	{
+		WOODEN_HITLER_PICTURE,
+		WOODEN_HITLER_PICTURE,
+		WOODEN_HITLER_PICTURE_DARK,
+		WOODEN_HITLER_PICTURE_DARK
+	},
+	{
+		ELEVATOR_DOWN_FRONT,
+		ELEVATOR_DOWN_FRONT,
+		ELEVATOR_DOWN_SIDE,
+		ELEVATOR_DOWN_SIDE,
+	},
+	{
+		CYAN_METAL_DOOR,
+		CYAN_METAL_DOOR,
+		CYAN_METAL_DOOR_FRAME_DARK,
+		CYAN_METAL_DOOR_FRAME_DARK
+	},
+	{
+		CYAN_METAL_DOOR_FRAME,
+		CYAN_METAL_DOOR_FRAME,
+		CYAN_METAL_DOOR_DARK,
+		CYAN_METAL_DOOR_DARK
+	},
+	{
+		ELEVATOR_DOOR,
+		ELEVATOR_DOOR,
+		CYAN_METAL_DOOR_FRAME_DARK,
+		CYAN_METAL_DOOR_FRAME_DARK
+	},
+	{
+		CYAN_METAL_DOOR_FRAME,
+		CYAN_METAL_DOOR_FRAME,
+		ELEVATOR_DOOR_DARK,
+		ELEVATOR_DOOR_DARK
+	},
+	{
+		WOODEN_EAGLE_PICTURE,
+		WOODEN_EAGLE_PICTURE,
+		WOODEN_EAGLE_PICTURE_DARK,
+		WOODEN_EAGLE_PICTURE_DARK
+	},
+	{
+		GREY_STONE_HITLER_PICTURE,
+		GREY_STONE_HITLER_PICTURE,
+		GREY_STONE_HITLER_PICTURE_DARK,
+		GREY_STONE_HITLER_PICTURE_DARK,
+	},
+	{
+		GREY_STONE_WALL,
+		GREY_STONE_WALL,
+		GREY_STONE_WALL_DARK,
+		GREY_STONE_WALL_DARK,
+	},
+	{
+		GREY_STONE_WALL,
+		GREY_STONE_WALL,
+		GREY_STONE_WALL_DARK,
+		GREY_STONE_WALL_DARK,
+	},
+	{
+		GREY_STONE_BANNER,
+		GREY_STONE_BANNER,
+		GREY_STONE_BANNER_DARK,
+		GREY_STONE_BANNER_DARK,
+	},
+	{
+		BLUE_TILE_WALL,
+		BLUE_TILE_WALL,
+		BLUE_TILE_WALL_DARK,
+		BLUE_TILE_WALL_DARK
+	},
+	{
+		CARMACK_AND_ROMERO,
+		CARMACK_AND_ROMERO,
+		CARMACK_AND_ROMERO,
+		CARMACK_AND_ROMERO,
+	},
+};
 
 void			check_door_hit(t_scene *scene, t_player_data *pd, \
 					t_map_data *md)
@@ -38,21 +191,16 @@ void			check_door_hit(t_scene *scene, t_player_data *pd, \
 	}
 }
 
-int				get_block_id(char block)
+static int		get_block_id(char block)
 {
 	return (ft_strchr(MP_BLOCKS, block) - MP_BLOCKS);
 }
 
-void			select_texture(t_scene *scene, t_mlx_image **texture)
+void			select_texture(t_player_data *pd, t_map_data *md, \
+					t_mlx_image *walls, t_mlx_image **texture)
 {
-	t_player_data	*pd;
-	t_map_data		*md;
-	t_mlx_image		*walls;
 	int				block_id;
 
-	pd = &scene->player_data;
-	md = &scene->map_data;
-	walls = (*scene).textures.walls;
 	if (pd->door_hit)
 		block_id = get_block_id((md->map)[pd->door->y][pd->door->x]);
 	else if (pd->secret_hit)

@@ -6,14 +6,14 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/14 13:54:51 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/29 12:14:36 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL      := /bin/sh
 CC         := clang
 CFLAGS     := -Wall -Wextra -fdiagnostics-color -g -pipe \
-              -march=native -O2
+              -march=native -O2 -flto
 INCLUDE    := -I./include -I./libft/include -I./libmlx -I./libsdl2/include
 NAME       := cub3D
 LIBFT      := ./libft/libft.a
@@ -27,16 +27,18 @@ SRCS       := src/attempt_item_pickup.c \
               src/button_press_handler.c \
               src/button_release_handler.c \
               src/colors.c \
+              src/colors_2.c \
               src/exit_failure.c \
               src/expose_handler.c \
               src/graphics.c \
               src/graphics_2.c \
               src/graphics_3.c \
+              src/graphics_4.c \
               src/item_pickup.c \
               src/item_pickup_2.c \
               src/key_press_handler.c \
               src/key_release_handler.c \
-	      src/load_audio.c \
+              src/load_audio.c \
               src/load_scene.c \
               src/load_scene_2.c \
               src/load_textures.c \
@@ -44,23 +46,35 @@ SRCS       := src/attempt_item_pickup.c \
               src/object_collision.c \
               src/parse_map.c \
               src/parse_map_2.c \
+              src/parse_map_3.c \
+              src/process_effects.c \
+              src/process_enemie_states.c \
+              src/process_enemie_states_2.c \
+              src/process_enemie_states_3.c \
+              src/process_enemie_states_4.c \
+              src/process_game_state.c \
               src/process_interact_request.c \
               src/process_key_states.c \
               src/process_key_states_2.c \
               src/process_mouse_motion.c \
               src/process_physics.c \
+              src/process_physics_2.c \
+              src/process_physics_3.c \
+              src/process_physics_4.c \
               src/render_floor_and_ceiling.c \
               src/render_hud.c \
-	      src/render_hud_2.c \
+              src/render_hud_2.c \
               src/render_scene.c \
               src/render_sprites.c \
               src/render_walls.c \
               src/render_walls_2.c \
               src/render_walls_3.c \
+              src/render_walls_4.c \
               src/switch_weapon.c \
               src/take_screenshot.c \
               src/winclose_handler.c \
-              src/main.c
+              src/main.c \
+              src/main_2.c
 OBJS       := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 DEPS       := $(SRCS:$(SRCDIR)/%.c=$(DEPDIR)/%.d)
 

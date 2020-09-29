@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 10:38:15 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 20:52:00 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:29:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,25 @@
 #include "key_press_handler.h"
 #include "snd.h"
 
-static void		switch_door_state(t_door *door)
+static t_point		calculate_ray_position(t_player_data *pd, double dist)
+{
+	t_point		ray;
+
+	ray.x = (int)(pd->pos_x + pd->dir_x * dist);
+	ray.y = (int)(pd->pos_y + pd->dir_y * dist);
+	return (ray);
+}
+
+static void			switch_door_state(t_scene *scene, t_door *door)
 {
 	if (door->state == OPEN || door->state == OPENING)
 		door->state = CLOSING;
 	else if (door->state == CLOSED || door->state == CLOSING)
 		door->state = OPENING;
+	playSoundFromMemory((scene->sounds)[SND_DOOR], G_SOUNDS_VOLUME);
 }
 
-t_door			*get_door(t_scene *scene, int door_x, int door_y)
+t_door				*get_door(t_scene *scene, int door_x, int door_y)
 {
 	int		i;
 
@@ -38,7 +48,7 @@ t_door			*get_door(t_scene *scene, int door_x, int door_y)
 	return (NULL);
 }
 
-t_secret		*get_secret(t_scene *scene, int secr_x, int secr_y)
+t_secret			*get_secret(t_scene *scene, int secr_x, int secr_y)
 {
 	int		i;
 
@@ -54,39 +64,32 @@ t_secret		*get_secret(t_scene *scene, int secr_x, int secr_y)
 	return (NULL);
 }
 
-void			process_interact_request(t_scene *scene)
+void				process_interact_request(t_scene *scene, \
+						t_player_data *pd, t_map_data *md)
 {
-	t_player_data	*pd;
-	t_map_data		*md;
-	t_point			obj;
+	t_point			ray;
 	t_secret		*secret;
 	double			dist;
 
-	pd = &scene->player_data;
-	md = &scene->map_data;
-	dist = PL_MAX_INTERACT_DIST;
-	while (dist > 0)
+	dist = 0;
+	while (dist <= PL_MAX_INTERACT_DIST)
 	{
-		obj.x = (int)(pd->pos_x + pd->dir_x * dist);
-		obj.y = (int)(pd->pos_y + pd->dir_y * dist);
-		if (ft_strchr(MP_DOORS, (md->map)[obj.y][obj.x]) && \
-			(obj.x != (int)pd->pos_x || obj.y != (int)pd->pos_y))
+		ray = calculate_ray_position(pd, dist);
+		if (ft_strchr(MP_DOORS, (md->map)[ray.y][ray.x]) && \
+			(ray.x != (int)pd->pos_x || ray.y != (int)pd->pos_y))
+			return ((void)switch_door_state(scene, \
+				get_door(scene, ray.x, ray.y)));
+		else if (ft_strchr(MP_SECRETS, (md->map)[ray.y][ray.x]))
 		{
-			playSoundFromMemory((scene->sounds)[SND_DOOR], G_SOUNDS_VOLUME);
-			switch_door_state(get_door(scene, obj.x, obj.y));
-			return ;
-		}
-		if (ft_strchr(MP_SECRETS, (md->map)[obj.y][obj.x]))
-		{
-			secret = get_secret(scene, obj.x, obj.y);
+			secret = get_secret(scene, ray.x, ray.y);
 			if (secret->state == IDLE)
-			{
 				playSoundFromMemory((scene->sounds)[SND_SECRET], \
 					G_SOUNDS_VOLUME);
-				secret->state = ACTIVE;
-			}
+			secret->state = ACTIVE;
 			return ;
 		}
-		dist -= 0.1;
+		else if (ft_strchr(MP_COLLIDERS, (md->map)[ray.y][ray.x]))
+			return ;
+		dist += 0.1;
 	}
 }

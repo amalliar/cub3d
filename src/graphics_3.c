@@ -6,18 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 14:14:44 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/12 13:14:52 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 10:43:54 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "colors.h"
 #include "graphics.h"
-
-void					segment_to_line(t_segment *segm, t_line *line)
-{
-	line->a = (*segm).p0.y - (*segm).p1.y;
-	line->b = (*segm).p1.x - (*segm).p0.x;
-	line->c = (*segm).p0.x * (*segm).p1.y - (*segm).p1.x * (*segm).p0.y;
-}
 
 static inline double	det(double a, double b, double c, double d)
 {
@@ -34,4 +28,52 @@ bool					intersect(t_line *m, t_line *n, t_fpoint *res)
 	res->x = -det(m->c, m->b, n->c, n->b) / zn;
 	res->y = -det(m->a, m->c, n->a, n->c) / zn;
 	return (true);
+}
+
+void					segment_to_line(t_segment *segm, t_line *line)
+{
+	line->a = (*segm).p0.y - (*segm).p1.y;
+	line->b = (*segm).p1.x - (*segm).p0.x;
+	line->c = (*segm).p0.x * (*segm).p1.y - (*segm).p1.x * (*segm).p0.y;
+}
+
+void					add_color_mask(t_mlx_image *frame, t_point res, \
+							int color, double opacity)
+{
+	int		old_color;
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < res.y)
+	{
+		x = 0;
+		while (x < res.x)
+		{
+			old_color = mlx_pixel_get(frame, x, y);
+			old_color = clr_mix(old_color, color, opacity);
+			mlx_pixel_set(frame, x, y, old_color);
+			++x;
+		}
+		++y;
+	}
+}
+
+void					draw_rectangle(t_mlx_image *frame, t_point p0, \
+							t_point p1, int color)
+{
+	int		x;
+	int		y;
+
+	y = p0.y;
+	while (y <= p1.y)
+	{
+		x = p0.x;
+		while (x <= p1.x)
+		{
+			mlx_pixel_set(frame, x, y, color);
+			++x;
+		}
+		++y;
+	}
 }

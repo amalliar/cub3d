@@ -6,12 +6,12 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 07:21:24 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/13 18:43:04 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 10:49:14 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_scene.h"
 #include "render_hud.h"
+#include "render_scene.h"
 
 static void		draw_stats(t_scene *scene)
 {
@@ -58,49 +58,48 @@ static void		update_face(t_scene *scene)
 	}
 }
 
-static void		draw_face(t_scene *scene)
+static void		draw_face(t_scene *scene, t_mlx_data *mlx_data, \
+					t_player_data *pd, t_mlx_image *faces)
 {
-	t_mlx_data		*mlx_data;
-	t_player_data	*pd;
-	t_mlx_image		*faces;
 	t_point			p0;
 
-	mlx_data = &scene->mlx_data;
-	pd = &scene->player_data;
-	faces = (*scene).textures.faces;
 	p0.x = 129 * G_HUD_SCALE;
 	p0.y = mlx_data->height - G_HUD_HEIGHT + 2.2 * G_HUD_SCALE;
-	if ((*pd).effects.r_bj_evil_grin)
+	if ((pd->effects).r_bj_evil_grin)
 	{
-		if ((clock() - (*pd).effects.r_bj_evil_grin) / CLOCKS_PER_SEC <= 2.0)
+		if ((clock() - (pd->effects).r_bj_evil_grin) / CLOCKS_PER_SEC <= 2.0)
 		{
 			latch_image(&mlx_data->frame, faces + 21, p0, G_HUD_SCALE);
 			return ;
 		}
-		(*pd).effects.r_bj_evil_grin = 0;
+		(pd->effects).r_bj_evil_grin = 0;
 		pd->faceframe = 1;
 		pd->facecount = 0;
 		pd->r_facetimer = clock();
 	}
-	latch_image(&mlx_data->frame, \
+	else if (scene->game_state == GS_DEATH)
+		latch_image(&mlx_data->frame, \
+			faces + 22, p0, G_HUD_SCALE);
+	else
+		latch_image(&mlx_data->frame, \
 		faces + 3 * ((100 - pd->health) / 16) + pd->faceframe, p0, G_HUD_SCALE);
 }
 
 static void		draw_weapon(t_scene *scene)
 {
 	t_mlx_data		*mlx_data;
-	t_weapon		*weapon;
+	t_weapon		*wpn;
 	t_point			p0;
 
 	mlx_data = &scene->mlx_data;
-	weapon = (*scene).player_data.active_weapon;
+	wpn = (scene->player_data).active_weapon;
 	p0.x = 247.5 * G_HUD_SCALE;
 	p0.y = mlx_data->height - G_HUD_HEIGHT + 5 * G_HUD_SCALE;
-	latch_image(&mlx_data->frame, weapon->hudpic, p0, G_HUD_SCALE);
+	latch_image(&mlx_data->frame, wpn->hudpic, p0, G_HUD_SCALE);
 	p0.x = G_GAME_WINDOW_WIDTH / 2 - 32 * G_HUD_SCALE * PL_WEAPON_SCALE;
 	p0.y = mlx_data->height - G_HUD_HEIGHT - 63.9 * G_HUD_SCALE * \
 		PL_WEAPON_SCALE;
-	latch_image(&mlx_data->frame, weapon->frames + weapon->frame, \
+	latch_image(&mlx_data->frame, wpn->frames + wpn->frame, \
 		p0, G_HUD_SCALE * PL_WEAPON_SCALE);
 }
 
@@ -108,7 +107,10 @@ void			render_hud(t_scene *scene)
 {
 	draw_stats(scene);
 	update_face(scene);
-	draw_face(scene);
+	draw_face(scene, &scene->mlx_data, &scene->player_data, \
+		(scene->textures).faces);
 	draw_weapon(scene);
 	draw_crosshair(scene);
+	if (SV_SHOW_FPS)
+		draw_fps_box(scene);
 }

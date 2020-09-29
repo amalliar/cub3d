@@ -6,12 +6,11 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 16:22:06 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/14 16:57:28 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:15:33 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_press_handler.h"
-#include "snd.h"
 
 void		switch_weapon(t_player_data *pd, int id, t_scene *scene)
 {

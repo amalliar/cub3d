@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/13 19:27:36 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/26 04:11:16 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,14 @@ static void		init_player_stats(t_player_data *pd)
 	pd->lives = 3;
 	pd->ammo = 8;
 	pd->score = 0;
-	pd->level += 1;
+	pd->level = 1;
 	pd->pitch = 0;
+	pd->default_pos_x = pd->pos_x;
+	pd->default_pos_y = pd->pos_y;
+	pd->default_dir_x = pd->dir_x;
+	pd->default_dir_y = pd->dir_y;
+	pd->default_plane_x = pd->plane_x;
+	pd->default_plane_y = pd->plane_y;
 }
 
 static void		load_map(t_scene *scene, char *path)
@@ -79,16 +85,14 @@ static void		load_map(t_scene *scene, char *path)
 	ft_lstadd_back(&lst, elem);
 	build_map_lst(fd, &line, &lst);
 	free(line);
-	if (!((*scene).map_data.map = \
-		gen_map(lst, &(*scene).map_data.width, &(*scene).map_data.height)))
+	if (!((scene->map_data).map = \
+		gen_map(lst, &(scene->map_data).width, &(scene->map_data).height)))
 		exit_failure("%s\n", strerror(errno));
 	ft_lstclear(&lst, free);
 	parse_map(scene);
 	close(fd);
-	playMusicFromMemory((scene->music)[(scene->player_data).level], \
-		G_MUSIC_VOLUME);
 	init_player_stats(&scene->player_data);
-	init_player_weapons(&scene->player_data, (*scene).textures.hud);
+	init_player_weapons(&scene->player_data, (scene->textures).hud);
 }
 
 void			load_scene(t_scene *scene, char *path)
@@ -96,4 +100,5 @@ void			load_scene(t_scene *scene, char *path)
 	load_audio(scene);
 	load_textures(scene);
 	load_map(scene, path);
+	playMusicFromMemory((scene->music)[0], G_MUSIC_VOLUME);
 }

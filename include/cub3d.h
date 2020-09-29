@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/15 16:42:49 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/29 11:52:18 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,20 @@
 # include <sys/uio.h>
 # include <unistd.h>
 # include "audio.h"
-# include "blocks.h"
 # include "settings.h"
+# include "snd.h"
 
-enum				e_keystates
+enum				e_game_states
+{
+	GS_NORMAL,
+	GS_DEATH,
+	GS_RESTART,
+	GS_RESPAWN,
+	GS_END,
+	GS_HALT
+};
+
+enum				e_key_states
 {
 	KEY_UP,
 	KEY_DOWN
@@ -77,6 +87,13 @@ enum				e_weapon_states
 	IDLE,
 	FIRING,
 	EMPTY
+};
+
+enum	e_object_states
+{
+	PLACED,
+	TAKEN,
+	NOT_A_PICKUP
 };
 
 typedef struct		s_point
@@ -130,11 +147,21 @@ typedef struct		s_textures
 {
 	t_mlx_image		walls[NUM_WALL_TEXTURES];
 	t_mlx_image		objects[NUM_OBJECT_TEXTURES];
+	t_mlx_image		guard[NUM_GUARD_TEXTURES];
 	t_mlx_image		hud[NUM_HUD_TEXTURES];
 	t_mlx_image		faces[NUM_FACES_TEXTURES];
+	t_mlx_image		menu[NUM_MENU_TEXTURES];
 	t_mlx_image		floor;
 	t_mlx_image		ceiling;
 }					t_textures;
+
+typedef struct		s_block
+{
+	int				id_tex_n;
+	int				id_tex_s;
+	int				id_tex_e;
+	int				id_tex_w;
+}					t_block;
 
 typedef struct		s_map_data
 {
@@ -178,6 +205,10 @@ typedef struct		s_weapon
 typedef struct		s_effects
 {
 	clock_t			r_bj_evil_grin;
+	clock_t			r_item_pickup;
+	clock_t			r_player_hit;
+	clock_t			r_player_dead;
+	clock_t			r_player_respawn;
 }					t_effects;
 
 typedef struct		s_player_data
@@ -215,6 +246,8 @@ typedef struct		s_player_data
 	int				p;
 	double			pos_x;
 	double			pos_y;
+	double			default_pos_x;
+	double			default_pos_y;
 	double			pos_z;
 	double			map_x;
 	double			map_y;
@@ -222,8 +255,12 @@ typedef struct		s_player_data
 	double			dir_y;
 	double			old_dir_x;
 	double			old_dir_y;
+	double			default_dir_x;
+	double			default_dir_y;
 	double			plane_x;
 	double			plane_y;
+	double			default_plane_x;
+	double			default_plane_y;
 	double			old_plane_x;
 	double			old_plane_y;
 	double			camera_x;
@@ -276,14 +313,38 @@ typedef struct		s_button_states
 	int				mb_wheel_down;
 }					t_button_states;
 
+typedef struct		s_estate
+{
+	bool			rotate;
+	int				shapenum;
+	double			s_max_time;
+	void			(*falways)();
+	void			(*fonce)();
+	int				soundnum;
+	struct s_estate	*next;
+}					t_estate;
+
+typedef struct		s_enemie_data
+{
+	t_estate		*state;
+	int				health;
+	bool			is_alive;
+	bool			is_tracking_player;
+	double			dir_x;
+	double			dir_y;
+	clock_t			r_timer;
+}					t_enemie_data;
+
 typedef struct		s_sprite
 {
-	int				id_tex;
+	t_mlx_image		*tex;
+	t_enemie_data	*e_data;
 	int				state;
 	double			x;
 	double			y;
 	double			dist;
 	char			type;
+	bool			is_visible;
 }					t_sprite;
 
 typedef struct		s_sprite_data
@@ -302,7 +363,6 @@ typedef struct		s_sprite_data
 	int				d;
 	int				stripe;
 	int				y;
-	int				id_tex;
 	double			sprite_x;
 	double			sprite_y;
 	double			inv_det;
@@ -312,6 +372,7 @@ typedef struct		s_sprite_data
 
 typedef struct		s_scene
 {
+	int				game_state;
 	int				render_started;
 	int				mouse_grabbing;
 	int				num_doors;
@@ -336,5 +397,17 @@ void				load_audio(t_scene *scene);
 void				load_scene(t_scene *scene, char *path);
 void				render_scene(t_scene *scene);
 void				take_screenshot(t_scene *scene);
+
+extern t_estate		g_grdidle;
+extern t_estate		g_grdstand;
+extern t_estate		g_grdshoot0;
+extern t_estate		g_grdshoot1;
+extern t_estate		g_grdshoot2;
+extern t_estate		g_grdshoot3;
+extern t_estate		g_grdpain;
+extern t_estate		g_grddie0;
+extern t_estate		g_grddie1;
+extern t_estate		g_grddie2;
+extern t_estate		g_grddie3;
 
 #endif

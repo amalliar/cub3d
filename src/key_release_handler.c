@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:25:47 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/10 19:44:56 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/26 03:35:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		key_release_handler(int keycode, t_scene *scene)
 		ks->kvk_uparrow = KEY_UP;
 	else if (keycode == KVK_DOWNARROW)
 		ks->kvk_downarrow = KEY_UP;
-	else if (keycode == KVK_CONTROL && (*scene).player_data.pos_z < 0)
-		(*scene).player_data.pos_z = 0;
+	else if (keycode == KVK_CONTROL && (scene->player_data).pos_z < 0)
+		(scene->player_data).pos_z = 0;
 	return (0);
 }
