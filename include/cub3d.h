@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/29 11:52:18 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/30 10:49:32 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <string.h>
 # include <sys/types.h>
 # include <sys/uio.h>
+# include <time.h>
 # include <unistd.h>
 # include "audio.h"
 # include "settings.h"
@@ -294,14 +295,14 @@ typedef struct		s_player_data
 
 typedef struct		s_key_states
 {
-	int				kvk_ansi_w;
-	int				kvk_ansi_a;
-	int				kvk_ansi_s;
-	int				kvk_ansi_d;
-	int				kvk_leftarrow;
-	int				kvk_rightarrow;
-	int				kvk_uparrow;
-	int				kvk_downarrow;
+	int				xk_w;
+	int				xk_a;
+	int				xk_s;
+	int				xk_d;
+	int				xk_left;
+	int				xk_right;
+	int				xk_up;
+	int				xk_down;
 }					t_key_states;
 
 typedef struct		s_button_states

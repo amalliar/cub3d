@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 00:23:08 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 06:26:00 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/30 14:12:20 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void		process_mouse_motion(t_scene *scene)
 	if (scene->mouse_grabbing == DISABLED)
 		return ;
 	mlx_data = &scene->mlx_data;
-	mlx_mouse_get_pos(mlx_data->win, &pos.x, &pos.y);
+	mlx_mouse_get_pos(mlx_data->mlx, mlx_data->win, &pos.x, &pos.y);
 	delta.x = pos.x - G_CENTER_X;
 	rotate_right(&scene->player_data, delta.x * mlx_data->frame_time * \
 		PL_MOUSE_SENSE);
-	mlx_mouse_move(mlx_data->win, G_CENTER_X, G_CENTER_Y);
+	mlx_mouse_move(mlx_data->mlx, mlx_data->win, G_CENTER_X, G_CENTER_Y);
 }

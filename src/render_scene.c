@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/29 11:16:41 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:01:25 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			render_fps_counter(t_mlx_data *mlx_data)
 	if (SV_SHOW_FPS)
 	{
 		str = ft_itoa(mlx_data->frames_per_second, 10);
-		mlx_string_put(mlx_data->mlx, mlx_data->win, 1, 5, CLR_YELLOW, str);
+		mlx_string_put(mlx_data->mlx, mlx_data->win, 1, 23, CLR_YELLOW, str);
 		free(str);
 	}
 	if ((clock() - r_timer) / CLOCKS_PER_SEC >= 1)
@@ -45,7 +45,7 @@ static int		render_next_frame(t_scene *scene)
 	process_key_states(scene);
 	process_mouse_motion(scene);
 	process_physics(scene);
-	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, mlx_data->win);
+	mlx_do_sync(mlx_data->mlx);
 	render_floor_and_ceiling(scene);
 	render_walls(scene);
 	render_sprites(scene);
@@ -92,6 +92,8 @@ void			render_scene(t_scene *scene)
 		mlx_data->height, G_MLX_WINDOW_TITLE)))
 		exit_failure("Failed creating mlx window instance: %s\n", \
 			strerror(errno));
+	if (SV_SHOW_FPS)
+		mlx_set_font(mlx_data->mlx, mlx_data->win, "*terminus-medium*32*");
 	mlx_do_key_autorepeatoff(mlx_data->mlx);
 	mlx_hook(mlx_data->win, KEY_PRESS, KEY_PRESS_MASK, \
 		key_press_handler, scene);

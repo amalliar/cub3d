@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 05:25:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/29 12:19:31 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/30 10:05:05 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		render_death_animation(t_scene *scene)
 
 	mlx_data = &scene->mlx_data;
 	effects = &(scene->player_data).effects;
-	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, mlx_data->win);
+	mlx_do_sync(mlx_data->mlx);
 	render_floor_and_ceiling(scene);
 	render_walls(scene);
 	render_sprites(scene);
@@ -70,7 +70,7 @@ static void		render_respawn_animation(t_scene *scene)
 
 	mlx_data = &scene->mlx_data;
 	pd = &scene->player_data;
-	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, mlx_data->win);
+	mlx_do_sync(mlx_data->mlx);
 	render_floor_and_ceiling(scene);
 	render_walls(scene);
 	render_sprites(scene);
@@ -78,7 +78,7 @@ static void		render_respawn_animation(t_scene *scene)
 	process_effects(scene);
 	if ((pd->effects).r_player_respawn == 0)
 	{
-		mlx_mouse_move(mlx_data->win, G_CENTER_X, G_CENTER_Y);
+		mlx_mouse_move(mlx_data->mlx, mlx_data->win, G_CENTER_X, G_CENTER_Y);
 		scene->game_state = GS_NORMAL;
 		playMusicFromMemory((scene->music)[pd->level - 1], G_MUSIC_VOLUME);
 		return ;
@@ -97,7 +97,7 @@ static void		render_endgame_screen(t_scene *scene)
 
 	playSoundFromMemory((scene->sounds)[SND_ROSTER], G_SOUNDS_VOLUME);
 	mlx_data = &scene->mlx_data;
-	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, mlx_data->win);
+	mlx_do_sync(mlx_data->mlx);
 	init_point(&res, G_MLX_WINDOW_WIDTH, G_MLX_WINDOW_HEIGHT);
 	add_color_mask(&mlx_data->frame, res, CLR_BLOOD, 1);
 	init_point(&p0, 0, 64 * G_HUD_SCALE);

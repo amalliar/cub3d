@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/29 15:50:00 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/01 07:43:03 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 # define MP_OBJECTS			"abcdefghijklmnopqrstuvwxyz123456789\"#$%&'()*+,."
 # define MP_ENEMIES				"|~{}"
-# define MP_BLOCKS				"!ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# define MP_BLOCKS				"!ABCDEFGHIJKLMNOPQRSTUVWX"
 # define MP_OUTER_OBJECTS		" " MP_BLOCKS
 # define MP_INNER_OBJECTS		"0^_<>" MP_OBJECTS MP_ENEMIES
 # define MP_DEFINED_OBJECTS		MP_OUTER_OBJECTS MP_INNER_OBJECTS
@@ -45,7 +45,7 @@
 # define MP_WSECRETS			"RU"
 # define MP_SECRETS				MP_NSECRETS MP_SSECRETS MP_ESECRETS MP_WSECRETS
 # define MP_SPECIAL_BLOCKS		MP_DOORS MP_SECRETS
-# define MP_COLLIDERS			"!ABCDEFGHIJKLMRSTUVWXYZbcdilmnq\"#$&"
+# define MP_COLLIDERS			"!ABCDEFGHIJKLMRSTUVWXbcdilmnq\"#$&"
 # define MP_COLLISION_RADIUS	0.20
 
 # define PL_CROSSHAIR			0
@@ -55,7 +55,7 @@
 # define PL_MAX_HEALTH			100
 # define PL_MAX_INTERACT_DIST	0.85
 # define PL_MAX_PICKUP_DIST		0.50
-# define PL_MOUSE_SENSE			0.025
+# define PL_MOUSE_SENSE			0.050
 # define PL_MOVE_SPEED			6
 # define PL_ROT_SPEED			2
 # define PL_CROSSHAIR_SCALE		1.0

@@ -6,11 +6,10 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:23:26 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 06:15:22 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/30 11:00:58 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keycodes.h"
 #include "process_key_states.h"
 
 static void		move_forward(t_scene *scene, t_player_data *pd)
@@ -77,20 +76,20 @@ void			process_key_states(t_scene *scene)
 	ks = &scene->key_states;
 	pd = &scene->player_data;
 	set_player_speed(pd, ks, (scene->mlx_data).frame_time);
-	if (ks->kvk_ansi_w == KEY_DOWN)
+	if (ks->xk_w == KEY_DOWN)
 		move_forward(scene, pd);
-	if (ks->kvk_ansi_s == KEY_DOWN)
+	if (ks->xk_s == KEY_DOWN)
 		move_backward(scene, pd);
-	if (ks->kvk_ansi_a == KEY_DOWN)
+	if (ks->xk_a == KEY_DOWN)
 		move_left(scene, pd);
-	if (ks->kvk_ansi_d == KEY_DOWN)
+	if (ks->xk_d == KEY_DOWN)
 		move_right(scene, pd);
-	if (ks->kvk_leftarrow == KEY_DOWN)
+	if (ks->xk_left == KEY_DOWN)
 		rotate_left(pd, pd->rot_speed);
-	if (ks->kvk_rightarrow == KEY_DOWN)
+	if (ks->xk_right == KEY_DOWN)
 		rotate_right(pd, pd->rot_speed);
-	if (ks->kvk_uparrow == KEY_DOWN)
+	if (ks->xk_up == KEY_DOWN)
 		rotate_up(pd, pd->rot_speed);
-	if (ks->kvk_downarrow == KEY_DOWN)
+	if (ks->xk_down == KEY_DOWN)
 		rotate_down(pd, pd->rot_speed);
 }

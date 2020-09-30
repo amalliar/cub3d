@@ -6,35 +6,38 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:25:47 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/26 03:35:39 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/30 19:32:07 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define XK_MISCELLANY
+#define XK_LATIN1
+
+#include <X11/keysymdef.h>
 #include "cub3d.h"
-#include "keycodes.h"
 
 int		key_release_handler(int keycode, t_scene *scene)
 {
 	t_key_states		*ks;
 
 	ks = &scene->key_states;
-	if (keycode == KVK_ANSI_W)
-		ks->kvk_ansi_w = KEY_UP;
-	else if (keycode == KVK_ANSI_A)
-		ks->kvk_ansi_a = KEY_UP;
-	else if (keycode == KVK_ANSI_S)
-		ks->kvk_ansi_s = KEY_UP;
-	else if (keycode == KVK_ANSI_D)
-		ks->kvk_ansi_d = KEY_UP;
-	else if (keycode == KVK_LEFTARROW)
-		ks->kvk_leftarrow = KEY_UP;
-	else if (keycode == KVK_RIGHTARROW)
-		ks->kvk_rightarrow = KEY_UP;
-	else if (keycode == KVK_UPARROW)
-		ks->kvk_uparrow = KEY_UP;
-	else if (keycode == KVK_DOWNARROW)
-		ks->kvk_downarrow = KEY_UP;
-	else if (keycode == KVK_CONTROL && (scene->player_data).pos_z < 0)
+	if (keycode == XK_w)
+		ks->xk_w = KEY_UP;
+	else if (keycode == XK_a)
+		ks->xk_a = KEY_UP;
+	else if (keycode == XK_s)
+		ks->xk_s = KEY_UP;
+	else if (keycode == XK_d)
+		ks->xk_d = KEY_UP;
+	else if (keycode == XK_Left)
+		ks->xk_left = KEY_UP;
+	else if (keycode == XK_Right)
+		ks->xk_right = KEY_UP;
+	else if (keycode == XK_Up)
+		ks->xk_up = KEY_UP;
+	else if (keycode == XK_Down)
+		ks->xk_down = KEY_UP;
+	else if (keycode == XK_Control_L && (scene->player_data).pos_z < 0)
 		(scene->player_data).pos_z = 0;
 	return (0);
 }

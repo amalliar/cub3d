@@ -6,18 +6,20 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 10:44:40 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 12:15:29 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/30 10:45:29 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_PRESS_HANDLER_H
 # define KEY_PRESS_HANDLER_H
+# define XK_MISCELLANY
+# define XK_LATIN1
 
+# include <X11/keysymdef.h>
 # include "cub3d.h"
 # include "ft_stdlib.h"
 # include "ft_string.h"
 # include "graphics.h"
-# include "keycodes.h"
 # include "mlx.h"
 # include "snd.h"
 

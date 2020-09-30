@@ -6,12 +6,16 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:47:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/23 08:51:08 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/30 10:56:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROCESS_KEY_STATES_H
 # define PROCESS_KEY_STATES_H
+# define XK_MISCELLANY
+# define XK_LATIN1
+
+# include <X11/keysymdef.h>
 # include "cub3d.h"
 
 int		door_collision(t_scene *scene, double px, double py, double cr);

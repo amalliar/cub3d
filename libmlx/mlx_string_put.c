@@ -1,72 +1,26 @@
+/*
+ ** mlx_string_put.c for MiniLibX in 
+ ** 
+ ** Made by Charlie Root
+ ** Login   <ol@epitech.net>
+ ** 
+ ** Started on  Mon Jul 31 19:01:33 2000 Charlie Root
+** Last update Tue Sep 25 17:11:47 2001 Charlie Root
+ */
 
-#include "mlx.h"
 
-#include "font.c"
-
-#define ATLAS_NB_CHAR 95
-
-#define FONT_WIDTH	((font_atlas.width/(ATLAS_NB_CHAR))-2)
+#include	"mlx_int.h"
 
 
-int mlx_put_image_to_window_scale(void *mlx_ptr, void *win_ptr, void *img_ptr, int sx, int sy, int sw, int sh, int dx, int dy, int dw, int dh, unsigned int color);
 
-void mlx_int_fill(unsigned char *data, int sl)
+int		mlx_string_put(t_xvar *xvar,t_win_list *win,
+			       int x,int y,int color,char *string)
 {
-  int i, j;
-  j = 0;
-  while (j < font_atlas.height)
-    {
-      i = 0;
-      while (i < font_atlas.width)
-	{
-	  data[j*sl+i*4] = font_atlas.pixel_data[j*font_atlas.width*font_atlas.bytes_per_pixel+i*4+2];
-	  data[j*sl+i*4+1] = font_atlas.pixel_data[j*font_atlas.width*font_atlas.bytes_per_pixel+i*4+1];
-	  data[j*sl+i*4+2] = font_atlas.pixel_data[j*font_atlas.width*font_atlas.bytes_per_pixel+i*4];
-	  data[j*sl+i*4+3] = 0xFF - font_atlas.pixel_data[j*font_atlas.width*font_atlas.bytes_per_pixel+i*4+3];
-	  i ++;
-	}
-      j ++;
-    }
-    
-}
-
-int mlx_string_put(void *mlx_ptr, void *win_ptr, int x, int y, int color, char *string)
-{
-  static void *font = (void *)0;
-  static unsigned char *data = (void *)0;
-  static int size_line = 0;
-  int bpp;
-  int endian;
-  int pos;
-  int val;
-  int dest_w;
-  int dest_h;
-
-  if (font == (void *)0)
-    {
-      font = mlx_new_image(mlx_ptr, font_atlas.width, font_atlas.height);
-      data = (unsigned char *)mlx_get_data_addr(font, &bpp, &size_line, &endian);
-      mlx_int_fill(data, size_line);
-    }
-
-  color = (color&0xFFFFFF)|0xFF000000;
-
-  //  dest_w = (FONT_WIDTH*5)/7;   /// ratio with X11 standard mlx_string_put
-  //  dest_h = (font_atlas.height*5)/7;
-  dest_w = FONT_WIDTH * 2;
-  dest_h = font_atlas.height * 2;
-  y -= dest_h / 3;
-
-  pos = 0;
-  while (*string)
-    {
-      if (*string >= 32 && *string <= 127)
-	val = *string - 32;
-      else
-	val = 31;
-      mlx_put_image_to_window_scale(mlx_ptr, win_ptr, font, val*(FONT_WIDTH+2), 0, FONT_WIDTH, font_atlas.height, x+pos*dest_w, y, dest_w, dest_h, color);
-      pos ++;
-      string ++;
-    }
-  return (0);
+   XGCValues	xgcv;
+   
+   xgcv.foreground = mlx_int_get_good_color(xvar,color);
+   XChangeGC(xvar->display,win->gc,GCForeground,&xgcv);
+   XDrawString(xvar->display,win->window,win->gc,x,y,string,strlen(string));
+   if (xvar->do_flush)
+     XFlush(xvar->display);
 }

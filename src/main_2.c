@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 04:36:04 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/26 04:39:23 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/30 11:02:31 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void		init_mlx_data(t_mlx_data *mlx_data)
 void		init_key_and_button_states(t_key_states *ks, \
 					t_button_states *bs)
 {
-	ks->kvk_ansi_w = KEY_UP;
-	ks->kvk_ansi_a = KEY_UP;
-	ks->kvk_ansi_s = KEY_UP;
-	ks->kvk_ansi_d = KEY_UP;
-	ks->kvk_leftarrow = KEY_UP;
-	ks->kvk_rightarrow = KEY_UP;
-	ks->kvk_uparrow = KEY_UP;
-	ks->kvk_downarrow = KEY_UP;
+	ks->xk_w = KEY_UP;
+	ks->xk_a = KEY_UP;
+	ks->xk_s = KEY_UP;
+	ks->xk_d = KEY_UP;
+	ks->xk_left = KEY_UP;
+	ks->xk_right = KEY_UP;
+	ks->xk_up = KEY_UP;
+	ks->xk_down = KEY_UP;
 	bs->mb_left = KEY_UP;
 	bs->mb_right = KEY_UP;
 	bs->mb_middle = KEY_UP;

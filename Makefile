@@ -6,19 +6,18 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/29 12:14:36 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/30 18:51:37 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL      := /bin/sh
 CC         := clang
-CFLAGS     := -Wall -Wextra -fdiagnostics-color -g -pipe \
-              -march=native -O2 -flto
-INCLUDE    := -I./include -I./libft/include -I./libmlx -I./libsdl2/include
+CFLAGS     := -Wall -Wextra -fdiagnostics-color -g -pipe -march=native -O2 -flto
+INCLUDE    := -I./include -I./libft/include -I./libmlx -I./libsdl2
 NAME       := cub3D
 LIBFT      := ./libft/libft.a
-LIBMLX     := ./libmlx/libmlx.dylib
-LIBS       := -L./libft -lft -L./libmlx -lmlx -framework OpenGL -framework AppKit -L./libsdl2 -lSDL2-2.0.0
+LIBMLX     := ./libmlx/libmlx.a
+LIBS       := -L./libft -lft -L./libmlx -lmlx -L/usr/lib -lXext -lX11 -lm -lz -lSDL2
 SRCDIR     := src
 OBJDIR     := .obj
 DEPDIR     := .dep
@@ -90,30 +89,29 @@ LGREEN     := \033[1;32m
 WHITE      := \033[1;37m
 NOC        := \033[0m
 
-bonus: $(NAME)
+linux: $(NAME)
 $(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
-	@echo "$(LGREEN)Linking executable $(NAME)$(NOC)"
+	@echo -e "$(LGREEN)Linking executable $(NAME)$(NOC)"
 	$(CC) $(CFLAGS) $(INCLUDE) ./libsdl2/audio.c $(OBJS) $(LIBS) -o $@
-	@echo "Built target $(NAME)"
-.PHONY: bonus
+	@echo -e "Built target $(NAME)"
+.PHONY: linux
 
 all:
 	@$(MAKE) fclean
 	@git checkout -f master
-	@$(MAKE) all
+	@$(MAKE)
 .PHONY: all
 
-linux:
+bonus:
 	@$(MAKE) fclean
-	@git checkout -f linux
-	@$(MAKE) all
-.PHONY: linux
+	@git checkout -f bonus
+	@$(MAKE)
+.PHONY: bonus
 
 $(LIBFT): NONE
 	@$(MAKE) -C ./libft
 $(LIBMLX): NONE
 	@$(MAKE) -C ./libmlx MAKEFLAGS= -j 1
-	@cp ./libmlx/libmlx.dylib .
 .PHONY: NONE
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(DEPDIR)/%.d | $(OBJDIR) $(DEPDIR)
@@ -129,22 +127,22 @@ $(DEPDIR)/%.d: ;
 clean:
 	@$(MAKE) -C ./libft clean
 	@$(MAKE) -C ./libmlx clean
-	@echo "$(WHITE)Removing C object files...$(NOC)"
+	@echo -e "$(WHITE)Removing C object files...$(NOC)"
 	@-rm -rf $(OBJDIR)
-	@echo "$(WHITE)Removing make dependency files...$(NOC)"
+	@echo -e "$(WHITE)Removing make dependency files...$(NOC)"
 	@-rm -rf $(DEPDIR)
 .PHONY: clean
 
 fclean: clean
 	@$(MAKE) -C ./libft fclean
-	@-rm -f libmlx.dylib
-	@echo "$(WHITE)Removing executable $(NAME)$(NOC)"
+	@-rm -f libmlx.a
+	@echo -e "$(WHITE)Removing executable $(NAME)$(NOC)"
 	@-rm -f $(NAME)
 .PHONY: fclean
 
 re:
 	$(MAKE) fclean
-	$(MAKE) bonus
+	$(MAKE) linux
 .PHONY: re
 
 help:

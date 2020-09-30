@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 18:38:35 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/29 10:55:23 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/30 19:33:31 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,17 @@ void		draw_crosshair(t_scene *scene)
 
 void		draw_fps_box(t_scene *scene)
 {
-	t_point			p0;
-	t_point			p1;
+	t_point		p0;
+	t_point		p1;
+	int			num_digits;
 
+	if ((scene->mlx_data).frames_per_second == 0)
+		num_digits = 1;
+	else
+		num_digits = (int)log10((scene->mlx_data).frames_per_second) + 1;
 	p0.x = 0;
 	p0.y = 0;
-	p1.x = 43;
-	p1.y = 27;
+	p1.x = 17 * num_digits - 1;
+	p1.y = 25;
 	draw_rectangle(&(scene->mlx_data).frame, p0, p1, CLR_BLACK);
 }

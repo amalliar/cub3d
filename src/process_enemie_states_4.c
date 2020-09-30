@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 05:00:07 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 05:04:24 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/09/30 11:00:11 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static int		calculate_attack_damage(t_scene *scene, t_sprite *en)
 	int				rand2;
 
 	ks = &scene->key_states;
-	if ((ks->kvk_ansi_w == KEY_DOWN || ks->kvk_ansi_s == KEY_DOWN || \
-		ks->kvk_ansi_a == KEY_DOWN || ks->kvk_ansi_d == KEY_DOWN) && \
+	if ((ks->xk_w == KEY_DOWN || ks->xk_s == KEY_DOWN || \
+		ks->xk_a == KEY_DOWN || ks->xk_d == KEY_DOWN) && \
 		(scene->player_data).pos_z >= 0)
 		speed = 160;
 	else
