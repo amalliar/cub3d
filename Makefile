@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/29 12:14:36 by amalliar         ###   ########.fr        #
+#    Updated: 2020/09/30 18:23:03 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,13 +100,13 @@ $(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
 all:
 	@$(MAKE) fclean
 	@git checkout -f master
-	@$(MAKE) all
+	@$(MAKE)
 .PHONY: all
 
 linux:
 	@$(MAKE) fclean
 	@git checkout -f linux
-	@$(MAKE) all
+	@$(MAKE)
 .PHONY: linux
 
 $(LIBFT): NONE
