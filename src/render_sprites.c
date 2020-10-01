@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 13:04:05 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 20:30:20 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/01 14:41:54 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void		draw_sprite(t_scene *scene, t_mlx_data *md, \
 	while (sd->stripe < sd->draw_end_x)
 	{
 		sd->tex_x = (int)(256 * (sd->stripe - (-sd->sprite_width / 2 + \
-			sd->sprite_screen_x)) * (*scene).textures.sprite.width / \
+			sd->sprite_screen_x)) * (scene->textures).sprite.width / \
 			sd->sprite_width) / 256;
 		sd->y = sd->draw_start_y;
 		if (sd->transform_y > 0 && sd->stripe > 0 && sd->stripe < md->width && \
@@ -65,9 +65,9 @@ static void		draw_sprite(t_scene *scene, t_mlx_data *md, \
 			{
 				sd->d = (sd->y - sd->v_move_screen) * 256 - md->height * 128 + \
 					sd->sprite_height * 128;
-				sd->tex_y = ((sd->d * (*scene).textures.sprite.height) / \
+				sd->tex_y = ((sd->d * (scene->textures).sprite.height) / \
 					sd->sprite_height) / 256;
-				color = mlx_pixel_get(&(*scene).textures.sprite, sd->tex_x, \
+				color = mlx_pixel_get(&(scene->textures).sprite, sd->tex_x, \
 					sd->tex_y);
 				if (color != BACKGROUND)
 					mlx_pixel_set(&md->frame, sd->stripe, sd->y, color);
@@ -91,20 +91,20 @@ void			render_sprites(t_scene *scene)
 	md = &scene->mlx_data;
 	pd = &scene->player_data;
 	i = 0;
-	while (i < (*scene).sprite_data.num_sprites)
+	while (i < (scene->sprite_data).num_sprites)
 	{
 		(scene->sprites)[i].dist = ((pd->pos_x - (scene->sprites)[i].x) * \
 			(pd->pos_x - (scene->sprites)[i].x) + (pd->pos_y - \
 			(scene->sprites)[i].y) * (pd->pos_y - (scene->sprites)[i].y));
 		++i;
 	}
-	ft_qsort(scene->sprites, (*scene).sprite_data.num_sprites, \
+	ft_qsort(scene->sprites, (scene->sprite_data).num_sprites, \
 		sizeof(t_sprite), compar);
 	i = 0;
-	while (i < (*scene).sprite_data.num_sprites)
+	while (i < (scene->sprite_data).num_sprites)
 	{
-		(*scene).sprite_data.sprite_x = (scene->sprites)[i].x - pd->pos_x;
-		(*scene).sprite_data.sprite_y = (scene->sprites)[i].y - pd->pos_y;
+		(scene->sprite_data).sprite_x = (scene->sprites)[i].x - pd->pos_x;
+		(scene->sprite_data).sprite_y = (scene->sprites)[i].y - pd->pos_y;
 		init_sprite_data(md, pd, &scene->sprite_data);
 		draw_sprite(scene, md, pd, &scene->sprite_data);
 		++i;

@@ -6,14 +6,14 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/30 18:20:20 by amalliar         ###   ########.fr        #
+#    Updated: 2020/10/01 16:44:12 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL      := /bin/sh
 CC         := clang
 CFLAGS     := -Wall -Wextra -fdiagnostics-color -g -pipe \
-              -march=native -O2
+              -march=native -O2 -flto
 INCLUDE    := -I./include -I./libft/include -I./libmlx
 NAME       := cub3D
 LIBFT      := ./libft/libft.a
@@ -26,22 +26,22 @@ DEPDIR     := .dep
 SRCS       := src/colors.c \
               src/exit_failure.c \
               src/graphics.c \
-	      src/graphics_2.c \
-	      src/keypress_handler.c \
-	      src/keyrelease_handler.c \
+              src/graphics_2.c \
+              src/keypress_handler.c \
+              src/keyrelease_handler.c \
               src/load_scene.c \
-	      src/mlx_image_to_bmp_file.c \
-	      src/parse_map.c \
-	      src/parse_map_2.c \
-	      src/parse_params.c \
-	      src/parse_params_2.c \
-	      src/process_keystates.c \
-	      src/process_keystates_2.c \
+              src/mlx_image_to_bmp_file.c \
+              src/parse_map.c \
+              src/parse_map_2.c \
+              src/parse_params.c \
+              src/parse_params_2.c \
+              src/process_keystates.c \
+              src/process_keystates_2.c \
               src/render_scene.c \
-	      src/render_sprites.c \
-	      src/render_textures.c \
-	      src/render_textures_2.c \
-	      src/winclose_handler.c \
+              src/render_sprites.c \
+              src/render_textures.c \
+              src/render_textures_2.c \
+              src/winclose_handler.c \
               src/main.c
 OBJS       := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 DEPS       := $(SRCS:$(SRCDIR)/%.c=$(DEPDIR)/%.d)
@@ -59,7 +59,7 @@ WHITE      := \033[1;37m
 NOC        := \033[0m
 
 all: $(NAME)
-$(NAME): $(OBJS) | $(LIBFT) $(LIBMLX)
+$(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
 	@echo "$(LGREEN)Linking executable $(NAME)$(NOC)"
 	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBS) -o $@
 	@echo "Built target $(NAME)"
@@ -77,12 +77,12 @@ linux:
 	@$(MAKE)
 .PHONY: linux
 
-$(LIBFT):
+$(LIBFT): NONE
 	@$(MAKE) -C ./libft
-
-$(LIBMLX):
+$(LIBMLX): NONE
 	@$(MAKE) -C ./libmlx MAKEFLAGS= -j 1
 	@cp ./libmlx/libmlx.dylib .
+.PHONY: NONE
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(DEPDIR)/%.d | $(OBJDIR) $(DEPDIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -MMD -MF $(DEPDIR)/$*.tmp -c -o $@ $<

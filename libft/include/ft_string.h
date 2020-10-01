@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 07:19:51 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/05 21:16:15 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/01 11:47:50 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int			ft_memcmp(const void *ptr1, const void *ptr2, size_t num);
 int			ft_strcmp(const char *str1, const char *str2);
 int			ft_strisnumeric(char *str);
 int			ft_strisspace(char *str);
+int			ft_strmatch(char *exp, char *str);
 int			ft_strncmp(const char *str1, const char *str2, size_t num);
 size_t		ft_strlcat(char *dest, const char *src, size_t num);
 size_t		ft_strlcpy(char *dest, const char *src, size_t num);

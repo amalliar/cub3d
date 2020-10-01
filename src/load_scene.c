@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 22:31:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 16:07:15 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/01 14:08:53 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ static void		load_map(t_scene *scene, int fd)
 	ft_lstadd_back(&lst, elem);
 	build_map_lst(fd, &line, &lst);
 	free(line);
-	if (!((*scene).map_data.map = \
-		gen_map(lst, &(*scene).map_data.width, &(*scene).map_data.height)))
+	if (!((scene->map_data).map = \
+		gen_map(lst, &(scene->map_data).width, &(scene->map_data).height)))
 		exit_failure("%s\n", strerror(errno));
 	ft_lstclear(&lst, free);
 	parse_map(scene);

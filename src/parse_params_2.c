@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:06:34 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 16:08:16 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/01 12:33:13 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void			set_color(t_colors *colors, char **words)
 	wc = word_count(words);
 	if (wc != 2)
 		exit_failure("Incorrect number of parameters for color: "
-		"expected 2 but got %s\n", ft_itoa(wc, 10));
+		"expected 1 but got %s\n", ft_itoa(wc - 1, 10));
 	if (!(rgb_values = ft_split(words[1], ',')))
 		exit_failure("%s\n", strerror(errno));
 	check_format(rgb_values, words);
@@ -75,8 +75,10 @@ void			set_color(t_colors *colors, char **words)
 	free_split_tab(rgb_values);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		exit_failure("Invalid R,G,B value: %s\n", words[1]);
-	if (!ft_strcmp("F", words[0]))
+	if (!ft_strcmp("F", words[0]) && colors->floor == -1)
 		colors->floor = clr_create(0, r, g, b);
-	else if (!ft_strcmp("C", words[0]))
+	else if (!ft_strcmp("C", words[0]) && colors->ceilling == -1)
 		colors->ceilling = clr_create(0, r, g, b);
+	else
+		exit_failure("Double initialisation of floor/ceilling color\n");
 }

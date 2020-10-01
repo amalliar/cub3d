@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 20:29:25 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/01 14:34:30 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int		render_next_frame(t_scene *scene)
 
 	mlx_data = &scene->mlx_data;
 	process_keystates(scene);
+	if (scene->render_mode == LOOP)
+		mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, mlx_data->win);
 	render_textures(scene);
 	render_sprites(scene);
 	if (scene->render_mode == SCREENSHOT)
@@ -31,7 +33,7 @@ static int		render_next_frame(t_scene *scene)
 		exit(EXIT_SUCCESS);
 	}
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, \
-		(*mlx_data).frame.img, 0, 0);
+		(mlx_data->frame).img, 0, 0);
 	return (0);
 }
 
@@ -50,7 +52,7 @@ static void		init_frame(t_scene *scene)
 			strerror(errno));
 	frame->addr = mlx_get_data_addr(frame->img, &frame->bits_per_pixel, \
 		&frame->line_length, &frame->endian);
-	if (!((*scene).player_data.zbuffer = \
+	if (!((scene->player_data).zbuffer = \
 		malloc(frame->width * sizeof(double))))
 		exit_failure("%s\n", strerror(errno));
 }

@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 20:30:05 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/01 14:44:21 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void			pick_texture(t_scene *scene, t_mlx_image **texture)
 	if (pd->side == 0)
 	{
 		if (pd->ray_dir_x >= 0)
-			*texture = &(*scene).textures.walls.east;
+			*texture = &(scene->textures).walls.east;
 		else
-			*texture = &(*scene).textures.walls.west;
+			*texture = &(scene->textures).walls.west;
 	}
 	else
 	{
 		if (pd->ray_dir_y >= 0)
-			*texture = &(*scene).textures.walls.south;
+			*texture = &(scene->textures).walls.south;
 		else
-			*texture = &(*scene).textures.walls.north;
+			*texture = &(scene->textures).walls.north;
 	}
 }
 
@@ -75,11 +75,11 @@ void			fill_stripe(t_scene *scene, t_mlx_image *texture, int x)
 	pd = &scene->player_data;
 	init_points(&p0, &p1, x, pd->draw_start - 1);
 	if (pd->draw_start > 0)
-		drawverline(&mlx_data->frame, p0, p1, (*scene).colors.ceilling);
+		drawverline(&mlx_data->frame, p0, p1, (scene->colors).ceilling);
 	p0.y = pd->draw_start;
 	while (p0.y < pd->draw_end)
 	{
-		pd->tex_y = (int)pd->tex_pos & (texture->height - 1);
+		pd->tex_y = (int)pd->tex_pos % texture->height;
 		pd->tex_pos += pd->step;
 		color = mlx_pixel_get(texture, texture->width - pd->tex_x, pd->tex_y);
 		mlx_pixel_set(&mlx_data->frame, p0.x, p0.y, color);
@@ -87,5 +87,5 @@ void			fill_stripe(t_scene *scene, t_mlx_image *texture, int x)
 	}
 	p0.y = pd->draw_end;
 	p1.y = mlx_data->height - 1;
-	drawverline(&mlx_data->frame, p0, p1, (*scene).colors.floor);
+	drawverline(&mlx_data->frame, p0, p1, (scene->colors).floor);
 }
