@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 18:38:35 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/29 10:55:23 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/01 11:23:22 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		draw_fps_box(t_scene *scene)
 
 	p0.x = 0;
 	p0.y = 0;
-	p1.x = 43;
+	p1.x = 22 * ((int)log10((scene->mlx_data).frames_per_second) + 1) - 1;
 	p1.y = 27;
 	draw_rectangle(&(scene->mlx_data).frame, p0, p1, CLR_BLACK);
 }

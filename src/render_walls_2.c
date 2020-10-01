@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/29 15:58:41 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/01 13:34:24 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,7 @@ void			fill_stripe(t_scene *scene, t_mlx_image *texture, int x)
 	y = pd->draw_start;
 	while (y < pd->draw_end)
 	{
-		pd->tex_y = (int)pd->tex_pos & (texture->height - 1);
+		pd->tex_y = (int)pd->tex_pos % texture->height;
 		pd->tex_pos += pd->step;
 		color = mlx_pixel_get(texture, pd->tex_x, pd->tex_y);
 		mlx_pixel_set(&mlx_data->frame, x, y, color);
