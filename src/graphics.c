@@ -6,12 +6,11 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 20:56:01 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 16:39:38 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:38:07 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
-#include "ft_stdlib.h"
 
 int				mlx_pixel_get(t_mlx_image *img, int x, int y)
 {

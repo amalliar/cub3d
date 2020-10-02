@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_scene.h                                     :+:      :+:    :+:   */
+/*   render_sprites.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/16 15:50:36 by amalliar          #+#    #+#             */
-/*   Updated: 2020/10/02 19:11:21 by amalliar         ###   ########.fr       */
+/*   Created: 2020/10/02 19:02:54 by amalliar          #+#    #+#             */
+/*   Updated: 2020/10/02 19:14:33 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_SCENE_H
-# define RENDER_SCENE_H
+#ifndef RENDER_SPRITES_H
+# define RENDER_SPRITES_H
+# define U_DIV				1
+# define V_DIV 				1
+# define V_MOVE 			0.0
+# define BACKGROUND			0x980088
 
-# include "cub3d.h"
-# include "events.h"
-# include "graphics.h"
+# include "ft_stdlib.h"
 
-void	process_keystates(t_scene *scene);
-void	render_textures(t_scene *scene);
-void	render_sprites(t_scene *scene);
+void	init_sprite_data(t_mlx_data *md, t_player_data *pd, t_sprite_data *sd);
+void	draw_sprite(t_scene *scene, t_mlx_data *md, t_player_data *pd, \
+			t_sprite_data *sd);
 
 #endif

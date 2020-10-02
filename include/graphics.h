@@ -6,14 +6,14 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:05:59 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 17:46:10 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:43:07 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 # include "cub3d.h"
-# include "mlx.h"
+# include "ft_stdlib.h"
 
 typedef struct		s_point
 {

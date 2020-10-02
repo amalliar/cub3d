@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map_2.c                                      :+:      :+:    :+:   */
+/*   load_map_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/14 18:44:11 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 16:08:31 by amalliar         ###   ########.fr       */
+/*   Created: 2020/10/02 18:24:11 by amalliar          #+#    #+#             */
+/*   Updated: 2020/10/02 19:21:41 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "load_scene.h"
-#include "ft_string.h"
-#include "ft_ctype.h"
-#include "ft_stdlib.h"
+#include "load_map.h"
 
-static size_t	get_cur_line_length(char *line)
+size_t		get_cur_line_length(char *line)
 {
 	int		len;
 
@@ -29,23 +26,7 @@ static size_t	get_cur_line_length(char *line)
 	return (len);
 }
 
-static void		get_map_size(t_list *lst, int *width, int *height)
-{
-	int		cur_line_length;
-
-	*width = 0;
-	*height = 0;
-	while (lst)
-	{
-		++*height;
-		cur_line_length = get_cur_line_length(lst->content);
-		if (cur_line_length > *width)
-			*width = cur_line_length;
-		lst = lst->next;
-	}
-}
-
-static void		gen_map_line(char *dest, char *src, int num)
+void		gen_map_line(char *dest, char *src, int num)
 {
 	int		len;
 
@@ -61,27 +42,53 @@ static void		gen_map_line(char *dest, char *src, int num)
 	dest[num] = '\0';
 }
 
-char			**gen_map(t_list *lst, int *width, int *height)
+void		parse_map(t_scene *scene)
 {
-	int		i;
-	char	**map;
+	int		x;
+	int		y;
+	char	obj;
 
-	get_map_size(lst, width, height);
-	if (!(map = malloc(*height * sizeof(char *))))
-		exit_failure("%s\n", strerror(errno));
-	i = 0;
-	while (i < *height)
+	y = 0;
+	while (y < (scene->map_data).height)
 	{
-		if (!(map[i] = malloc(*width + 1)))
-			exit_failure("%s\n", strerror(errno));
-		gen_map_line(map[i], lst->content, *width);
-		lst = lst->next;
-		++i;
+		x = 0;
+		while (x < (scene->map_data).width)
+		{
+			obj = (scene->map_data).map[y][x];
+			if (!ft_strchr(DEFINED_MAP_OBJECTS, obj))
+				exit_failure("Invalid map object at position [%s][%s]: %c\n", \
+				ft_itoa(x + 1, 10), ft_itoa(y + 1, 10), obj);
+			process_map_object(scene, x, y, obj);
+			++x;
+		}
+		++y;
 	}
-	return (map);
+	if ((scene->player_data).pos_x == -1)
+		exit_failure("Map is missing player's start position\n");
 }
 
-void			check_neighbours(t_map_data *map_data, int mx, int my)
+void		process_map_object(t_scene *scene, int x, int y, char obj)
+{
+	if (ft_strchr(MP_INNER_OBJECTS, obj))
+		check_neighbours(&scene->map_data, x, y);
+	if (ft_strchr("NSEW", obj))
+	{
+		load_player_data(&scene->player_data, x, y, obj);
+		((scene->map_data).map)[y][x] = '0';
+	}
+	if (obj == '2')
+	{
+		if (!(scene->sprites = ft_realloc(scene->sprites, \
+			(scene->sprite_data).num_sprites * sizeof(t_sprite), \
+			((scene->sprite_data).num_sprites + 1) * sizeof(t_sprite))))
+			exit_failure("%s\n", strerror(errno));
+		(scene->sprites)[(scene->sprite_data).num_sprites].x = x + 0.5;
+		(scene->sprites)[(scene->sprite_data).num_sprites].y = y + 0.5;
+		(scene->sprite_data).num_sprites += 1;
+	}
+}
+
+void		check_neighbours(t_map_data *map_data, int mx, int my)
 {
 	if (mx > 0 && (map_data->map)[my][mx - 1] == ' ')
 		exit_failure("Map breach detected at position [%s][%s]\n", \

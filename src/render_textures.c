@@ -6,13 +6,38 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:52:19 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 20:30:41 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/02 19:22:05 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_scene.h"
+#include "render_textures.h"
 
-static void		init_player_data(t_player_data *pd, int x, int width)
+void	render_textures(t_scene *scene)
+{
+	t_mlx_data		*mlx_data;
+	t_mlx_image		*texture;
+	t_player_data	*pd;
+	int				x;
+
+	mlx_data = &scene->mlx_data;
+	pd = &scene->player_data;
+	x = 0;
+	while (x < mlx_data->width)
+	{
+		dda_init1(pd, x, mlx_data->width);
+		dda_init2(pd);
+		dda_run(pd, &scene->map_data);
+		calculate_stripe_limits(pd, mlx_data->height);
+		pick_texture(scene, &texture);
+		calculate_tex_x(scene, texture);
+		fill_stripe(scene, texture, x);
+		(pd->zbuffer)[x] = pd->perp_wall_dist;
+		++x;
+	}
+}
+
+void	dda_init1(t_player_data *pd, int x, int width)
 {
 	pd->camera_x = 2 * x / (double)width - 1;
 	pd->ray_dir_x = pd->dir_x + pd->plane_x * pd->camera_x;
@@ -24,7 +49,7 @@ static void		init_player_data(t_player_data *pd, int x, int width)
 	pd->hit = 0;
 }
 
-static void		calc_step_and_sidedist(t_player_data *pd)
+void	dda_init2(t_player_data *pd)
 {
 	if (pd->ray_dir_x < 0)
 	{
@@ -48,7 +73,7 @@ static void		calc_step_and_sidedist(t_player_data *pd)
 	}
 }
 
-static void		perform_dda(t_player_data *pd, t_map_data *md)
+void	dda_run(t_player_data *pd, t_map_data *md)
 {
 	while (pd->hit == 0)
 	{
@@ -69,7 +94,7 @@ static void		perform_dda(t_player_data *pd, t_map_data *md)
 	}
 }
 
-static void		calc_draw_start_end(t_player_data *pd, int height)
+void	calculate_stripe_limits(t_player_data *pd, int height)
 {
 	if (pd->side == 0)
 		pd->perp_wall_dist = (pd->map_x - pd->pos_x + \
@@ -84,28 +109,4 @@ static void		calc_draw_start_end(t_player_data *pd, int height)
 	pd->draw_end = pd->line_height / 2 + height / 2;
 	if (pd->draw_end >= height || pd->draw_end < 0)
 		pd->draw_end = height - 1;
-}
-
-void			render_textures(t_scene *scene)
-{
-	t_mlx_data		*mlx_data;
-	t_mlx_image		*texture;
-	t_player_data	*pd;
-	int				x;
-
-	mlx_data = &scene->mlx_data;
-	pd = &scene->player_data;
-	x = 0;
-	while (x < mlx_data->width)
-	{
-		init_player_data(pd, x, mlx_data->width);
-		calc_step_and_sidedist(pd);
-		perform_dda(pd, &scene->map_data);
-		calc_draw_start_end(pd, mlx_data->height);
-		pick_texture(scene, &texture);
-		calc_tex_x(scene, texture);
-		fill_stripe(scene, texture, x);
-		(pd->zbuffer)[x] = pd->perp_wall_dist;
-		++x;
-	}
 }

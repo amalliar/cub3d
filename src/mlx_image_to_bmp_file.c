@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 20:15:52 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 15:32:06 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:41:24 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				mlx_image_to_bmp_file(t_mlx_image *mi, const char *name)
 	bd.stride = bd.width_in_bytes + bd.padding_size;
 	if ((bd.fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, \
 		S_IRUSR | S_IWUSR)) == -1)
-		return (-1);
+		return (1);
 	bd.file_header = create_bmp_file_header(mi->height, bd.stride);
 	write(bd.fd, bd.file_header, FILE_HEADER_SIZE);
 	bd.info_header = create_bmp_info_header(-mi->height, mi->width);

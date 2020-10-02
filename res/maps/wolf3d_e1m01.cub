@@ -1,14 +1,24 @@
-R 1280 720
+R                1280              720
 
-NO ./res/textures/dev_N.xpm
-SO ./res/textures/dev_S.xpm
-WE ./res/textures/dev_W.xpm
-EA ./res/textures/dev_E.xpm
 
-S ./res/textures/lamp.xpm
+SO                       ./res/textures/dev_S.xpm
 
-F 112,112,112
-C 56,56,56
+
+
+
+
+C                   56,56,56
+NO          ./res/textures/dev_N.xpm
+EA             ./res/textures/dev_E.xpm
+
+S                 ./res/textures/lamp.xpm
+WE              ./res/textures/dev_W.xpm
+
+F          112,112,112
+
+
+
+
 
                             111111111111111                     
                             111111111111111                     

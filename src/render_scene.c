@@ -6,13 +6,10 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:26:43 by amalliar          #+#    #+#             */
-/*   Updated: 2020/10/01 14:34:30 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/02 18:50:31 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "events.h"
-#include "graphics.h"
 #include "render_scene.h"
 
 static int		render_next_frame(t_scene *scene)

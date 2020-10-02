@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/10/01 16:44:12 by amalliar         ###   ########.fr        #
+#    Updated: 2020/10/02 19:26:10 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,14 @@ SRCS       := src/colors.c \
               src/graphics_2.c \
               src/keypress_handler.c \
               src/keyrelease_handler.c \
+              src/load_map.c \
+              src/load_map_2.c \
+              src/load_map_3.c \
+              src/load_params.c \
+              src/load_params_2.c \
+              src/load_params_3.c \
               src/load_scene.c \
               src/mlx_image_to_bmp_file.c \
-              src/parse_map.c \
-              src/parse_map_2.c \
-              src/parse_params.c \
-              src/parse_params_2.c \
               src/process_keystates.c \
               src/process_keystates_2.c \
               src/render_scene.c \

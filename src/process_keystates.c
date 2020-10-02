@@ -6,54 +6,13 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:23:26 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 16:06:19 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/02 18:48:08 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keycodes.h"
 #include "process_keystates.h"
 
-static void		move_forward(t_map_data *md, t_player_data *pd)
-{
-	if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x + pd->dir_x * \
-		pd->move_speed)] != '1')
-		pd->pos_x += pd->dir_x * pd->move_speed * pd->speed_mod;
-	if ((md->map)[(int)(pd->pos_y + pd->dir_y * \
-		pd->move_speed)][(int)pd->pos_x] != '1')
-		pd->pos_y += pd->dir_y * pd->move_speed * pd->speed_mod;
-}
-
-static void		move_backward(t_map_data *md, t_player_data *pd)
-{
-	if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x - pd->dir_x * \
-		pd->move_speed)] != '1')
-		pd->pos_x -= pd->dir_x * pd->move_speed * pd->speed_mod;
-	if ((md->map)[(int)(pd->pos_y - pd->dir_y * \
-		pd->move_speed)][(int)pd->pos_x] != '1')
-		pd->pos_y -= pd->dir_y * pd->move_speed * pd->speed_mod;
-}
-
-static void		move_left(t_map_data *md, t_player_data *pd)
-{
-	if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x + pd->dir_y * \
-		pd->move_speed)] != '1')
-		pd->pos_x += pd->dir_y * pd->move_speed * pd->speed_mod;
-	if ((md->map)[(int)(pd->pos_y - pd->dir_x * \
-		pd->move_speed)][(int)pd->pos_x] != '1')
-		pd->pos_y -= pd->dir_x * pd->move_speed * pd->speed_mod;
-}
-
-static void		move_right(t_map_data *md, t_player_data *pd)
-{
-	if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x - pd->dir_y * \
-		pd->move_speed)] != '1')
-		pd->pos_x -= pd->dir_y * pd->move_speed * pd->speed_mod;
-	if ((md->map)[(int)(pd->pos_y + pd->dir_x * \
-		pd->move_speed)][(int)pd->pos_x] != '1')
-		pd->pos_y += pd->dir_x * pd->move_speed * pd->speed_mod;
-}
-
-void			process_keystates(t_scene *scene)
+void		process_keystates(t_scene *scene)
 {
 	t_keystates		*ks;
 	t_player_data	*pd;
@@ -79,4 +38,44 @@ void			process_keystates(t_scene *scene)
 		turn_left(pd);
 	if (ks->kvk_rightarrow == KEY_DOWN)
 		turn_right(pd);
+}
+
+void		move_forward(t_map_data *md, t_player_data *pd)
+{
+	if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x + pd->dir_x * \
+		pd->move_speed)] != '1')
+		pd->pos_x += pd->dir_x * pd->move_speed * pd->speed_mod;
+	if ((md->map)[(int)(pd->pos_y + pd->dir_y * \
+		pd->move_speed)][(int)pd->pos_x] != '1')
+		pd->pos_y += pd->dir_y * pd->move_speed * pd->speed_mod;
+}
+
+void		move_backward(t_map_data *md, t_player_data *pd)
+{
+	if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x - pd->dir_x * \
+		pd->move_speed)] != '1')
+		pd->pos_x -= pd->dir_x * pd->move_speed * pd->speed_mod;
+	if ((md->map)[(int)(pd->pos_y - pd->dir_y * \
+		pd->move_speed)][(int)pd->pos_x] != '1')
+		pd->pos_y -= pd->dir_y * pd->move_speed * pd->speed_mod;
+}
+
+void		move_left(t_map_data *md, t_player_data *pd)
+{
+	if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x + pd->dir_y * \
+		pd->move_speed)] != '1')
+		pd->pos_x += pd->dir_y * pd->move_speed * pd->speed_mod;
+	if ((md->map)[(int)(pd->pos_y - pd->dir_x * \
+		pd->move_speed)][(int)pd->pos_x] != '1')
+		pd->pos_y -= pd->dir_x * pd->move_speed * pd->speed_mod;
+}
+
+void		move_right(t_map_data *md, t_player_data *pd)
+{
+	if ((md->map)[(int)pd->pos_y][(int)(pd->pos_x - pd->dir_y * \
+		pd->move_speed)] != '1')
+		pd->pos_x -= pd->dir_y * pd->move_speed * pd->speed_mod;
+	if ((md->map)[(int)(pd->pos_y + pd->dir_x * \
+		pd->move_speed)][(int)pd->pos_x] != '1')
+		pd->pos_y += pd->dir_x * pd->move_speed * pd->speed_mod;
 }

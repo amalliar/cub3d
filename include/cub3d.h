@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/08/17 20:28:46 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:42:48 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <errno.h>
 # include <math.h>
 # include <stdarg.h>
+# include "mlx.h"
 
 enum				e_keystates
 {

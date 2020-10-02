@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:52:38 by amalliar          #+#    #+#             */
-/*   Updated: 2020/10/01 14:44:21 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/02 18:59:46 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			pick_texture(t_scene *scene, t_mlx_image **texture)
 	}
 }
 
-void			calc_tex_x(t_scene *scene, t_mlx_image *texture)
+void			calculate_tex_x(t_scene *scene, t_mlx_image *texture)
 {
 	t_mlx_data		*mlx_data;
 	t_player_data	*pd;
