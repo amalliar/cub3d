@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:05:51 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/22 02:23:39 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/04 17:48:38 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define WEAPON_PICKUPS		"23"
 # define PU1 AMMO_PICKUPS GIBS_PICKUPS HEALTH_PICKUPS KEY_PICKUPS
 # define PU2 POWERUP_PICKUPS TREASURE_PICKUPS WEAPON_PICKUPS
-# define PICKUPS PU1 PU2
+# define MP_PICKUPS PU1 PU2
 
 # include "cub3d.h"
 

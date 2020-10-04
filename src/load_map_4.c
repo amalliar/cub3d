@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   load_map_4.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/14 18:35:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/26 05:49:36 by amalliar         ###   ########.fr       */
+/*   Created: 2020/10/04 17:20:39 by amalliar          #+#    #+#             */
+/*   Updated: 2020/10/04 17:50:19 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "load_scene.h"
-#include "parse_map.h"
+#include "load_map.h"
 
 static void		set_player_dir(t_player_data *pd, double dir_x, double dir_y)
 {
@@ -25,7 +24,7 @@ static void		set_plane_dir(t_player_data *pd, double plane_x, double plane_y)
 	pd->plane_y = plane_y;
 }
 
-static void		load_player_data(t_player_data *player_data, int x, int y, \
+void			load_player_data(t_player_data *player_data, int x, int y, \
 					char obj)
 {
 	if (player_data->pos_x != -1)
@@ -55,48 +54,23 @@ static void		load_player_data(t_player_data *player_data, int x, int y, \
 	}
 }
 
-static void		process_map_object(t_scene *scene, int x, int y, char obj)
+void			load_object_data(t_scene *scene, int x, int y, char obj)
 {
-	if (ft_strchr(MP_INNER_OBJECTS, obj))
-		check_neighbours(&scene->map_data, x, y);
-	if (ft_strchr("^_<>", obj))
-	{
-		load_player_data(&scene->player_data, x, y, obj);
-		((scene->map_data).map)[y][x] = '0';
-	}
-	else if (ft_strchr(MP_OBJECTS, obj))
-		load_object_data(scene, x, y, obj);
-	else if (ft_strchr(MP_ENEMIES, obj))
-		load_enemie_data(scene, x, y, obj);
-	else if (ft_strchr(MP_DOORS, obj))
-		load_door_data(scene, x, y, obj);
-	else if (ft_strchr(MP_SECRETS, obj))
-		load_secret_data(scene, x, y, obj);
-}
+	t_sprite		*this_sprite;
+	t_sprite_data	*sd;
 
-void			parse_map(t_scene *scene)
-{
-	t_map_data		*md;
-	int				x;
-	int				y;
-	char			obj;
-
-	md = &scene->map_data;
-	y = 0;
-	while (y < md->height)
-	{
-		x = 0;
-		while (x < md->width)
-		{
-			obj = (md->map)[y][x];
-			if (!ft_strchr(MP_DEFINED_OBJECTS, obj))
-				exit_failure("Invalid map object at position [%s][%s]: %c\n", \
-				ft_itoa(x, 10), ft_itoa(y, 10), obj);
-			process_map_object(scene, x, y, obj);
-			++x;
-		}
-		++y;
-	}
-	if ((scene->player_data).pos_x == -1)
-		exit_failure("Map is missing player's start position\n");
+	sd = &scene->sprite_data;
+	if (!(scene->sprites = ft_realloc(scene->sprites, \
+		sd->num_sprites * sizeof(t_sprite), \
+		(sd->num_sprites + 1) * sizeof(t_sprite))))
+		exit_failure("%s\n", strerror(errno));
+	this_sprite = scene->sprites + sd->num_sprites;
+	this_sprite->x = x + 0.5;
+	this_sprite->y = y + 0.5;
+	this_sprite->tex = (scene->textures).objects + \
+		(ft_strchr(MP_OBJECTS, obj) - MP_OBJECTS);
+	this_sprite->state = \
+		(ft_strchr(MP_PICKUPS, obj)) ? PLACED : NOT_A_PICKUP;
+	this_sprite->type = obj;
+	sd->num_sprites += 1;
 }

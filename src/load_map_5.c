@@ -1,37 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map_3.c                                      :+:      :+:    :+:   */
+/*   load_map_5.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/26 05:43:24 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/28 14:25:33 by amalliar         ###   ########.fr       */
+/*   Created: 2020/10/04 17:22:25 by amalliar          #+#    #+#             */
+/*   Updated: 2020/10/04 17:23:11 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse_map.h"
-
-void			load_object_data(t_scene *scene, int x, int y, char obj)
-{
-	t_sprite		*this_sprite;
-	t_sprite_data	*sd;
-
-	sd = &scene->sprite_data;
-	if (!(scene->sprites = ft_realloc(scene->sprites, \
-		sd->num_sprites * sizeof(t_sprite), \
-		(sd->num_sprites + 1) * sizeof(t_sprite))))
-		exit_failure("%s\n", strerror(errno));
-	this_sprite = scene->sprites + sd->num_sprites;
-	this_sprite->x = x + 0.5;
-	this_sprite->y = y + 0.5;
-	this_sprite->tex = (scene->textures).objects + \
-		(ft_strchr(MP_OBJECTS, obj) - MP_OBJECTS);
-	this_sprite->state = \
-		(ft_strchr(PICKUPS, obj)) ? PLACED : NOT_A_PICKUP;
-	this_sprite->type = obj;
-	sd->num_sprites += 1;
-}
+#include "load_map.h"
 
 static void		set_enemie_dir(t_sprite *sp)
 {

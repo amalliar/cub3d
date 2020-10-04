@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 18:02:54 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/29 11:52:18 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/03 20:57:47 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -393,9 +393,6 @@ typedef struct		s_scene
 }					t_scene;
 
 void				exit_failure(char *format, ...);
-void				load_audio(t_scene *scene);
-void				load_scene(t_scene *scene, char *path);
-void				render_scene(t_scene *scene);
 void				take_screenshot(t_scene *scene);
 
 extern t_estate		g_grdidle;
