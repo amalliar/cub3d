@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/09/30 18:51:37 by amalliar         ###   ########.fr        #
+#    Updated: 2020/10/04 23:06:03 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,14 +38,15 @@ SRCS       := src/attempt_item_pickup.c \
               src/key_press_handler.c \
               src/key_release_handler.c \
               src/load_audio.c \
+              src/load_map.c \
+              src/load_map_2.c \
+              src/load_map_3.c \
+              src/load_map_4.c \
+              src/load_map_5.c \
               src/load_scene.c \
-              src/load_scene_2.c \
               src/load_textures.c \
               src/mlx_image_to_bmp_file.c \
               src/object_collision.c \
-              src/parse_map.c \
-              src/parse_map_2.c \
-              src/parse_map_3.c \
               src/process_effects.c \
               src/process_enemie_states.c \
               src/process_enemie_states_2.c \
