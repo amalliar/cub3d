@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 18:11:55 by amalliar          #+#    #+#             */
-/*   Updated: 2020/10/02 19:16:34 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/06 15:24:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_format(char **rgb_values, char **words)
 		!ft_strisnumeric(rgb_values[2]))
 		exit_failure("Invalid R,G,B format: %s\n", words[1]);
 	if (strisbignum(rgb_values[0]) || strisbignum(rgb_values[1]) || \
-		strisbignum(rgb_values[1]))
+		strisbignum(rgb_values[2]))
 		exit_failure("Invalid R,G,B value: %s\n", words[1]);
 }
 

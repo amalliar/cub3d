@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 17:58:00 by amalliar          #+#    #+#             */
-/*   Updated: 2020/10/02 19:17:51 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/06 15:55:08 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int				strisbignum(char *str)
 {
 	size_t		len;
 
+	while (*str == '0')
+		++str;
 	len = ft_strlen(str);
 	if (len != INT_MAX_LEN)
 		return (len > INT_MAX_LEN);
