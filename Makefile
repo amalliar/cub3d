@@ -6,7 +6,7 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/10/04 17:35:52 by amalliar         ###   ########.fr        #
+#    Updated: 2020/10/08 16:59:24 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,11 @@ SHELL      := /bin/sh
 CC         := clang
 CFLAGS     := -Wall -Wextra -fdiagnostics-color -g -pipe \
               -march=native -O2 -flto
-INCLUDE    := -I./include -I./libft/include -I./libmlx -I./libsdl2/include
+INCLUDE    := -I./include -I./libft/include -I./libmlx -I$(HOME)/.brew/Cellar/sdl2/2.0.12_1/include -I./ssdl2/include
 NAME       := cub3D
 LIBFT      := ./libft/libft.a
 LIBMLX     := ./libmlx/libmlx.dylib
-LIBS       := -L./libft -lft -L./libmlx -lmlx -framework OpenGL -framework AppKit -L./libsdl2 -lSDL2-2.0.0
+LIBS       := -L./libft -lft -L. -lmlx -framework OpenGL -framework AppKit -L$(HOME)/.brew/Cellar/sdl2/2.0.12_1/lib -lSDL2
 SRCDIR     := src
 OBJDIR     := .obj
 DEPDIR     := .dep
@@ -94,7 +94,7 @@ NOC        := \033[0m
 bonus: $(NAME)
 $(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
 	@echo "$(LGREEN)Linking executable $(NAME)$(NOC)"
-	$(CC) $(CFLAGS) $(INCLUDE) ./libsdl2/audio.c $(OBJS) $(LIBS) -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) ./ssdl2/audio.c $(OBJS) $(LIBS) -o $@
 	@echo "Built target $(NAME)"
 .PHONY: bonus
 
