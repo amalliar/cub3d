@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 20:34:18 by amalliar          #+#    #+#             */
-/*   Updated: 2020/10/01 07:43:03 by amalliar         ###   ########.fr       */
+/*   Updated: 2020/10/26 18:23:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 # define SV_GRAVITY				9.807 * 1000
 # define SV_NO_WAR				0
-# define SV_SHOW_FPS			1
+# define SV_SHOW_FPS			0
 
 # define MP_OBJECTS			"abcdefghijklmnopqrstuvwxyz123456789\"#$%&'()*+,."
 # define MP_ENEMIES				"|~{}"
