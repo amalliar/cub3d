@@ -6,12 +6,12 @@
 #    By: amalliar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 23:55:29 by amalliar          #+#    #+#              #
-#    Updated: 2020/10/04 23:06:03 by amalliar         ###   ########.fr        #
+#    Updated: 2021/10/28 13:35:45 by amalliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL      := /bin/sh
-CC         := clang
+CC         := gcc
 CFLAGS     := -Wall -Wextra -fdiagnostics-color -g -pipe -march=native -O2 -flto
 INCLUDE    := -I./include -I./libft/include -I./libmlx -I./libsdl2
 NAME       := cub3D
