@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 07:09:37 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/29 10:28:54 by amalliar         ###   ########.fr       */
+/*   Updated: 2021/10/28 13:41:39 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,12 @@ static t_sprite		*get_attack_target(t_scene *scene)
 void				player_attack(t_scene *scene)
 {
 	t_sprite	*target;
-	int			rand1;
 	int			rand2;
 	int			damage;
 
 	target = get_attack_target(scene);
 	if (target == NULL)
 		return ;
-	rand1 = rand() % 256;
 	rand2 = rand() % 256;
 	if ((scene->player_data).active_weapon->id == 0)
 		damage = rand2 / 16;

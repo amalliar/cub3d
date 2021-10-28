@@ -6,7 +6,7 @@
 /*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 13:15:58 by amalliar          #+#    #+#             */
-/*   Updated: 2020/09/27 08:48:28 by amalliar         ###   ########.fr       */
+/*   Updated: 2021/10/28 13:40:20 by amalliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,8 @@ static void		process_door_states(t_scene *scene, t_door *doors, \
 void			process_physics(t_scene *scene)
 {
 	t_mlx_data			*mlx_data;
-	t_player_data		*pd;
 
 	mlx_data = &scene->mlx_data;
-	pd = &scene->player_data;
 	process_player_jump(scene);
 	process_door_states(scene, scene->doors, scene->num_doors, \
 		mlx_data->frame_time);
